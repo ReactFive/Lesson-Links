@@ -1,9 +1,10 @@
 var React = require('react');
+require('../stylesheets/modules/app.scss');
 
 var App = React.createClass({
   render: function() {
     return (
-      <div>Hello Dude</div>
+      <div id='test'>Hello World</div>
     );
   }
 });
