@@ -5,7 +5,7 @@ var Hello = React.createClass({
   render: function(){
     return (
       <div>
-        Hello Test 
+        Hello Test13 
       </div>
     )
   }
