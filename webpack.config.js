@@ -1,5 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
+var sassLoaders = [
+  "css-loader",
+  "autoprefixer-loader?browsers=last 2 version",
+  "sass-loader?indentedSyntax=sass&includePaths[]=" + path.join(__dirname, "./src"),
+];
 
 module.exports = {
   devtool: 'eval',
@@ -18,13 +23,17 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.sass']
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'client')
+    },
+    {
+      test: /\.sass$/,
+      loader: 'style!css!sass'
     }]
   }
 };
