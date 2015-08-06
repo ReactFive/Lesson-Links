@@ -1,0 +1,31 @@
+{
+  "scripts": {
+    "test": "test",
+    "start": "nodemon DevServer.js"
+  },
+  "name": "opal",
+  "version": "1.0.0",
+  "description": "Opal strives to make online learning more of a conversation between student and teacher by providing students a rare outlet in a video lecture environment. Opal is meant for teachers that want to share and collaborate on self-made or external educational videos with their students.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReactFive/opal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ReactFive/opal/issues"
+  },
+  "homepage": "https://github.com/ReactFive/opal#readme",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "babel-core": "^5.8.21",
+    "babel-loader": "^5.3.2",
+    "jsx-loader": "^0.13.2",
+    "react-hot-loader": "^1.2.8",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
+  }
+}
