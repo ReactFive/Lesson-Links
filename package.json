@@ -1,31 +1,42 @@
 {
-  "scripts": {
-    "test": "test",
-    "start": "nodemon DevServer.js"
-  },
-  "name": "opal",
+  "name": "react-hot-boilerplate",
   "version": "1.0.0",
-  "description": "Opal strives to make online learning more of a conversation between student and teacher by providing students a rare outlet in a video lecture environment. Opal is meant for teachers that want to share and collaborate on self-made or external educational videos with their students.",
-  "main": "index.js",
+  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint src"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ReactFive/opal.git"
+    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "reactjs",
+    "boilerplate",
+    "hot",
+    "reload",
+    "hmr",
+    "live",
+    "edit",
+    "webpack"
+  ],
+  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ReactFive/opal/issues"
+    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
   },
-  "homepage": "https://github.com/ReactFive/opal#readme",
+  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
+  "devDependencies": {
+    "babel-core": "^5.4.7",
+    "babel-eslint": "^3.1.9",
+    "babel-loader": "^5.1.2",
+    "eslint-plugin-react": "^2.3.0",
+    "react-hot-loader": "^1.2.7",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.8.2"
+  },
   "dependencies": {
     "react": "^0.13.3"
-  },
-  "devDependencies": {
-    "babel-core": "^5.8.21",
-    "babel-loader": "^5.3.2",
-    "jsx-loader": "^0.13.2",
-    "react-hot-loader": "^1.2.8",
-    "webpack": "^1.10.5",
-    "webpack-dev-server": "^1.10.1"
   }
 }
