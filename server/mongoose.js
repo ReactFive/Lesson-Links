@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Lesson = require('./models/lesson')
+var Lesson = require('./models/lesson');
 
 module.exports = function(config) {
 
@@ -12,4 +12,5 @@ module.exports = function(config) {
     console.log("You have connected to the database, dude.");
   });
 
+  Lesson.createSeedLesson();
 }

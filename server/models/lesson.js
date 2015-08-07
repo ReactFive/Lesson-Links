@@ -25,7 +25,11 @@ var lessonSchema = new mongoose.Schema ({
     default   : true
   },
   comments    : [{
-    id        : String,
+    marked_at :
+    {
+      type    : Number,
+      required: true
+    },
     author    : String,
     text      :
     {
@@ -83,10 +87,15 @@ function createSeedLesson() {
         teacher: {
           id: "54ff4ed8476278905d04a1e6",
           name: "Rick"
-        }
+        },
+        comments: [{
+          marked_at : 13.345,
+          author    : "Abhi",
+          text      : "I didn't really get what you are doing with that for loop?"
+        }]
       });
     }
   });
 }
 
-createSeedLesson();
+exports.createSeedLesson = createSeedLesson;
