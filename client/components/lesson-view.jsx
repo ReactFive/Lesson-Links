@@ -1,7 +1,8 @@
 var React = require('react');
 var CommentSubmission = require('./comment-submission.jsx');
 var CommentList = require('./comment-list.jsx');
-var VideoPlayer = require('./video-player.jsx');
+var VideoBox = require('./VideoBox.jsx');
+var Content = require('./Content.jsx');
 
 //require('../stylesheets/modules/app.scss');
 
@@ -27,14 +28,9 @@ var LessonView = React.createClass({
   },
   render: function() {
     return (
-      <div id='test'>
-        <h2>{this.state.title}</h2>
-        <VideoPlayer 
-          title={this.state.title} 
-          url={this.state.url}
-          comments = {this.state.comments} />
-        <CommentSubmission onCommentSubmit={this.onCommentSubmit}/>
-        <CommentList comments={this.state.comments} />
+      <div id='lesson-view'>
+        <VideoBox title={this.state.title} url={this.state.url} comments = {this.state.comments} />
+        <Content comments = {this.state.comments}/>
       </div>
     );
   }
