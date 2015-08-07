@@ -16,12 +16,18 @@ var app = express();
 
 var config = require('./config');
 var routes = require('../client/routes.js');
-/*
+
+var Lesson = require('./models/lesson');
+var LessonCtrl = require('./controllers/lessonCtrl');
+
+
+//this should work if you uncomment and start the database on localhost with "mongod"
+
 mongoose.connect(config.database);
 mongoose.connection.on('error', function() {
   console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
 });
-*/
+
 app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
@@ -29,6 +35,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(express.static(path.join(__dirname, 'client/public')));
+
+/**
+ * API points should probably be moved to their own file...
+ */
+
+app.get('/api/lessons', LessonCtrl.getAllLessons );
 
 
 app.use(function(req, res) {
