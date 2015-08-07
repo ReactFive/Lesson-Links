@@ -1,4 +1,5 @@
 node_modules
+api.js
 *.log
 client/bower_components
 

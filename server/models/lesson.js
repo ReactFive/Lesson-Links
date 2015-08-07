@@ -20,7 +20,7 @@ var lessonSchema = new mongoose.Schema ({
     required  : true
   },
   publish     :
-  {
+  { 
     type      : Boolean,
     default   : true
   },
@@ -35,7 +35,17 @@ var lessonSchema = new mongoose.Schema ({
     {
       type    : String,
       trim    : true,
-      max     : 50
+      max     : 180
+    },
+    votes     : 
+    {
+      type   : Number,
+      default : 0
+    },
+    star      : 
+    {
+      type    : Boolean,
+      default : false
     },
     responses   :
     [{
@@ -44,7 +54,17 @@ var lessonSchema = new mongoose.Schema ({
       {
         type    : String,
         trim    : true,
-        max     : 50
+        max     : 180
+      },
+      votes     : 
+      {
+      type   : Number,
+      default : 0
+      },
+      star      : 
+      {
+        type    : Boolean,
+        default : false
       }
     }]
   }],
