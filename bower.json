@@ -1,0 +1,17 @@
+{
+  "name": "LearningLinks",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ReactFive/opal",
+  "authors": [
+    "ReactFive"
+  ],
+  "description": "A teaching/learning tool allowing for rich interaction with video instruction",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
