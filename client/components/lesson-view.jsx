@@ -13,6 +13,18 @@ var LessonView = React.createClass({
       comments: [{text:"test comment", time:60}]
     };
   },
+  onCommentSubmit: function(comment) {
+    var player = videojs('attachmentVideo');
+
+    var commentObj = {
+      text: comment,
+      time: player.currentTime()
+    };
+
+    this.setState({
+      comments: this.state.comments.concat(commentObj)
+    });
+  },
   render: function() {
     return (
       <div id='test'>
