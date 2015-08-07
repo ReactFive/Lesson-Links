@@ -1,12 +1,17 @@
 var React = require('react');
-require('../stylesheets/modules/app.scss');
+
+var RouteHandler = require('react-router').RouteHandler;
 
 var App = React.createClass({
   render: function() {
     return (
-      <div id='test'>Hello World</div>
+      <div>
+        <RouteHandler />
+      </div>
     );
   }
 });
 
 module.exports = App;
+
+
