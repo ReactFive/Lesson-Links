@@ -1,11 +1,10 @@
 node_modules
-client/bower_components
 *.log
+client/bower_components
 
 bundle.js
 vendor.bundle.js
 vendor.js
-
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, WebStorm
