@@ -1,4 +1,4 @@
-var Lesson = require('../models/lesson');
+var Lesson = require('mongoose').model('Lesson');
 
 exports.getAllLessons = function(req, res) {
   Lesson.find({})
