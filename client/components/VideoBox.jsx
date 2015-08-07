@@ -1,5 +1,5 @@
 var React = require('react');
-var VideoPlayer = require('./video-player.jsx');
+var VideoPlayer = require('./VideoPlayer.jsx');
 
 var VideoBox = React.createClass({
   /*{ getInitialState: function(){

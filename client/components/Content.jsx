@@ -4,7 +4,9 @@ var Content = React.createClass({
 
   render: function() {
     return (
-      <CommentsView comments={this.props.comments} />
+      <div id="content">
+        <CommentsView comments={this.props.comments} />
+      </div>
     );
   }
 
