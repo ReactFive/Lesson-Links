@@ -1,10 +1,13 @@
 var React = require('react');
-
 var RouteHandler = require('react-router').RouteHandler;
 var CommentSubmission = require('./comment-submission.jsx');
 var CommentList = require('./CommentList.jsx');
 var VideoPlayer = require('./VideoPlayer.jsx');
 var LessonView = require('./LessonView.jsx')
+
+var Nav = require('./header-footer/nav.jsx');
+var Footer = require('./header-footer/footer.jsx');
+
 //require('../stylesheets/modules/app.scss');
 
 var App = React.createClass({
@@ -14,7 +17,9 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <RouteHandler />
+        <Nav />
+         <RouteHandler />
+        <Footer />
       </div>
     );
   }

@@ -91,6 +91,7 @@ gulp.task('browserify-vendor', function() {
  */
 gulp.task('browserify', ['browserify-vendor'], function() {
   return browserify('client/components/main.js')
+
       .external(dependencies)
       .transform(babelify)
       .bundle()
