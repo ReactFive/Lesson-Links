@@ -1,4 +1,4 @@
-#Opal/Mediu(Me-to-you)
+#Learning Links
 
 Opal strives to make online learning more of a conversation between student and teacher by providing students a rare outlet in a video lecture environment. Opal is meant for teachers that want to share and collaborate on self-made or external educational videos with their students.
 

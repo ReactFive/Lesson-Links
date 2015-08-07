@@ -1,14 +1,11 @@
 {
-<<<<<<< HEAD
   "name": "opal",
   "version": "1.0.0",
   "description": "",
-=======
   "name": "LearningLinks",
   "version": "0.0.1",
   "description": "A teaching/learning tool allowing for rich interaction with video instruciton",
   "main": "server/index.js",
->>>>>>> Express server working; build process changed to Gulp
   "scripts": {
     "start": "babel-node server/index.js",
     "watch": "nodemon --exec babel-node -- server/index.js",
@@ -18,7 +15,6 @@
     "type": "git",
     "url": "https://github.com/ReactFive/opal"
   },
-<<<<<<< HEAD
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -46,7 +42,7 @@
     "react": "^0.13.3",
     "react-router": "^0.13.3",
     "url-loader": "^0.5.6"
-=======
+  },
   "keywords": [
   ],
   "author": "The team",
@@ -83,6 +79,5 @@
     "react-router": "^0.13.3",
     "reflux": "^0.2.11",
     "swig": "^1.4.2"
->>>>>>> Express server working; build process changed to Gulp
   }
 }
