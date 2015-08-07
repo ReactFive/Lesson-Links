@@ -2,9 +2,9 @@ var React = require('react');
 
 var RouteHandler = require('react-router').RouteHandler;
 var CommentSubmission = require('./comment-submission.jsx');
-var CommentList = require('./comment-list.jsx');
-var VideoPlayer = require('./video-player.jsx');
-var LessonView = require('./lesson-view.jsx')
+var CommentList = require('./CommentList.jsx');
+var VideoPlayer = require('./VideoPlayer.jsx');
+var LessonView = require('./LessonView.jsx')
 //require('../stylesheets/modules/app.scss');
 
 var App = React.createClass({
