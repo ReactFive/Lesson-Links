@@ -1,10 +1,14 @@
 var React = require('react');
+var Reflux = require('reflux');
 var Comment = require('./Comment.jsx');
+var LessonStore = require('../stores/lesson-store');
 
 var CommentList = React.createClass({
+
+  mixins: [Reflux.connect(LessonStore)],
   render: function() {
     var that=this;
-    var comments = this.props.comments
+    var comments = LessonStore.lesson.comments
     .filter(function(comment){
       return comment.time >= 0 ;
     })

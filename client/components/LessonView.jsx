@@ -8,13 +8,13 @@ var LessonStore = require('../Stores/lesson-store');
 //require('../stylesheets/modules/app.scss');
 
 var LessonView = React.createClass({
-  mixins: [Reflux.connect(LessonStore)],
 
-  getInitialState: function(){
-    return {};
-  },
+  // getInitialState: function(){
+  //   console.log("LessonView getInitialState", this.state)
+  //   return {};
+  // },
   componentWillMount: function() {
-    this.setState(LessonStore.lesson);
+    console.log("LessonView componentWillMount", this.state)
   },
   onCommentSubmit: function(comment) {
     var player = videojs('attachmentVideo');
@@ -57,11 +57,12 @@ var LessonView = React.createClass({
 
   },
   render: function() {
+    console.log("rendering");
     return (
         <div className="container">
           <div id='lesson-view'>
-            <VideoBox title={this.state.title} url={this.state.url} comments = {this.state.comments} />
-            <Content comments = {this.state.comments} submit={this.onCommentSubmit} submitReply={this.onReplySubmit}/>
+            <VideoBox />
+            <Content submit={this.onCommentSubmit}/>
           </div>
         </div>
     );
