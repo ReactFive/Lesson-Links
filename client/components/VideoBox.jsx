@@ -13,7 +13,7 @@ var VideoBox = React.createClass({
   render: function() {
     return (
       <div id="video-box col-lg-12">
-        <VideoPlayer title={this.props.title} url={this.props.url} comments = {this.props.comments} />
+        <VideoPlayer />
       </div>
     );
   }

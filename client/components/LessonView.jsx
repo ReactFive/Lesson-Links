@@ -14,7 +14,6 @@ var LessonView = React.createClass({
   //   return {};
   // },
   componentWillMount: function() {
-    console.log("LessonView componentWillMount", this.state)
   },
   onCommentSubmit: function(comment) {
     var player = videojs('attachmentVideo');

@@ -18,6 +18,7 @@ var Comment = React.createClass({
     return (
       <div>
         <CommentContent comment={this.props.comment} toggleReplyForm={this.onToggleReplyForm}/>
+
         <ReplyList replies={this.props.comment.replies}/>
         <ReplySubmissionBox 
           submitReply={this.props.submitReply} 
