@@ -50,33 +50,20 @@ app.use(flash()); // use connect-flash for flash messages stored in session
  */
 app.get('/api/lessons', LessonCtrl.getAllLessons );
 
-// process the login form
-
-// app.post('/api/login', passport.authenticate('local-signup', {
-//   successRedirect : '/', 
-//   failureRedirect : '/debug', 
-//   failureFlash : true // allow flash messages
-// }));
-
 app.post('/api/signup', 
   passport.authenticate('local-signup'),
   function(req, res) {
     console.log('singup success')
-    res.send(req.user)
+    res.send(req.user._id)
     // If this function gets called, authentication was successful.
     // `req.user` property contains the authenticated user.
 });
-
-// app.post('/api/login', function(req,res){
-//   console.log(req.body)
-//   res.send('hello')
-// })
 
 app.post('/api/login',
   passport.authenticate('local-login'),
   function(req, res) {
     console.log('login success')
-    res.send(req.user)
+    res.send(req.user._id)
     // If this function gets called, authentication was successful.
     // `req.user` property contains the authenticated user.
 });
