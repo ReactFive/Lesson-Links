@@ -1,10 +1,10 @@
 var React = require('react');
 
-var LibLessonAdd = React.createClass({
+var LibAddLesson = React.createClass({
   render:function(){
     return (
-      <div id="lib-lesson-entry">
-        Add Image Here
+      <div id="lib-add-lesson">
+        <h1>LibAddLessonImg</h1>
       </div>
     )
   }
