@@ -67,10 +67,12 @@ var LessonView = React.createClass({
   },
   render: function() {
     return (
-      <div id='lesson-view'>
-        <VideoBox title={this.state.title} url={this.state.url} comments = {this.state.comments} />
-        <Content comments = {this.state.comments}/>
-      </div>
+        <div className="container">
+          <div id='lesson-view'>
+            <VideoBox title={this.state.title} url={this.state.url} comments = {this.state.comments} />
+            <Content comments = {this.state.comments}/>
+          </div>
+        </div>
     );
   }
 });

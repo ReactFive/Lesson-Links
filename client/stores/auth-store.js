@@ -1,5 +1,5 @@
 var Reflux = require('reflux');
-var Api = require('../utils/api');
+var Api = require('../util/api');
 var Actions = require('../actions');
 var _ = require('lodash');
 

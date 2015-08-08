@@ -3,7 +3,7 @@ var Router = require('react-router');
 var Link = Router.Link;
 //var Actions = require('../actions');
 var Reflux = require('reflux');
-var AuthStore = require('../stores/auth-store');
+var AuthStore = require('../../stores/auth-store');
 
 
 module.exports = React.createClass({
@@ -39,13 +39,13 @@ module.exports = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              {this.state.loggedIn && <Link activeClassName="active" to="/lesson">Lessons</Link>}
+              {this.state.user && <Link activeClassName="active" to="/lesson">Lessons</Link>}
             </li>
             <li className="pull-right">
-              {!this.state.loggedIn && <Link activeClassName="active" to="/">Signup</Link>}
+              {!this.state.user && <Link activeClassName="active" to="/">Signup</Link>}
             </li>
           </ul>
-        {this.state.loggedIn ? this.renderLogout() : this.renderLogin()}
+          { this.state.user ? this.renderLogout() : this.renderLogin() }
         </div>
     </nav>
   },
@@ -59,9 +59,7 @@ module.exports = React.createClass({
         <input ref="password" type="text" className="form-control" placeholder="Password"/>
       </div>
       <button type="submit" className="btn btn-default">Login</button>
-      {/*this.state.error && (
-       <p>Bad login information</p>
-       )*/}
+      {/* add error message */}
     </form>
   },
   renderLogout: function(){
@@ -78,8 +76,10 @@ module.exports = React.createClass({
     event.preventDefault();
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
+    console.log(email);
+    console.log(passoword);
 
-    Actions.login(email, password);
+    {/* Actions.login(email, password); */}
 
     this.refs.email.getDOMNode().value = "";
     this.refs.password.getDOMNode().value = "";

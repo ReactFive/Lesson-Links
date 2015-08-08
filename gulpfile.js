@@ -132,14 +132,14 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
  |--------------------------------------------------------------------------
  */
 gulp.task('sass', function () {
-  gulp.src('./client/public/sass/*.scss')
+  gulp.src('sass/**/*.scss')
       .pipe(sass().on('error', sass.logError))
       .pipe(concat('style.css'))
-      .pipe(gulp.dest('./'));
+      .pipe(gulp.dest('client/public/css'));
 });
 
 gulp.task('watch', function () {
-  gulp.watch('client/sass/**/*.scss', ['sass']);
+  gulp.watch('sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['sass', 'vendor', 'browserify-watch', 'watch']);
