@@ -50,33 +50,34 @@ app.use(flash()); // use connect-flash for flash messages stored in session
  */
 app.get('/api/lessons', LessonCtrl.getAllLessons );
 
-app.get('/profile', isLoggedIn, function(req, res) {
-//Fetch all of a users lessons
-});
-
-
 // process the login form
 
-app.post('/login', passport.authenticate('local-signup', {
+app.post('/api/login', passport.authenticate('local-signup', {
   successRedirect : '/', 
   failureRedirect : '/', 
   failureFlash : true // allow flash messages
 }));
 
 
-app.get('/logout', function(req, res) {
+app.get('/api/logout', function(req, res) {
   req.logout();
   res.end();
 });
 
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-  // if user is authenticated in the session, carry on 
-  if (req.isAuthenticated())
-    return next();
-  // if they aren't redirect them to the home page
-  res.redirect('/');
-}
+app.get('/api/authStatus', function(req,res){
+  {res.send(req.isAuthenticated())}
+})
+
+app.get('/api/user', function(req,res){
+  
+})
+
+app.get('/api/lesson', function(req,res){
+  
+})
+
+
+
 
 /**
  * Here is where we use React on the server-side, via the react-router
