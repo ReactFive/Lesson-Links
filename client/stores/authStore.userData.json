@@ -1,0 +1,8 @@
+module.exports = {
+"richard.vancamp@gmail.com:test1": {
+"user": "richard.vancamp@gmail.com"
+},
+"abhi.gulati@gmail.com:test2": {
+"user": "abhi.gulati@gmail.com"
+}
+}

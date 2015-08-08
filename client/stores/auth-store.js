@@ -1,35 +1,68 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Actions = require('../actions');
-var _ = require('lodash');
 var $ = require('jquery');
+var _ = require('lodash');
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('../../scratch');
+};
+localStorage.setItem('myFirstKey', 'myFirstValue');
+console.log(localStorage.getItem('myFirstKey'));
+
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
-  login: function (email, password) {
-    var em = email;
-    var pd = password;
-    if (localStorage.token) {
-      this.user = email;
-      this.triggerChange();
-    } else {
-      Api.fakeLogin(email, password, function(err, res) {
-        if (res.err) {
-          console.log(err);
-          return null;
-        }
-        else {
-          this.user = res.email;
-        }
-      }.bind(this));
-      this.triggerChange();
+  init: function() {
+    this.token = localStorage.getItem('apiToken');
+
+    if (this.token === null){
+      return null;
+    }
+
+    this.user = JSON.parse(this.token);
+    this.error = false;
+  },
+
+  changed: function(){
+    this.trigger(this.getState());
+  },
+
+  getState: function(){
+    return {
+      error: this.error,
+      user: this.user,
+      loggedIn: this.loggedIn()
     }
   },
-  triggerChange: function(){
-    this.trigger('change', this.user);
-  }
-});
 
+  loggedIn: function(){
+    return this.user !== null;
+  },
+
+  getUser: function(){
+    return this.user;
+  },
+
+  onLogin: function (email, password) {
+    // fake API simulation
+    setTimeout(function() {
+      var auths = require('./authStore.userData.json');
+      Actions.login.completed(auths[`${email}:${password}`]);
+    }, renderTimeout);
+  },
+
+ onLoginCompleted(authResponse){
+   if(authResponse) {
+     this.token = authResponse.user;
+     this.user = authResponse.user;
+     localStorage.setItem('apiToken', this.token);
+   } else {
+     this.error = "Username or password invalid."
+   }
+   this.changed();
+ }
+});
   onLogin(email, password){
     Api.login(email, password)
   },
