@@ -54,7 +54,7 @@ app.get('/api/lessons', LessonCtrl.getAllLessons );
 
 app.post('/api/login', passport.authenticate('local-signup', {
   successRedirect : '/', 
-  failureRedirect : '/', 
+  failureRedirect : '/debug', 
   failureFlash : true // allow flash messages
 }));
 
