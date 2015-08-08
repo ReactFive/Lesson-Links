@@ -12,7 +12,7 @@ var React = require('react');
 //var LibLessonPreview = require('./lib-lesson-preview.jsx');
 var userID = "54ff4ed8476278905d04a1e6"
 
-var testLessons = [ {
+var TEST = [{
     title: "Lesson One - T",
     url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
     teacher: {
@@ -84,13 +84,16 @@ var testLessons = [ {
   }];
 
 var LibraryView = React.createClass({
+  getInitialState: function(){
+    return {lessons: TEST}
+  },
   onLockClick: function(lock){
     console.log("locked!")
   },
   render: function() {
     return (
-      <div>
-        <LibFilter />
+      <div id="library-view">
+        <LibFilter lessons = {this.state.lessons}/>
       </div>
     );
   }
@@ -99,9 +102,9 @@ var LibraryView = React.createClass({
 var LibFilter = React.createClass({
   render:function(){
     return (
-      <div>
+      <div id="library-filter">
         <LibFilterHeader />
-        <Library />
+        <Library lessons = {this.props.lessons}/>
       </div>
     )
   }
@@ -110,17 +113,9 @@ var LibFilter = React.createClass({
 var LibFilterHeader = React.createClass({
   render:function(){
     return (
-      <div>
+      <div id="library-filter-header">
         <h1>My Library</h1>
       </div>
-    )
-  }
-});
-
-var LibFilterHeader = React.createClass({
-  render:function(){
-    return (
-        <h1>My Library</h1>
     )
   }
 });
@@ -128,8 +123,42 @@ var LibFilterHeader = React.createClass({
 var Library = React.createClass({
   render:function(){
     return (
-      <div>
-        <h1>My Library</h1>
+      <div id="library">
+        <LibLessonEntry lessons = {this.props.lessons}/>
+      </div>
+    )
+  }
+});
+
+var LibLessonEntry = React.createClass({
+  render:function(){
+    return (
+      <div id="lib-lesson-entry">
+        <LibLessonPreview lessons = {this.props.lessons} />
+        <LibLessonLock />
+      </div>
+    )
+  }
+});
+
+var LibLessonPreview = React.createClass({
+  render:function(){
+    var lessons = this.props.lessons.map(function(lesson, index){
+      return <span key={index}> test </span>
+    });
+    return (
+      <div id="lib-lesson-entry">
+      {lessons}
+      </div>
+    );
+  }
+});
+
+var LibLessonLock = React.createClass({
+  render:function(){
+    return (
+      <div id="lib-lesson-entry">
+        <p>Lesson Lock</p>
       </div>
     )
   }
