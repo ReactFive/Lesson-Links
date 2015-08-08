@@ -18,11 +18,7 @@ module.exports = React.createClass({
   componentWillMount: function(){
     //Actions.checkIfLoggedIn();
   },
-  setStateOnAuth(){
-    //this.setState({
-    //  loggedIn: Actions.checkIfLoggedIn()
-    //});
-  },
+
   render: function() {
     return <nav className="navbar navbar-default navbar-fixed-top">
       <div className="container">
