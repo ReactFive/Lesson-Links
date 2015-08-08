@@ -53,13 +53,19 @@ var VideoPlayer = React.createClass({
   },
   render: function() {
     return (
-      <video id='attachmentVideo' 
-      className='video-js vjs-default-skin' 
-      width='740'
-      height='264' 
-      controls preload='auto'
-      data-setup={'{ "techOrder": ["youtube"], "src": "' + this.props.url + '" }'}>
-      </video>
+        <div className="row">
+          <div className="col-md-10 col-md-offset-1">
+                  <div className="embed-responsive embed-responsive-16by9">
+                  <video id='attachmentVideo'
+                  className='video-js vjs-default-skin'
+                  width='640'
+                  height='390'
+                  controls preload='auto'
+                  data-setup={'{ "techOrder": ["youtube"], "src": "' + this.props.url + '" }'}>
+                  </video>
+              </div>
+            </div>
+           </div>
     )
   }  
 })
