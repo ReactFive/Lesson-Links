@@ -1,6 +1,6 @@
 var React = require('react');
 
-var CommentSubmissionBox = React.createClass({
+var ReplySubmissionBox = React.createClass({
   getInitialState: function(){
     return {
       text: ''
@@ -11,16 +11,16 @@ var CommentSubmissionBox = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    this.props.submit(this.state.text);
+    this.props.submitReply(this.state.text, this.props.comment.id); 
+    this.props.toggleReplyForm();
   },
   render: function() {
     return (
       <div id="comment-creation-box" className="panel panel-default">
         <div className="panel panel-body">
-          <button href="/" className="btn btn-primary" role="button">Make a comment</button>
           <form onSubmit={this.handleSubmit}>
             <textarea className="form-control" onChange={this.onChange} value={this.state.text}/>
-            <button className="btn btn-primary">submit</button>
+            <input type="submit" value="submit" className="btn btn-primary" onClick={this.handleSubmit}/ >
           </form>
 
         </div>
@@ -30,4 +30,4 @@ var CommentSubmissionBox = React.createClass({
 
 });
 
-module.exports = CommentSubmissionBox;
+module.exports = ReplySubmissionBox;

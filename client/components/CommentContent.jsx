@@ -5,7 +5,9 @@ var CommentContent = React.createClass({
   render: function() {
     return (
       <div className="comment-content">
-        <p>{this.props.time} {this.props.text}</p> 
+        <p>ID: {this.props.comment.id} </p> <br/>
+        <p>time: {this.props.comment.time} </p> <br/>
+        <p>text: {this.props.comment.text} </p> <br/>
       </div>
     );
   }
