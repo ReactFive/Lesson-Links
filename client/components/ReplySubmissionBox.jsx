@@ -25,7 +25,7 @@ var ReplySubmissionBox = React.createClass({
     this.setState({
       text: ''
     });
-    this.onToggleReplyForm(e);
+
   },
   render: function() {
     return (
@@ -36,7 +36,7 @@ var ReplySubmissionBox = React.createClass({
 
         { this.state.showReplyForm ? 
           <form onSubmit={this.handleSubmit}>
-            <input className="form-control" ref="test" onChange={this.onChange} value={this.state.text}/><br/>
+            <input className="form-control" onChange={this.onChange} value={this.state.text} ref="test"/><br/>
             <button type="submit" className="btn btn-primary pull-right" onClick={this.handleSubmit} >Submit</button>
             <button type="submit" className="btn btn-default pull-right" onClick={this.onToggleReplyForm} >Cancel</button>
           </form>
