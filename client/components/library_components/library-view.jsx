@@ -3,7 +3,7 @@ var React = require('react');
 var LibFilter = require('./lib-filter.jsx');
 
 var TEST = [{
-    title: "Lesson One - T",
+    title: "Lesson One - TS",
     url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
     teacher: {
       id: "54ff4ed8476278905d04a1e6",
@@ -59,11 +59,11 @@ var TEST = [{
     }]
   },
     {
-    title: "Lesson 5 -",
+    title: "Lesson 5 - S",
     url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
     teacher: {
       id: "888",
-      name: "Rick"
+      name: "Isto"
     },
     publish: true,
     comments: [{
