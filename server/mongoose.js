@@ -14,4 +14,5 @@ module.exports = function(config) {
   });
 
   Lesson.createSeedLesson();
+  //User.createSeedUser();
 }

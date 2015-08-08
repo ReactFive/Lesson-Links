@@ -6,14 +6,8 @@ var _ = require('lodash');
 module.exports = Reflux.createStore({
   listenables: [Actions],
   init: function() {
-    /*this.token =
-
-    if (this.token === null){
-      return null;
-    }
-
-    this.user = JSON.parse(this.token);
-    this.error = false; */
+    this.error = false;
+    this.user = {}
   },
 
   changed: function(){
@@ -37,29 +31,18 @@ module.exports = Reflux.createStore({
   },
 
   onLogin: function (email, password) {
-    // fake API simulation
-    setTimeout(function() {
-      var auths = require('./authStore.userData.json');
-      Actions.login.completed(auths[`${email}:${password}`]);
-    }, renderTimeout);
-  },
-
-  // Calls util/api.login to ping server with email/login info. Returns an object with all the user data
- /* onLogin(email, password){
+    var self = this;
     Api.login(email, password)
-  },*/
+    .then(function(res){
+      console.log(res);
+      self.user = res.user;
+    })
+    .catch(function(res){
+      console.log(res);
+    });
 
-
- onLoginCompleted(authResponse){
-   if(authResponse) {
-     this.token = authResponse.user;
-     this.user = authResponse.user;
-     //localStorage.setItem('apiToken', this.token);
-   } else {
-     this.error = "Username or password invalid."
-   }
-   this.changed();
- }, 
+    this.changed();
+  },
 
   triggerChange: function(){
     this.trigger('change', this.loggedIn);
