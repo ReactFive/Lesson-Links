@@ -1,19 +1,9 @@
 var React = require('react');
-//**Declare additional variable necessary for view
 
-//var LibFilter = require('./lib-filter.jsx');
-
-//var LibFilterHeader = require('./lib-filter-header.jsx')
-
-//var Library = require('./library.jsx')
-
-//var LibLessonOptions = require('./lib-lesson-options.jsx');
-
-//var LibLessonPreview = require('./lib-lesson-preview.jsx');
-var userID = "54ff4ed8476278905d04a1e6"
+var LibFilter = require('./lib-filter.jsx');
 
 var TEST = [{
-    title: "Lesson One - T",
+    title: "Lesson One - TS",
     url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
     teacher: {
       id: "54ff4ed8476278905d04a1e6",
@@ -69,11 +59,11 @@ var TEST = [{
     }]
   },
     {
-    title: "Lesson 5 -",
+    title: "Lesson 5 - S",
     url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
     teacher: {
       id: "888",
-      name: "Rick"
+      name: "Isto"
     },
     publish: true,
     comments: [{
@@ -96,77 +86,6 @@ var LibraryView = React.createClass({
         <LibFilter lessons = {this.state.lessons}/>
       </div>
     );
-  }
-});
-
-var LibFilter = React.createClass({
-  render:function(){
-    return (
-      <div id="library-filter">
-        <LibFilterHeader />
-        <Library lessons = {this.props.lessons}/>
-      </div>
-    )
-  }
-});
-
-var LibFilterHeader = React.createClass({
-  render:function(){
-    return (
-      <div id="library-filter-header">
-        <h1>My Library</h1>
-      </div>
-    )
-  }
-});
-
-var Library = React.createClass({
-  render:function(){
-    return (
-      <div id="library">
-        <LibLessonEntry lessons = {this.props.lessons}/>
-      </div>
-    )
-  }
-});
-
-var LibLessonEntry = React.createClass({
-  render:function(){
-    return (
-      <div id="lib-lesson-entry">
-        <LibLessonPreview lessons = {this.props.lessons} />
-        <LibLessonLock />
-      </div>
-    )
-  }
-});
-
-var LibLessonPreview = React.createClass({
-  render:function(){
-    var lessons = this.props.lessons.map(function(lesson, index){
-      return <span key={index}> 
-        <ul>
-          <li>Title: {lesson.title}</li>
-          <li>url: {lesson.url} </li>
-          <li>Author: {lesson.teacher.name}</li>
-        </ul> 
-      </span>
-    });
-    return (
-      <div id="lib-lesson-entry">
-      {lessons}
-      </div>
-    );
-  }
-});
-
-var LibLessonLock = React.createClass({
-  render:function(){
-    return (
-      <div id="lib-lesson-entry">
-        <p>Lesson Lock</p>
-      </div>
-    )
   }
 });
 
