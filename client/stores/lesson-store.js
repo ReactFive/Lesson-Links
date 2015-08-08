@@ -47,9 +47,9 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.getLesson()
     .then(function(res) {
-      console.log(res.data);
       self.lesson = res.data[0];
       console.log(self.lesson);
+      self.trigger();
     })
     .catch(function(res) {
       console.log(res);
