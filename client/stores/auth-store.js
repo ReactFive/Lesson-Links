@@ -7,14 +7,14 @@ var _ = require('lodash');
 module.exports = Reflux.createStore({
   listenables: [Actions],
   init: function() {
-    this.token = localStorage.getItem('apiToken');
+    /*this.token =
 
     if (this.token === null){
       return null;
     }
 
     this.user = JSON.parse(this.token);
-    this.error = false;
+    this.error = false; */
   },
 
   changed: function(){
@@ -46,16 +46,16 @@ module.exports = Reflux.createStore({
   },
 
   // Calls util/api.login to ping server with email/login info. Returns an object with all the user data
-  onLogin(email, password){
+ /* onLogin(email, password){
     Api.login(email, password)
-  },
+  },*/
 
 
  onLoginCompleted(authResponse){
    if(authResponse) {
      this.token = authResponse.user;
      this.user = authResponse.user;
-     localStorage.setItem('apiToken', this.token);
+     //localStorage.setItem('apiToken', this.token);
    } else {
      this.error = "Username or password invalid."
    }

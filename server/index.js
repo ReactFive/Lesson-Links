@@ -12,9 +12,9 @@ var React = require('react');
 var Router = require('react-router');
 var swig  = require('swig');
 var _ = require('lodash');
-var passport = require('passport')
-var flash = require('connect-flash')
-var session = require('express-session')
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
 var env = process.env.NODE_ENV || 'development';
@@ -24,7 +24,9 @@ var config = require('./config')[env];
 
 var routes = require('../client/routes.js');
 var Lesson = require('./models/lesson');
+var User = require('./models/user');
 var LessonCtrl = require('./controllers/lessonCtrl');
+var UserCtrl = require('./controllers/userCtrl');
 
 //mongo should work now from at mongolab--suggest to change the dev env to your localhost
 require('./mongoose')(config);
@@ -50,28 +52,10 @@ app.use(flash()); // use connect-flash for flash messages stored in session
  */
 app.get('/api/lessons', LessonCtrl.getAllLessons );
 
-app.post('/api/signup', 
-  passport.authenticate('local-signup'),
-  function(req, res) {
-    console.log('singup success')
-    res.send(req.user)
-    // If this function gets called, authentication was successful.
-    // `req.user` property contains the authenticated user.
-});
+app.post('/api/signup', passport.authenticate('local-signup'), UserCtrl.signupUser);
+app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
 
-app.post('/api/login',
-  passport.authenticate('local-login'),
-  function(req, res) {
-    console.log('login success')
-    res.send(req.user)
-    // If this function gets called, authentication was successful.
-    // `req.user` property contains the authenticated user.
-});
-
-app.get('/api/logout', function(req, res) {
-  req.logout();
-  res.end();
-});
+app.get('/api/logout', UserCtrl.logout);
 
 app.post('/api/authenticate', function(req,res){
   {res.send(req.isAuthenticated())}

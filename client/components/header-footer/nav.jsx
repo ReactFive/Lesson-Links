@@ -12,15 +12,15 @@ module.exports = React.createClass({
     Router.Navigation ],
 
   componentWillMount: function(){
-    this,setState(AuthStore.user())
+    //this,setState(AuthStore.user())
   },
 
   componentDidMount: function() {
-    this.listenTo(AuthStore, this.onAuthChange);
+    //this.listenTo(AuthStore, this.onAuthChange);
   },
 
   onAuthChange(auth) {
-    this.setState(auth);
+    //this.setState(auth);
   },
 
   handleLogout() {
