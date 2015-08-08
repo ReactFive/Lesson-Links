@@ -52,12 +52,34 @@ app.get('/api/lessons', LessonCtrl.getAllLessons );
 
 // process the login form
 
-app.post('/api/login', passport.authenticate('local-signup', {
-  successRedirect : '/', 
-  failureRedirect : '/debug', 
-  failureFlash : true // allow flash messages
-}));
+// app.post('/api/login', passport.authenticate('local-signup', {
+//   successRedirect : '/', 
+//   failureRedirect : '/debug', 
+//   failureFlash : true // allow flash messages
+// }));
 
+app.post('/api/signup', 
+  passport.authenticate('local-signup'),
+  function(req, res) {
+    console.log('singup success')
+    res.send(req.user)
+    // If this function gets called, authentication was successful.
+    // `req.user` property contains the authenticated user.
+});
+
+// app.post('/api/login', function(req,res){
+//   console.log(req.body)
+//   res.send('hello')
+// })
+
+app.post('/api/login',
+  passport.authenticate('local-login'),
+  function(req, res) {
+    console.log('login success')
+    res.send(req.user)
+    // If this function gets called, authentication was successful.
+    // `req.user` property contains the authenticated user.
+});
 
 app.get('/api/logout', function(req, res) {
   req.logout();
@@ -75,9 +97,6 @@ app.get('/api/user', function(req,res){
 app.get('/api/lesson', function(req,res){
   
 })
-
-
-
 
 /**
  * Here is where we use React on the server-side, via the react-router
