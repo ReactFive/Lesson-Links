@@ -47,7 +47,7 @@ var lessonSchema = new mongoose.Schema ({
       type    : Boolean,
       default : false
     },
-    responses   :
+    replies   :
     [{
       author    : String,
       text      :
@@ -111,7 +111,11 @@ function createSeedLesson() {
         comments: [{
           marked_at : 13.345,
           author    : "Abhi",
-          text      : "I didn't really get what you are doing with that for loop?"
+          text      : "I didn't really get what you are doing with that for loop?",
+          replies   : [{
+            author    : "Colin",
+            text      : "I feel the same way"
+          }]
         }]
       });
     }
