@@ -13,9 +13,24 @@ var CommentSubmissionBox = React.createClass({
   onToggleCommentForm: function(){
     this.setState({ showCommentForm: !this.state.showCommentForm });
   },
-  handleSubmit: function(e) {
+  onFormFocus: function(){
+    if(this.state.text === ''){
+      var player = videojs('attachmentVideo');
+      player.pause();
+      this.onToggleCommentForm();
+    }
+  },
+  onFormBlur: function(){
+    if(this.state.text === ''){
+      this.onToggleCommentForm();
+    }
+  },
+  handleSubmit: function(e){
     e.preventDefault();
     this.props.submit(this.state.text);
+    this.setState({
+      text: ''
+    });
     this.onToggleCommentForm();
   },
   render: function() {
@@ -23,14 +38,20 @@ var CommentSubmissionBox = React.createClass({
       <div id="comment-creation-box" className="panel panel-default">
         <div className="panel panel-body">
 
-          <input type="submit" value="Question? Comment?" className="btn btn-primary" onClick={this.onToggleCommentForm} />
-          
-          { this.state.showCommentForm ? 
-            <form onSubmit={this.handleSubmit}>
-              <textarea className="form-control" onChange={this.onChange} value={this.state.text}/>
+          <form onSubmit={this.handleSubmit}>
+            <textarea 
+              className="form-control" 
+              placeholder="Share your questions..."
+              value={this.state.text}
+              onChange={this.onChange} 
+              onFocus={this.onFormFocus} 
+              onBlur={this.onFormBlur} />
+            <br/>
+            { this.state.showCommentForm ? 
               <button type="submit" className="btn btn-default" onClick={this.handleSubmit}>Submit</button>
-            </form>
-          : null }
+            : null }
+          </form>
+        
 
 
 
