@@ -1,4 +1,3 @@
-lib-add-lesson
 
 var LibLessonAdd = React.createClass({
   render:function(){
