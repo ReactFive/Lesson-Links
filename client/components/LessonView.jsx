@@ -1,12 +1,11 @@
 var React = require('react');
-var CommentSubmission = require('./comment-submission.jsx');
-var CommentList = require('./CommentList.jsx');
 var VideoBox = require('./VideoBox.jsx');
 var Content = require('./Content.jsx');
 
 //require('../stylesheets/modules/app.scss');
 
 var LessonView = React.createClass({
+
   getInitialState: function(){
     return {
       title: "our video",
@@ -58,7 +57,8 @@ var LessonView = React.createClass({
 
     var commentObj = {
       text: comment,
-      time: player.currentTime()
+      time: player.currentTime(),
+      replies: []
     };
 
     this.setState({
@@ -70,7 +70,7 @@ var LessonView = React.createClass({
         <div className="container">
           <div id='lesson-view'>
             <VideoBox title={this.state.title} url={this.state.url} comments = {this.state.comments} />
-            <Content comments = {this.state.comments}/>
+            <Content comments = {this.state.comments} submit={this.onCommentSubmit}/>
           </div>
         </div>
     );
