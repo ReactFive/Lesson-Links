@@ -3,17 +3,13 @@ var Api = require('../utils/api');
 var Actions = require('../actions');
 var $ = require('jquery');
 var _ = require('lodash');
-if (typeof localStorage === "undefined" || localStorage === null) {
-  var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('../../scratch');
-};
-localStorage.setItem('myFirstKey', 'myFirstValue');
-console.log(localStorage.getItem('myFirstKey'));
+
+
 
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
-  init: function() {
+  /*init: function() {
     this.token = localStorage.getItem('apiToken');
 
     if (this.token === null){
@@ -61,7 +57,7 @@ module.exports = Reflux.createStore({
      this.error = "Username or password invalid."
    }
    this.changed();
- }
+ } */
 });
   onLogin(email, password){
     Api.login(email, password)
