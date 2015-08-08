@@ -24,20 +24,22 @@ module.exports = function(passport) {
       passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
-    console.log('test')
     console.log('email: '+email+' | password: '+password)
    // User.findOne wont fire unless data is sent back
     process.nextTick(function() {
       User.findOne({ 'local.email': email }, function(err, user) {
         // if there are any errors, return the error
-        if (err)
-          console.log('problem in here')
+        if (err){
           console.log(err)
           return done(err);
-        // check to see if theres already a user with that email
+          // check to see if theres already a user with that email}
+        }
         if (user) {
+          console.log('email taken')
           return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-        } else {// if there is no user with that email
+        } else {
+          // if there is no user with that email
+          console.log('creating user')
           // create the user
           var newUser            = new User();
           // set the user's local credentials

@@ -54,7 +54,7 @@ app.post('/api/signup',
   passport.authenticate('local-signup'),
   function(req, res) {
     console.log('singup success')
-    res.send(req.user._id)
+    res.send(req.user)
     // If this function gets called, authentication was successful.
     // `req.user` property contains the authenticated user.
 });
@@ -63,7 +63,7 @@ app.post('/api/login',
   passport.authenticate('local-login'),
   function(req, res) {
     console.log('login success')
-    res.send(req.user._id)
+    res.send(req.user)
     // If this function gets called, authentication was successful.
     // `req.user` property contains the authenticated user.
 });
@@ -73,7 +73,7 @@ app.get('/api/logout', function(req, res) {
   res.end();
 });
 
-app.get('/api/authStatus', function(req,res){
+app.post('/api/authenticate', function(req,res){
   {res.send(req.isAuthenticated())}
 })
 

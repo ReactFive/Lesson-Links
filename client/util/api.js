@@ -1,6 +1,5 @@
 var React = require('react');
 var $ = require('jquery')
-var request = require('request');
 //var fetch = require('whatwg-fetch');
 
 module.exports.login = function(email, password) {
