@@ -1,3 +1,5 @@
+var React = require('react');
+
 var LibFilterHeader = React.createClass({
   render:function(){
     return (
@@ -7,3 +9,5 @@ var LibFilterHeader = React.createClass({
     )
   }
 });
+
+module.exports = LibFilterHeader;

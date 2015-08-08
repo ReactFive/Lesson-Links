@@ -1,3 +1,5 @@
+var React = require('react');
+
 var LibLessonLock = React.createClass({
   render:function(){
     return (
@@ -7,3 +9,5 @@ var LibLessonLock = React.createClass({
     )
   }
 });
+
+module.exports = LibLessonLock

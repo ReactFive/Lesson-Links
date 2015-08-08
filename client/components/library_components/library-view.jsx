@@ -1,16 +1,6 @@
 var React = require('react');
-//**Declare additional variable necessary for view
 
-//var LibFilter = require('./lib-filter.jsx');
-
-//var LibFilterHeader = require('./lib-filter-header.jsx')
-
-//var Library = require('./library.jsx')
-
-//var LibLessonOptions = require('./lib-lesson-options.jsx');
-
-//var LibLessonPreview = require('./lib-lesson-preview.jsx');
-var userID = "54ff4ed8476278905d04a1e6"
+var LibFilter = require('./lib-filter.jsx');
 
 var TEST = [{
     title: "Lesson One - T",
@@ -98,6 +88,5 @@ var LibraryView = React.createClass({
     );
   }
 });
-
 
 module.exports = LibraryView;

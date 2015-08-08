@@ -1,3 +1,4 @@
+var React = require('react');
 
 var LibLessonAdd = React.createClass({
   render:function(){
@@ -8,3 +9,5 @@ var LibLessonAdd = React.createClass({
     )
   }
 });
+
+module.exports = LibAddLesson;

@@ -1,3 +1,5 @@
+var React = require('react');
+
 var LibLessonPreview = React.createClass({
   render:function(){
     var lessons = this.props.lessons.map(function(lesson, index){
@@ -10,9 +12,11 @@ var LibLessonPreview = React.createClass({
       </span>
     });
     return (
-      <div id="lib-lesson-entry">
+      <div id="lib-lesson-preview">
       {lessons}
       </div>
     );
   }
 });
+
+module.exports = LibLessonPreview;

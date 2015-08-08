@@ -1,3 +1,9 @@
+var React = require('react');
+
+var LibLessonPreview = require('./lib-lesson-preview.jsx');
+
+var LibLessonLock = require('./lib-lesson-lock.jsx')
+
 var LibLessonEntry = React.createClass({
   render:function(){
     return (
@@ -8,3 +14,5 @@ var LibLessonEntry = React.createClass({
     )
   }
 });
+
+module.exports = LibLessonEntry;
