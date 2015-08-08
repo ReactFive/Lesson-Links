@@ -90,8 +90,7 @@ gulp.task('browserify-vendor', function() {
  |--------------------------------------------------------------------------
  */
 gulp.task('browserify', ['browserify-vendor'], function() {
-  return browserify('client/components/main.js')
-
+  return browserify('./client/components/main.js')
       .external(dependencies)
       .transform(babelify)
       .bundle()
@@ -132,14 +131,14 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
  |--------------------------------------------------------------------------
  */
 gulp.task('sass', function () {
-  gulp.src('sass/**/*.scss')
+  gulp.src('./client/public/sass/*.scss')
       .pipe(sass().on('error', sass.logError))
       .pipe(concat('style.css'))
-      .pipe(gulp.dest('client/public/css'));
+      .pipe(gulp.dest('./'));
 });
 
 gulp.task('watch', function () {
-  gulp.watch('sass/**/*.scss', ['sass']);
+  gulp.watch('client/sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['sass', 'vendor', 'browserify-watch', 'watch']);
