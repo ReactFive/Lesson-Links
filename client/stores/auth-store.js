@@ -4,12 +4,9 @@ var Actions = require('../actions');
 var $ = require('jquery');
 var _ = require('lodash');
 
-
-
-
 module.exports = Reflux.createStore({
   listenables: [Actions],
-  /*init: function() {
+  init: function() {
     this.token = localStorage.getItem('apiToken');
 
     if (this.token === null){
@@ -48,6 +45,12 @@ module.exports = Reflux.createStore({
     }, renderTimeout);
   },
 
+  // Calls util/api.login to ping server with email/login info. Returns an object with all the user data
+  onLogin(email, password){
+    Api.login(email, password)
+  },
+
+
  onLoginCompleted(authResponse){
    if(authResponse) {
      this.token = authResponse.user;
@@ -57,11 +60,7 @@ module.exports = Reflux.createStore({
      this.error = "Username or password invalid."
    }
    this.changed();
- } */
-});
-  onLogin(email, password){
-    Api.login(email, password)
-  },
+ }, 
 
   triggerChange: function(){
     this.trigger('change', this.loggedIn);
