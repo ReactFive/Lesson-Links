@@ -12,6 +12,10 @@ var React = require('react');
 var Router = require('react-router');
 var swig  = require('swig');
 var _ = require('lodash');
+var passport = require('passport')
+var flash = require('connect-flash')
+var session = require('express-session')
+var cookieParser = require('cookie-parser');
 
 var env = process.env.NODE_ENV || 'development';
 var app = express();
@@ -24,19 +28,62 @@ var LessonCtrl = require('./controllers/lessonCtrl');
 
 //mongo should work now from at mongolab--suggest to change the dev env to your localhost
 require('./mongoose')(config);
+require('./passport')(passport)
 
 app.set('port', config.port);
 app.use(compression());
 app.use(logger('dev'));
+app.use(cookieParser()); // read cookies for auth
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(express.static(path.join(__dirname, '/../client/')));
 
+// required for passport
+app.use(session({ secret: 'superdupersecretdonttellanyone' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 /**
  * API points should probably be moved to their own file...
  */
 app.get('/api/lessons', LessonCtrl.getAllLessons );
+
+app.post('/api/signup', 
+  passport.authenticate('local-signup'),
+  function(req, res) {
+    console.log('singup success')
+    res.send(req.user)
+    // If this function gets called, authentication was successful.
+    // `req.user` property contains the authenticated user.
+});
+
+app.post('/api/login',
+  passport.authenticate('local-login'),
+  function(req, res) {
+    console.log('login success')
+    res.send(req.user)
+    // If this function gets called, authentication was successful.
+    // `req.user` property contains the authenticated user.
+});
+
+app.get('/api/logout', function(req, res) {
+  req.logout();
+  res.end();
+});
+
+app.post('/api/authenticate', function(req,res){
+  {res.send(req.isAuthenticated())}
+})
+
+app.get('/api/user', function(req,res){
+  
+})
+
+app.get('/api/lesson', function(req,res){
+  
+})
 
 /**
  * Here is where we use React on the server-side, via the react-router

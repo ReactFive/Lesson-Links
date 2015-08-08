@@ -4,7 +4,7 @@ var Link = Router.Link;
 //var Actions = require('../actions');
 var Reflux = require('reflux');
 var AuthStore = require('../../stores/auth-store');
-
+var Actions = require('../../actions')
 
 module.exports = React.createClass({
   mixins: [
@@ -77,9 +77,9 @@ module.exports = React.createClass({
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
     console.log(email);
-    console.log(passoword);
+    console.log(password);
 
-    {/* Actions.login(email, password); */}
+    Actions.login(email, password);
 
     this.refs.email.getDOMNode().value = "";
     this.refs.password.getDOMNode().value = "";
