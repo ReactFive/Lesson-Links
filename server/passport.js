@@ -1,5 +1,5 @@
 var LocalStrategy   = require('passport-local').Strategy;
-var User            = require('./models/user');
+var User            = require('mongoose').model('User');
 
 module.exports = function(passport) {
 
@@ -24,6 +24,7 @@ module.exports = function(passport) {
       passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
+    console.log(req.body.name)
     console.log('email: '+email+' | password: '+password)
    // User.findOne wont fire unless data is sent back
     process.nextTick(function() {
@@ -44,6 +45,7 @@ module.exports = function(passport) {
           var newUser            = new User();
           // set the user's local credentials
           newUser.local.email    = email;
+          newUser.local.name = req.body.name || undefined;
           newUser.generateHash(password, function(hash){
             newUser.local.password = hash;
             // save the user

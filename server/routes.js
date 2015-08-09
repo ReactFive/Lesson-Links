@@ -23,11 +23,6 @@ module.exports = function(app) {
       res.send(req.isAuthenticated())
     }
   });
-  app.get('/api/user', function (req, res) {
-  });
-
-  app.get('/api/lesson', function (req, res) {
-
-  });
+  app.get('/api/user', function (req, res) {});
 
 };
