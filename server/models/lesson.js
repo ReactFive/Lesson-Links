@@ -12,13 +12,12 @@ var lessonSchema = new mongoose.Schema ({
   {
     type      : String,
     required  : true,
-    index     : true,
-    validate  : check.urlValidator
+    unique    : true,
+    index     : true
   },
   video_url   :
   {
     type      : String,
-    unique    : true,
     validate  : check.urlValidator
   },
   created_at  :
