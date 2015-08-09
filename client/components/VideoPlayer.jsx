@@ -61,6 +61,7 @@ var VideoPlayer = React.createClass({
   },
   render: function() {
     return (
+      this.state.lesson && this.state.lesson.video_url ?
         <div className="row">
           <div className="col-md-10 col-md-offset-1">
             <div className="embed-responsive embed-responsive-16by9">
@@ -68,11 +69,12 @@ var VideoPlayer = React.createClass({
                 className='video-js vjs-default-skin'
                   width='640' height='390'
                   controls preload='auto'
-                  data-setup={'{ "techOrder": ["youtube"], "src": "' + this.props.url + '" }'}>
+                  data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
               </video>
             </div>
           </div>
         </div>
+        : null
     )
   }  
 })
