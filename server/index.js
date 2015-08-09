@@ -59,15 +59,15 @@ app.get('/api/logout', UserCtrl.logout);
 
 app.post('/api/authenticate', function(req,res){
   {res.send(req.isAuthenticated())}
-})
+});
 
 app.get('/api/user', function(req,res){
   
-})
+});
 
 app.get('/api/lesson', function(req,res){
   
-})
+});
 
 /**
  * Here is where we use React on the server-side, via the react-router
