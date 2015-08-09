@@ -23,10 +23,6 @@ var app = express();
 var config = require('./config')[env];
 
 var routes = require('../client/routes.js');
-var Lesson = require('./models/lesson');
-var User = require('./models/user');
-var LessonCtrl = require('./controllers/lessonCtrl');
-var UserCtrl = require('./controllers/userCtrl');
 
 //mongo should work now from at mongolab--suggest to change the dev env to your localhost
 require('./mongoose')(config);
@@ -48,26 +44,9 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 /**
- * API points should probably be moved to their own file...
+ * API points are in routes.js
  */
-app.get('/api/lessons', LessonCtrl.getAllLessons );
-
-app.post('/api/signup', passport.authenticate('local-signup'), UserCtrl.signupUser);
-app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
-
-app.get('/api/logout', UserCtrl.logout);
-
-app.post('/api/authenticate', function(req,res){
-  {res.send(req.isAuthenticated())}
-});
-
-app.get('/api/user', function(req,res){
-  
-});
-
-app.get('/api/lesson', function(req,res){
-  
-});
+require('./routes')(app);
 
 /**
  * Here is where we use React on the server-side, via the react-router

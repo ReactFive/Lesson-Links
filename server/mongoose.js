@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Lesson = require('./models/lesson');
-var User = require('mongoose').model('User');
 var UserModel = require('./models/user');
+var User = require('mongoose').model('User');
 
 module.exports = function(config) {
 
