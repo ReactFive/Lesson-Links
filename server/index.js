@@ -30,7 +30,7 @@ var UserCtrl = require('./controllers/userCtrl');
 
 //mongo should work now from at mongolab--suggest to change the dev env to your localhost
 require('./mongoose')(config);
-require('./passport')(passport)
+require('./passport')(passport);
 
 app.set('port', config.port);
 app.use(compression());

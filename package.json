@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "async": "^1.4.0",
+    "axios": "^0.5.4",
     "bcrypt": "^0.8.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.13.3",

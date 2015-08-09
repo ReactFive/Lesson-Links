@@ -12,20 +12,20 @@ module.exports = React.createClass({
     Router.Navigation ],
 
   componentWillMount: function(){
-    //this,setState(AuthStore.user())
+    //AuthStore.getState();
   },
 
   componentDidMount: function() {
-    //this.listenTo(AuthStore, this.onAuthChange);
+    this.listenTo(AuthStore, this.onAuthChange);
   },
 
   onAuthChange(auth) {
-    //this.setState(auth);
+    this.setState(auth);
   },
 
   handleLogout() {
     event.preventDefault();
-    AuthActions.logout();
+    Actions.logout();
     this.transitionTo('/');
   },
 
@@ -75,7 +75,7 @@ module.exports = React.createClass({
   handleBtnSubmit: function(event){
 
     console.log("in logout handler")
-    AuthActions.logout();
+    Actions.logout();
   },
   handleSubmit: function(event){
     event.preventDefault();
@@ -84,10 +84,10 @@ module.exports = React.createClass({
     var password = this.refs.password.getDOMNode().value;
     console.log(password);
 
-    AuthActions.login(email, password);
+    Actions.login(email, password);
 
 
     this.refs.email.getDOMNode().value = "";
     this.refs.password.getDOMNode().value = "";
   }
-})
+});
