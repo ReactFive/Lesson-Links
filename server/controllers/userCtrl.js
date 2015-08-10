@@ -22,4 +22,8 @@ exports.logout = function(req, res){
     // The response should indicate that the user is no longer authenticated.
     return res.send({ authenticated: req.isAuthenticated() });
   });
-}
+};
+
+exports.checkAuthentication = function(req, res){
+    return res.send(req.isAuthenticated());
+};
