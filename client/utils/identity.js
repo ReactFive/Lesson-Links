@@ -1,7 +1,7 @@
-module.exports = function() {
+(function(global){
   var currentUser = {};
-  if (!!window.currentUser) {
-    currentUser = window.currentUser;
+  if (global && !!global.currentUser) {
+    currentUser = global.currentUser;
     console.log(currentUser);
   }
   return {
@@ -10,4 +10,4 @@ module.exports = function() {
       return !!this.currentUser;
     }
   }
-}
+})(window);
