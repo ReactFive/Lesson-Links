@@ -16,6 +16,11 @@
     <title>Sample App</title>
   </head>
   <body>
+  {% if !!bootstrappedUser %}
+  <script>
+    window.currentUser = {{ JSON.stringify(bootstrappedUser) }}
+  </script>
+  {% endif %}
     <div id='root'>{{html|safe}}</div>
       <script src="/public/js/vendor.js"></script>   
       <script src="/public/js/vendor.bundle.js"></script>

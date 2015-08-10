@@ -4,7 +4,7 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Link = Router.Link;
 var Route = Router.Route;
-var AuthStore = require('../../stores/auth-store');
+var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions');
 
 module.exports = React.createClass({

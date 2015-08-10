@@ -55,8 +55,7 @@ require('./routes')(app);
 app.use(function(req, res) {
   Router.run(routes, req.path, function(Handler) {
     var html = React.renderToString(React.createElement(Handler));
-    var page = swig.renderFile('views/index.html', { html: html,
-      locals: {bootstrappedUser: req.user}});
+    var page = swig.renderFile('views/index.html', { html: html, bootstrappedUser: req.user});
     res.send(page);
   });
 });

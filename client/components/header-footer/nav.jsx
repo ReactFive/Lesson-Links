@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 var Reflux = require('reflux');
-var AuthStore = require('../../stores/auth-store');
+var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions');
 
 

@@ -1,5 +1,6 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
+var Identity = require('../utils/identity.js');
 var Actions = require('../actions');
 var ReactRouter = require('react-router');
 var Navigation = ReactRouter.Navigation;
@@ -11,14 +12,20 @@ module.exports = Reflux.createStore({
   init: function(){},
 
   authenticate: function(){
-    return Api.getStatus()
-    .then(function(res){
-      if (res) {
-        console.log("authentication service says: " + res.data);
-        this.loggedIn = res.data;
-        this.triggerChange();
-      }
-    }.bind(this));
+    if(Identity.isAuthenticated()){
+      console.log(Identity.isAuthenticated);
+      this.loggedIn = true;
+      this.triggerChange();
+    } else {
+      return Api.getStatus()
+          .then(function (res) {
+            if (res) {
+              console.log("authentication service says: " + res.data);
+              this.loggedIn = res.data;
+              this.triggerChange();
+            }
+          }.bind(this));
+    }
   },
 
   login: function (email, password) {
