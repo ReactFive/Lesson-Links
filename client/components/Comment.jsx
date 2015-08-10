@@ -19,12 +19,8 @@ var Comment = React.createClass({
       <div>
         <CommentContent comment={this.props.comment} toggleReplyForm={this.onToggleReplyForm}/>
         <ReplyList replies={this.props.comment.replies}/>
-<<<<<<< HEAD
-        <ReplySubmissionBox 
-          submitReply={this.props.submitReply} 
-=======
+
         <ReplySubmissionBox id="reply-submission-box"
->>>>>>> Added submit reply to store and improved UI
           comment={this.props.comment}
           showReplyForm={this.state.showReplyForm}
           toggleReplyForm={this.onToggleReplyForm} /> 
