@@ -8,13 +8,10 @@ var VideoPlayer = React.createClass({
   mixins: [Reflux.connect(LessonStore, "lesson")],
 
   componentWillReceiveProps: function(nextProps){
-    console.log(nextProps)
+    console.log("inside componentWillReceiveProps", nextProps)
     //var newComments = _.difference(nextProps.comments, this.props.comments);
     //var player = videojs('attachmentVideo');
-    this.state.lesson.comments.forEach(function(comment) {
-      comment.time = comment.marked_at;
-    });
-    var player = this.videoSetup(this.state.lesson.comments);
+    
     //player.markers.add(this.state.lesson.comments);
   },
   componentWillMount: function(){
@@ -24,6 +21,13 @@ var VideoPlayer = React.createClass({
   },
   componentWillUpdate: function(nextProps, nextState) {
     console.log("video player updating; nextState = ", nextState)
+    
+  },
+  componentDidUpdate: function() {
+    this.state.lesson.comments.forEach(function(comment) {
+      comment.time = comment.marked_at;
+    });
+    var player = this.videoSetup(this.state.lesson.comments);
   },
   videoSetup: function(comments){
     // initialize video.js
