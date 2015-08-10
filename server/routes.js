@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LessonCtrl = require('./controllers/lessonCtrl');
 var UserCtrl = require('./controllers/userCtrl');
+var _ = require('lodash');
 
 module.exports = function(app) {
 
@@ -19,10 +20,23 @@ module.exports = function(app) {
   app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', function (req, res) {
-    {
-      res.send(req.isAuthenticated())
-    }
+    {res.send(req.isAuthenticated())}
   });
   app.get('/api/user', function (req, res) {});
+
+  app.all('/api/*', function(req, res){
+    res.sendStatus(404);
+  });
+// *** LOGOUT ***
+  app.post('/logout', function(request, response){
+    request.logout();
+    response.end();
+  });
+//  REACT
+  app.get('*', function(request, response){
+    response.render('index', {
+      bootstrappedUser: _.omit(req.user, "password")
+    });
+  });
 
 };

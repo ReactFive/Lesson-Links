@@ -1,5 +1,6 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
+var Identity = require('../utils/identity.js');
 var Actions = require('../actions');
 var ReactRouter = require('react-router');
 var Navigation = ReactRouter.Navigation;
@@ -12,15 +13,19 @@ module.exports = Reflux.createStore({
   },
 
   authenticate: function(){
+    if(Identity().isAuthenticated()){
+      this.loggedIn = true;
+      this.triggerChange();
+    } else {
       return Api.getStatus()
         .then(function (res) {
           if (res) {
-            console.log("Authenticated by api " + res.data);
             this.loggedIn = res.data;
             this.triggerChange();
           }
         }.bind(this));
-    },
+    }
+  },
 
   login: function (email, password) {
     return Api.login(email, password)
@@ -43,6 +48,7 @@ module.exports = Reflux.createStore({
   logout: function(){
     this.user = null;
     this.loggedIn = false;
+    Identity.deleteCurrentUser;
     this.triggerChange();
     toastr["success"]("You have logged out");
     return Api.logout();
