@@ -8,7 +8,7 @@ var VideoBox = React.createClass({
 
   render: function() {
     return (
-      <div id="video-box col-lg-12">
+      <div id="video-box" className="col-lg-12">
         <VideoPlayer />
       </div>
     );

@@ -1,4 +1,6 @@
 var React = require('react');
+var Reflux = require('reflux');
+var Actions = require('../actions');
 
 var ReplySubmissionBox = React.createClass({
   getInitialState: function(){
@@ -16,7 +18,7 @@ var ReplySubmissionBox = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    this.props.submitReply(this.state.text, this.props.comment.id);
+    Actions.submitReply(this.state.text, this.props.comment.key);
     this.setState({
       text: ''
     });

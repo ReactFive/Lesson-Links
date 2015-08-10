@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg==); }
 
@@ -12,11 +13,21 @@ body {
 .error-actions .btn {
   margin-right: 10px; }
 
+=======
+<<<<<<< HEAD
+>>>>>>> Added submit reply to store and improved UI
 h1 {
   font-family: "Open Sans", sans-serif; }
 
 h2 {
   font-family: "Roboto", sans-serif; }
+=======
+html,
+#root{
+  width: 100%;
+  height: 100%;
+}
+>>>>>>> Added submit reply to store and improved UI
 
 body {
   padding-top: 65px; }
@@ -26,6 +37,7 @@ body {
   text-align: center;
   padding-top: 100px; }
 
+<<<<<<< HEAD
 .sublogo {
   padding-bottom: 200px;
   text-align: center; }
@@ -37,6 +49,27 @@ h2 {
   font-family: "Roboto", sans-serif; }
 
 .comment-box {
+=======
+#video-box{
+  background-color: black;
+  width: 100%;
+  height: 480px;
+}
+
+.wrapper{
+  background-color: black;
+  width: 100%;
+  height: 480px;
+}
+
+.videocontent{
+  width: 854px;
+  height: 480px;
+}
+
+
+.comment-box{
+>>>>>>> Added submit reply to store and improved UI
   list-style-type: none;
   margin: 0 0 23px;
   font-size: 16.25px; }
@@ -58,7 +91,11 @@ h2 {
   display: inline;
   vertical-align: top; }
 
+<<<<<<< HEAD
 .comment-username {
+=======
+.comment-author{
+>>>>>>> Added submit reply to store and improved UI
   vertical-align: top;
   color: #167ac6;
   font-weight: 500;
@@ -132,6 +169,7 @@ h2 {
   border-left: 5px solid rgba(33,150, 243, 0.2 ) !important;
 >>>>>>> Improvements to UI
   padding: 10px !important;
+  padding-left: 23px !important;
   margin-top: 20px;
   box-shadow: none !important; }
 

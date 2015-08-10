@@ -5,5 +5,6 @@ module.exports = Reflux.createActions([
   'authenticate',
   'logout',
   'signup',
-  'submitComment'
+  'submitComment',
+  'submitReply'
 ]);
