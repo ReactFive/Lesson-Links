@@ -1,5 +1,6 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('mongoose').model('User');
+var _               = require('lodash');
 
 module.exports = function(passport) {
 
@@ -33,11 +34,11 @@ module.exports = function(passport) {
         if (err){
           console.log(err)
           return done(err);
-          // check to see if theres already a user with that email}
+          // check to see if there is already a user with that email}
         }
         if (user) {
           console.log('email taken')
-          return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+          return done(null, false);
         } else {
           // if there is no user with that email
           console.log('creating user')
@@ -77,19 +78,19 @@ module.exports = function(passport) {
 
       // if no user is found, return the message
       if (!user)
-        return done(null, false/*, req.flash('loginMessage', 'No user found.')*/); // req.flash is the way to set
-        // flashdata using connect-flash
+        return done(null, false); // req.flash is the way to set
 
       // if the user is found but the password is wrong
       user.validPassword(password, function(valid){
         console.log('this password is '+ valid)
         if(!valid) {
-          return done(null, false/*, req.flash('loginMessage', 'Oops! Wrong password.')*/); // create the loginMessage
+          return done(null, false); // create the loginMessage
           // and save it to session as flashdata
         } else {
           // all is well, return successful user
           console.log(user)
-          return done(null, user);
+          var newUser = _.omit(user, "password");
+          return done(null, newUser);
         }
       })
     });
