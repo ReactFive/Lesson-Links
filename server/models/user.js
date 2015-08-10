@@ -51,6 +51,8 @@ userSchema.methods.validPassword = function(password, callback) {
   });
 };
 
+userSchema.methods.addLesson = function(lesson){}
+
 var User = mongoose.model('User', userSchema);
 
 function createSeedUsers() {

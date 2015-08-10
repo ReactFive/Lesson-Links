@@ -13,6 +13,21 @@ exports.loginUser = function(req, res) {
   return res.status(200).send({user: req.user});
 };
 
+exports.addLesson = function(req, res){
+  User.findByIdAndUpdate(req.user.id, {
+    $addToSet: {
+      lessons: req.body.lesson._id
+    }, {}, function(err, obj) {
+      if (err) {
+        console.log(500, err);
+      } else {
+        console.log(obj);
+      }
+    });
+    res.status(201);
+  })
+}
+
 
 exports.logout = function(req, res){
   req.logout();

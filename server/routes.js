@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.get('/api/lessons', LessonCtrl.getAllLessons);
   app.get('/api/lesson/:url', LessonCtrl.getLessonByUrl);
   app.post('/api/lesson/:url', LessonCtrl.createLesson);
+  app.post('/api/lesson/update/:url', LessonCtrl.updateLesson);
 
   /**
    * USER API
