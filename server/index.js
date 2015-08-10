@@ -7,8 +7,8 @@ var logger = require('morgan');
 var colors = require('colors');
 var mongoose = require('mongoose');
 //var request = require('request');
-var React = require('react');
-var Router = require('react-router');
+//var React = require('react');
+//var Router = require('react-router');
 var swig  = require('swig');
 var _ = require('lodash');
 var passport = require('passport');
@@ -30,7 +30,7 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(cookieParser()); // read cookies for auth
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(express.static(path.join(__dirname, '/../client/')));
 
@@ -45,9 +45,9 @@ app.use(passport.session()); // persistent login sessions
 require('./routes')(app);
 
 /**
- * Here is where we use React on the server-side, via the react-router
+ * Commented stuff below is to render React on the server-side, via the react-router
  */
-
+/*
 app.use(function(req, res) {
   Router.run(routes, req.path, function(Handler) {
     var html = React.renderToString(React.createElement(Handler));
@@ -61,12 +61,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send({ message: err.message });
 });
+*/
 
-// Non-js static files
-app.use(express.static('/'))
-
-var server = require('http').createServer(app);
-
-server.listen(app.get('port'), function() {
-  console.log('Hey dude, your server is listening on port ' + app.get('port'));
-});
+app.listen(config.port);
+console.log('listening on port '+ config.port + '...');
