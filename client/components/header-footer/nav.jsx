@@ -7,26 +7,18 @@ var Actions = require('../../actions');
 
 
 module.exports = React.createClass({
-  mixins: [Reflux.connect(AuthStore),
-    Reflux.ListenerMixin,
-    Router.Navigation ],
+  mixins: [Reflux.listenTo(AuthStore, "onChange")],
+
+  getInitialState: function(){
+    return {
+      loggedIn: false,
+      error: false,
+      user: {}
+    }
+  },
 
   componentWillMount: function(){
-    //AuthStore.getState();
-  },
-
-  componentDidMount: function() {
-    this.listenTo(AuthStore, this.onAuthChange);
-  },
-
-  onAuthChange(auth) {
-    this.setState(auth);
-  },
-
-  handleLogout() {
-    event.preventDefault();
-    Actions.logout();
-    this.transitionTo('/');
+   Actions.authenticate();
   },
 
   render: function() {
@@ -45,13 +37,13 @@ module.exports = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              {this.state.user && <Link activeClassName="active" to="/lesson">Lessons</Link>}
+              {this.state.loggedIn && <Link activeClassName="active" to="/lesson">Lessons</Link>}
             </li>
             <li className="pull-right">
-              {!this.state.user && <Link activeClassName="active" to="/">Signup</Link>}
+              {!this.state.loggedIn && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
           </ul>
-          { this.state.user ? this.renderLogout() : this.renderLogin() }
+            { this.state.loggedIn ? this.renderLogout() : this.renderLogin() }
         </div>
     </nav> )
   },
@@ -61,33 +53,39 @@ module.exports = React.createClass({
         <input ref="email" type="text" className="form-control" placeholder="Email"/>
       </div>
       <div className="form-group">
-        <input ref="password" type="text" className="form-control" placeholder="Password"/>
+        <input ref="password" type="password" className="form-control" placeholder="Password"/>
       </div>
       <button type="submit" className="btn btn-default">Login</button>
       {/* add error message */}
     </form>
   },
+
   renderLogout: function(){
     return <form className="navbar-form navbar-right">
       <button className="btn btn-default" onClick={this.handleLogout}>Logout</button>
     </form>
   },
-  handleBtnSubmit: function(event){
 
-    console.log("in logout handler")
+  handleLogout() {
+    event.preventDefault();
     Actions.logout();
   },
+
   handleSubmit: function(event){
     event.preventDefault();
 
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
-    console.log(password);
 
     Actions.login(email, password);
 
-
     this.refs.email.getDOMNode().value = "";
     this.refs.password.getDOMNode().value = "";
+
+  },
+
+  onChange: function(event, auth){
+    console.log(auth);
+    this.setState({loggedIn: auth})
   }
 });

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var check = require('./mongooseValidators');
 
 var lessonSchema = new mongoose.Schema ({
   title   :
@@ -7,11 +8,17 @@ var lessonSchema = new mongoose.Schema ({
     required  : true,
     trim      : true
   },
-  url   :
+  lesson_url  :
   {
     type      : String,
     required  : true,
+    unique    : true,
     index     : true
+  },
+  video_url   :
+  {
+    type      : String,
+    validate  : check.urlValidator
   },
   created_at  :
   {
@@ -103,7 +110,8 @@ function createSeedLesson() {
     if (collection.length === 0) {
       Lesson.create({
         title: "default lesson",
-        url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
+        lesson_url: "http://localhost:3000/sass-101",
+        video_url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
         teacher: {
           id: "54ff4ed8476278905d04a1e6",
           name: "Rick"

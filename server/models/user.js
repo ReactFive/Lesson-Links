@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt');
-var lesson = require('./lesson');
+var Lesson = require('./lesson');
 
 var userSchema = new mongoose.Schema ({
   local            : {
@@ -13,7 +13,8 @@ var userSchema = new mongoose.Schema ({
       type: String,
       required: true,
       trim: true
-    }
+    },
+    name: String
   },
   facebook         : {
     id           : String,
@@ -32,8 +33,8 @@ var userSchema = new mongoose.Schema ({
     token        : String,
     email        : String,
     name         : String
-  }
-  //lessons : [{ type:mongoose.Schema.Types.ObjectId, ref: 'lesson'}]
+  },
+  lessons : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Lesson'}]
 });
 
 userSchema.methods.generateHash = function(password, callback) {
@@ -50,15 +51,20 @@ userSchema.methods.validPassword = function(password, callback) {
   });
 };
 
-module.exports = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
 
-function createSeedUser() {
+function createSeedUsers() {
+
   User.find({}).exec(function(err, users) {
+    var hashed_password = bcrypt.hashSync("rickspassword", 10);
+    var hashed_password2 = bcrypt.hashSync("test1", 10);
     if (users.length === 0) {
-      User.create({local:{ email: "richard.vancamp@gmail.com", password: "rick"}});
-    console.log("new user created");
+      User.create({local:{ email: "richard.vancamp@gmail.com", password: hashed_password, name:"Rick Van Camp"}});
+      User.create({local:{ email: "test1@test1.com", password: hashed_password2, name:"test1"}});
+      console.log("new default users created");
     }
   });
+
 }
 
-exports.createSeedUser = createSeedUser;
+exports.createSeedUsers = createSeedUsers;
