@@ -54,7 +54,7 @@ var LessonView = React.createClass({
         <div className="container">
           <div id='lesson-view'>
             <VideoBox />
-            <Content submit={this.onCommentSubmit}/>
+            <Content/>
           </div>
         </div>
     );
