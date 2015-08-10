@@ -7,7 +7,7 @@ var CommentsView = React.createClass({
 
     return (
       <div className="col-lg-10 col-lg-offset-1">
-        <CommentSubmissionBox submit={this.props.submit}/>
+        <CommentSubmissionBox/>
         <CommentList />
       </div>
     );

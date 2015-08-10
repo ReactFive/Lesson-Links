@@ -24,7 +24,6 @@ var VideoPlayer = React.createClass({
     console.log("video player updating; nextState = ", nextState)
     if(this.state.videoSetupCompleted) {
       var newComments = _.difference(nextState.lesson.comments, this.state.currentComments);
-      debugger;
       var player = videojs('attachmentVideo');
       
       player.markers.add(this.state.lesson.comments);

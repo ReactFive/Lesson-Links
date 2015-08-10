@@ -33,7 +33,8 @@ var CommentSubmissionBox = React.createClass({
       text: this.state.text,
       marked_at: videojs('attachmentVideo').currentTime(),
       time: videojs('attachmentVideo').currentTime(),
-      author: "current User"
+      author: "current User",
+      replies: []
     });
     this.setState({
       text: ''
