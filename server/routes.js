@@ -17,7 +17,7 @@ module.exports = function(app) {
    */
   app.post('/api/signup', passport.authenticate('local-signup'), UserCtrl.signupUser);
   app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
-  app.get('/api/logout', UserCtrl.logout);
+  app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', function (req, res) {
     {
       res.send(req.isAuthenticated())

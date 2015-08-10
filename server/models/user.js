@@ -61,7 +61,7 @@ function createSeedUsers() {
     if (users.length === 0) {
       User.create({local:{ email: "richard.vancamp@gmail.com", password: hashed_password, name:"Rick Van Camp"}});
       User.create({local:{ email: "test1@test1.com", password: hashed_password2, name:"test1"}});
-    console.log("new deafault users created");
+      console.log("new default users created");
     }
   });
 
