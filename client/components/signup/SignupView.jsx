@@ -11,7 +11,7 @@ module.exports = React.createClass({
   mixins: [Navigation],
 
   render: function(){
-    return ( <div className="container" id='signup'>
+    return ( <div className="container signup-container" id='signup'>
       <div className="col-md-6 col-md-offset-3">
 
         <h1>signup</h1>
@@ -37,7 +37,8 @@ module.exports = React.createClass({
             <input ref="password2" className="form-control" name="password2" type="password" placeholder="same password again"/>
           </div>
 
-          <button className="btn btn-primary">signup</button>
+          <button className="btn btn-primary">Signup</button>
+          <Link activeClassName="active" to="/"><button className="signup-cancel-btn btn btn-default">Cancel</button></Link>
         </form>
       </div>
     </div> )

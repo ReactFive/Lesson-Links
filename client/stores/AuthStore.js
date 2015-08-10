@@ -9,22 +9,23 @@ module.exports = Reflux.createStore({
   mixins: [Navigation],
   listenables: [Actions],
 
-  init: function(){},
+  init: function(){
+  },
 
   authenticate: function(){
-    if(Identity.isAuthenticated()){
-      console.log(Identity.isAuthenticated);
+    if(Identity().isAuthenticated()){
+      console.log("Authenticated: " + Identity().currentUser.local.name);
       this.loggedIn = true;
       this.triggerChange();
     } else {
       return Api.getStatus()
-          .then(function (res) {
-            if (res) {
-              console.log("authentication service says: " + res.data);
-              this.loggedIn = res.data;
-              this.triggerChange();
-            }
-          }.bind(this));
+        .then(function (res) {
+          if (res) {
+            console.log("Authenticated by api " + res.data);
+            this.loggedIn = res.data;
+            this.triggerChange();
+          }
+        }.bind(this));
     }
   },
 

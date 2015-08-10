@@ -1,7 +1,8 @@
 module.exports = function() {
-  var currentUser;
+  var currentUser = {};
   if (!!window.currentUser) {
-    currentUser = window.currentUser
+    currentUser = window.currentUser;
+    console.log(currentUser);
   }
   return {
     currentUser: currentUser,
