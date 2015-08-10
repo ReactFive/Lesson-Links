@@ -10,23 +10,17 @@ var VideoPlayer = React.createClass({
     videoSetupCompleted: false
   },
   componentWillReceiveProps: function(nextProps){
-    console.log("inside componentWillReceiveProps", nextProps)
-    //var newComments = _.difference(nextProps.comments, this.props.comments);
-    //var player = videojs('attachmentVideo');
-    
-    //player.markers.add(this.state.lesson.comments);
   },
   componentWillMount: function(){
   },
   componentDidMount: function(){
   },
   componentWillUpdate: function(nextProps, nextState) {
-    console.log("video player updating; nextState = ", nextState)
     if(this.state.videoSetupCompleted) {
-      var newComments = _.difference(nextState.lesson.comments, this.state.currentComments);
       var player = videojs('attachmentVideo');
-      
-      player.markers.add(this.state.lesson.comments);
+      var pastComments = player.markers.getMarkers();
+      var newComments = _.difference(nextState.lesson.comments, pastComments);
+      player.markers.add(newComments);
     }
   },
   componentDidUpdate: function() {
