@@ -21,6 +21,11 @@ module.exports.logout = function(){
   return axios.post(url);
 };
 
+module.exports.getUser = function() {
+  var url  = rootUrl + '/api/user';
+  return axios.post(url);
+}
+
 module.exports.getStatus = function(){
   var url  = rootUrl + '/api/authenticate';
   return axios.post(url);
