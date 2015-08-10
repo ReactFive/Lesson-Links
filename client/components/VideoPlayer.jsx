@@ -17,7 +17,6 @@ var VideoPlayer = React.createClass({
   componentWillMount: function(){
   },
   componentDidMount: function(){
-    //return this.videoSetup();
   },
   componentWillUpdate: function(nextProps, nextState) {
     console.log("video player updating; nextState = ", nextState)

@@ -5,14 +5,8 @@ var _ = require('lodash');
 
 var LessonStore = require('../Stores/lesson-store');
 
-//require('../stylesheets/modules/app.scss');
-
 var LessonView = React.createClass({
 
-  // getInitialState: function(){
-  //   console.log("LessonView getInitialState", this.state)
-  //   return {};
-  // },
   componentWillMount: function() {
   },
   onCommentSubmit: function(comment) {
@@ -56,7 +50,6 @@ var LessonView = React.createClass({
 
   },
   render: function() {
-    console.log("rendering");
     return (
         <div className="container">
           <div id='lesson-view'>
