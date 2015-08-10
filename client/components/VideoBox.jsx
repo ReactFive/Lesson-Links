@@ -1,7 +1,11 @@
 var React = require('react');
+var Reflux = require('reflux');
+var LessonStore = require('../stores/lesson-store');
+
 var VideoPlayer = require('./VideoPlayer.jsx');
 
 var VideoBox = React.createClass({
+  mixins: [Reflux.connect(LessonStore, "lesson")],
   /*{ getInitialState: function(){
       return {
         title: this.props.title,
@@ -11,6 +15,7 @@ var VideoBox = React.createClass({
     }, }*/
 
   render: function() {
+    console.log(this.state.lesson);
     return (
       <div id="video-box col-lg-12">
         <VideoPlayer />
