@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="bower_components/videojs-markers/dist/videojs.markers.min.css">
     <link rel="stylesheet" href="bower_components/videojs/dist/video-js/video-js.min.css">
-<<<<<<< HEAD
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-=======
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/paper/bootstrap.min.css">
->>>>>>> Added paper bootstrap theme
     <title>Sample App</title>
   </head>
   <body>
+  {% if !!bootstrappedUser %}
+  <script>
+    window.currentUser = {{ JSON.stringify(bootstrappedUser) }}
+  </script>
+  {% endif %}
     <div id='root'>{{html|safe}}</div>
       <script src="/public/js/vendor.js"></script>   
       <script src="/public/js/vendor.bundle.js"></script>

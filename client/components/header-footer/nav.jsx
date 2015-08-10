@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 var Reflux = require('reflux');
-var AuthStore = require('../../stores/auth-store');
+var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions');
 
 
@@ -49,11 +49,15 @@ module.exports = React.createClass({
   },
   renderLogin: function(){
     return <form onSubmit={this.handleSubmit} className="navbar-form navbar-right" role="search">
-      <div className="form-group">
-        <input ref="email" type="text" className="form-control" placeholder="Email"/>
+      <div className="form-group form-group-lg">
+        <div className="col-sm-4">
+          <input ref="email" type="text" className="input-lg form-control nav-login" placeholder="Email"/>
+        </div>
       </div>
-      <div className="form-group">
-        <input ref="password" type="password" className="form-control" placeholder="Password"/>
+      <div className="form-group form-group-lg">
+        <div className="col-sm-4">
+          <input ref="password" type="password" className="input-lg form-control nav-login" placeholder="Password"/>
+        </div>
       </div>
       <button type="submit" className="btn btn-default">Login</button>
       {/* add error message */}

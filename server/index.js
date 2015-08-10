@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
-//var async = require('async');
 var colors = require('colors');
 var mongoose = require('mongoose');
 //var request = require('request');
@@ -13,7 +12,6 @@ var Router = require('react-router');
 var swig  = require('swig');
 var _ = require('lodash');
 var passport = require('passport');
-var flash = require('connect-flash');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 
@@ -21,7 +19,6 @@ var env = process.env.NODE_ENV || 'development';
 var app = express();
 
 var config = require('./config')[env];
-
 var routes = require('../client/routes.js');
 
 //mongo should work now from at mongolab--suggest to change the dev env to your localhost
@@ -41,7 +38,6 @@ app.use(express.static(path.join(__dirname, '/../client/')));
 app.use(session({ secret: 'superdupersecretdonttellanyone' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
 
 /**
  * API points are in routes.js
@@ -55,7 +51,7 @@ require('./routes')(app);
 app.use(function(req, res) {
   Router.run(routes, req.path, function(Handler) {
     var html = React.renderToString(React.createElement(Handler));
-    var page = swig.renderFile('views/index.html', { html: html });
+    var page = swig.renderFile('views/index.html', { html: html, bootstrappedUser: _.omit(req.user, "password")});
     res.send(page);
   });
 });
