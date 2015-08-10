@@ -32,7 +32,7 @@ module.exports = React.createClass({
             <span className="icon-bar"></span>
           </button>
           <Link to="/" className="navbar-brand">
-            LEARNING LINKS
+            LESSON LINKS
           </Link>
         </div>
           <ul className="nav navbar-nav navbar-right">

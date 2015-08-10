@@ -12,21 +12,21 @@ var LibLessonEntry = React.createClass({
             <li>Author: {lesson.teacher.name}</li>
           </ul> 
 
-          <div id="lib-lesson-lock">
-            <h1>test-lock</h1>
-            <img src='../../public/assets/lock.png' />
+          <div className="lib-lock">
+            <a>lock</a>
           </div> 
 
         </span>
     });
 
     return (
-        <div id="lib-lesson-entry">
-          <h1>test-entrypath</h1>
+        <span className="lib-lesson-entry">
           {lessons}
-        </div>
+        </span>
     );
   }
 });
+
+{/*            <img src='../../public/assets/lock.png' />*/}
 
 module.exports = LibLessonEntry;

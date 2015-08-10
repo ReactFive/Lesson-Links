@@ -1,0 +1,21 @@
+$header-font     : 'Open Sans', sans-serif;
+$subheader-font  : 'Roboto', sans-serif;
+
+$background-color: #ffffff;
+
+$dark-purple     : #3a406b;
+$light-purple    : #b8b6e4;
+
+$dark-pink       : #c75d8d;
+$light-pink      : #eed2df;
+
+$dark-blue       : #5c94c0;
+$light-blue      : #abd7e4;
+
+h1{
+  font-family: $header-font;
+}
+
+h2{
+  font-family: $subheader-font;
+}
