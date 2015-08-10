@@ -3,16 +3,11 @@ var React = require('react');
 var ReplySubmissionBox = React.createClass({
   getInitialState: function(){
     return {
-      text: '',
-      showReplyForm: false
+      text: ''
     }
   },
-  onToggleReplyForm: function(e) {
-    e.preventDefault();
-    this.setState({ showReplyForm: !this.state.showReplyForm });
-  },
   componentDidUpdate: function(){
-    if(this.state.showReplyForm){
+    if(this.props.showReplyForm){
       React.findDOMNode(this.refs.test).focus();
     }
   },
@@ -30,13 +25,11 @@ var ReplySubmissionBox = React.createClass({
   render: function() {
     return (
       <div id="reply-creation-box">
-        <p className="comment-reply-button" onClick={this.onToggleReplyForm}>Reply</p>
-
-        { this.state.showReplyForm ? 
-          <form onSubmit={this.handleSubmit}>
-            <textarea className="form-control" onChange={this.onChange} value={this.state.text} ref="test"/><br/>
-            <button type="submit" className="btn btn-primary pull-right" onClick={this.handleSubmit} >Submit</button>
-            <button type="submit" className="btn btn-default pull-right" onClick={this.onToggleReplyForm} >Cancel</button>
+        { this.props.showReplyForm ? 
+          <form onSubmit={this.handleSubmit} className="reply-form-box">
+            <textarea className="form-control reply-form" rows="3" onChange={this.onChange} value={this.state.text} ref="test"/>
+            <button type="submit" className="btn btn-primary pull-right reply-button" onClick={this.handleSubmit} >Submit</button>
+            <button type="submit" className="btn btn-default pull-right reply-button" onClick={this.props.toggleReplyForm} >Cancel</button>
           </form>
         : null }
       </div>
