@@ -5,7 +5,8 @@ var ReplyContent = React.createClass({
   render: function() {
     return (
       <div className="reply-content">
-        <p>{this.props.time} {this.props.text}</p> 
+        <p>{this.props.text}</p>
+        <small>some other user</small>
       </div>
     );
   }

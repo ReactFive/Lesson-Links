@@ -5,7 +5,10 @@ var CommentContent = React.createClass({
   render: function() {
     return (
       <div className="comment-content">
-        <p>{this.props.time} {this.props.text}</p> 
+        <p className="comment-username">{this.props.comment.username} </p> 
+        <p className="comment-video-timestamp">@ {this.props.comment.time} seconds </p> 
+        <p className="comment-text">{this.props.comment.text} </p>
+        <p className="comment-reply-button" onClick={this.props.toggleReplyForm}>Reply</p>
       </div>
     );
   }

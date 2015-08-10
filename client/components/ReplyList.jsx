@@ -5,10 +5,10 @@ var ReplyList = React.createClass({
 
   render: function() {
     var replies = this.props.replies.map(function(reply, index) {
-      return <li className="reply list-group-item" key={index}> <Reply reply={reply}/> </li>
+      return <li className="reply" key={index}> <Reply reply={reply}/> </li> 
     });
     return ( 
-      <ul id="reply-list" className="list-group">
+      <ul id="reply-list" >
         {replies}
       </ul>
     );

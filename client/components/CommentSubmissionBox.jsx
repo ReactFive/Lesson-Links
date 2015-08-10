@@ -3,27 +3,56 @@ var React = require('react');
 var CommentSubmissionBox = React.createClass({
   getInitialState: function(){
     return {
-      text: ''
+      text: '',
+      showCommentForm: false
     }
   },
   onChange: function(e) {
     this.setState({text: e.target.value});
   },
-  handleSubmit: function(e) {
+  onToggleCommentForm: function(){
+    this.setState({ showCommentForm: !this.state.showCommentForm });
+  },
+  onFormFocus: function(){
+    if(this.state.text === ''){
+      var player = videojs('attachmentVideo');
+      player.pause();
+      this.onToggleCommentForm();
+    }
+  },
+  onFormBlur: function(){
+    if(this.state.text === ''){
+      this.onToggleCommentForm();
+    }
+  },
+  handleSubmit: function(e){
     e.preventDefault();
     this.props.submit(this.state.text);
+    this.setState({
+      text: ''
+    });
+    this.onToggleCommentForm();
   },
   render: function() {
     return (
       <div id="comment-creation-box" className="panel panel-default">
-        <div className="panel-heading">Comments</div>
         <div className="panel panel-body">
-
-          <button href="/" className="btn btn-primary" role="button">Make a comment</button>
-          <form onSubmit={this.handleSubmit}>
-            <textarea className="form-control" onChange={this.onChange} value={this.state.text}/>
-            <button className="btn btn-primary">submit</button>
+          <form onSubmit={this.handleSubmit} className="comment-form-box">
+            <textarea 
+              className="form-control comment-form" 
+              placeholder="Share your questions..."
+              value={this.state.text}
+              onChange={this.onChange} 
+              onFocus={this.onFormFocus} 
+              onBlur={this.onFormBlur} />
+            <br/>
+            { this.state.showCommentForm ? 
+              <button type="submit" className="btn btn-primary pull-right" onClick={this.handleSubmit}>Submit</button>
+            : null }
           </form>
+        
+
+
 
         </div>
       </div>
