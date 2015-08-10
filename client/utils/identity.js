@@ -1,13 +1,16 @@
-(function(global){
+module.exports = function() {
   var currentUser = {};
-  if (global && !!global.currentUser) {
-    currentUser = global.currentUser;
-    console.log(currentUser);
+  if (!!window.currentUser) {
+    currentUser = window.currentUser;
   }
   return {
     currentUser: currentUser,
+    deleteCurrentUser: function(){
+      this.currentUser = null;
+      window.currentUser = null;
+    },
     isAuthenticated: function () {
       return !!this.currentUser;
     }
-  }
-})(window);
+  };
+};
