@@ -9,9 +9,9 @@ module.exports.login = function(email, password) {
   return axios.post( url, data)
 };
 
-module.exports.signup = function(email, password) {
+module.exports.signup = function(name, email, password) {
   var url = rootUrl + '/api/signup';
-  var data = {email:email, password:password};
+  var data = {name: name, email:email, password:password};
 
   return axios.post( url, data)
 };
@@ -24,4 +24,4 @@ module.exports.logout = function(){
 module.exports.getStatus = function(){
   var url  = rootUrl + '/api/authenticate';
   return axios.post(url);
-}
+};

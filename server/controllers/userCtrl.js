@@ -3,9 +3,10 @@ var passport = require('passport');
 
 exports.signupUser = function(req, res) {
     console.log('singup success');
-    return res.status(201).send({user:req.user})
-    // If this function gets called, authentication was successful.
-    // `req.user` property contains the authenticated user.
+    req.logIn(user, function(err) {
+      if(err) {return next(err);}
+      return res.status(201).send({user:req.user});
+  });
 };
 
 exports.loginUser = function(req, res) {

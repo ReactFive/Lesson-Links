@@ -40,7 +40,7 @@ module.exports = React.createClass({
               {this.state.loggedIn && <Link activeClassName="active" to="/lesson">Lessons</Link>}
             </li>
             <li className="pull-right">
-              {!this.state.loggedIn && <Link activeClassName="active" to="/">Signup</Link>}
+              {!this.state.loggedIn && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
           </ul>
             { this.state.loggedIn ? this.renderLogout() : this.renderLogin() }

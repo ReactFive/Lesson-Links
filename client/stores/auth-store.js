@@ -1,8 +1,11 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Actions = require('../actions');
+var ReactRouter = require('react-router');
+var Navigation = ReactRouter.Navigation;
 
 module.exports = Reflux.createStore({
+  mixins: [Navigation],
   listenables: [Actions],
 
   init: function(){},
@@ -21,7 +24,7 @@ module.exports = Reflux.createStore({
   login: function (email, password) {
     return Api.login(email, password)
     .then(function(res){
-      this.user = res.data.user;
+      this.user = res.data.user.local;
       this.loggedIn = true;
       this.triggerChange();
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);
@@ -42,6 +45,20 @@ module.exports = Reflux.createStore({
     this.triggerChange();
     toastr["success"]("You have logged out");
     return Api.logout();
+  },
+
+  signup: function(name, email, password){
+    return Api.signup(name, email, password)
+      .then(function(res){
+        this.user = res.data.user.local;
+        this.triggerChange();
+        toastr["success"]("Welcome to Lesson Links " + res.data.user.local.name);
+      }.bind(this))
+      .catch(function(res){
+        console.log("catch:", res);
+        toastr["error"]("Sorry, there was a problem registering you");
+        this.triggerChange();
+      }.bind(this));
   },
 
   triggerChange: function(){
