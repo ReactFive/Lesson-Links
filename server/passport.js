@@ -1,5 +1,5 @@
 var LocalStrategy   = require('passport-local').Strategy;
-var User            = require('./models/user');
+var User            = require('mongoose').model('User');
 
 module.exports = function(passport) {
 
@@ -24,6 +24,7 @@ module.exports = function(passport) {
       passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
+    console.log(req.body.name)
     console.log('email: '+email+' | password: '+password)
    // User.findOne wont fire unless data is sent back
     process.nextTick(function() {
@@ -44,6 +45,7 @@ module.exports = function(passport) {
           var newUser            = new User();
           // set the user's local credentials
           newUser.local.email    = email;
+          newUser.local.name = req.body.name || undefined;
           newUser.generateHash(password, function(hash){
             newUser.local.password = hash;
             // save the user
@@ -72,15 +74,18 @@ module.exports = function(passport) {
       if (err)
         return done(err);
 
+
       // if no user is found, return the message
       if (!user)
-        return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+        return done(null, false/*, req.flash('loginMessage', 'No user found.')*/); // req.flash is the way to set
+        // flashdata using connect-flash
 
       // if the user is found but the password is wrong
       user.validPassword(password, function(valid){
         console.log('this password is '+ valid)
         if(!valid) {
-          return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+          return done(null, false/*, req.flash('loginMessage', 'Oops! Wrong password.')*/); // create the loginMessage
+          // and save it to session as flashdata
         } else {
           // all is well, return successful user
           console.log(user)

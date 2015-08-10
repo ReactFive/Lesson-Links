@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Lesson = require('./models/lesson');
-var User = require('./models/user');
+var UserModel = require('./models/user');
+var User = require('mongoose').model('User');
 
 module.exports = function(config) {
 
@@ -14,5 +15,5 @@ module.exports = function(config) {
   });
 
   Lesson.createSeedLesson();
-  //User.createSeedUser();
+  UserModel.createSeedUsers();
 }
