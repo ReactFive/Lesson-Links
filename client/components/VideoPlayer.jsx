@@ -1,23 +1,50 @@
 var React = require('react');
+var Reflux = require('reflux');
+
 var _ = require('lodash');
+var LessonStore = require('../stores/lesson-store');
 
 var VideoPlayer = React.createClass({
+  mixins: [Reflux.connect(LessonStore, "lesson")],
+  getInitialState: function() {
+    videoSetupCompleted: false
+  },
   componentWillReceiveProps: function(nextProps){
-    var newComments = _.difference(nextProps.comments, this.props.comments);
-    var player = videojs('attachmentVideo');
-    player.markers.add(newComments);
+    console.log("inside componentWillReceiveProps", nextProps)
+    //var newComments = _.difference(nextProps.comments, this.props.comments);
+    //var player = videojs('attachmentVideo');
+    
+    //player.markers.add(this.state.lesson.comments);
   },
   componentWillMount: function(){
   },
   componentDidMount: function(){
-    return this.videoSetup();
   },
-  videoSetup: function(){
+  componentWillUpdate: function(nextProps, nextState) {
+    console.log("video player updating; nextState = ", nextState)
+    if(this.state.videoSetupCompleted) {
+      var newComments = _.difference(nextState.lesson.comments, this.state.currentComments);
+      var player = videojs('attachmentVideo');
+      
+      player.markers.add(this.state.lesson.comments);
+    }
+  },
+  componentDidUpdate: function() {
+    if(!this.state.videoSetupCompleted){
+      this.state.lesson.comments.forEach(function(comment) {
+        comment.time = comment.marked_at;
+      });
+      var player = this.videoSetup(this.state.lesson.comments);
+      this.setState({videoSetupCompleted : true});
+      this.setState({currentComments : this.state.lesson.comments});
+    }
+  },
+  videoSetup: function(comments){
     // initialize video.js
     var player = videojs('attachmentVideo');
     // setup plugin
     player.markers({
-      markers: this.props.comments,
+      markers: comments,
       markerStyle: {
         'width':'7px',
         'border-radius': '30%',
@@ -53,19 +80,20 @@ var VideoPlayer = React.createClass({
   },
   render: function() {
     return (
+      this.state.lesson && this.state.lesson.video_url ?
         <div className="row">
           <div className="col-md-10 col-md-offset-1">
-                  <div className="embed-responsive embed-responsive-16by9">
-                  <video id='attachmentVideo'
-                  className='video-js vjs-default-skin'
-                  width='640'
-                  height='390'
+            <div className="embed-responsive embed-responsive-16by9">
+              <video id='attachmentVideo'
+                className='video-js vjs-default-skin'
+                  width='640' height='390'
                   controls preload='auto'
-                  data-setup={'{ "techOrder": ["youtube"], "src": "' + this.props.url + '" }'}>
-                  </video>
-              </div>
+                  data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
+              </video>
             </div>
-           </div>
+          </div>
+        </div>
+        : null
     )
   }  
 })

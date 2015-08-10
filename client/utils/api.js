@@ -25,3 +25,10 @@ module.exports.getStatus = function(){
   var url  = rootUrl + '/api/authenticate';
   return axios.post(url);
 };
+
+module.exports.getLesson = function() {
+  // need to change this later to '/lesson' to grab a single lesson's data
+  var url = 'http://localhost:3000/api/lessons';
+
+  return axios.get(url);
+};
