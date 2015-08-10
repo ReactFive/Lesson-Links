@@ -13,6 +13,7 @@ var LessonView = React.createClass({
       url: "https://www.youtube.com/watch?v=xjS6SftYQaQ",
       comments: [{
           id: 0,
+          username: "colin",
           time: 9.5,
           text: "I don't get what you are saying",
           replies: [ 
@@ -26,20 +27,23 @@ var LessonView = React.createClass({
         },
         {
           id: 1,
+          username: "isto",
           time: 16,
-          text: "That really helped me understand that better",
+          text: "actually its really deep when you start to think about it, like theres always a little hope for you till its really gone, this is how i see that point",
           replies: []
         },
         {
           id: 2,
+          username: "esteban",
           time: 23.6,
           text: "I want to confirm what you said",
           replies: []
         },
         {
           id: 3,
+          username: "rick",
           time: 28,
-          text: "What are you talking about",
+          text: "actually its really deep when you start to think about it, like theres always a little hope for you till its really gone, this is how i see that point",
           replies: [
             {
               text: "Reply"
@@ -52,6 +56,7 @@ var LessonView = React.createClass({
         },
         {
           id: 4,
+          username: "colin",
           time: 60,
           text: "Did this work?",
           replies: []
@@ -63,6 +68,7 @@ var LessonView = React.createClass({
 
     var commentObj = {
       id: this.state.comments.length,
+      username: "isto",
       text: comment,
       time: player.currentTime(),
       replies: []
