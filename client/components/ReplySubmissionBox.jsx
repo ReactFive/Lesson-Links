@@ -29,20 +29,16 @@ var ReplySubmissionBox = React.createClass({
   },
   render: function() {
     return (
-      <div id="comment-creation-box" className="panel panel-default">
-        <div className="panel panel-body">
-
-        <button type="submit" className="btn btn-default" onClick={this.onToggleReplyForm}>Reply</button>
+      <div id="reply-creation-box">
+        <p className="comment-reply-button" onClick={this.onToggleReplyForm}>Reply</p>
 
         { this.state.showReplyForm ? 
           <form onSubmit={this.handleSubmit}>
-            <input className="form-control" onChange={this.onChange} value={this.state.text} ref="test"/><br/>
+            <textarea className="form-control" onChange={this.onChange} value={this.state.text} ref="test"/><br/>
             <button type="submit" className="btn btn-primary pull-right" onClick={this.handleSubmit} >Submit</button>
             <button type="submit" className="btn btn-default pull-right" onClick={this.onToggleReplyForm} >Cancel</button>
           </form>
         : null }
-
-        </div>
       </div>
     );
   }

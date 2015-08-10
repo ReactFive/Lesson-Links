@@ -37,7 +37,6 @@ var CommentSubmissionBox = React.createClass({
     return (
       <div id="comment-creation-box" className="panel panel-default">
         <div className="panel panel-body">
-
           <form onSubmit={this.handleSubmit}>
             <textarea 
               className="form-control" 
