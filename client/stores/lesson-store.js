@@ -15,7 +15,6 @@ module.exports = Reflux.createStore({
     Api.getLesson()
     .then(function(res) {
       self.lesson = res.data[0];
-      console.log(self.lesson);
       self.trigger(self.lesson);
     })
     .catch(function(res) {
@@ -25,7 +24,6 @@ module.exports = Reflux.createStore({
 
 
   submitComment: function(comment) {
-    console.log(comment);
     this.lesson.comments.push(comment);
     this.trigger(this.lesson);
   }
