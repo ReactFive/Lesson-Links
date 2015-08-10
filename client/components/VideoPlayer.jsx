@@ -6,7 +6,9 @@ var LessonStore = require('../stores/lesson-store');
 
 var VideoPlayer = React.createClass({
   mixins: [Reflux.connect(LessonStore, "lesson")],
-
+  getInitialState: function() {
+    videoSetupCompleted: false
+  },
   componentWillReceiveProps: function(nextProps){
     console.log("inside componentWillReceiveProps", nextProps)
     //var newComments = _.difference(nextProps.comments, this.props.comments);
@@ -20,13 +22,23 @@ var VideoPlayer = React.createClass({
   },
   componentWillUpdate: function(nextProps, nextState) {
     console.log("video player updating; nextState = ", nextState)
-    
+    if(this.state.videoSetupCompleted) {
+      var newComments = _.difference(nextState.lesson.comments, this.state.currentComments);
+      debugger;
+      var player = videojs('attachmentVideo');
+      
+      player.markers.add(this.state.lesson.comments);
+    }
   },
   componentDidUpdate: function() {
-    this.state.lesson.comments.forEach(function(comment) {
-      comment.time = comment.marked_at;
-    });
-    var player = this.videoSetup(this.state.lesson.comments);
+    if(!this.state.videoSetupCompleted){
+      this.state.lesson.comments.forEach(function(comment) {
+        comment.time = comment.marked_at;
+      });
+      var player = this.videoSetup(this.state.lesson.comments);
+      this.setState({videoSetupCompleted : true});
+      this.setState({currentComments : this.state.lesson.comments});
+    }
   },
   videoSetup: function(comments){
     // initialize video.js

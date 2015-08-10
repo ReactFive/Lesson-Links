@@ -21,8 +21,14 @@ module.exports = Reflux.createStore({
     .catch(function(res) {
       console.log(res);
     })
-  }
+  },
 
+
+  submitComment: function(comment) {
+    console.log(comment);
+    this.lesson.comments.push(comment);
+    this.trigger(this.lesson);
+  }
   // change: function(){
   //   this.trigger('change', this.loggedIn);
   // }

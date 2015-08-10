@@ -1,4 +1,6 @@
 var React = require('react');
+var Reflux = require('reflux');
+var Actions = require('../actions');
 
 var CommentSubmissionBox = React.createClass({
   getInitialState: function(){
@@ -27,7 +29,12 @@ var CommentSubmissionBox = React.createClass({
   },
   handleSubmit: function(e){
     e.preventDefault();
-    this.props.submit(this.state.text);
+    Actions.submitComment({
+      text: this.state.text,
+      marked_at: videojs('attachmentVideo').currentTime(),
+      time: videojs('attachmentVideo').currentTime(),
+      author: "current User"
+    });
     this.setState({
       text: ''
     });
