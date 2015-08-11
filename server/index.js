@@ -26,6 +26,9 @@ require('./mongoose')(config);
 require('./passport')(passport);
 
 app.set('port', config.port);
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+app.set('views', config.rootPath + 'views/');
 app.use(compression());
 app.use(logger('dev'));
 app.use(cookieParser()); // read cookies for auth
