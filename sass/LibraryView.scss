@@ -23,3 +23,24 @@
 .lib-lesson-container{
   background-color: $light-pink;
 }
+
+.lib-add-lesson{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border: 7px dashed;
+  background: $light-purple;
+  color: $dark-purple;
+  margin: 7px;
+  padding-left: 5px;
+  a{
+    font-weight: bold;
+    font-size: 150px;
+    vertical-align: middle;
+
+  }
+  a:hover{
+    font-size: 200px;
+    color: $dark-pink;
+  }
+}

@@ -80,7 +80,7 @@ var Library = React.createClass({
   },
   render:function(){
     
-    {/*Grab Teacher's Names*/}
+    {/*Grab Teacher's Name*/}
     var name = this.state.lessons[0].teacher.name
 
     return (

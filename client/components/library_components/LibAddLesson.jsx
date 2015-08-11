@@ -3,8 +3,8 @@ var React = require('react');
 var LibAddLesson = React.createClass({
   render:function(){
     return (
-      <span id="lib-add-lesson">
-        <h1>Add Lesson</h1>
+      <span className="lib-add-lesson">
+        <a className="add-me">+</a>
       </span>
     )
   }
