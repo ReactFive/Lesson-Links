@@ -131,7 +131,7 @@ gulp.task('browserify-watch', ['browserify-vendor'], function() {
  |--------------------------------------------------------------------------
  */
 gulp.task('sass', function () {
-  gulp.src('sass/**/*.scss')
+  gulp.src('sass/Main.scss')
       .pipe(sass().on('error', sass.logError))
       .pipe(concat('style.css'))
       .pipe(gulp.dest('client/public/css'));

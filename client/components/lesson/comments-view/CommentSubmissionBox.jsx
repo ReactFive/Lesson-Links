@@ -1,7 +1,10 @@
 var React = require('react');
 var Reflux = require('reflux');
-var Actions = require('../actions');
-var AuthStore = require('../stores/AuthStore');
+var Actions = require('../../../actions');
+var AuthStore = require('../../../stores/AuthStore.js');
+// Drop-in replacement for the textarea component which automatically resizes textarea as content changes
+// https://github.com/andreypopp/react-textarea-autosize
+var Textarea = require('react-textarea-autosize');
 
 var CommentSubmissionBox = React.createClass({
   mixins: [Reflux.listenTo(AuthStore, "onChange")],
@@ -52,18 +55,18 @@ var CommentSubmissionBox = React.createClass({
   render: function() {
     return (
       <div id="comment-creation-box" className="panel panel-default">
-        <div className="panel panel-body">
+        <div className="panel panel-body comment-creation-form">
           <form onSubmit={this.handleSubmit} className="comment-form-box">
-            <textarea 
+            <Textarea 
               className="form-control comment-form" 
               placeholder="Share your questions..."
               value={this.state.text}
               onChange={this.onInputChange} 
               onFocus={this.onFormFocus} 
-              onBlur={this.onFormBlur} />
+              onBlur={this.onFormBlur}></Textarea>
             <br/>
             { this.state.showCommentForm ? 
-              <button type="submit" className="btn btn-primary pull-right" onClick={this.handleSubmit}>Submit</button>
+              <button type="submit" className="btn btn-primary btn-sm pull-right" onClick={this.handleSubmit}>Submit</button>
             : null }
           </form>
         </div>
