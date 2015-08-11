@@ -50,3 +50,6 @@ resources/templates.list
 build/
 build.properties
 junit*.properties
+
+###Compiled Styles
+client/public/css/style.css

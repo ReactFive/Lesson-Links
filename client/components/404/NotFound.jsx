@@ -5,7 +5,7 @@ var LINK = Router.Link;
 var NotFound = React.createClass({
   render: function() {
     return (
-        <div className="container error-container">
+        <div className="container error-container" id="404err">
           <div className="row">
             <div classname="col-md-12">
               <div className="error-template">
