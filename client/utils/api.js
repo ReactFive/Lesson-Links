@@ -39,6 +39,6 @@ module.exports.getStatus = function(){
 
 module.exports.getLesson = function(lessonUrl) {
   // need to change this later to '/lesson' to grab a single lesson's data
-  var url  = rootUrl + '/api/lesson/'+lessonUrl;
+  var url  = rootUrl + '/api/lesson/'+lessonUrl; 
   return axios.get(url);
 };

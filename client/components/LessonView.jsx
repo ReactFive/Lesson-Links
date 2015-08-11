@@ -12,8 +12,8 @@ var LessonView = React.createClass({
     router: React.PropTypes.func
   },
   componentWillMount: function() {
-    console.log(this.context.router.getCurrentParams().url)
-    LessonStore.fetchLesson(this.context.router.getCurrentParams().url)
+    // console.log(this.context.router.getCurrentParams().url)
+    // LessonStore.fetchLesson(this.context.router.getCurrentParams().url)
   },
   render: function() {
     return (

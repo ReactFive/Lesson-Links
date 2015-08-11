@@ -44,7 +44,7 @@ var lessonSchema = new mongoose.Schema ({
       trim    : true,
       max     : 180
     },
-    votes     : 
+    likes     : 
     {
       type   : Array,
       default : []
@@ -63,7 +63,7 @@ var lessonSchema = new mongoose.Schema ({
         trim    : true,
         max     : 180
       },
-      votes     : 
+      likes     : 
       {
       type   : Array,
       default : []
