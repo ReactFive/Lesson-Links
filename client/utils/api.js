@@ -23,7 +23,7 @@ module.exports.logout = function(){
 
 module.exports.getUser = function() {
   var url  = rootUrl + '/api/user';
-  return axios.post(url);
+  return axios.get(url);
 };
 
 module.exports.updateLesson = function(lesson) {
