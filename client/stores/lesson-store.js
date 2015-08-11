@@ -22,12 +22,32 @@ module.exports = Reflux.createStore({
     })
   },
 
-
   submitComment: function(comment) {
     this.lesson.comments.push(comment);
     this.trigger(this.lesson);
+  },
+
+  submitReply: function(reply, commentKey) {
+    var player = videojs('attachmentVideo');
+    //wrap the reply in an object
+    var replyObj = {
+      text: reply
+    };
+
+    //find the index of the comment to which the reply should be added
+    var commentIndex;
+    _.forEach(this.lesson.comments, function(comment, key){
+      if(comment.key === commentKey){
+        commentIndex = key;
+      }
+    })
+    
+    //add the reply to the comments
+    this.lesson.comments[commentIndex].replies.push(replyObj);
+    this.trigger(this.lesson);
+
   }
-  // change: function(){
-  //   this.trigger('change', this.loggedIn);
-  // }
+
+
+
 })

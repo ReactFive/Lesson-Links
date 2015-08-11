@@ -3,6 +3,7 @@ api.js
 *.log
 client/bower_components
 server/config.js
+client/public/css/*
 
 bundle.js
 vendor.bundle.js
