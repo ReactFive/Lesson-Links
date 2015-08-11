@@ -9,8 +9,8 @@ var LibLessonEntry = React.createClass({
       return <span className="lib-lesson-entry" key={index}>
       
           <p>
-            <p className="lib-less-title">Title: {lesson.title}</p>
-            <p className="lib-less-author">Author: {lesson.teacher.name}</p>
+            <p className="lib-less-title">{lesson.title}</p>
+            <p className="lib-less-author">By: {lesson.teacher.name}</p>
           </p> 
 
           <p className="lib-lock">
