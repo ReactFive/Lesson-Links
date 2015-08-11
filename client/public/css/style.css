@@ -72,14 +72,17 @@ p {
   width: 854px;
   height: 480px; }
 
+.comments-view {
+  font-size: 12px; }
+
 .comment-box {
   list-style-type: none;
-  margin: 0 0 23px;
-  font-size: 16.25px; }
+  margin: 0 0 16px;
+  font-size: 12px; }
 
 .comment-content {
-  padding-left: 23px;
-  padding-right: 23px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-top: 12px;
   padding-bottom: 5px;
   border: none;
@@ -123,37 +126,38 @@ p {
   margin: 0; }
 
 .comment-form {
+  font-size: 12px !important;
   border: none;
   border-top: 1px solid rgba(33, 150, 243, 0.2) !important;
   padding: 10px !important;
   box-shadow: none !important; }
 
 #reply-creation-box {
-  padding-left: 20px; }
+  padding-left: 16px; }
 
 #reply-list {
   margin-top: 15px !important; }
 
 .reply {
   list-style-type: none;
-  margin: 0 0 23px;
-  font-size: 16.25px;
+  margin: 0 0 16px;
+  font-size: 12px;
   border-left: 5px solid #eeeeee;
-  padding-left: 23px;
-  padding-right: 23px;
+  padding-left: 16px;
+  padding-right: 16px;
   padding-top: 2px;
   padding-bottom: 5px; }
 
 .reply-form-box {
   width: 90%;
-  margin-left: 20px;
-  margin-bottom: 50px; }
+  margin-left: 12px;
+  margin-bottom: 38px; }
 
 .reply-form {
   border-left: 5px solid rgba(33, 150, 243, 0.2) !important;
-  padding: 10px !important;
-  padding-left: 23px !important;
-  margin-top: 20px;
+  padding: 8px !important;
+  padding-left: 16px !important;
+  margin-top: 15px;
   box-shadow: none !important; }
 
 .reply-button {
