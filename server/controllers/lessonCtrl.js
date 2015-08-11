@@ -40,7 +40,7 @@ exports.updateLesson = function(req, res, next){
       title : req.body.title || "Your lesson",
       video_url : req.body.video_url || null,
       published : req.body.published || true,
-      comments : req.body.comments,
+      comments : req.body.comments
     }
   }, function(err, raw){
     if (err) return handleError(err);
