@@ -14,7 +14,10 @@ var Multichoice = React.createClass({
   },
 
   handleClick: function(){
-
+    this.refs.name.getDOMNode().value = "";
+    this.refs.email.getDOMNode().value = "";
+    this.refs.password.getDOMNode().value = "";
+    this.refs.password2.getDOMNode().value = "";
   },
 
   render: function() {
@@ -29,10 +32,12 @@ var Multichoice = React.createClass({
       classString+= " btn btn-lg btn-primary btn-block";
       var refString = "opts";
       refString += index;
+      var idString = "opt" + index;
       return (
         <label className={classString}>
           <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-          <input key={index} type="radio" name="q_answer" ref={refString} value={index}/>{option}</label>
+          <input id={idString} key={index} onClick={this.handleClick} type="radio" name="q_answer" ref={refString}" +
+           " value={index}/>{option}</label>
         )
     });
     return (
