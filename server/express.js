@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var passport = require("passport");
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var errorHandler = require('errorhandler');
 var swig  = require('swig');
 var compression = require('compression');
@@ -27,7 +28,16 @@ module.exports = function(app, config){
   app.use(express.static(path.join(__dirname, '/../client/')));
 
 // required for passport
-  app.use(session({ secret: 'superdupersecretdonttellanyone' })); // session secret
+  app.use(session({
+    secret: 'superdupersecretdonttellanyone',
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+      url: config.database,
+      //Session expires after 1 day
+      ttl: 1 * 24 * 60 * 60 
+    })
+  })); // session secret
   app.use(passport.initialize());
   app.use(passport.session()); // persistent login sessions
 
