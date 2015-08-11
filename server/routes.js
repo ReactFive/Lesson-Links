@@ -20,9 +20,8 @@ module.exports = function(app) {
   app.post('/api/signup', passport.authenticate('local-signup'), UserCtrl.signupUser);
   app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
   app.post('/api/logout', UserCtrl.logout);
-  app.get('/api/user', UserCtrl.getUser);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
-  app.get('/api/user', function (req, res) {});
+  app.get('/api/user', UserCtrl.getUser);
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){
