@@ -64,7 +64,6 @@ function createSeedUsers() {
       console.log("new default users created");
     }
   });
-
 }
 
 exports.createSeedUsers = createSeedUsers;

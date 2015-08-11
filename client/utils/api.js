@@ -21,6 +21,17 @@ module.exports.logout = function(){
   return axios.post(url);
 };
 
+module.exports.getUser = function() {
+  var url  = rootUrl + '/api/user';
+  return axios.get(url);
+};
+
+module.exports.updateLesson = function(lesson) {
+  var url  = rootUrl + '/api/lessons/update' + lesson.lesson_url;
+  lesson.publish = !lesson.publish
+  return axios.post(url, lesson);
+};
+
 module.exports.getStatus = function(){
   var url  = rootUrl + '/api/authenticate';
   return axios.post(url);

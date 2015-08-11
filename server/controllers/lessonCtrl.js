@@ -5,7 +5,6 @@ var User = require('mongoose').model('User');
 exports.getAllLessons = function(req, res) {
   Lesson.find({})
   .exec(function (err, collection) {
-    console.log("in here");
     if (err) {
       res.status(500);
       return res.send(err);
@@ -33,10 +32,26 @@ exports.getLessonByUrl = function(req, res, next) {
   });
 };
 
+exports.updateLesson = function(req, res, next){
+  // var teacherID = req.user.id;
+  console.log(req.params.url)
+  Lesson.update({lesson_url : req.params.url}, {$set : 
+    {
+      title : req.body.title || "Your lesson",
+      video_url : req.body.video_url || null,
+      published : req.body.published || true,
+      comments : req.body.comments,
+    }
+  }, function(err, raw){
+    if (err) return handleError(err);
+    console.log(raw)
+  })
+}
+
 exports.createLesson = function(req, res, next){
     var teacherID = req.user.id;
-    //var teacherID = "55c763f321aa777315bb9728";
-
+    // var teacherID = "55c8fd1ac35805231878ef1a";
+    
     var newLesson = new Lesson ({
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,

@@ -14,6 +14,6 @@ module.exports = function(config) {
     console.log("You have connected to the database, dude.");
   });
 
-  Lesson.createSeedLesson();
-  UserModel.createSeedUsers();
+  // UserModel.createSeedUsers();
+  // Lesson.createSeedLesson();
 }

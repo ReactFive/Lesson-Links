@@ -2,6 +2,7 @@ node_modules
 api.js
 *.log
 client/bower_components
+server/config.js
 
 bundle.js
 vendor.bundle.js

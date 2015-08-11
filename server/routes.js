@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.get('/api/lessons', LessonCtrl.getAllLessons);
   app.get('/api/lesson/:url', LessonCtrl.getLessonByUrl);
   app.post('/api/lesson/:url', LessonCtrl.createLesson);
+  app.post('/api/lesson/update/:url', LessonCtrl.updateLesson);
 
   /**
    * USER API
@@ -20,7 +21,7 @@ module.exports = function(app) {
   app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
-  app.get('/api/user', function (req, res) {});
+  app.get('/api/user', UserCtrl.getUser);
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){
