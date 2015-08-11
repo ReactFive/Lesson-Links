@@ -4,7 +4,7 @@ var LibLessonEntry = require('./LibLessonEntry.jsx');
 var LibAddLesson = require('./LibAddLesson.jsx');
 
 var TEST = [{
-    title: "Lesson One - TS",
+    title: "Lesson One",
     url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
     teacher: {
       id: "54ff4ed8476278905d04a1e6",
@@ -83,17 +83,20 @@ var Library = React.createClass({
     {/*Grab Teacher's Name*/}
     var name = this.state.lessons[0].teacher.name
 
+    {/*Declare apostrophe*/}
+    var apo = "'"
+
     return (
       <div className="lib-lesson-container">
         <div id="library-filter-header">
-          <h1>{name} s Library</h1>
+          <h1>{name}{apo}s Library</h1>
         </div>
         <div id="library-filter">
             <LibLessonEntry lessons = {this.state.lessons}/>
             <LibAddLesson />
         </div>
         <div id="library-filter-header">
-          <h1>{name} s Studies</h1>
+          <h1>{name}{apo}s Studies</h1>
         </div>
         <div id="library-filter">
             <LibLessonEntry lessons = {this.state.lessons}/>

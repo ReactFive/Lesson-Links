@@ -9,11 +9,27 @@
   color: $dark-purple;
   margin: 7px;
   padding-left: 5px;
+  text-align: center;
+}
+
+.lib-less-title{
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.lib-less-author{
+  font-weight: 300;
+  font-size: 16px;
 }
 
 .lib-lock{
   font-size: 12px;
-  padding-left: 20px;
+  text-decoration: none;
+}
+
+.lib-lock:hover{
+  text-decoration: none;
+  color: $dark-pink;
 }
 
 .library-filter-header{
@@ -21,8 +37,6 @@
 }
 
 .lib-lesson-container{
-  background-color: $light-pink;
-  border: 7px solid $dark-pink;
 }
 
 .lib-filter-header{
@@ -34,31 +48,30 @@
   height: 200px;
   width: 200px;
   border: 7px dashed;
-  background: $light-purple;
   color: $dark-purple;
   margin: 7px;
   padding-left: 5px;
+  text-align: center;
   a{
     font-weight: bold;
     font-size: 150px;
     color: $dark-purple;
-    text-align: center;
-    line-height: 50%
+    line-height: 1.25;
   }
   a:hover{
     font-size: 200px;
     text-decoration: none;
     color: $dark-pink;
+    line-height: 0.99;
   }
 }
 
 .lib-lock{
   a{
-  text-decoration: none;
-  color: $dark-purple;
+    text-decoration: none;
+    color: $dark-purple;
   a:hover{
     text-decoration: none;
-    color: $dark-pink;
   }
   }
 }
