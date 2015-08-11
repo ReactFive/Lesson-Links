@@ -79,14 +79,24 @@ var Library = React.createClass({
     return {lessons: TEST}
   },
   render:function(){
+    
+    {/*Grab Teacher's Names*/}
+    var name = this.state.lessons[0].teacher.name
+
     return (
-      <div>
+      <div className="lib-lesson-container">
         <div id="library-filter-header">
-          <h1>My Library</h1>
+          <h1>{name} s Library</h1>
         </div>
         <div id="library-filter">
             <LibLessonEntry lessons = {this.state.lessons}/>
             <LibAddLesson />
+        </div>
+        <div id="library-filter-header">
+          <h1>{name} s Studies</h1>
+        </div>
+        <div id="library-filter">
+            <LibLessonEntry lessons = {this.state.lessons}/>
         </div>
       </div>
     )
