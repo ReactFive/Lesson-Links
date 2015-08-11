@@ -9,16 +9,22 @@ var Multichoice = React.createClass({
      options: ["11", "7", "32", "43"],
      correct: 2,
      item: 1,
-     counter: 0
+     counter: 0,
+     outcome: null
     };
   },
 
-  handleClick: function(){
-    this.refs.name.getDOMNode().value = "";
-    this.refs.email.getDOMNode().value = "";
-    this.refs.password.getDOMNode().value = "";
-    this.refs.password2.getDOMNode().value = "";
+  handleClick: function(clickedOpt){
+    console.log(clickedOpt);
+      if(this.state.correct === clickedOpt) {
+        console.log("correct");
+        this.setState({outcome: "correct"});
+      } else{
+        console.log("false");
+        this.setState({outcome: "incorrect"});
+     }
   },
+  
 
   render: function() {
     var i = this.state.item;
@@ -32,14 +38,13 @@ var Multichoice = React.createClass({
       classString+= " btn btn-lg btn-primary btn-block";
       var refString = "opts";
       refString += index;
-      var idString = "opt" + index;
+      var handle = this.handleClick;
       return (
         <label className={classString}>
           <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-          <input id={idString} key={index} onClick={this.handleClick} type="radio" name="q_answer" ref={refString}" +
-           " value={index}/>{option}</label>
+          <input onClick={handle.bind(null,index)} type="radio" name="q_answer" ref={refString} value={index}/>{option}</label>
         )
-    });
+    }.bind(this));
     return (
     <div className="container-fluid bg-info">
       <div className="modal-dialog">
