@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../../../actions');
+var AuthStore = require('../../../stores/AuthStore.js');
 // Drop-in replacement for the textarea component which automatically resizes textarea as content changes
 // https://github.com/andreypopp/react-textarea-autosize
 var Textarea = require('react-textarea-autosize');
