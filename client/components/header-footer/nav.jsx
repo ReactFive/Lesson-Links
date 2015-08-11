@@ -51,12 +51,12 @@ module.exports = React.createClass({
     return <form onSubmit={this.handleSubmit} className="navbar-form navbar-right" role="search">
       <div className="form-group form-group-lg">
         <div className="col-sm-4">
-          <input ref="email" type="text" className="input-lg form-control nav-login" placeholder="Email"/>
+          <input ref="email" type="text" className="form-control nav-login" placeholder="Email"/>
         </div>
       </div>
       <div className="form-group form-group-lg">
         <div className="col-sm-4">
-          <input ref="password" type="password" className="input-lg form-control nav-login" placeholder="Password"/>
+          <input ref="password" type="password" className="form-control nav-login" placeholder="Password"/>
         </div>
       </div>
       <button type="submit" className="btn btn-default">Login</button>

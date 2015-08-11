@@ -4,6 +4,7 @@ var Identity = require('../utils/identity.js');
 var Actions = require('../actions');
 var ReactRouter = require('react-router');
 var Navigation = ReactRouter.Navigation;
+var _ = require('lodash');
 
 module.exports = Reflux.createStore({
   mixins: [Navigation],
@@ -13,8 +14,13 @@ module.exports = Reflux.createStore({
   },
 
   authenticate: function(){
-    if(Identity().isAuthenticated()){
+    var name = _.findKey(Identity().currentUser, function(obj){
+      return obj._id;
+    });
+   if(name){
+      console.log("authenticated as: ", Identity().currentUser);
       this.loggedIn = true;
+      this.user = Identity().currentUser;
       this.triggerChange();
     } else {
       return Api.getStatus()
@@ -48,7 +54,8 @@ module.exports = Reflux.createStore({
   logout: function(){
     this.user = null;
     this.loggedIn = false;
-    Identity.deleteCurrentUser;
+    delete window.currentUser;
+    console.log("deleted ", Identity().currentUser);
     this.triggerChange();
     toastr["success"]("You have logged out");
     return Api.logout();

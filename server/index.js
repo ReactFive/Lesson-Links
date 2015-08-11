@@ -55,13 +55,13 @@ app.use(function(req, res) {
     res.send(page);
   });
 });
+*/
 
 app.use(function(err, req, res, next) {
   console.log(err.stack.red);
   res.status(err.status || 500);
   res.send({ message: err.message });
 });
-*/
 
 app.listen(config.port);
 console.log('listening on port '+ config.port + '...');

@@ -1,13 +1,13 @@
 module.exports = function() {
-  var currentUser = {};
+  var currentUser;
   if (!!window.currentUser) {
     currentUser = window.currentUser;
   }
   return {
     currentUser: currentUser,
-    deleteCurrentUser: function(){
-      this.currentUser = null;
-      window.currentUser = null;
+     deleteCurrentUser: function(){
+      delete window.currentUser;
+      return this.currentUser = null;
     },
     isAuthenticated: function () {
       return !!this.currentUser;

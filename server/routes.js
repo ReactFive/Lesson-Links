@@ -28,7 +28,7 @@ module.exports = function(app) {
   });
 
 //  *** BASE FROM WHICH INDEX.HTML IS RENDERED ***
-  app.get('*', function(request, response){
+  app.get('/', function(request, response){
     response.render('index', {
       bootstrappedUser: _.omit(req.user, "password")
     });
