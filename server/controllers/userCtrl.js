@@ -10,7 +10,6 @@ exports.signupUser = function(req, res) {
 };
 
 exports.loginUser = function(req, res) {
-  console.log(req.user)
   return res.status(200).send({user: req.user});
 };
 
@@ -30,7 +29,6 @@ exports.addLesson = function(req, res){
 }
 
 exports.getUser = function(req, res){
-  console.log(req.user)
   User.findById(req.user.id, function(err, obj){
     if (err) {console.log(err)}
     res.send(obj)
@@ -38,7 +36,6 @@ exports.getUser = function(req, res){
 }
 
 exports.logout = function(req, res){
-  console.log(req.user);
   req.logout();
   req.session.destroy(function (err) {
     if (err) { return next(err); }
