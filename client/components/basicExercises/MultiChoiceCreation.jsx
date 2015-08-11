@@ -3,7 +3,9 @@ var Reflux = require('reflux');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Link = Router.Link;
-var Route = Router.Route;
+var AuthStore = require('../../stores/AuthStore');
+var Actions = require('../../actions');
+var Select = require('react-select');
 
 var MultiChoiceCreation = React.createClass({
   mixins: [Reflux.listenTo(AuthStore, "onChange")],
@@ -11,7 +13,8 @@ var MultiChoiceCreation = React.createClass({
   getInitialState: function(){
     return {
       choiceNumber: 4,
-      optionsArray: []
+      optionsArray: [],
+      user: null
     }
   },
 
@@ -33,29 +36,37 @@ var MultiChoiceCreation = React.createClass({
     this.setState({optionsArray: inputs})
   },
 
-  handleSubmit: function(){
-
+  handleSubmit: function(event){
+    console.log(event);
   },
 
   render: function(){
-    var time = videojs("#attachmentVideo").currentTime;
-    return ( <div className="container multichoice-container">
-          <form name="numberOfItems" onChange={this.formSetup}>
-            <select value="choices">
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">Apple</option>
-            </select>
-          </form>
+    //var time = videojs("#attachmentVideo").currentTime || 0;
+    var options = [
+      { value: '0', label: 'One' },
+      { value: '1', label: 'Two' },
+      { value: '2', label: 'Three' },
+      { value: '4', label: 'Four' },
+      { value: '5', label: 'Five' }
+    ];
 
+    return (
+        <div className="container multichoice-container">
           <div className="col-md-6 col-md-offset-3">
 
-            <h1>Create a multiple choice question</h1>
+            <h3>Create a multiple choice question</h3>
+
+            <Select
+              name="Number of items"
+              value="Number if alternatives"
+              options={options}
+              onSelect={this.formSetup}
+              />
+
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
 
               <div className="form-group">
-                <label id="question">Link a multiple-choice question at {time}</label>
+                <label id="question">Link a multiple-choice question</label>
                 <input ref="question" className="form-control" name="name" type='text' placeholder="Question"/>
               </div>
 
@@ -67,10 +78,10 @@ var MultiChoiceCreation = React.createClass({
           </div>
         </div>
     )
-  }
+  },
   onChange: function(event, user){
     this.setState({user: user})
   }
 });
 
-module.exports =  MultiChoiceCreation;
+module.exports = MultiChoiceCreation;
