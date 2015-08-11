@@ -1,6 +1,9 @@
 var React = require('react');
 var Reflux = require('reflux');
-var Actions = require('../actions');
+var Actions = require('../../../actions');
+// Drop-in replacement for the textarea component which automatically resizes textarea as content changes
+// https://github.com/andreypopp/react-textarea-autosize
+var Textarea = require('react-textarea-autosize');
 
 var ReplySubmissionBox = React.createClass({
   getInitialState: function(){
@@ -29,9 +32,9 @@ var ReplySubmissionBox = React.createClass({
       <div id="reply-creation-box">
         { this.props.showReplyForm ? 
           <form onSubmit={this.handleSubmit} className="reply-form-box">
-            <textarea className="form-control reply-form" rows="3" onChange={this.onChange} value={this.state.text} ref="test"/>
-            <button type="submit" className="btn btn-primary pull-right reply-button" onClick={this.handleSubmit} >Submit</button>
-            <button type="submit" className="btn btn-default pull-right reply-button" onClick={this.props.toggleReplyForm} >Cancel</button>
+            <Textarea className="form-control reply-form" rows="2" onChange={this.onChange} value={this.state.text} ref="test"></Textarea>
+            <button type="submit" className="btn btn-primary btn-xs pull-right reply-button" onClick={this.handleSubmit} >Submit</button>
+            <button type="submit" className="btn btn-default btn-xs pull-right reply-button" onClick={this.props.toggleReplyForm} >Cancel</button>
           </form>
         : null }
       </div>

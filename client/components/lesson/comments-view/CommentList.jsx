@@ -1,7 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Comment = require('./Comment.jsx');
-var LessonStore = require('../stores/lesson-store');
+var LessonStore = require('../../../stores/lesson-store');
 
 var CommentList = React.createClass({
 

@@ -1,6 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
-var LessonStore = require('../stores/lesson-store');
+var LessonStore = require('../../stores/lesson-store.js');
 
 var VideoPlayer = require('./VideoPlayer.jsx');
 

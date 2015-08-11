@@ -34,6 +34,14 @@ p{
   font-size: 12px;
 }
 
+#comment-creation-box{
+  margin: 0;
+}
+
+.comment-creation-form{
+  margin: 0 !important;
+}
+
 .comment-box{
   list-style-type: none;
   margin: 0 0 16px;
@@ -87,7 +95,6 @@ p{
 }
 
 .comment-form-box{
-  width: 90%;
   margin: 0;
 }
 
@@ -95,12 +102,16 @@ p{
   font-size: 12px !important;
   border: none;
   border-top: 1px solid rgba(33,150, 243, 0.2 ) !important;
-  padding: 10px !important;
   box-shadow: none !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  padding-top: 12px !important;
+  padding-bottom: 5px !important;
 }
 
 #reply-creation-box{
-  padding-left: 16px;
+  padding-left: 40px;
+  margin-top: 15px;
 }
 
 
@@ -121,7 +132,6 @@ p{
 
 .reply-form-box{
   width: 90%;
-  margin-left: 12px;
   margin-bottom: 38px;
 }
 
@@ -131,8 +141,11 @@ p{
   padding-left: 16px !important;
   margin-top: 15px;
   box-shadow: none !important;
+  font-size: 12px !important; 
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
-
 
 .reply-button{
   margin-top: 5px;

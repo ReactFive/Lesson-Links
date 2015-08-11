@@ -2,7 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 
 var _ = require('lodash');
-var LessonStore = require('../stores/lesson-store');
+var LessonStore = require('../../stores/lesson-store');
 
 var VideoPlayer = React.createClass({
   mixins: [Reflux.connect(LessonStore, "lesson")],
