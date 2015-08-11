@@ -6,7 +6,7 @@ var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions');
 
 
-module.exports = React.createClass({
+var nav = React.createClass({
   mixins: [Reflux.listenTo(AuthStore, "onChange")],
 
   getInitialState: function(){
@@ -88,8 +88,9 @@ module.exports = React.createClass({
 
   },
 
-  onChange: function(event, auth){
-    console.log(auth);
-    this.setState({loggedIn: auth})
+  onChange: function(event, user){
+    this.setState({loggedIn: !!user})
   }
 });
+
+module.exports = nav;

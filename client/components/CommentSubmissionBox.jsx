@@ -1,15 +1,23 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../actions');
+var AuthStore = require('../stores/AuthStore');
 
 var CommentSubmissionBox = React.createClass({
+  mixins: [Reflux.listenTo(AuthStore, "onChange")],
+
   getInitialState: function(){
     return {
       text: '',
       showCommentForm: false
     }
   },
-  onChange: function(e) {
+
+  onChange: function(event, user) {
+    this.setState({user : user});
+  },
+
+  onInputChange: function(e) {
     this.setState({text: e.target.value});
   },
   onToggleCommentForm: function(){
@@ -50,7 +58,7 @@ var CommentSubmissionBox = React.createClass({
               className="form-control comment-form" 
               placeholder="Share your questions..."
               value={this.state.text}
-              onChange={this.onChange} 
+              onChange={this.onInputChange} 
               onFocus={this.onFormFocus} 
               onBlur={this.onFormBlur} />
             <br/>
@@ -58,10 +66,6 @@ var CommentSubmissionBox = React.createClass({
               <button type="submit" className="btn btn-primary pull-right" onClick={this.handleSubmit}>Submit</button>
             : null }
           </form>
-        
-
-
-
         </div>
       </div>
     );
