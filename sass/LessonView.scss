@@ -57,6 +57,10 @@ p{
   border-top: 1px solid #eeeeee;
 }
 
+.comment-content-main{
+  display: inline-block;
+}
+
 .comment-video-timestamp{
   color: rgba(20, 20, 20, 0.4);
   cursor: pointer;
@@ -85,15 +89,30 @@ p{
   word-wrap: break-word;
 }
 
-.comment-reply-button{
+.comment-toolbar{
+  opacity: .50;
+}
+.comment-like-button,
+.comment-reply-button,
+.comment-like-icon,
+.comment-likes{
   color: #555;
   cursor: pointer;
   font-size: 11px;
   font-weight: 500;
   opacity: .75;
-  vertical-align: top;
+  display: inline;
 }
 
+.comment-delete-button{
+  color: #555;
+  margin-left: 10px !important;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 100;
+  opacity: .95;
+  display: inline;
+}
 .comment-form-box{
   margin: 0;
 }
