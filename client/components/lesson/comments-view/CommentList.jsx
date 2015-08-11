@@ -2,6 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var Comment = require('./Comment.jsx');
 var LessonStore = require('../../../stores/lesson-store');
+var _ = require('lodash');
 
 var CommentList = React.createClass({
 
@@ -9,7 +10,9 @@ var CommentList = React.createClass({
   render: function() {
     if (this.state.lesson) {
       var that=this;
-      var comments = this.state.lesson.comments
+      var comments = _.sortBy(this.state.lesson.comments,function(o){
+		return o.likes.length;
+	  })
       .filter(function(comment){
         return comment.time >= 0 ;
       })
