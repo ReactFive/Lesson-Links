@@ -12,11 +12,13 @@ var SignupView = require('./components/signup/SignupView.jsx');
 var NotFound = require('./components/404/NotFound.jsx');
 var Exercise = require('./components/basicExercises/Multichoice.jsx');
 
+
+
 var routes = (
     <Route handler={App}>
       <Route path='/' handler={LandingPage} />
       <Route path='/register' handler={SignupView} />
-      <Route path='/lesson' handler={LessonView} />
+      <Route path='/lesson/:url' handler={LessonView} />
       <Route path='/library' handler={LibraryView} />
       <Route path='/exercise' handler={Exercise} />
       <NotFoundRoute handler={NotFound}/>

@@ -6,13 +6,14 @@ var _ = require('lodash');
 module.exports = Reflux.createStore({
   listenables: [Actions],
 
-  init: function() {
+  init: function() {},
 
+  fetchLesson : function(url){
     this.lesson = {
       comments: []
     }
     var self = this;
-    Api.getLesson()
+    Api.getLesson(url)
     .then(function(res) {
       self.lesson = res.data[0];
       self.trigger(self.lesson);
@@ -21,6 +22,7 @@ module.exports = Reflux.createStore({
       console.log(res);
     })
   },
+    submitComment: function(comment) {
 
   submitComment: function(comment) {
     this.lesson.comments.push(comment);

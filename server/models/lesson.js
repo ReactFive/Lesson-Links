@@ -46,8 +46,8 @@ var lessonSchema = new mongoose.Schema ({
     },
     votes     : 
     {
-      type   : Number,
-      default : 0
+      type   : Array,
+      default : []
     },
     star      : 
     {
@@ -65,8 +65,8 @@ var lessonSchema = new mongoose.Schema ({
       },
       votes     : 
       {
-      type   : Number,
-      default : 0
+      type   : Array,
+      default : []
       },
       star      : 
       {
