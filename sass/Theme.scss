@@ -14,8 +14,17 @@ $light-blue      : #abd7e4;
 
 h1{
   font-family: $header-font;
+  color: $dark-purple;
 }
 
 h2{
   font-family: $subheader-font;
+  color: $dark-blue;
 }
+
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+

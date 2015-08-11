@@ -22,6 +22,11 @@
 
 .lib-lesson-container{
   background-color: $light-pink;
+  border: 7px solid $dark-pink;
+}
+
+.lib-filter-header{
+  color: $dark-purple
 }
 
 .lib-add-lesson{
@@ -36,11 +41,24 @@
   a{
     font-weight: bold;
     font-size: 150px;
-    vertical-align: middle;
-
+    color: $dark-purple;
+    text-align: center;
+    line-height: 50%
   }
   a:hover{
     font-size: 200px;
+    text-decoration: none;
     color: $dark-pink;
+  }
+}
+
+.lib-lock{
+  a{
+  text-decoration: none;
+  color: $dark-purple;
+  a:hover{
+    text-decoration: none;
+    color: $dark-pink;
+  }
   }
 }
