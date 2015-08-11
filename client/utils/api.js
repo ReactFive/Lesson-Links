@@ -37,9 +37,8 @@ module.exports.getStatus = function(){
   return axios.post(url);
 };
 
-module.exports.getLesson = function() {
+module.exports.getLesson = function(lessonUrl) {
   // need to change this later to '/lesson' to grab a single lesson's data
-  var url = 'http://localhost:3000/api/lessons';
-
+  var url  = rootUrl + '/api/lesson/'+lessonUrl; 
   return axios.get(url);
 };
