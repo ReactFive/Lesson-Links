@@ -2,13 +2,9 @@ var React = require('react');
 
 module.exports = React.createClass({
   render: function() {
-   return ( <footer className="navbar navbar-default">
-      <div className="container">
-        <div className="row">
+   return ( <footer className="navbar navbar-default footer-main">
           <small>Copyright Team Acid Reflux.</small>
-        </div>
-      </div>
-    </footer>
+      </footer>
    )
   }
 })

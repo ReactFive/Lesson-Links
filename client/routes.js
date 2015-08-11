@@ -1,12 +1,15 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var Route = ReactRouter.Route;
+var Router = require('react-router');
+var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var DefaultRoute = Router.DefaultRoute;
 
 var App = require('./components/App');
 var LandingPage = require('./components/LandingPage.jsx');
 var LessonView = require('./components/LessonView.jsx');
 var LibraryView = require('./components/library_components/LibraryView.jsx');
-var SignupView = require('./components/signup/SignupView.jsx')
+var SignupView = require('./components/signup/SignupView.jsx');
+var NotFound = require('./components/404/NotFound.jsx');
 
 var routes = (
     <Route handler={App}>
@@ -14,6 +17,7 @@ var routes = (
       <Route path='/register' handler={SignupView} />
       <Route path='/lesson' handler={LessonView} />
       <Route path='/library' handler={LibraryView} />
+      <NotFoundRoute handler={NotFound}/>
     </Route>
 );
 
