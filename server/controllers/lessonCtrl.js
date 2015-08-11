@@ -50,8 +50,8 @@ exports.updateLesson = function(req, res, next){
 }
 
 exports.createLesson = function(req, res, next){
-    // var teacherID = req.user.id;
-    var teacherID = "55c8fd1ac35805231878ef1a";
+    var teacherID = req.user.id;
+    // var teacherID = "55c8fd1ac35805231878ef1a";
     
     var newLesson = new Lesson ({
       title : req.body.title || "Your lesson",
