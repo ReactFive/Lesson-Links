@@ -9,20 +9,18 @@ module.exports = Reflux.createStore({
   init: function() {},
 
   fetchLesson : function(url){
-    this.lesson = {
-      comments: []
-    }
+    url = url || 'sass-101'
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
-      self.lesson = res.data[0];
+      self.lesson = res.data;
+      console.log(self.lesson)
       self.trigger(self.lesson);
     })
     .catch(function(res) {
       console.log(res);
     })
   },
-    submitComment: function(comment) {
 
   submitComment: function(comment) {
     this.lesson.comments.push(comment);
