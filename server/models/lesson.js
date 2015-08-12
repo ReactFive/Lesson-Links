@@ -44,10 +44,10 @@ var lessonSchema = new mongoose.Schema ({
       trim    : true,
       max     : 180
     },
-    votes     : 
+    likes     : 
     {
-      type   : Number,
-      default : 0
+      type   : Array,
+      default : []
     },
     star      : 
     {
@@ -63,10 +63,10 @@ var lessonSchema = new mongoose.Schema ({
         trim    : true,
         max     : 180
       },
-      votes     : 
+      likes     : 
       {
-      type   : Number,
-      default : 0
+      type   : Array,
+      default : []
       },
       star      : 
       {

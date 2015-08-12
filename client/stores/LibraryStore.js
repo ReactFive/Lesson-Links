@@ -22,5 +22,9 @@ module.exports = Reflux.createStore({
       }
       this.triggerChange();
     }.bind(this));
+  },
+
+  redirectLesson: function(){
+    
   }
 })
