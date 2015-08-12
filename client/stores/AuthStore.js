@@ -11,18 +11,39 @@ module.exports = Reflux.createStore({
   listenables: [Actions],
 
   init: function(){
-    this.user = false;
-    this.authenticate();
+    this.auth = {
+      user: false,
+      loggedIn: false,
+      authorized: false
+    };
   },
 
   authenticate: function(){
-      return Api.getUser()
+    var user = Identity().currentUser;
+    if (user._id){
+      this.auth.loggedIn = true;
+      this.triggerChange();
+    }
+    return Api.getStatus()
         .then(function (res) {
-          if (res.data.user) {
-            this.user = res.data.user;
+          if (res.data) {
+            this.auth.loggedIn = res.data;
             this.triggerChange();
           } else {
-            this.user = false;
+            this.auth.loggedIn = false;
+            this.triggerChange();
+          }
+        }.bind(this));
+  },
+
+  getUser: function(){
+    return Api.getUser()
+        .then(function (res) {
+          if (res.data.user) {
+            this.auth.user = res.data.user;
+            this.triggerChange();
+          } else {
+            this.auth.user = false;
             this.triggerChange();
           }
         }.bind(this));
@@ -31,8 +52,8 @@ module.exports = Reflux.createStore({
   login: function (email, password) {
     return Api.login(email, password)
     .then(function(res){
-      this.user = res.data.user.local;
-      this.loggedIn = true;
+      this.auth.user = res.data.user.local;
+      this.auth.loggedIn = true;
       this.triggerChange();
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);
     }.bind(this))
@@ -47,10 +68,9 @@ module.exports = Reflux.createStore({
   },
 
   logout: function(){
-    this.user = null;
-    this.loggedIn = false;
+    this.auth.user = null;
+    this.auth.loggedIn = false;
     delete window.currentUser;
-    console.log("deleted ", Identity().currentUser);
     this.triggerChange();
     toastr["success"]("You have logged out");
     return Api.logout();
@@ -59,18 +79,18 @@ module.exports = Reflux.createStore({
   signup: function(name, email, password){
     return Api.signup(name, email, password)
       .then(function(res){
-        this.user = res.data.user.local;
+        this.auth.user = res.data.user;
+        this.auth.loggedIn = true;
         this.triggerChange();
         toastr["success"]("Welcome to Lesson Links " + res.data.user.local.name);
       }.bind(this))
       .catch(function(res){
-        console.log("catch:", res);
         toastr["error"]("Sorry, there was a problem registering you");
         this.triggerChange();
       }.bind(this));
   },
 
   triggerChange: function(){
-    this.trigger(this.user);
+    this.trigger(this.auth);
   }
 });

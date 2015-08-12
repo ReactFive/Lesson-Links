@@ -7,14 +7,9 @@ var Actions = require('../../actions');
 
 
 var nav = React.createClass({
-  mixins: [Reflux.connect(AuthStore,"user")],
+  mixins: [Reflux.connect(AuthStore,"auth")],
 
   getInitialState: function(){
-    return {
-      loggedIn: false,
-      error: false,
-      userId: false
-    }
   },
 
   componentWillMount: function(){
@@ -22,6 +17,7 @@ var nav = React.createClass({
   },
 
   render: function() {
+    console.log(this.state.auth);
     return ( <nav className="navbar navbar-default navbar-fixed-top">
       <div className="container">
         <div className="navbar-header">
@@ -37,13 +33,13 @@ var nav = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              {this.state.user && <Link activeClassName="active" to="/lesson">Lessons</Link>}
+              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/lesson">Lessons</Link>}
             </li>
             <li className="pull-right">
-              {!this.state.user && <Link activeClassName="active" to="/register">Signup</Link>}
+              {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
           </ul>
-            { this.state.user ? this.renderLogout() : this.renderLogin() }
+            { (this.state.auth && this.state.auth.loggedIn) ? this.renderLogout() : this.renderLogin() }
         </div>
     </nav> )
   },
