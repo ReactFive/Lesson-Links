@@ -11,6 +11,7 @@ var LibraryView = require('./components/library_components/LibraryView.jsx');
 var SignupView = require('./components/signup/SignupView.jsx');
 var NotFound = require('./components/404/NotFound.jsx');
 var Exercise = require('./components/basicExercises/Multichoice.jsx');
+var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
 
 var routes = (
     <Route handler={App}>
@@ -19,6 +20,7 @@ var routes = (
       <Route path='/lesson' handler={LessonView} />
       <Route path='/library' handler={LibraryView} />
       <Route path='/exercise' handler={Exercise} />
+      <Route path='/multiplechoice' handler={MultiChoiceCreation} />
       <NotFoundRoute handler={NotFound}/>
     </Route>
 );

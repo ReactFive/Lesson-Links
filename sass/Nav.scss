@@ -12,10 +12,11 @@
   padding-bottom:120px;
 }
 
-.footer-main {
-     padding: 1em;
-     position: absolute;
-     left: 0;
-     right: 0;
-     bottom: 0;
+.footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
+  background:#999;
 }
