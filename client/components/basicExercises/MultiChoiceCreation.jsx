@@ -12,7 +12,6 @@ var MultiChoiceCreation = React.createClass({
 
   getInitialState: function(){
     return {
-      choiceNumber: 4,
       optionsArray: [],
       user: null
     }
@@ -22,15 +21,16 @@ var MultiChoiceCreation = React.createClass({
     this.setState({user: AuthStore.user});
   },
 
-  formSetup: function(){
+  formSetup: function(event){
+    console.log(event);
     var inputs = [];
-    for (var i = 0; i < choiceNumber; i++){
+    for (var i = 0; i < event; i++){
       var ID = "opt" + i;
       var nameText = "opt" + i;
-      inputArray.push(
+      inputs.push(
           <div className="form-group">
-            <label id={ID}>Option: {i}</label>
-        <input ref={i} className="form-control" name="option" type='text' placeholder="Add an option here"/>
+            <label key={i} id={ID}>Option: {i+1}</label>
+        <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
       </div>)
     }
     this.setState({optionsArray: inputs})
@@ -60,7 +60,7 @@ var MultiChoiceCreation = React.createClass({
               name="Number of items"
               value="Number if alternatives"
               options={options}
-              onSelect={this.formSetup}
+              onChange={this.formSetup}
               />
 
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
