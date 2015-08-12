@@ -77,6 +77,6 @@ module.exports = Reflux.createStore({
 
   triggerChange: function(){
     this.trigger('change', this.user);
-  }
+  } 
 
 });
