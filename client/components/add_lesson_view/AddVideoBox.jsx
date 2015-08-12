@@ -1,27 +1,34 @@
 var React = require('react');
 var Reflux = require('reflux');
 var AddLessonStore = require('../../stores/AddLessonStore.js');
-
+var Actions = require('../../actions.js');
 var AddVideoBox = React.createClass({
 
 
     getInitialState: function(){
       return {
-        lessonTitle: '',
-        lessonURL: '',
-        lessonLink: ''      
+        title: '',
+        video_url: '',
+        lesson_url: '',
+        published: false      
       }
     },
 
     onInputChange: function(e){
-      this.setState({lessonTitle: React.findDOMNode(this.refs.lessonTitle).value})
-      this.setState({lessonURL: React.findDOMNode(this.refs.lessonURL).value})
-      this.setState({lessonLink: React.findDOMNode(this.refs.lessonLink).value})
+      this.setState({title: React.findDOMNode(this.refs.title).value})
+      this.setState({video_url: React.findDOMNode(this.refs.video_url).value})
+      this.setState({lesson_url: React.findDOMNode(this.refs.lesson_url).value})
     },
 
     handleSubmit: function(e){
       e.preventDefault();
-      debugger;
+      Actions.createLesson({
+        title: this.state.title,
+        video_url: this.state.video_url,
+        lesson_url: this.state.lesson_url,
+        published: this.state.published
+      });
+
     },
     
   render: function() {
@@ -33,23 +40,23 @@ var AddVideoBox = React.createClass({
               className="add-lesson-info"
               type="text" 
               placeholder="What is the name of your new Lesson?"
-              ref="lessonTitle" 
-              value={this.state.lessonTitle}
+              ref="title" 
+              value={this.state.title}
               onChange={this.onInputChange}></input>
             <input 
               className="add-lesson-info"
               type="url" 
               placeholder="Input your video URL here. We currently only support YouTube videos." 
-              name="newVideoUrl" ref="lessonURL" 
-              value={this.state.lessonURL}
+              name="newVideoUrl" ref="video_url" 
+              value={this.state.video_url}
               onChange={this.onInputChange}></input>
             <h1>www.lesson-links.com/api/lesson/</h1>
             <input 
               type="text" 
               placeholder="Customize your Lesson Link." 
               name="newVideoUrl" 
-              ref="lessonLink" 
-              value={this.state.lessonLink}
+              ref="lesson_url" 
+              value={this.state.lesson_url}
               onChange={this.onInputChange}></input> 
             <button
               type="submit" 
@@ -60,9 +67,9 @@ var AddVideoBox = React.createClass({
 
         <div>
           <h1> Results </h1>
-          {this.state.lessonTitle}
-          {this.state.lessonURL}
-          {this.state.lessonLink}
+          {this.state.title}
+          {this.state.video_url}
+          {this.state.lesson_url}
         </div>
       </div>
     );
