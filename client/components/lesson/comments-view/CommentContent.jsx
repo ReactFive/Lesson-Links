@@ -8,13 +8,19 @@ var CommentContent = React.createClass({
 
   getInitialState: function(){
     return {
-      liked: false
+      liked: false,
+      starred: false
     }
   },
 
   toggleLikeButton: function(e) {
     e.preventDefault();
     this.setState({ liked: !this.state.liked });
+  },
+
+  toggleStarButton: function(e){
+    e.preventDefault();
+    this.setState({ starred: !this.state.starred });
   },
 
   onChange: function(event, user) {
@@ -42,11 +48,25 @@ var CommentContent = React.createClass({
     this.toggleLikeButton(e);
   },
 
+  starComment: function(e){
+    e.preventDefault();
+    // Mark that comment as 'starred' or 'unstarred' on the server by toggling it's star property
+    // Actions.starComment(this.props.comment.key, this.state.user.name);
+    this.toggleStarButton(e);
+  },
+
   render: function() {
     return (
       <div className="comment-content">
+        { this.state.starred ? 
+          <p className="comment-star-button glyphicon glyphicon-star" onClick={this.starComment}> </p> 
+          :
+          <p className="comment-star-button glyphicon glyphicon-star-empty" onClick={this.starComment}> </p> 
+        }
         <p className="comment-author">{this.props.comment.author} </p> 
         <p className="comment-video-timestamp">@ {this.props.comment.time} seconds </p> 
+       
+       
         <p className="comment-text">{this.props.comment.text} </p>
 
         <div className="comment-toolbar">

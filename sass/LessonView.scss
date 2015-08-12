@@ -89,6 +89,23 @@ p{
   word-wrap: break-word;
 }
 
+.glyphicon-star{
+  float: left;
+  font-size: 16px;
+  font-weight: 100;
+  opacity: .8;
+  color: rgb(240,210,88);
+}
+
+.glyphicon-star-empty{
+  float: left;
+  font-size: 16px;
+  font-weight: 100;
+  opacity: .8;
+  color: rgba(25, 25, 25, 0.4);
+}
+
+
 .comment-toolbar{
   opacity: .50;
 }
