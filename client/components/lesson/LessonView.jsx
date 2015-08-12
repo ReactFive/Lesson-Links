@@ -8,7 +8,6 @@ var Reflux = require('reflux');
 
 
 var LessonView = React.createClass({
-  mixins: [Reflux.listenTo(LessonStore, "onChange")],
 
   contextTypes: {
     router: React.PropTypes.func

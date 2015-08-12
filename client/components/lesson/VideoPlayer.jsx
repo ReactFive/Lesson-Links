@@ -28,7 +28,8 @@ var VideoPlayer = React.createClass({
       this.state.lesson.comments.forEach(function(comment) {
         comment.time = comment.marked_at;
       });
-      var player = this.videoSetup(this.state.lesson.comments);
+      //var player = this.videoSetup(this.state.lesson.comments);
+      videojs('attachmentVideo');
       this.setState({videoSetupCompleted : true});
       this.setState({currentComments : this.state.lesson.comments});
     }
@@ -78,16 +79,17 @@ var VideoPlayer = React.createClass({
 
     return (
       this.state.lesson && this.state.lesson.video_url ?
-        <div className="wrapper col-md-10 col-md-offset-1">
-         <div className="videocontent">
-          <video id="attachmentVideo" 
-            controls
-            preload="auto" 
-            className="video-js vjs-default-skin vjs-big-play-centered"
-            width="854px" height="480px"
-            data-setup={'{ "techOrder": ["youtube","html5","flash"], "src": "https://www.youtube.com/watch?v=qYG8uxnZqng" }'}>
-          </video>
-         </div>
+        <div className="row">
+          <div className="col-md-10 col-md-offset-1">
+            <div className="embed-responsive embed-responsive-16by9">
+              <video id='attachmentVideo'
+                className='video-js vjs-default-skin'
+                width='640' height='390'
+                controls preload='auto'
+                data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
+              </video>
+            </div>
+          </div>
         </div>
         : null
     )
