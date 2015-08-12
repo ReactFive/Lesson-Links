@@ -12,9 +12,16 @@ var MultiChoiceCreation = React.createClass({
 
   getInitialState: function(){
     return {
-      alternatives: 3,
       optionsArray: [],
-      user: null
+      correctChecks: [],
+      user: null,
+      options: [
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' },
+        { value: '3', label: 'Three' },
+        { value: '4', label: 'Four' },
+        { value: '5', label: 'Five' }
+      ]
     }
   },
 
@@ -25,38 +32,31 @@ var MultiChoiceCreation = React.createClass({
   formSetup: function(event){
     console.log(event);
     var inputs = [];
-    for (var i = 1; i <= event; i++){
+    var checks = [];
+    for (var i = 0; i < event; i++){
       var ID = "opt" + i;
       var nameText = "opt" + i;
       inputs.push(
           <div key={i} className="form-group">
-            <label id={ID}>Option: {i}</label>
+            <label id={ID}>Option: {i+1}</label>
         <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
       </div>)
     }
 
-    /* for (var i = 0; i < event; i++){
+    for (var i = 0; i < event; i++){
      var IdText = "radio" + 1;
-     checks.push(<label key={1} className="radio-inline">
-     <input type="radio" name="inlineRadioOptions" id={IdText} value={i+1}/>
-     </label>)
-     } */
-    this.setState({optionsArray: inputs})
-  },
-
-  handleSubmit: function(event){
-    console.log(event);
+     checks.push(
+         <label key={i} className="radio-inline">
+           <input type="radio"name="inlineRadioOptions"/>
+           Item {i+1}
+         </label>
+     )
+     }
+    this.setState({optionsArray: inputs, correctChecks: checks})
   },
 
   render: function(){
-    //var time = videojs("#attachmentVideo").currentTime || 0;
-    var options = [
-      { value: '0', label: 'One' },
-      { value: '1', label: 'Two' },
-      { value: '2', label: 'Three' },
-      { value: '4', label: 'Four' },
-      { value: '5', label: 'Five' }
-    ];
+    //var time = videojs("#attachmentVideo").currentTime || 0
 
     return (
         <div className="container multichoice-container">
@@ -67,7 +67,7 @@ var MultiChoiceCreation = React.createClass({
             <Select
               name="Number of items"
               value="Select the number of alternative answers"
-              options={options}
+              options={this.state.options}
               onChange={this.formSetup}
               />
 
@@ -79,12 +79,12 @@ var MultiChoiceCreation = React.createClass({
 
               {this.state.optionsArray}
 
-                /*<div class="radio">
-                {this.state.checksForAnswer}
-                <div class="radio">*/
+               <div className="correct-answer-label">
+                 {!!this.state.optionsArray.length && <span className="correct-answer-label"><strong>Indicate the correct option: </strong></span>}{this.state.correctChecks}
+                </div>
 
-              <button className="btn btn-primary">Add to your lesson</button>
-              <Link activeClassName="active" to="/"><button className="signup-cancel-btn btn btn-default">Cancel</button></Link>
+              <button className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
+              <Link activeClassName="active" to="/"><button className=" btn btn-default pull-right">Cancel</button></Link>
             </form>
           </div>
         </div>
