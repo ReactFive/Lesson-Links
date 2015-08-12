@@ -11,7 +11,6 @@ var AddLessonView = React.createClass({
           <div className='add-lesson-view'>
             <AddVideoBox />
           </div>
-        </div>
       </div>
     );
   }
