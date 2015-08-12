@@ -8,7 +8,7 @@ module.exports = Reflux.createActions([
   'submitComment',
   'submitReply',
   'fetchLesson',
-  'updateUser'
+  'updateUser',
   'deleteComment',
   'likeComment',
   'unlikeComment',

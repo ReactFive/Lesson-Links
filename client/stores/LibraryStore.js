@@ -27,8 +27,7 @@ module.exports = Reflux.createStore({
   listenables: [Actions],
 
   init: function(){
-    this.listenTo(Actions.login, AuthStore.updateUser)
-    this.listenTo(Actions.updateUser, this.updateUser);
+    this.connect(AuthStore.auth)
   },
   onUpdateUser: function(user){
     console.log('updating user')

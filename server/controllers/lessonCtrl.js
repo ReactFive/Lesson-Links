@@ -42,11 +42,35 @@ exports.updateLesson = function(req, res, next){
       video_url : req.body.video_url || null,
       published : req.body.published || true,
       comments : req.body.comments
-    }
-  }, function(err, raw){
-    if (err) return handleError(err);
-    console.log(raw)
-  })
+  if(req.body.video_url) {
+    Lesson.update({lesson_url : req.params.url}, {$set : 
+      {
+        title : req.body.title || "Your lesson",
+      }
+    }, function(err, raw){
+      if (err) return handleError(err);
+      console.log(raw)
+    })}
+  if(req.body.published) {
+    Lesson.update({lesson_url : req.params.url}, {$set : 
+      {
+        published : req.body.published || true,
+      }
+    }, function(err, raw){
+      if (err) return handleError(err);
+      console.log(raw)
+    })}
+  if(req.body.comments) {
+    Lesson.update({lesson_url : req.params.url}, {$set : 
+      {
+        comments : req.body.comments
+      }
+    }, function(err, raw){
+      if (err) return handleError(err);
+      console.log(raw)
+    })}
+
+  res.send(200)
 }
 
 exports.createLesson = function(req, res, next){
