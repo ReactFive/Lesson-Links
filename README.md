@@ -9,12 +9,4 @@ A good lecture video has the potential to be as good as a good live lecture. Thi
 Enter Lesson Links. Lesson Links allows any teacher to equip a video with view-commentary feedback so that they can have a dialogue with their online students. Teachers equip a video with feedback ability. Students provide feedback. Teachers learn what educational points can be improved upon. Finally, the flow of communication is open again. 
 
 
-   /* for (var i = 0; i < event; i++){
-      var IdText = "radio" + 1;
-      checks.push(<label key={1} className="radio-inline">
-        <input type="radio" name="inlineRadioOptions" id={IdText} value={i+1}/>
-        </label>)
-    } */
-    
-      
-    
+ 
