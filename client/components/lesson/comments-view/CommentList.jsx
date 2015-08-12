@@ -5,11 +5,11 @@ var LessonStore = require('../../../stores/lesson-store');
 
 var CommentList = React.createClass({
 
-  mixins: [Reflux.connect(LessonStore)],
+  mixins: [Reflux.connect(LessonStore, "lesson")],
   render: function() {
     if (this.state.lesson) {
       var that=this;
-      var comments = LessonStore.lesson.comments
+      var comments = this.state.lesson.comments
       .filter(function(comment){
         return comment.time >= 0 ;
       })
