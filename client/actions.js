@@ -11,4 +11,5 @@ module.exports = Reflux.createActions([
   'deleteComment',
   'likeComment',
   'unlikeComment'
+  'createLesson'
 ]);
