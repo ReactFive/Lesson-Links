@@ -28,10 +28,12 @@ var VideoPlayer = React.createClass({
       this.state.lesson.comments.forEach(function(comment) {
         comment.time = comment.marked_at;
       });
-      //var player = this.videoSetup(this.state.lesson.comments);
-      videojs('attachmentVideo');
-      this.setState({videoSetupCompleted : true});
-      this.setState({currentComments : this.state.lesson.comments});
+
+      var player = this.videoSetup(this.state.lesson.comments);
+      this.setState({
+        videoSetupCompleted : true,
+        currentComments : this.state.lesson.comments
+      });
     }
   },
   videoSetup: function(comments){
