@@ -21,7 +21,7 @@ var routes = (
       <Route path='/' handler={LandingPage} />
       <Route path='/register' handler={SignupView} />
       {/*<Route path='/lesson' handler={LessonView} />*/}
-      <Route path='lesion/:url' handler={LessonView2} />
+      <Route path='lesson/:url' handler={LessonView2} />
       <Route path='/:url' handler={LessonView2} />
       <Route path='/library' handler={LibraryView} />
       <Route path='/exercise' handler={Exercise} />
