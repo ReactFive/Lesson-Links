@@ -33,44 +33,39 @@ exports.getLessonByUrl = function(req, res, next) {
 };
 
 exports.updateLesson = function(req, res, next){
-  var teacherID = req.user._id;
-  // var teacherID = '55ca2b6e80fe364f127710e4';
-  
-  Lesson.update({lesson_url : req.params.url}, {$set : 
-    {
-      title : req.body.title || "Your lesson",
-      video_url : req.body.video_url || null,
-      published : req.body.published || true,
-      comments : req.body.comments
-  if(req.body.video_url) {
-    Lesson.update({lesson_url : req.params.url}, {$set : 
-      {
-        title : req.body.title || "Your lesson",
-      }
-    }, function(err, raw){
-      if (err) return handleError(err);
-      console.log(raw)
-    })}
-  if(req.body.published) {
-    Lesson.update({lesson_url : req.params.url}, {$set : 
-      {
-        published : req.body.published || true,
-      }
-    }, function(err, raw){
-      if (err) return handleError(err);
-      console.log(raw)
-    })}
-  if(req.body.comments) {
-    Lesson.update({lesson_url : req.params.url}, {$set : 
-      {
-        comments : req.body.comments
-      }
-    }, function(err, raw){
-      if (err) return handleError(err);
-      console.log(raw)
-    })}
-
-  res.send(200)
+  if (req.user._id === req.body.teacher.id)
+  {
+    if(req.body.video_url) {
+      Lesson.update({lesson_url : req.params.url}, {$set : 
+        {
+          title : req.body.title || "Your lesson",
+        }
+      }, function(err, raw){
+        if (err) return handleError(err);
+        console.log(raw)
+      })}
+    if(req.body.published) {
+      Lesson.update({lesson_url : req.params.url}, {$set : 
+        {
+          published : req.body.published || true,
+        }
+      }, function(err, raw){
+        if (err) return handleError(err);
+        console.log(raw)
+      })}
+    if(req.body.comments) {
+      Lesson.update({lesson_url : req.params.url}, {$set : 
+        {
+          comments : req.body.comments
+        }
+      }, function(err, raw){
+        if (err) return handleError(err);
+        console.log(raw)
+      })}
+    res.send(200)
+  } else {
+    res.status(401).send('Logged in user and lesson user are not the same')
+  }
 }
 
 exports.createLesson = function(req, res, next){
