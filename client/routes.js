@@ -21,11 +21,11 @@ var routes = (
     <Route handler={App}>
       <Route path='/' handler={LandingPage} />
       <Route path='/register' handler={SignupView} />
-      <Route path='/:url' handler={LessonView2} />
       <Route path='/library' handler={LibraryView} />
       <Route path='/add-lesson' handler={AddLessonView}/>
       <Route path='/exercise' handler={Exercise} />
       <Route path='/multiplechoice' handler={MultiChoiceCreation} />
+      <Route path='/:url' handler={LessonView2} />
       <NotFoundRoute handler={NotFound}/>
     </Route>
 );
