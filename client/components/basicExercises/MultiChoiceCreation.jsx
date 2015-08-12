@@ -37,10 +37,17 @@ var MultiChoiceCreation = React.createClass({
       var ID = "opt" + i;
       var nameText = "opt" + i;
       inputs.push(
-          <div key={i} className="form-group">
+        <div key={i}>
+          <div className="form-group">
             <label id={ID}>Option: {i+1}</label>
-        <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
-      </div>)
+              <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
+          </div>
+            <div class="form-group">
+              <label for="">Feedback to this option when selected by learner:</label>
+                <textarea className="form-control" rows="2"></textarea>
+            </div>
+      </div>
+            )
     }
 
     for (var i = 0; i < event; i++){

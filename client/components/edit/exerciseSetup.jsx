@@ -9,8 +9,13 @@ var Select = require('react-select');
 
 var exerciseSetup = React.createClass({
 
-
-
+  render: function(){
+    return (
+    <div>
+      <h1>Set up the exercises</h1>
+    </div>
+    )
+  }
 
 });
 

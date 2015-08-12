@@ -14,6 +14,7 @@ var AddLessonView = require('./components/add_lesson_view/AddLessonView.jsx');
 var NotFound = require('./components/404/NotFound.jsx');
 var Exercise = require('./components/basicExercises/Multichoice.jsx');
 var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
+var EditView = require('./components/edit/EditView.jsx');
 
 
 
@@ -23,6 +24,7 @@ var routes = (
       <Route path='/register' handler={SignupView} />
       <Route path='/library' handler={LibraryView} />
       <Route path='/add-lesson' handler={AddLessonView}/>
+      <Route path='/edit' handler={EditView} />
       <Route path='/exercise' handler={Exercise} />
       <Route path='/multiplechoice' handler={MultiChoiceCreation} />
       <Route path='/:url' handler={LessonView2} />

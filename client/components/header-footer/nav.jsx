@@ -7,13 +7,13 @@ var Actions = require('../../actions');
 
 
 var nav = React.createClass({
-  mixins: [Reflux.listenTo(AuthStore, "onChange")],
+  mixins: [Reflux.connect(AuthStore,"user")],
 
   getInitialState: function(){
     return {
       loggedIn: false,
       error: false,
-      user: {}
+      userId: false
     }
   },
 
@@ -37,13 +37,13 @@ var nav = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              {this.state.loggedIn && <Link activeClassName="active" to="/lesson">Lessons</Link>}
+              {this.state.user && <Link activeClassName="active" to="/lesson">Lessons</Link>}
             </li>
             <li className="pull-right">
-              {!this.state.loggedIn && <Link activeClassName="active" to="/register">Signup</Link>}
+              {!this.state.user && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
           </ul>
-            { this.state.loggedIn ? this.renderLogout() : this.renderLogin() }
+            { this.state.user ? this.renderLogout() : this.renderLogin() }
         </div>
     </nav> )
   },
@@ -70,7 +70,7 @@ var nav = React.createClass({
     </form>
   },
 
-  handleLogout() {
+  handleLogout: function() {
     event.preventDefault();
     Actions.logout();
   },
@@ -86,10 +86,6 @@ var nav = React.createClass({
     this.refs.email.getDOMNode().value = "";
     this.refs.password.getDOMNode().value = "";
 
-  },
-
-  onChange: function(event, user){
-    this.setState({loggedIn: !!user})
   }
 });
 

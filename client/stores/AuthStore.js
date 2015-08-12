@@ -11,26 +11,21 @@ module.exports = Reflux.createStore({
   listenables: [Actions],
 
   init: function(){
+    this.user = false;
+    this.authenticate();
   },
 
   authenticate: function(){
-    var name = _.findKey(Identity().currentUser, function(obj){
-      return obj._id;
-    });
-   if(name){
-      console.log("authenticated as: ", Identity().currentUser);
-      this.loggedIn = true;
-      this.user = Identity().currentUser;
-      this.triggerChange();
-    } else {
-      return Api.getStatus()
+      return Api.getUser()
         .then(function (res) {
-          if (res) {
-            this.loggedIn = res.data;
+          if (res.data.user) {
+            this.user = res.data.user;
+            this.triggerChange();
+          } else {
+            this.user = false;
             this.triggerChange();
           }
         }.bind(this));
-    }
   },
 
   login: function (email, password) {
@@ -76,7 +71,6 @@ module.exports = Reflux.createStore({
   },
 
   triggerChange: function(){
-    this.trigger('change', this.user);
-  } 
-
+    this.trigger(this.user);
+  }
 });
