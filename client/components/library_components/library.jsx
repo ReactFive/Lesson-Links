@@ -3,6 +3,8 @@ var Router = require('react-router');
 var LibraryStore = require('../../stores/LibraryStore')
 var AuthStore = require('../../stores/AuthStore')
 var Link = Router.Link;
+var Reflux = require('reflux');
+
 
 
 var LibLessonEntry = require('./LibLessonEntry.jsx');
@@ -80,36 +82,38 @@ var TEST = [{
   }];
 
 var Library = React.createClass({
+  mixins: [Reflux.listenTo(LibraryStore, "user")],
+
   componentWillMount: function(){
-    console.log(AuthStore)
-    this.state.lessons = AuthStore.user.lessons
+    console.log(LibraryStore)
+    this.state.lessons = LibraryStore.user.lessons
   },
   render:function(){
+    if (this.user){
+        {/*Grab Teacher's Name*/}
+        var name = this.state.lessons[0].teacher.name
     
-    {/*Grab Teacher's Name*/}
-    var name = this.state.lessons[0].teacher.name
-
-    {/*Declare apostrophe*/}
-    var apo = "'"
-
-    return (
-      <div className="lib-lesson-container">
-        <div id="library-filter-header">
-          <h1>{name}{apo}s Library</h1>
-        </div>
-        <div id="library-filter">
-            <LibLessonEntry lessons = {this.state.lessons}/>
-            <LibAddLesson />
-        </div>
-        <div id="library-filter-header">
-          <h1>{name}{apo}s Studies</h1>
-        </div>
-        <div id="library-filter">
-            <LibLessonEntry lessons = {this.state.lessons}/>
-        </div>
-      </div>
-    )
-  }
+        {/*Declare apostrophe*/}
+        var apo = "'"
+    
+        return (
+          <div className="lib-lesson-container">
+            <div id="library-filter-header">
+              <h1>{name}{apo}s Library</h1>
+            </div>
+            <div id="library-filter">
+                <LibLessonEntry lessons = {this.state.lessons}/>
+                <LibAddLesson />
+            </div>
+            <div id="library-filter-header">
+              <h1>{name}{apo}s Studies</h1>
+            </div>
+            <div id="library-filter">
+                <LibLessonEntry lessons = {this.state.lessons}/>
+            </div>
+          </div>
+        )
+      }}
 });
 
 module.exports = Library;
