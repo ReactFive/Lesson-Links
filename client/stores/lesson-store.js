@@ -9,7 +9,7 @@ module.exports = Reflux.createStore({
   init: function() {},
 
   fetchLesson : function(url){
-    url = url || 'sass-101'
+    url = url// || 'sass-101'
     var self = this;
     Api.getLesson(url)
     .then(function(res) {

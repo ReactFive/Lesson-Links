@@ -13,13 +13,14 @@ var LessonView = React.createClass({
     router: React.PropTypes.func
   },
   componentWillMount: function(){
-    //console.log(this.context.router.getCurrentParams().url);
-    Actions.fetchLesson(this.context.router.getCurrentParams().url)
+     console.log(this.props.params.url)
+     console.log(this.context.router.getCurrentParams().url);
+    Actions.fetchLesson(this.props.params.url)
   },
   render: function() {
     return (
         <div>
-          <div id='lesson-view'>
+          <div id='lesson-view2'>
             <VideoBox />
             <Content/>
           </div>
