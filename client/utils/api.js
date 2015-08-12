@@ -32,7 +32,6 @@ module.exports.updateLesson = function(lesson) {
 };
 
 module.exports.createLesson = function(lesson) {
-  debugger;
   var url  = rootUrl + '/api/lesson/' + lesson.lesson_url;
   return axios.post(url, lesson);
 };
