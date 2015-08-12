@@ -56,3 +56,8 @@ client/public/css/style.css
 
 ####Rebase Creations
 *.orig
+
+
+###Floor
+.floo
+.flooignore
