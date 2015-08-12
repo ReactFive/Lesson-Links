@@ -50,7 +50,6 @@ module.exports = Reflux.createStore({
         commentIndex = key;
       }
     })
-    debugger;
     console.log("likes before: ", this.lesson.comments[commentIndex])
     
     if(this.lesson.comments[commentIndex].likes.indexOf(username)  === -1){
@@ -71,7 +70,6 @@ module.exports = Reflux.createStore({
         commentIndex = key;
       }
     })
-    debugger;
     console.log("likes before: ", this.lesson.comments[commentIndex])
     
     if(this.lesson.comments[commentIndex].likes.indexOf(username) >= 0){

@@ -1,0 +1,27 @@
+@import "Theme.scss";
+
+
+
+.add-lesson-info{
+
+}
+
+.add-lesson-button{
+  height: 200px;
+  width: 25%;
+  background-color: $dark-blue;
+  color: $light-blue;
+  border: 2px solid $light-blue;
+}
+
+.add-lesson-button :hover{
+  background-color:$light-blue;
+}
+
+.addless-button-container{
+  align-content: center;
+}
+
+.add-lesson-view{
+  text-align: center;
+}
