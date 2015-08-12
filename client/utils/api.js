@@ -27,8 +27,13 @@ module.exports.getUser = function() {
 };
 
 module.exports.updateLesson = function(lesson) {
-  var url  = rootUrl + '/api/lessons/update' + lesson.lesson_url;
+  var url  = rootUrl + '/api/lessons/' + lesson.lesson_url;
   return axios.put(url, lesson);
+};
+
+module.exports.createLesson = function(lesson) {
+  var url  = rootUrl + '/api/lessons/' + lesson.lesson_url;
+  return axios.post(url, lesson);
 };
 
 module.exports.getStatus = function(){
