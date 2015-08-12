@@ -62,7 +62,6 @@ gulp.task('vendor', function() {
   return gulp.src([
     'client/bower_components/jquery/dist/jquery.js',
     'client/bower_components/video.js/dist/video-js/video.js',
-    'client/bower_components/videojs-markers/dist/videojs-markers.js',
     'client/bower_components/videojs-youtube/dist/vjs.youtube.js',
     'client/bower_components/toastr/toastr.js'
   ]).pipe(concat('vendor.js'))
