@@ -29,10 +29,19 @@ exports.addLesson = function(req, res){
 }
 
 exports.getUser = function(req, res){
-  User.findById(req.user.id, function(err, obj){
-    if (err) {console.log(err)}
-    res.send(obj)
-  })
+  if(req.user) {
+    User.findById(req.user.id, function (err, obj) {
+      if (!obj) {
+        res.status(401).send({user: false});
+      }
+      if (err) {
+        console.log(err)
+      }
+      res.send(obj)
+    })
+  }else{
+    res.status(401).send({user: false});
+  }
 }
 
 exports.logout = function(req, res){

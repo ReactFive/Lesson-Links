@@ -7,7 +7,7 @@ var LessonStore = require('../../stores/lesson-store');
 var VideoPlayer = React.createClass({
   mixins: [Reflux.connect(LessonStore, "lesson")],
   getInitialState: function() {
-    videoSetupCompleted: false
+    videoSetupCompleted: false;
   },
   componentWillReceiveProps: function(nextProps){
   },
