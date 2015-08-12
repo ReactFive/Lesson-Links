@@ -28,8 +28,7 @@ module.exports.getUser = function() {
 
 module.exports.updateLesson = function(lesson) {
   var url  = rootUrl + '/api/lessons/update' + lesson.lesson_url;
-  lesson.publish = !lesson.publish
-  return axios.post(url, lesson);
+  return axios.put(url, lesson);
 };
 
 module.exports.getStatus = function(){
