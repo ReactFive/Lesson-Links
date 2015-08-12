@@ -10,7 +10,16 @@ exports.signupUser = function(req, res) {
 };
 
 exports.loginUser = function(req, res) {
-  return res.status(200).send({user: req.user});
+  User
+  .findById(req.user._id)
+  .populate('lessons')
+  .exec(
+    function(err, obj){
+      if (err) {console.log(err)}
+      console.log(obj)
+      res.status(200).send({user: obj})
+    }
+  )
 };
 
 exports.addLesson = function(req, res){
@@ -30,7 +39,7 @@ exports.addLesson = function(req, res){
 
 exports.getUser = function(req, res){
   if(req.user) {
-    User.findById(req.user.id, function (err, obj) {
+    User.findById(req.user._id, function (err, obj) {
       if (!obj) {
         res.status(401).send({user: false});
       }

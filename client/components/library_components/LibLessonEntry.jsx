@@ -1,5 +1,5 @@
 var React = require('react');
-
+var LibraryStore = require('../../stores/LibraryStore')
 var LibAddLesson = require('./LibAddLesson.jsx')
 
 var LibLessonEntry = React.createClass({
@@ -16,7 +16,10 @@ var LibLessonEntry = React.createClass({
             <li>Author: {lesson.teacher.name}</li>
           </ul> 
           <p>
-            <p className="lib-less-title">{lesson.title}</p>
+            <p className="lib-less-title">
+              {lesson.title}
+              {<Link activeClassName="active" to={"/lesson/"+lesson.lesson_url}>Lessons</Link>}
+            </p>
             <p className="lib-less-author">By: {lesson.teacher.name}</p>
           </p> 
 

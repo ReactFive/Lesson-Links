@@ -1,4 +1,9 @@
 var React = require('react');
+var Router = require('react-router');
+var LibraryStore = require('../../stores/LibraryStore')
+var AuthStore = require('../../stores/AuthStore')
+var Link = Router.Link;
+
 
 var LibLessonEntry = require('./LibLessonEntry.jsx');
 var LibAddLesson = require('./LibAddLesson.jsx');
@@ -75,8 +80,9 @@ var TEST = [{
   }];
 
 var Library = React.createClass({
-  getInitialState: function(){
-    return {lessons: TEST}
+  componentWillMount: function(){
+    console.log(AuthStore)
+    this.state.lessons = AuthStore.user.lessons
   },
   render:function(){
     

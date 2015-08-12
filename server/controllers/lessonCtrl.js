@@ -33,7 +33,7 @@ exports.getLessonByUrl = function(req, res, next) {
 };
 
 exports.updateLesson = function(req, res, next){
-  var teacherID = req.user.id;
+  var teacherID = req.user._id;
   // var teacherID = '55ca2b6e80fe364f127710e4';
   
   Lesson.update({lesson_url : req.params.url}, {$set : 
@@ -53,14 +53,16 @@ exports.createLesson = function(req, res, next){
 
     var teacherID = req.user.id;
     // var teacherID = "55c8fd1ac35805231878ef1a";
-    
 
     var newLesson = new Lesson ({
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,
       video_url : req.body.video_url || null,
       published : req.body.published || true,
-      teacher: teacherID
+      teacher: {
+        id: req.user._id,
+        name: req.user.local.name
+      }
     });
 
     newLesson.save(function(err, lesson){
@@ -76,7 +78,7 @@ exports.createLesson = function(req, res, next){
         }
       }
       //ADDING THE LESSON ID TO THE USER'S DOCUMENT
-      User.findByIdAndUpdate(teacherID, {
+      User.findByIdAndUpdate(req.user._id, {
         $addToSet: {
           lessons: lesson._id
         }
