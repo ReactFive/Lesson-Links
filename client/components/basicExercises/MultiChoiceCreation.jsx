@@ -12,6 +12,7 @@ var MultiChoiceCreation = React.createClass({
 
   getInitialState: function(){
     return {
+      alternatives: 3,
       optionsArray: [],
       user: null
     }
@@ -24,15 +25,22 @@ var MultiChoiceCreation = React.createClass({
   formSetup: function(event){
     console.log(event);
     var inputs = [];
-    for (var i = 0; i < event; i++){
+    for (var i = 1; i <= event; i++){
       var ID = "opt" + i;
       var nameText = "opt" + i;
       inputs.push(
-          <div className="form-group">
-            <label key={i} id={ID}>Option: {i+1}</label>
+          <div key={i} className="form-group">
+            <label id={ID}>Option: {i}</label>
         <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
       </div>)
     }
+
+    /* for (var i = 0; i < event; i++){
+     var IdText = "radio" + 1;
+     checks.push(<label key={1} className="radio-inline">
+     <input type="radio" name="inlineRadioOptions" id={IdText} value={i+1}/>
+     </label>)
+     } */
     this.setState({optionsArray: inputs})
   },
 
@@ -58,21 +66,24 @@ var MultiChoiceCreation = React.createClass({
 
             <Select
               name="Number of items"
-              value="Number if alternatives"
+              value="Select the number of alternative answers"
               options={options}
               onChange={this.formSetup}
               />
 
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
-
+            <h5>Write your question/prompt/problem</h5>
               <div className="form-group">
-                <label id="question">Link a multiple-choice question</label>
                 <input ref="question" className="form-control" name="name" type='text' placeholder="Question"/>
               </div>
 
               {this.state.optionsArray}
 
-              <button className="btn btn-primary">Add to your exercise</button>
+                /*<div class="radio">
+                {this.state.checksForAnswer}
+                <div class="radio">*/
+
+              <button className="btn btn-primary">Add to your lesson</button>
               <Link activeClassName="active" to="/"><button className="signup-cancel-btn btn btn-default">Cancel</button></Link>
             </form>
           </div>

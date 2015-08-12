@@ -7,3 +7,14 @@ Lesson Links is a simple software that allows video viewers to comment on the vi
 A good lecture video has the potential to be as good as a good live lecture. This, however, is rarely the case. Too often online learners slug through dull, confusing, unimagined videos. Without the  feedback that facilitates effective live learning environments, these dirths of education remain on the internet, and the most popular source for information has become plagued by boring, ineffective, or outdated learning material. 
 
 Enter Lesson Links. Lesson Links allows any teacher to equip a video with view-commentary feedback so that they can have a dialogue with their online students. Teachers equip a video with feedback ability. Students provide feedback. Teachers learn what educational points can be improved upon. Finally, the flow of communication is open again. 
+
+
+   /* for (var i = 0; i < event; i++){
+      var IdText = "radio" + 1;
+      checks.push(<label key={1} className="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id={IdText} value={i+1}/>
+        </label>)
+    } */
+    
+      
+    
