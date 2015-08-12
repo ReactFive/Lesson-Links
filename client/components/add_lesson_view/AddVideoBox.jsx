@@ -42,7 +42,7 @@ var AddVideoBox = React.createClass({
               <input 
                 className="add-lesson-info"
                 type="text" 
-                placeholder="What is the name of your new Lesson?"
+                placeholder="Lesson Name"
                 ref="title" 
                 value={this.state.title}
                 onChange={this.onInputChange}></input>
@@ -53,7 +53,7 @@ var AddVideoBox = React.createClass({
               <input 
                 className="add-lesson-info"
                 type="url" 
-                placeholder="Input your video URL here. We currently only support YouTube videos." 
+                placeholder="YouTube URL" 
                 name="newVideoUrl" ref="video_url" 
                 value={this.state.video_url}
                 onChange={this.onInputChange}></input>
@@ -63,7 +63,7 @@ var AddVideoBox = React.createClass({
               <label>www.lesson-links.com/api/lesson/</label>
               <input 
                 type="text" 
-                placeholder="Customize your Lesson Link." 
+                placeholder="your-custom-link" 
                 name="newVideoUrl" 
                 ref="lesson_url" 
                 value={this.state.lesson_url}
