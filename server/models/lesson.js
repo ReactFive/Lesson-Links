@@ -85,7 +85,7 @@ var lessonSchema = new mongoose.Schema ({
     },
     name      : String
   },
-  lessons : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Exercise'}]
+  exercises : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Exercise'}]
 });
 
 lessonSchema.virtual('hasComments').get(function(){

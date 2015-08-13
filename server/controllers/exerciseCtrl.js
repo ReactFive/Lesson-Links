@@ -15,16 +15,17 @@ exports.addExercise = function(req, res) {
 
 newExercise.save(function(err, exer){
   if(err) res.status(500).send({error: "unable to save to db"});
-
-  Lesson.findByIdAndUpdate(lessonId, {
+   console.log("now in here");
+  Lesson.findOneAndUpdate({_id: lessonId}, {
     $addToSet: {
       exercises: exer._id
     }
-  }, function(err, obj) {
+  }, {}, function(err, obj) {
+    console.log("in here");
       if (err) {
         console.log(500, err);
       } else {
-        console.log(obj);
+        console.log("saved", obj);
       }
     });
   res.status(201);

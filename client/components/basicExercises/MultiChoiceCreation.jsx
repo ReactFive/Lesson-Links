@@ -43,7 +43,7 @@ var MultiChoiceCreation = React.createClass({
               <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
           </div>
             <div class="form-group">
-              <label for="">Feedback to this option when selected by learner:</label>
+              <label htmlFor="">Feedback to this option when selected by learner:</label>
                 <textarea className="form-control" rows="2"></textarea>
             </div>
       </div>
