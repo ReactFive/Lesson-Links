@@ -6,7 +6,7 @@ var ReplyContent = React.createClass({
     return (
       <div className="reply-content">
         <p>{this.props.text}</p>
-        <small>some other user</small>
+        <small>{this.props.author}</small>
       </div>
     );
   }
