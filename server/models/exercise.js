@@ -12,7 +12,7 @@ var Exercise = mongoose.model("Exercise", ExerciseSchema);
 function createSeedExercise() {
   Exercise.find({}).exec(function(err, collection) {
     if (collection.length === 0) {
-      Exercises.create({
+      Exercise.create({
       user: "Rick",
       exercise: {"this":{"that": "this"}}
     });
