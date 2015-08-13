@@ -5,12 +5,21 @@
   text-align: center;
   padding-top: 100px;
   font-family: $header-font;
+  color: $dark-blue;
 } 
 
 .sublogo{
   padding-bottom: 200px;
   text-align: center;
   font-family: $header-font;
+  letter-spacing: .16em;
+  color: $light-purple;
+}
+
+.teaser{
+  text-align: center;
+  font-family: $header-font;
+  
 }
 
 .learnMore{
