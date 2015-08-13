@@ -11,8 +11,9 @@ var CommentList = React.createClass({
     if (this.state.lesson) {
       var that=this;
       var comments = _.sortBy(this.state.lesson.comments,function(o){
-		return o.likes.length;
-	  })
+		    return o.likes.length;
+	    })
+      .reverse()
       .filter(function(comment){
         return comment.time >= 0 ;
       })
