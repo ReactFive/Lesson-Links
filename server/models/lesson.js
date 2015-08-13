@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var check = require('./mongooseValidators');
+var Exercise = require('./exercise');
 
 var lessonSchema = new mongoose.Schema ({
   title   :
@@ -83,7 +84,8 @@ var lessonSchema = new mongoose.Schema ({
       ref     : 'User'
     },
     name      : String
-  }
+  },
+  lessons : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Exercise'}]
 });
 
 lessonSchema.virtual('hasComments').get(function(){
