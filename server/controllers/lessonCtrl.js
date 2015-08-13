@@ -43,7 +43,9 @@ exports.updateLesson = function(req, res, next){
       }, function(err, raw){
         if (err) return handleError(err);
         console.log(raw)
-      })}
+      })} else {
+        res.send(401)
+      }
     if(req.body.published && req.user._id === lesson.teacher.id) {
       Lesson.update({lesson_url : req.params.url}, {$set : 
         {
@@ -52,7 +54,9 @@ exports.updateLesson = function(req, res, next){
       }, function(err, raw){
         if (err) return handleError(err);
         console.log(raw)
-      })}
+      })} else {
+        res.send(401)
+      }
     if(req.body.comments) {
       Lesson.update({lesson_url : req.params.url}, {$set : 
         {
