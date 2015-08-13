@@ -7,17 +7,13 @@ var AuthStore = require('../../../stores/AuthStore.js');
 var Textarea = require('react-textarea-autosize');
 
 var CommentSubmissionBox = React.createClass({
-  mixins: [Reflux.listenTo(AuthStore, "onChange")],
+  mixins: [Reflux.connect(AuthStore, "auth")],
 
   getInitialState: function(){
     return {
       text: '',
       showCommentForm: false
     }
-  },
-
-  onChange: function(event, user) {
-    this.setState({user : user});
   },
 
   onInputChange: function(e) {
@@ -40,11 +36,12 @@ var CommentSubmissionBox = React.createClass({
   },
   handleSubmit: function(e){
     e.preventDefault();
+    debugger;
     Actions.submitComment({
       text: this.state.text,
       marked_at: videojs('attachmentVideo').currentTime(),
       time: videojs('attachmentVideo').currentTime(),
-      author: this.state.user.name,
+      author: AuthStore.auth.user.name,
       replies: [],
       likes: []
     });
