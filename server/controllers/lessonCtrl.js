@@ -35,7 +35,7 @@ exports.getLessonByUrl = function(req, res, next) {
 exports.updateLesson = function(req, res, next){
   var teacherID = req.user.id;
   // var teacherID = '55ca2b6e80fe364f127710e4';
-
+  
   Lesson.update({lesson_url : req.params.url}, {$set : 
     {
       title : req.body.title || "Your lesson",

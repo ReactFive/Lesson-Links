@@ -25,6 +25,7 @@ module.exports = Reflux.createStore({
   submitComment: function(comment) {
     this.lesson.comments.push(comment);
     this.trigger(this.lesson);
+    Api.updateLesson(this.lesson);
   },
 
   deleteComment: function(commentKey){
@@ -50,15 +51,10 @@ module.exports = Reflux.createStore({
         commentIndex = key;
       }
     })
-    console.log("likes before: ", this.lesson.comments[commentIndex])
     
     if(this.lesson.comments[commentIndex].likes.indexOf(username)  === -1){
       this.lesson.comments[commentIndex].likes.push(username);
-    }else{
-      console.log("already liked that!")
     }
-
-    console.log("likes after: ", this.lesson.comments[commentIndex])
     this.trigger(this.lesson);
   },
 
@@ -70,16 +66,11 @@ module.exports = Reflux.createStore({
         commentIndex = key;
       }
     })
-    console.log("likes before: ", this.lesson.comments[commentIndex])
     
     if(this.lesson.comments[commentIndex].likes.indexOf(username) >= 0){
       var index = this.lesson.comments[commentIndex].likes.indexOf(username);
       this.lesson.comments[commentIndex].likes.splice(index, 1);
-    }else{
-      console.log("you can't unlike what you haven't even liked in the first place! (this is a bug)")
     }
-
-    console.log("likes after: ", this.lesson.comments[commentIndex])
     this.trigger(this.lesson);
   },
 
