@@ -40,6 +40,7 @@ module.exports = Reflux.createStore({
     return Api.getUser()
         .then(function (res) {
           if (res.data.user) {
+            console.log('updating user')
             this.auth.user = res.data.user;
             this.triggerChange();
           } else {

@@ -18,9 +18,10 @@ var Library = React.createClass({
   },
   render:function(){
     {/*Grab Teacher's Name*/}
-    if (AuthStore.auth.user) {
+    if (AuthStore.auth.loggedIn) {
         var user = AuthStore.auth.user
         var name = user.local.name
+        console.log(user)
     
         {/*Declare apostrophe*/}
         var apo = "'"
@@ -32,7 +33,7 @@ var Library = React.createClass({
             </div>
             <div id="library-filter">
               <LibLessonEntry lessons = {
-                user.lessons
+                _.filter(user.lessons, function(n){return n.teacher.id === user._id})
               }/>
               <LibAddLesson />
             </div>
@@ -41,7 +42,7 @@ var Library = React.createClass({
             </div>
             <div id="library-filter">
               <LibLessonEntry lessons = {
-                user.lessons
+                _.filter(user.lessons, function(n){return n.teacher.id !== user._id})
               }/>
             </div>
           </div>

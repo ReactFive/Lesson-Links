@@ -19,7 +19,7 @@ var LibLessonEntry = React.createClass({
           </p> 
 
           <p className="lib-lock">
-            <a>publish?</a>
+            <a onClick={LibraryStore.togglePublish(lesson)}>Publish?</a>
           </p> 
         </span>
     })
