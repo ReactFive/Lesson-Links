@@ -52,7 +52,7 @@ module.exports = Reflux.createStore({
   login: function (email, password) {
     return Api.login(email, password)
     .then(function(res){
-      this.auth.user = res.data.user.local;
+      this.auth.user = res.data.user;
       this.auth.loggedIn = true;
       this.triggerChange();
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);

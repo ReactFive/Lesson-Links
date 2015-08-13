@@ -33,34 +33,55 @@ exports.getLessonByUrl = function(req, res, next) {
 };
 
 exports.updateLesson = function(req, res, next){
-  var teacherID = req.user.id;
-  // var teacherID = '55ca2b6e80fe364f127710e4';
-  
-  Lesson.update({lesson_url : req.params.url}, {$set : 
-    {
-      title : req.body.title || "Your lesson",
-      video_url : req.body.video_url || null,
-      published : req.body.published || true,
-      comments : req.body.comments
+  Lesson.findOne({'lesson_url':req.params.url})
+  .exec(function(err, lesson){
+    if(req.body.video_url && req.user._id === lesson.teacher.id) {
+      Lesson.update({lesson_url : req.params.url}, {$set : 
+        {
+          title : req.body.title || "Your lesson",
+        }
+      }, function(err, raw){
+        if (err) return handleError(err);
+        console.log(raw)
+      })} else {
+        res.send(401)
+      }
+    if(req.body.published && req.user._id === lesson.teacher.id) {
+      Lesson.update({lesson_url : req.params.url}, {$set : 
+        {
+          published : req.body.published || true,
+        }
+      }, function(err, raw){
+        if (err) return handleError(err);
+        console.log(raw)
+      })} else {
+        res.send(401)
+      }
+    if(req.body.comments) {
+      Lesson.update({lesson_url : req.params.url}, {$set : 
+        {
+          comments : req.body.comments
+        }
+      }, function(err, raw){
+        if (err) return handleError(err);
+        console.log(raw)
+      })
     }
-  }, function(err, raw){
-    if (err) return handleError(err);
-    console.log(raw)
   })
+  res.send(200)
 }
 
 exports.createLesson = function(req, res, next){
-
-    var teacherID = req.user.id;
-    // var teacherID = "55c8fd1ac35805231878ef1a";
-    
-
+    console.log(req.user)
     var newLesson = new Lesson ({
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,
       video_url : req.body.video_url || null,
       published : req.body.published || true,
-      teacher: teacherID
+      teacher: {
+        id: req.user._id,
+        name: req.user.local.name
+      }
     });
 
     newLesson.save(function(err, lesson){
@@ -76,7 +97,7 @@ exports.createLesson = function(req, res, next){
         }
       }
       //ADDING THE LESSON ID TO THE USER'S DOCUMENT
-      User.findByIdAndUpdate(teacherID, {
+      User.findByIdAndUpdate(req.user._id, {
         $addToSet: {
           lessons: lesson._id
         }

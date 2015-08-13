@@ -6,26 +6,27 @@ var Actions = require('../../actions');
 var LessonStore = require('../../stores/lesson-store.js');
 var Reflux = require('reflux');
 
+module.exports = LessonView;
 
 var LessonView = React.createClass({
+  mixins: [Reflux.listenTo(LessonStore, "lesson")],
 
   contextTypes: {
     router: React.PropTypes.func
   },
   componentWillMount: function(){
-    //console.log(this.context.router.getCurrentParams().url);
     Actions.fetchLesson(this.context.router.getCurrentParams().url)
   },
   render: function() {
     return (
-        <div>
-          <div id='lesson-view'>
-            <VideoBox />
-            <Content/>
-          </div>
+      <div>
+        <div id='lesson-view'>
+          <VideoBox />
+          <Content/>
         </div>
+      </div>
     );
-  }
+  } 
 });
 
 module.exports = LessonView;

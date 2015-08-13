@@ -17,7 +17,6 @@ var nav = React.createClass({
   },
 
   render: function() {
-    console.log(this.state.auth);
     return ( <nav className="navbar navbar-default navbar-fixed-top">
       <div className="container">
         <div className="navbar-header">
@@ -33,7 +32,7 @@ var nav = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/lesson">Lessons</Link>}
+              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
             </li>
             <li className="pull-right">
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}

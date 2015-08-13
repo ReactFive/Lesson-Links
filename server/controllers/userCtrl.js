@@ -1,16 +1,26 @@
 var User = require('mongoose').model('User');
 var passport = require('passport');
+var _ = require('lodash');
 
 exports.signupUser = function(req, res) {
     console.log('singup success');
     req.logIn(req.user, function(err) {
       if(err) {return next(err);}
-      return res.status(201).send({user:req.user});
+      return res.status(201).send({user:_.omit(req.user, 'local')});
   });
 };
 
 exports.loginUser = function(req, res) {
-  return res.status(200).send({user: req.user});
+  User
+  .findById(req.user._id)
+  .populate('lessons')
+  .exec(
+    function(err, obj){
+      if (err) {console.log(err)}
+      console.log(obj)
+      res.status(200).send({user:obj})
+    }
+  )
 };
 
 exports.addLesson = function(req, res){
@@ -30,14 +40,14 @@ exports.addLesson = function(req, res){
 
 exports.getUser = function(req, res){
   if(req.user) {
-    User.findById(req.user.id, function (err, obj) {
+    User.findById(req.user._id, function (err, obj) {
       if (!obj) {
         res.status(401).send({user: false});
       }
       if (err) {
         console.log(err)
       }
-      res.send(obj)
+      res.send({user:_.omit(obj, 'local')})
     })
   }else{
     res.status(401).send({user: false});

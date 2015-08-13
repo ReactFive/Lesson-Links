@@ -16,8 +16,6 @@ var Exercise = require('./components/basicExercises/Multichoice.jsx');
 var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
 var EditView = require('./components/edit/EditView.jsx');
 
-
-
 var routes = (
     <Route handler={App}>
       <Route path='/' handler={LandingPage} />

@@ -7,6 +7,7 @@ module.exports = Reflux.createStore({
   listenables: [Actions],
 
   createLesson: function(lesson){
+    console.log(Api)
     Api.createLesson(lesson)
     .then(function(res){
       console.log("successfully created lesson");
