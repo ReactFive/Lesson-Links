@@ -82,7 +82,8 @@ module.exports = Reflux.createStore({
     var player = videojs('attachmentVideo');
     //wrap the reply in an object
     var replyObj = {
-      text: reply
+      author: reply.author,
+      text: reply.text
     };
     //find the index of the comment to which the reply should be added
     var commentIndex;
@@ -93,6 +94,7 @@ module.exports = Reflux.createStore({
     })
     //add the reply to the comments
     this.lesson.comments[commentIndex].replies.push(replyObj);
+    debugger;
     this.trigger(this.lesson);
     Api.updateLesson(this.lesson);
   }
