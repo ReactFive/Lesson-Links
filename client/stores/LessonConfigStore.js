@@ -37,19 +37,7 @@ var AddLessonStore = Reflux.createStore({
           },
           "name": "Colin Wiley"
       },
-      "comments": [
-          {
-              "author": "Colin Wiley",
-              "marked_at": 660.846271,
-              "text": "What is a function? Can anyone explain it to me?",
-              "_id": {
-                  "$oid": "55cce245b049c75b4fe3bd06"
-              },
-              "replies": [],
-              "star": false,
-              "likes": []
-          }
-      ],
+      "comments": [],
       "publish": true,
       "created_at": {
           "$date": "2015-08-13T15:23:56.760Z"
@@ -58,7 +46,10 @@ var AddLessonStore = Reflux.createStore({
     }
 
     console.log(this.lesson);
-    this.trigger(this.lesson);
+    var self = this;
+    setTimeout(function() {
+      self.trigger(self.lesson)
+    }, 200);
   }
   /* end testing */
 
