@@ -5,8 +5,11 @@ var AuthStore = require('../../stores/AuthStore')
 var Router = require('react-router')
 var Link = Router.Link;
 
+// LibraryStore.togglePublish(lesson)
+
 var LibLessonEntry = React.createClass({
   render:function(){
+    var owner = this.props.owner
     var lessons = this.props.lessons.map(function(lesson, index){
       return <span className="lib-lesson-entry" key={index}>
           <p>
@@ -19,7 +22,8 @@ var LibLessonEntry = React.createClass({
           </p> 
 
           <p className="lib-lock">
-            <a onClick={LibraryStore.togglePublish(lesson)}>Publish?</a>
+            {owner ? <a>Publish?</a> : ''}
+            
           </p> 
         </span>
     })
