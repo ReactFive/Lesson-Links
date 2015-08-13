@@ -33,9 +33,9 @@ exports.getLessonByUrl = function(req, res, next) {
 };
 
 exports.updateLesson = function(req, res, next){
-  if (true)
-  {
-    if(req.body.video_url) {
+  Lesson.findOne({'lesson_url':req.params.url})
+  .exec(function(err, lesson){
+    if(req.body.video_url && req.user._id === lesson.teacher.id) {
       Lesson.update({lesson_url : req.params.url}, {$set : 
         {
           title : req.body.title || "Your lesson",
@@ -44,7 +44,7 @@ exports.updateLesson = function(req, res, next){
         if (err) return handleError(err);
         console.log(raw)
       })}
-    if(req.body.published) {
+    if(req.body.published && req.user._id === lesson.teacher.id) {
       Lesson.update({lesson_url : req.params.url}, {$set : 
         {
           published : req.body.published || true,
@@ -61,20 +61,14 @@ exports.updateLesson = function(req, res, next){
       }, function(err, raw){
         if (err) return handleError(err);
         console.log(raw)
-      })}
-    res.send(200)
-  } else {
-    res.status(401).send('Logged in user and lesson user are not the same')
-  }
+      })
+    }
+  })
+  res.send(200)
 }
 
 exports.createLesson = function(req, res, next){
-    console.log('creating lesson')
     console.log(req.user)
-
-    var teacherID = req.user._id;
-    // var teacherID = "55c8fd1ac35805231878ef1a";
-
     var newLesson = new Lesson ({
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,
