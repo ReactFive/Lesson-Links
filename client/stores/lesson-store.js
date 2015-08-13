@@ -18,11 +18,13 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     })
   },
+
   submitComment: function(comment) {
     this.lesson.comments.push(comment);
     this.trigger(this.lesson);
-    Api.updateLesson(this.lesson);
+    Api.updateLesson(this.lesson.comments, this.lesson.lesson_url);
   },
+
   deleteComment: function(commentKey){
     //find the index of the comment to which the reply should be added
     var commentIndex;
