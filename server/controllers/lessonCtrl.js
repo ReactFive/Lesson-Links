@@ -34,6 +34,7 @@ exports.getLessonByUrl = function(req, res, next) {
 
 
 exports.updateLesson = function(req, res, next){
+  console.log("REQ DOT BODY", req.body);
 
   Lesson.update({lesson_url : req.params.url}, {$set : 
     {

@@ -21,7 +21,12 @@ var ReplySubmissionBox = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    Actions.submitReply(this.state.text, this.props.comment.key);
+ 
+    Actions.submitReply({
+      text: this.state.text, 
+      author: window.currentUser.local.name
+    }, this.props.comment.key);
+
     this.setState({
       text: ''
     });
