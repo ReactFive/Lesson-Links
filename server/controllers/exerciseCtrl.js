@@ -4,7 +4,7 @@ var Lesson = require('mongoose').model('Lesson');
 
 exports.addExercise = function(req, res) {
 
-  var lessonId = req.body.lesson;
+  var lessonId = req.body.lesson_id;
 
   var newExercise = new Exercise({
     time: req.body.time,
