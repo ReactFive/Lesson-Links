@@ -33,8 +33,10 @@ var Library = React.createClass({
             </div>
             <div id="library-filter">
               <LibLessonEntry lessons = {
-                _.filter(user.lessons, function(n){return n.teacher.id === user._id})
-              }/>
+                _.filter(user.lessons, function(n){return n.teacher.id === user._id
+                })
+                
+              } owner = {true}/>
               <LibAddLesson />
             </div>
             <div id="library-filter-header">
@@ -42,8 +44,9 @@ var Library = React.createClass({
             </div>
             <div id="library-filter">
               <LibLessonEntry lessons = {
-                _.filter(user.lessons, function(n){return n.teacher.id !== user._id})
-              }/>
+                _.filter(user.lessons, function(n){return n.teacher.id !== user._id
+                })
+              } owner = {false}/>
             </div>
           </div>
         )
