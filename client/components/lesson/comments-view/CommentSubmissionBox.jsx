@@ -35,6 +35,7 @@ var CommentSubmissionBox = React.createClass({
     }
   },
   handleSubmit: function(e){
+    debugger;
     e.preventDefault();
 
     Actions.submitComment({
@@ -42,6 +43,7 @@ var CommentSubmissionBox = React.createClass({
       marked_at: videojs('attachmentVideo').currentTime(),
       time: videojs('attachmentVideo').currentTime(),
       author: window.currentUser.local.name,
+
       replies: [],
       likes: []
     });

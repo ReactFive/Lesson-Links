@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LessonCtrl = require('./controllers/lessonCtrl');
 var UserCtrl = require('./controllers/userCtrl');
+var ExerciseCtrl = require('./controllers/exerciseCtrl');
 var _ = require('lodash');
 
 module.exports = function(app) {
@@ -22,6 +23,12 @@ module.exports = function(app) {
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
   app.get('/api/user', UserCtrl.getUser);
+
+  /**
+   * EXERCISE API
+   */
+
+  app.post('/api/exercise', ExerciseCtrl.addExercise);
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){

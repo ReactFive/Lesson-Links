@@ -22,6 +22,7 @@ module.exports = Reflux.createStore({
     var user = Identity().currentUser;
     if (user._id){
       this.auth.loggedIn = true;
+      this.auth.user = user;
       this.triggerChange();
     }
     return Api.getStatus()

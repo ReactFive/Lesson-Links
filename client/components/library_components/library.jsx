@@ -13,11 +13,15 @@ var _ = require('lodash')
 var Library = React.createClass({
   mixins: [Reflux.connect(AuthStore,"auth")],
 
+  getInitialState: function(){
+  },
+
   componentWillMount: function(){
     console.log(AuthStore)
   },
   render:function(){
     {/*Grab Teacher's Name*/}
+
     if (AuthStore.auth.loggedIn) {
         var user = AuthStore.auth.user
         var name = user.local.name

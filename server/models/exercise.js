@@ -1,49 +1,23 @@
 var mongoose = require('mongoose');
+var Mixed = mongoose.Schema.Types.Mixed;
 
-var multipleChoiceExerciseSchema = new mongoose.Schema({
-  type      :
-  {
-    type      : String,
-    required  : true,
-    trim      : true
-  },
-  question  :
-  {
-    type      : String,
-    required  : true,
-    trim      : true
-  },
-  choices   : [{
-    text  :
-    {
-      type    : String,
-      trim    : true,
-      max     : 180
-    },
-    feedback :
-    {
-      type    : String,
-      trim    : true,
-      max     : 180
-    },
-    correctness
-    {
-      type    : Boolean
-    },
-  }],
-  teacher   :
-  {
-    id        :
-    {
-      type    : mongoose.Schema.Types.ObjectId,
-      ref     : 'User'
-    },
-    name      : String
-  },
-  time      :
-  {
-    type      : Number
-  }
-})
+var ExerciseSchema = new mongoose.Schema({
+  type: String,
+  time: Number,
+  exercise: mongoose.Schema.Types.Mixed
+});
 
-var Exercise = mongoose.model('MultipleChoiceExercise', multipleChoiceExerciseSchema);
+var Exercise = mongoose.model("Exercise", ExerciseSchema);
+
+function createSeedExercise() {
+  Exercise.find({}).exec(function(err, collection) {
+    if (collection.length === 0) {
+      Exercise.create({
+      user: "Rick",
+      exercise: {"this":{"that": "this"}}
+    });
+ }
+});
+}
+
+createSeedExercise();
