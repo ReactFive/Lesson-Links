@@ -33,7 +33,7 @@ exports.getLessonByUrl = function(req, res, next) {
 };
 
 exports.updateLesson = function(req, res, next){
-  if (req.user._id === req.body.teacher.id)
+  if (true)
   {
     if(req.body.video_url) {
       Lesson.update({lesson_url : req.params.url}, {$set : 
@@ -69,8 +69,10 @@ exports.updateLesson = function(req, res, next){
 }
 
 exports.createLesson = function(req, res, next){
+    console.log('creating lesson')
+    console.log(req.user)
 
-    var teacherID = req.user.id;
+    var teacherID = req.user._id;
     // var teacherID = "55c8fd1ac35805231878ef1a";
 
     var newLesson = new Lesson ({

@@ -1,26 +1,24 @@
 var React = require('react');
 var LibraryStore = require('../../stores/LibraryStore')
 var LibAddLesson = require('./LibAddLesson.jsx')
+var AuthStore = require('../../stores/AuthStore')
+var Router = require('react-router')
+var Link = Router.Link;
 
 var LibLessonEntry = React.createClass({
   render:function(){
-
+    console.log(this.props)
     var lessons = this.props.lessons.map(function(lesson, index){
       return <span className="lib-lesson-entry" key={index}>
-      
-          <ul>
-            <li>Title: {lesson.title}</li>
-            <li>
-              url: {lesson.url} 
-            </li>
-            <li>Author: {lesson.teacher.name}</li>
-          </ul> 
+ 
           <p>
             <p className="lib-less-title">
-              {lesson.title}
-              {<Link activeClassName="active" to={"/lesson/"+lesson.lesson_url}>Lessons</Link>}
+              <a href={lesson.lesson_url || '/'}>
+                {lesson.title || 'title not found'}
+              </a>
             </p>
-            <p className="lib-less-author">By: {lesson.teacher.name}</p>
+
+            <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}</p>
           </p> 
 
           <p className="lib-lock">

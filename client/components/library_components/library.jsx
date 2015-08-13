@@ -2,118 +2,41 @@ var React = require('react');
 var Router = require('react-router');
 var LibraryStore = require('../../stores/LibraryStore')
 var AuthStore = require('../../stores/AuthStore')
-var Link = Router.Link;
 var Reflux = require('reflux');
-
-
-
 var LibLessonEntry = require('./LibLessonEntry.jsx');
 var LibAddLesson = require('./LibAddLesson.jsx');
 
-var TEST = [{
-    title: "Lesson One",
-    url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
-    teacher: {
-      id: "54ff4ed8476278905d04a1e6",
-      name: "Rick"
-    },
-    publish: true,
-    comments: [{
-      marked_at : 13.345,
-      author    : "Abhi Gulati",
-      text      : "I didn't really get what you are doing with that for loop?"
-    }]
-  },
-    {
-    title: "Lesson 2 - S",
-    url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
-    teacher: {
-      id: "888",
-      name: "Rick"
-    },
-    publish: true,
-    comments: [{
-      marked_at : 13.345,
-      author    : "Abhi Gulati",
-      text      : "I didn't really get what you are doing with that for loop?"
-    }]
-  },
-    {
-    title: "Lesson 3 - S",
-    url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
-    teacher: {
-      id: "888",
-      name: "Rick"
-    },
-    publish: true,
-    comments: [{
-      marked_at : 13.345,
-      author    : "Abhi Gulati",
-      text      : "I didn't really get what you are doing with that for loop?"
-    }]
-  },
-    {
-    title: "Lesson 4 - T",
-    url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
-    teacher: {
-      id: "54ff4ed8476278905d04a1e6",
-      name: "Rick"
-    },
-    publish: true,
-    comments: [{
-      marked_at : 13.345,
-      author    : "Abhi Gulati",
-      text      : "I didn't really get what you are doing with that for loop?"
-    }]
-  },
-    {
-    title: "Lesson 5 - S",
-    url: "https://www.youtube.com/watch?v=pw1DeLy2Xsw",
-    teacher: {
-      id: "888",
-      name: "Isto"
-    },
-    publish: true,
-    comments: [{
-      marked_at : 13.345,
-      author    : "Abhi Gulati",
-      text      : "I didn't really get what you are doing with that for loop?"
-    }]
-  }];
-
 var Library = React.createClass({
-  mixins: [Reflux.listenTo(LibraryStore, "user")],
+  mixins: [Reflux.connect(AuthStore,"auth")],
 
   componentWillMount: function(){
-    console.log(LibraryStore)
-    this.state.lessons = LibraryStore.user.lessons
+    console.log(AuthStore)
   },
   render:function(){
-    if (this.user){
-        {/*Grab Teacher's Name*/}
-        var name = this.state.lessons[0].teacher.name
-    
-        {/*Declare apostrophe*/}
-        var apo = "'"
-    
-        return (
-          <div className="lib-lesson-container">
-            <div id="library-filter-header">
-              <h1>{name}{apo}s Library</h1>
-            </div>
-            <div id="library-filter">
-                <LibLessonEntry lessons = {this.state.lessons}/>
-                <LibAddLesson />
-            </div>
-            <div id="library-filter-header">
-              <h1>{name}{apo}s Studies</h1>
-            </div>
-            <div id="library-filter">
-                <LibLessonEntry lessons = {this.state.lessons}/>
-            </div>
-          </div>
-        )
-      }}
+    {/*Grab Teacher's Name*/}
+    var name = AuthStore.auth.user.local.name
+
+    {/*Declare apostrophe*/}
+    var apo = "'"
+
+    return (
+      <div className="lib-lesson-container">
+        <div id="library-filter-header">
+          <h1>{name}{apo}s Library</h1>
+        </div>
+        <div id="library-filter">
+            <LibLessonEntry lessons = {AuthStore.auth.user.lessons}/>
+            <LibAddLesson />
+        </div>
+        <div id="library-filter-header">
+          <h1>{name}{apo}s Studies</h1>
+        </div>
+        <div id="library-filter">
+            <LibLessonEntry lessons = {AuthStore.auth.user.lessons}/>
+        </div>
+      </div>
+    )
+  }
 });
 
 module.exports = Library;
