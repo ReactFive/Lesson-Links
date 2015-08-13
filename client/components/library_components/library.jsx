@@ -5,6 +5,10 @@ var AuthStore = require('../../stores/AuthStore')
 var Reflux = require('reflux');
 var LibLessonEntry = require('./LibLessonEntry.jsx');
 var LibAddLesson = require('./LibAddLesson.jsx');
+var _ = require('lodash')
+
+// _.filter(AuthStore.auth.user.lessons, function(n){return n.teacher.id !== AuthStore.auth.user.id})
+
 
 var Library = React.createClass({
   mixins: [Reflux.connect(AuthStore,"auth")],
@@ -14,28 +18,39 @@ var Library = React.createClass({
   },
   render:function(){
     {/*Grab Teacher's Name*/}
-    var name = AuthStore.auth.user.local.name
-
-    {/*Declare apostrophe*/}
-    var apo = "'"
-
-    return (
-      <div className="lib-lesson-container">
-        <div id="library-filter-header">
-          <h1>{name}{apo}s Library</h1>
-        </div>
-        <div id="library-filter">
-            <LibLessonEntry lessons = {AuthStore.auth.user.lessons}/>
-            <LibAddLesson />
-        </div>
-        <div id="library-filter-header">
-          <h1>{name}{apo}s Studies</h1>
-        </div>
-        <div id="library-filter">
-            <LibLessonEntry lessons = {AuthStore.auth.user.lessons}/>
-        </div>
-      </div>
-    )
+    if (AuthStore.auth.loggedIn) {
+        var user = AuthStore.auth.user
+        var name = user.local.name
+        console.log(user)
+    
+        {/*Declare apostrophe*/}
+        var apo = "'"
+    
+        return (
+          <div className="lib-lesson-container">
+            <div id="library-filter-header">
+              <h1>{name}{apo}s Library</h1>
+            </div>
+            <div id="library-filter">
+              <LibLessonEntry lessons = {
+                _.filter(user.lessons, function(n){return n.teacher.id === user._id})
+              }/>
+              <LibAddLesson />
+            </div>
+            <div id="library-filter-header">
+              <h1>{name}{apo}s Studies</h1>
+            </div>
+            <div id="library-filter">
+              <LibLessonEntry lessons = {
+                _.filter(user.lessons, function(n){return n.teacher.id !== user._id})
+              }/>
+            </div>
+          </div>
+        )
+    } else {
+      AuthStore.getUser()
+      return null
+    }
   }
 });
 

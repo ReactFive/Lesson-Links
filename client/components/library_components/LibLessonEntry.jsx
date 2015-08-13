@@ -7,34 +7,29 @@ var Link = Router.Link;
 
 var LibLessonEntry = React.createClass({
   render:function(){
-    console.log(this.props)
     var lessons = this.props.lessons.map(function(lesson, index){
       return <span className="lib-lesson-entry" key={index}>
- 
           <p>
             <p className="lib-less-title">
               <a href={lesson.lesson_url || '/'}>
                 {lesson.title || 'title not found'}
               </a>
             </p>
-
             <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}</p>
           </p> 
 
           <p className="lib-lock">
-            <a>publish?</a>
+            <a onClick={LibraryStore.togglePublish(lesson)}>Publish?</a>
           </p> 
-
         </span>
-    });
-
-    return (
+    })
+     return (
         <span >
           {lessons}
         </span>
-    );
+    )
   }
-});
+})
 
 
 {/* FOR FUTURE ANIMATION STYLING           <img src='../../public/assets/lock.png' />*/}
