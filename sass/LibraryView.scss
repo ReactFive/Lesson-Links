@@ -4,8 +4,8 @@
   display: inline-block;
   height: 200px;
   width: 200px;
-  border: 7px solid $dark-purple;
-  background: $light-purple;
+  border: 7px solid black;
+  background: $background-color;
   color: $dark-purple;
   margin: 7px;
   padding-left: 5px;
@@ -60,10 +60,7 @@
     line-height: 1.25;
   }
   p:hover{
-    font-size: 200px;
-    text-decoration: none;
-    color: $dark-pink;
-    line-height: 0.99;
+    text-decoration: none:
   }
 }
 

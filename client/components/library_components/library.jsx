@@ -31,7 +31,7 @@ var Library = React.createClass({
             <div id="library-filter-header">
               <h1>{name}{apo}s Library</h1>
             </div>
-            <div id="library-filter">
+            <div id="library-filter" className="row">
               <LibLessonEntry lessons = {
                 _.filter(user.lessons, function(n){return n.teacher.id === user._id})
               }/>
