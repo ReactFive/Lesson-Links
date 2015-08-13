@@ -38,7 +38,11 @@ var lessonSchema = new mongoose.Schema ({
       type    : Number,
       required: true
     },
-    author    : String,
+    author    : 
+    {
+      name  : String,
+      id    : String
+    },
     text      :
     {
       type    : String,
