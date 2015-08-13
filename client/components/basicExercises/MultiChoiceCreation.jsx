@@ -61,8 +61,7 @@ var MultiChoiceCreation = React.createClass({
               name="Number of items"
               value="Select the number of alternative answers"
               options={this.state.options}
-              onChange={this.formSetup}
-              />
+              onChange={this.formSetup} />
 
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
             <h5>Write your question/prompt/problem</h5>
