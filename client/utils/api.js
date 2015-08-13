@@ -26,9 +26,9 @@ module.exports.getUser = function() {
   return axios.get(url);
 };
 
-module.exports.updateLesson = function(update, lessonURL) {
-  var url  = rootUrl + '/api/lesson/' + lessonURL;
-  return axios.put(url, update);
+module.exports.updateLesson = function(lesson) {
+  var url  = rootUrl + '/api/lesson/' + lesson.lesson_url;
+  return axios.put(url, lesson);
 };
 
 module.exports.createLesson = function(lesson) {
