@@ -4,11 +4,13 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Link = Router.Link;
 var AuthStore = require('../../stores/AuthStore');
+var AddLessonStore = require('../../stores/AddLessonStore');
 var Actions = require('../../actions');
 var Select = require('react-select');
 
 var MultiChoiceCreation = React.createClass({
-  mixins: [Reflux.listenTo(AuthStore, "onChange")],
+  mixins: [Reflux.connect(AuthStore, "auth"),
+  Reflux.connect(AddLessonStore, "lesson")],
 
   getInitialState: function(){
     return {
@@ -26,7 +28,6 @@ var MultiChoiceCreation = React.createClass({
   },
 
   componentWillMount: function(){
-    this.setState({user: AuthStore.user});
   },
 
   formSetup: function(event){
@@ -36,22 +37,24 @@ var MultiChoiceCreation = React.createClass({
     for (var i = 0; i < event; i++){
       var ID = "opt" + i;
       var nameText = "opt" + i;
+      var ID2 = "feed" + i;
       inputs.push(
         <div key={i}>
           <div className="form-group">
-            <label id={ID}>Option: {i+1}</label>
-              <input className="form-control" name="option" type='text' placeholder="Add an option here"/>
+            <label htmlFor={ID}>Option: {i+1}</label>
+              <input id={ID} className="form-control" name="option" type='text'
+                     placeholder="Add an option here"/>
           </div>
-            <div class="form-group">
-              <label htmlFor="">Feedback to this option when selected by learner:</label>
-                <textarea className="form-control" rows="2"></textarea>
+            <div className="form-group">
+              <label htmlFor={ID2}>Feedback to this option when selected by learner:</label>
+                <textarea id={ID2} className="form-control" rows="2"></textarea>
             </div>
       </div>
             )
     }
 
     for (var i = 0; i < event; i++){
-     var IdText = "radio" + 1;
+     var IdText = "radio" + i;
      checks.push(
          <label key={i} className="radio-inline">
            <input type="radio"name="inlineRadioOptions"/>
@@ -97,6 +100,35 @@ var MultiChoiceCreation = React.createClass({
         </div>
     )
   },
+
+  handleSubmit: function(event){
+    console.log("called");
+    event.preventDefault();
+    /* var optNodes = [];
+    var feedNodes = [];
+    var checkNodes = [];
+
+    for (var i = 0; i < this.state.inputs.length; i++){
+      var name = "opt" + i;
+      optNodes.push(this.refs.name.getDOMNode().value);
+    }
+
+    for (var j = 0; j < this.state.inputs.length; j++){
+      var ident = "feed" + j;
+      feedNodes.push(this.refs.ident.getDOMNode().value);
+    }
+
+    for (var k = 0; k < this.state.checks.length; k++){
+      var refId = "radio" + i;
+      checkNodes.push(this.refs.refId.getDOMNode().value)
+    }
+    console.log(optNodes, feedNodes, checkNodes);
+    Actions.createExercise(optNodes, feedNodes, checkNodes);
+  }, */
+  
+
+  },
+
   onChange: function(event, user){
     this.setState({user: user})
   }
