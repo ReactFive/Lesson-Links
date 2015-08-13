@@ -28,7 +28,6 @@ module.exports.getUser = function() {
 
 module.exports.updateLesson = function(lesson) {
   var url  = rootUrl + '/api/lesson/' + lesson.lesson_url;
-  debugger;
   return axios.put(url, lesson);
 };
 
