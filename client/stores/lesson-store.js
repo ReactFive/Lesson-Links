@@ -18,11 +18,13 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     })
   },
+
   submitComment: function(comment) {
     this.lesson.comments.push(comment);
     this.trigger(this.lesson);
     Api.updateLesson(this.lesson);
   },
+
   deleteComment: function(commentKey){
     //find the index of the comment to which the reply should be added
     var commentIndex;
@@ -35,10 +37,12 @@ module.exports = Reflux.createStore({
     //remove the index
     this.lesson.comments.splice(commentIndex, 1);
     this.trigger(this.lesson);
+    debugger;
+    Api.updateLesson(this.lesson);
 
   },
 
-  likeComment: function(commentKey, username){
+  likeComment: function(commentKey, userID){
     //find the index of the comment to which the reply should be added
     var commentIndex;
     _.forEach(this.lesson.comments, function(comment, key){
@@ -47,13 +51,15 @@ module.exports = Reflux.createStore({
       }
     })
     
-    if(this.lesson.comments[commentIndex].likes.indexOf(username)  === -1){
-      this.lesson.comments[commentIndex].likes.push(username);
+    if(this.lesson.comments[commentIndex].likes.indexOf(userID)  === -1){
+      this.lesson.comments[commentIndex].likes.push(userID);
     }
+
     this.trigger(this.lesson);
+    Api.updateLesson(this.lesson);
   },
 
-  unlikeComment: function(commentKey, username){
+  unlikeComment: function(commentKey, userID){
     //find the index of the comment to which the reply should be added
     var commentIndex;
     _.forEach(this.lesson.comments, function(comment, key){
@@ -62,12 +68,15 @@ module.exports = Reflux.createStore({
       }
     })
     
-    if(this.lesson.comments[commentIndex].likes.indexOf(username) >= 0){
-      var index = this.lesson.comments[commentIndex].likes.indexOf(username);
+    if(this.lesson.comments[commentIndex].likes.indexOf(userID) >= 0){
+      var index = this.lesson.comments[commentIndex].likes.indexOf(userID);
       this.lesson.comments[commentIndex].likes.splice(index, 1);
     }
+
     this.trigger(this.lesson);
+    Api.updateLesson(this.lesson);
   },
+
 
   submitReply: function(reply, commentKey) {
     var player = videojs('attachmentVideo');
@@ -85,5 +94,6 @@ module.exports = Reflux.createStore({
     //add the reply to the comments
     this.lesson.comments[commentIndex].replies.push(replyObj);
     this.trigger(this.lesson);
+    Api.updateLesson(this.lesson);
   }
 })

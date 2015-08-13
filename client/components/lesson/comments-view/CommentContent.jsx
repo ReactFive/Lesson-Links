@@ -28,7 +28,10 @@ var CommentContent = React.createClass({
   },
 
   componentDidMount: function() {
-    this.state.user = AuthStore.user;
+    this.state.user = window.currentUser;
+
+    //for the comment, will look to see if the user has already liked it or not, and set it accordingly
+    this.state.liked = this.props.comment.likes.indexOf(this.state.user) >= 0;
   },
 
   deleteComment: function(e){
@@ -38,13 +41,13 @@ var CommentContent = React.createClass({
 
   likeComment: function(e){
     e.preventDefault();
-    Actions.likeComment(this.props.comment.key, this.state.user.name);
+    Actions.likeComment(this.props.comment.key, this.state.user._id);
     this.toggleLikeButton(e);
   },
 
   unlikeComment: function(e){
     e.preventDefault();
-    Actions.unlikeComment(this.props.comment.key, this.state.user.name);
+    Actions.unlikeComment(this.props.comment.key, this.state.user._id);
     this.toggleLikeButton(e);
   },
 
@@ -56,6 +59,7 @@ var CommentContent = React.createClass({
   },
 
   render: function() {
+    
     return (
       <div className="comment-content">
         { this.state.starred ? 
