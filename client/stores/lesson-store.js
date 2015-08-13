@@ -94,7 +94,6 @@ module.exports = Reflux.createStore({
     })
     //add the reply to the comments
     this.lesson.comments[commentIndex].replies.push(replyObj);
-    debugger;
     this.trigger(this.lesson);
     Api.updateLesson(this.lesson);
   }
