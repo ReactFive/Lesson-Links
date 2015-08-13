@@ -57,6 +57,7 @@ module.exports = Reflux.createStore({
       this.auth.user = res.data.user;
       this.auth.loggedIn = true;
       this.triggerChange();
+      toastr.options.fadeOut = 1000;
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);
     }.bind(this))
     .catch(function(res){

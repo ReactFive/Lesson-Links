@@ -18,6 +18,7 @@
     "videojs": "~4.12.12",
     "jquery": "~2.1.4",
     "toastr": "~2.1.1",
-    "videojs-youtube": "~1.2.12"
+    "videojs-youtube": "~1.2.12",
+    "bootstrap-sass": "~3.3.5"
   }
 }
