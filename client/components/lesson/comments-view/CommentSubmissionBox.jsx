@@ -36,7 +36,6 @@ var CommentSubmissionBox = React.createClass({
   },
   handleSubmit: function(e){
     e.preventDefault();
-    debugger;
     Actions.submitComment({
       text: this.state.text,
       marked_at: videojs('attachmentVideo').currentTime(),
