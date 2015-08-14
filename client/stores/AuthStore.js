@@ -1,3 +1,4 @@
+var React = require('react')
 var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Identity = require('../utils/identity.js');

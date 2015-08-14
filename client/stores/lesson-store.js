@@ -1,6 +1,7 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Actions = require('../actions');
+var AuthStore = require('./AuthStore')
 var _ = require('lodash');
 
 module.exports = Reflux.createStore({
@@ -18,6 +19,22 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     })
   },
+
+  followLesson : function(lesson){
+    if(AuthStore.auth.user.lessons._reduce(function(found, elem, key){
+     {/*Check if the user is already following this lesson*/}
+     if (found) {
+       return true
+     } else {
+       return (elem.lesson_url === lesson.lesson_url)
+     }
+      console.log('adding lesson')
+      Api.followLesson({
+        lesson_url : lesson.lesson_url,
+        addLesson : true
+      })}
+    }) 
+  }
 
   submitComment: function(comment) {
     this.lesson.comments.push(comment);

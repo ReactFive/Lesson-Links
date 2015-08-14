@@ -49,7 +49,6 @@ exports.getUser = function(req, res){
     function(err, user){
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
-      console.log(user)
       res.status(200).send({user:user})
     })
   } else {
@@ -57,7 +56,22 @@ exports.getUser = function(req, res){
   }
 }
 
+exports.updateUser = function(req, res){
+  console.log('Updating User')
+  if(req.user && req.body.addLesson === true){
+    User
+    .findByIdAndUpdate(req.user._id,
+    {$push:{'lessons':{req.user.lesson}}},
+    {safe:true, upsert: false, new: true},
+    function(err, user){
+      if (err) {console.log(err)}
+      res.status(200).send(user)       
+    }
+  }
+}
+
 exports.logout = function(req, res){
+  console.log('logging out')
   req.logout();
   req.session.destroy(function (err) {
     if (err) { return next(err); }
