@@ -15,8 +15,9 @@ var Comment = React.createClass({
     this.setState({ showReplyForm: !this.state.showReplyForm });
   },
   render: function() {
+
     return (
-      <div>
+      <li className="comment-box">
         <CommentContent comment={this.props.comment} toggleReplyForm={this.onToggleReplyForm}/>
         <ReplyList replies={this.props.comment.replies}/>
 
@@ -24,7 +25,7 @@ var Comment = React.createClass({
           comment={this.props.comment}
           showReplyForm={this.state.showReplyForm}
           toggleReplyForm={this.onToggleReplyForm} /> 
-      </div>
+      </li>
     );
   }
 });
