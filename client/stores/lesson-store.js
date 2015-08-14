@@ -20,11 +20,9 @@ module.exports = Reflux.createStore({
   },
 
   submitComment: function(comment) {
-    debugger;
     this.lesson.comments.push(comment);
-    Api.updateLesson(this.lesson);
     this.trigger(this.lesson);
-    debugger;
+    Api.updateLesson(this.lesson);
   },
 
   deleteComment: function(commentKey){

@@ -9,14 +9,15 @@ var Reflux = require('reflux');
 module.exports = LessonView;
 
 var LessonView = React.createClass({
-  mixins: [Reflux.listenTo(LessonStore, "lesson")],
 
   contextTypes: {
     router: React.PropTypes.func
   },
+
   componentWillMount: function(){
     Actions.fetchLesson(this.context.router.getCurrentParams().url)
   },
+
   render: function() {
     return (
       <div>
