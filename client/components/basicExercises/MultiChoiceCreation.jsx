@@ -11,12 +11,14 @@ var _ = require('lodash');
 
 var MultiChoiceCreation = React.createClass({
   mixins: [Reflux.connect(AuthStore, "auth"),
-  Reflux.connect(AddLessonStore, "lesson")],
+  Reflux.connect(AddLessonStore, "lesson"),
+  Navigation],
 
   getInitialState: function(){
     return {
       numbs: 6,
       optNumbs: 3,
+      correctOption: null,
       options: [
         { value: '1', label: 'One' },
         { value: '2', label: 'Two' },
@@ -150,32 +152,32 @@ var MultiChoiceCreation = React.createClass({
               </div>
                <div onChange={this.checkHandle} className="correct-answer-label">
                  <span className="correct-answer-label">
-                   <strong>Indicate the correct option: </strong>
+                   <strong>Indicate the best option: </strong>
                  </span>
                  <label htmlFor="correct1" className={radioClassString[0]}>
-                   <input ref="correct1" type="radio" name="correct1" value="1"/>
+                   <input ref="correct1" type="radio" name="correct" value="1"/>
                    1
                  </label>
                  <label htmlFor="correct2" className={radioClassString[1]}>
-                   <input ref="correct2" type="radio" name="correct2" value="2"/>
+                   <input ref="correct2" type="radio" name="correct" value="2"/>
                    2
                  </label>
                  <label htmlFor="correct3" className={radioClassString[2]}>
-                   <input ref="correct3" type="radio" name="correct3" value="3"/>
+                   <input ref="correct3" type="radio" name="correct" value="3"/>
                    3
                  </label>
                  <label htmlFor="correct4" className={radioClassString[3]}>
-                   <input ref="correct4" type="radio" name="correct4" value="4"/>
+                   <input ref="correct4" type="radio" name="correct" value="4"/>
                    4
                  </label>
                  <label htmlFor="correct5" className={radioClassString[4]}>
-                   <input ref="correct5" type="radio" name="correct5" value="5"/>
+                   <input ref="correct5" type="radio" name="correct" value="5"/>
                    5
                  </label>
                 </div>
 
-              <button className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
-              <Link activeClassName="active" to="/"><button className=" btn btn-default pull-right">Cancel</button></Link>
+              <button type="submit" className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
+              <Link activeClassName="active" to="/edit"><button className=" btn btn-default pull-right">Cancel</button></Link>
             </form>
           </div>
         </div>
@@ -183,14 +185,12 @@ var MultiChoiceCreation = React.createClass({
   },
 
   checkHandle(event){
-    console.log(event.target.value);
+    this.state.correctOption = event.target.value;
   },
 
   handleSubmit: function(event) {
     event.preventDefault();
     var question = this.refs.question.getDOMNode().value.trim();
-
-    console.log(question);
 
     var option1 = this.refs.option1.getDOMNode().value.trim();
     var option2 = this.refs.option2.getDOMNode().value.trim();
@@ -198,23 +198,15 @@ var MultiChoiceCreation = React.createClass({
     var option4 = this.refs.option4.getDOMNode().value.trim();
     var option5 = this.refs.option5.getDOMNode().value.trim();
 
-    var options = [option1, option2, option3, option4, option5];
-
     var feedback1 = this.refs.feedback1.getDOMNode().value.trim();
     var feedback2 = this.refs.feedback2.getDOMNode().value.trim();
     var feedback3 = this.refs.feedback3.getDOMNode().value.trim();
     var feedback4 = this.refs.feedback4.getDOMNode().value.trim();
     var feedback5 = this.refs.feedback5.getDOMNode().value.trim();
 
+    var options = [option1, option2, option3, option4, option5];
     var allFeedback = [feedback1, feedback2, feedback3, feedback4, feedback5];
 
-    var correct1 = this.refs.correct1.getDOMNode().value.trim();
-    var correct2 = this.refs.correct2.getDOMNode().value.trim();
-    var correct3 = this.refs.correct3.getDOMNode().value.trim();
-    var correct4 = this.refs.correct4.getDOMNode().value.trim();
-    var correct5 = this.refs.correct5.getDOMNode().value.trim();
-
-    var allCorrectChecks = [correct1, correct2, correct3, correct4, correct5];
     //var time = videojs("#attachmentVideo").currentTime;
 
     var exercise = {};
@@ -222,10 +214,11 @@ var MultiChoiceCreation = React.createClass({
     exercise.question = question;
     exercise.options = removeBlanks(options);
     exercise.feedback = removeBlanks(allFeedback);
-    exercise.checks = removeBlanks(allCorrectChecks);
+    exercise.correct = this.state.correctOption;
 
-    console.log(exercise);
-    Actions.createExercise(exercise);
+    if (exercise.question.length && exercise.options.length) {
+      Actions.createExercise(exercise);
+    }
 
     function removeBlanks(array) {
       var arr = [];
@@ -235,7 +228,7 @@ var MultiChoiceCreation = React.createClass({
       return arr;
     }
 
-    this.transitionTo('/');
+    this.transitionTo('/edit');
   },
 
   onChange: function(event, user){
