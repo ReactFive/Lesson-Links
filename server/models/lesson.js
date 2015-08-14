@@ -85,9 +85,14 @@ var lessonSchema = new mongoose.Schema ({
     id        :
     {
       type    : mongoose.Schema.Types.ObjectId,
-      ref     : 'User'
+      ref     : 'User',
+      default : null
     },
-    name      : String
+    name      : 
+    {
+      type    : String,
+      default : null
+    }
   },
   exercises : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Exercise'}]
 });

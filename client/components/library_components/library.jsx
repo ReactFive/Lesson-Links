@@ -14,16 +14,15 @@ var Library = React.createClass({
   },
 
   componentWillMount: function(){
-    console.log(AuthStore.auth.user)
   },
   render:function(){
-    {/*Grab Teacher's Name*/}
 
     {/*Declare apostrophe*/}
     var apo = "'"
-
+    console.log(AuthStore.auth.user)
     if (AuthStore.auth.user){
       var user = AuthStore.auth.user
+      {/*Grab User's Name*/}
       var name = user.local.name
 
       return (
@@ -33,7 +32,7 @@ var Library = React.createClass({
           </div>
           <div id="library-filter" className="row">
             <LibLessonEntry lessons = {
-              _.filter(user.lessons, function(n){return n.teacher.id === user._id
+              _.filter(user.lessons, function(lesson){return lesson.teacher.id === user._id
               })
             } owner = {true}/>
             <LibAddLesson />
@@ -43,7 +42,7 @@ var Library = React.createClass({
           </div>
           <div id="library-filter">
             <LibLessonEntry lessons = {
-              _.filter(user.lessons, function(n){return n.teacher.id !== user._id
+              _.filter(user.lessons, function(lesson){return lesson.teacher.id !== user._id
               })
             } owner = {false}/>
 

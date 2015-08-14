@@ -27,76 +27,41 @@ exports.getLessonByUrl = function(req, res, next) {
       res.status(500);
       return res.send(err);
     } else {
-      res.status(200).send(lesson);
+      if (lesson.publish) {
+        res.status(200).send(lesson);
+      } else {
+        res.status(401).send('Lesson not published')
+      }
     }
   });
 };
 
 
 exports.updateLesson = function(req, res, next){
-  console.log("REQ DOOOTT BODY", req.body);
-
-  Lesson.update({lesson_url : req.params.url}, {$set : 
-    {
-      title : req.body.title || "Your lesson",
-      video_url : req.body.video_url || null,
-      published : req.body.published,
-      comments : req.body.comments
-    }
-  }, function(err, raw){
-    if (err) console.log(err);
-    console.log(raw)
+  Lesson.findOne({'lesson_url':req.params.url})
+  .exec(function(err, lesson){
+    if (!req.body.hasOwnProperty('video_url')) {req.body.video_url = lesson.video_url}
+    if (!req.body.hasOwnProperty('publish')) {req.body.publish = lesson.publish}
+    if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
+    Lesson.update({'lesson_url' : req.params.url}, {
+      $set : 
+        {
+          title : req.body.title
+          video_url : req.body.video_url,
+          publish : req.body.publish,
+          comments : req.body.comments
+        }
+      }, function(err, raw){
+        if (err) {
+          console.log(err)
+          res.sendStatus(500)
+        }
+        console.log(raw)
+      }
+    )
+    res.sendStatus(200)
   })
 }
-
-// exports.updateLesson = function(req, res, next){
-
-//   console.log("req.body.comments", req.body.comments);
-//   console.log("req.body.video_url", req.body.video_url);
-//   console.log("req.body.published", req.body.published);
-//   console.log("req.params.url", req.params.url);
-//   console.log("req.body", req.body);
-
-//   Lesson.findOne({'lesson_url':req.params.url})
-//   .exec(function(err, lesson){
-
-//     console.log("YEAAAAAA")
-//     if(req.body.video_url && req.user._id === lesson.teacher.id) {
-//       Lesson.update({lesson_url : req.params.url}, {$set : 
-//         {
-//           title : req.body.title || "Your lesson",
-//         }
-//       }, function(err, raw){
-//         if (err) return handleError(err);
-//         console.log(raw)
-//       })} else {
-//         res.sendStatus(401)
-//       }
-//     if(req.body.published && req.user._id === lesson.teacher.id) {
-//       Lesson.update({lesson_url : req.params.url}, {$set : 
-//         {
-//           published : req.body.published || true,
-//         }
-//       }, function(err, raw){
-//         if (err) return handleError(err);
-//         console.log(raw)
-//       })} else {
-//         res.sendStatus(401)
-//       }
-//     if(req.body.comments) {
-//       console.log("Made it to here");
-//       Lesson.update({lesson_url : req.params.url}, {$set : 
-//         {
-//           comments : req.body.comments
-//         }
-//       }, function(err, raw){
-//         if (err) return handleError(err);
-//         console.log(raw)
-//       })
-//     }
-//   })
-//   res.sendStatus(200);
-// }
 
 exports.createLesson = function(req, res, next){
     console.log(req.user)
