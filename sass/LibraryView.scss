@@ -19,6 +19,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-family: $subheader-font;
+  padding-bottom: 5%;
+  padding-top: 10%;
 }
 
 .titleAnchor:hover{
@@ -53,19 +56,26 @@
 }
 
 .lib-less-author{
+  width: 180px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-weight: 300;
   font-size: 16px;
+  padding-bottom: 15%;
+  padding-top: 10%;
 }
 
 .lib-lock{
   font-size: 12px;
   text-decoration: none;
+  color: $dark-purple;
 }
 
 .lib-lock:hover{
   text-decoration: none;
   color: $dark-pink;
-
 }
 
 #library-view{
@@ -79,14 +89,4 @@
   border: 7px dashed;
   color: $dark-purple;
   text-align: center;
-}
-
-.lib-lock{
-  a{
-    text-decoration: none;
-    color: $dark-purple;
-  a:hover{
-    text-decoration: none;
-  }
-  }
 }

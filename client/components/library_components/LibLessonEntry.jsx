@@ -19,16 +19,16 @@ var LibLessonEntry = React.createClass({
     return <span className="lib-lesson-entry" key={index}>
         <p>
           <p className="lib-less-title">
-            <a href={lesson.lesson_url || '/'}>
+            <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
               {lesson.title || 'title not found'}
             </a>
           </p>
           <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}</p>
         </p> 
-        <p className="lib-lock">
+        <p>
           {owner ? lesson.publish ? 
-            <a onClick={boundClick}>Published< /a> : 
-            <a onClick={boundClick}>Not Published< /a> 
+            <a className="lib-lock" onClick={boundClick}>Published< /a> : 
+            <a className="lib-lock" onClick={boundClick}>Not Published< /a> 
           : ''}
           
         </p> 
