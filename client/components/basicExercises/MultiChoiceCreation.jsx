@@ -211,6 +211,7 @@ var MultiChoiceCreation = React.createClass({
 
     var exercise = {};
     //exercise.time = time;
+    exercise.type = "multi";
     exercise.question = question;
     exercise.options = removeBlanks(options);
     exercise.feedback = removeBlanks(allFeedback);
