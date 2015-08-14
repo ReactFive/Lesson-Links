@@ -46,6 +46,7 @@ var Library = React.createClass({
               _.filter(user.lessons, function(n){return n.teacher.id !== user._id
               })
             } owner = {false}/>
+
           </div>
         </div>
       )

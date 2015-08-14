@@ -12,13 +12,18 @@ module.exports = Reflux.createStore({
     Api.createLesson(lesson)
     .then(function(res){
       console.log("successfully created lesson");
-      console.log(res)
-      AuthStore.getUser()
+      console.log(res);
+      AuthStore.getUser();
     }) 
     .catch(function(res){
       console.log("failed to create lesson");
-      console.log(res)
+      console.log(res);
     })
+  },
+
+  createExercise: function(ex){
+    toastr['success']("The exercise was added to your lesson")
+    console.log(ex)
   }
 
 });

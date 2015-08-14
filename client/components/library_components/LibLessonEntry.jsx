@@ -9,7 +9,7 @@ var Link = Router.Link;
 
 var LibLessonEntry = React.createClass({
   render:function(){
-    var owner = this.props.owner
+    var owner = this.props.owner;
     var lessons = this.props.lessons.map(function(lesson, index){
       return <span className="lib-lesson-entry" key={index}>
           <p>

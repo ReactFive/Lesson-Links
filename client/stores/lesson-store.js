@@ -78,7 +78,6 @@ module.exports = Reflux.createStore({
 
 
   submitReply: function(reply, commentKey) {
-    var player = videojs('attachmentVideo');
     //wrap the reply in an object
     var replyObj = {
       author: reply.author,
