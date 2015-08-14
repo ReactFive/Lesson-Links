@@ -1,13 +1,13 @@
 @import "Theme.scss";
 
 $dropDown       : false;
-.navbar-special {
+.navbar-lessonlinks {
   background-color: $dark-blue;
   border-color: $light-blue;
   .navbar-brand {
     color: $background-color;
     font-family: $subheader-font;
-    font-weight: thin;
+    font-weight: 200;
     &:hover, &:focus { 
       color: $light-blue; }}
   .navbar-text {
@@ -47,6 +47,7 @@ $dropDown       : false;
   .navbar-form {
     border-color: $background-color; 
     font-family: $subheader-font;
+    font-weight: 200;
     input, textarea{
         color: $background-color;
     }
@@ -67,6 +68,7 @@ $dropDown       : false;
     }
     input:focus {
         color: $background-color;
+        border-color: $light-blue;
     }
 
     input, select, textarea{
