@@ -4,9 +4,6 @@ var LibAddLesson = require('./LibAddLesson.jsx')
 var AuthStore = require('../../stores/AuthStore')
 var Router = require('react-router')
 var Link = Router.Link;
-var lock = '../../public/assets/lock.png';
-var unlock = '../../public/assets/unlock.png';
-
 
 var LibLessonEntry = React.createClass({
 
@@ -27,11 +24,10 @@ var LibLessonEntry = React.createClass({
           </p>
           <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}</p>
         </p> 
-
         <p className="lib-lock">
           {owner ? lesson.publish ? 
-            <img onClick={boundClick} src={unlock} /> : 
-            <img onClick={boundClick} src={lock} /> 
+            <a onClick={boundClick}>Published< /a> : 
+            <a onClick={boundClick}>Not Published< /a> 
           : ''}
           
         </p> 

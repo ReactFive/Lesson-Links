@@ -27,7 +27,11 @@ exports.getLessonByUrl = function(req, res, next) {
       res.status(500);
       return res.send(err);
     } else {
-      res.status(200).send(lesson);
+      if (lesson.publish) {
+        res.status(200).send(lesson);
+      } else {
+        res.status(401).send('Lesson not published')
+      }
     }
   });
 };
@@ -36,16 +40,15 @@ exports.getLessonByUrl = function(req, res, next) {
 exports.updateLesson = function(req, res, next){
   Lesson.findOne({'lesson_url':req.params.url})
   .exec(function(err, lesson){
-    if (!req.body.video_url) {req.body.video_url = lesson.video_url}
-    if (!req.body.published) {req.body.published = lesson.published}
-    if (!req.body.published) {req.body.published = lesson.published}
-    if (!req.body.comments) {req.body.comments = lesson.comments}
+    if (!req.body.hasOwnProperty('video_url')) {req.body.video_url = lesson.video_url}
+    if (!req.body.hasOwnProperty('publish')) {req.body.publish = lesson.publish}
+    if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
     Lesson.update({'lesson_url' : req.params.url}, {
       $set : 
         {
-          title : req.body.title || "Your lesson",
-          video_url : req.body.video_url || null,
-          published : req.body.published,
+          title : req.body.title
+          video_url : req.body.video_url,
+          publish : req.body.publish,
           comments : req.body.comments
         }
       }, function(err, raw){

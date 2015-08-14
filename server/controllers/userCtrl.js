@@ -15,10 +15,11 @@ exports.loginUser = function(req, res) {
   .findById(req.user._id)
   .populate('lessons')
   .exec(
-    function(err, obj){
+    function(err, user){
       if (err) {console.log(err)}
-      console.log(obj)
-      res.status(200).send({user:obj})
+      user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
+      console.log(user)
+      res.status(200).send({user:user})
     }
   )
 };
@@ -45,10 +46,11 @@ exports.getUser = function(req, res){
     .findById(req.user._id)
     .populate('lessons')
     .exec(
-    function(err, obj){
+    function(err, user){
       if (err) {console.log(err)}
-      console.log(obj)
-      res.status(200).send({user:obj})
+      user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
+      console.log(user)
+      res.status(200).send({user:user})
     })
   } else {
     res.sendStatus(401)
