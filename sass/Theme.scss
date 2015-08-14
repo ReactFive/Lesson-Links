@@ -1,8 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Vidaloka);
 
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,700');
 
-$header-font     : url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,800');
+$header-font     : 'Vidaloka', serif;
 
-$subheader-font  : url(http://fonts.googleapis.com/css?family=Roboto:400,100,700');
+$subheader-font  : Roboto, sans-serif;
 
 $background-color: #ffffff;
 
@@ -54,3 +56,4 @@ p{
 .Site-content {
   flex: 1;
 }
+

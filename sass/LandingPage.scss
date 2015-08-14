@@ -3,18 +3,38 @@
 .logo {
   font-size: 120px;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 125px;
+  font-family: $header-font;
+  color: $dark-blue;
 } 
 
 .sublogo{
-  padding-bottom: 200px;
+  padding-bottom: 150px;
   text-align: center;
+  font-family: $header-font;
+  letter-spacing: .16em;
+  color: $light-purple;
+  font-weight: bold;
 }
 
-.learnMore{
+.teaser{
+  font-family: $header-font;
+  background-color: $light-purple;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
   text-align: center;
+  margin: 0 auto;
+  h3{
+    color: $background-color;
+    padding-top: 35px;
+  }
 }
 
-.Site-content{
-  text-align: center;
+.landing1{
+  
+}
+
+.landing2{
+  background-color: $light-blue;
 }
