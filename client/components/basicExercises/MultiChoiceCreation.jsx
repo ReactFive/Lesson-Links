@@ -4,14 +4,14 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Link = Router.Link;
 var AuthStore = require('../../stores/AuthStore');
-var AddLessonStore = require('../../stores/AddLessonStore');
+var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
 var Select = require('react-select');
 var _ = require('lodash');
 
 var MultiChoiceCreation = React.createClass({
   mixins: [Reflux.connect(AuthStore, "auth"),
-  Reflux.connect(AddLessonStore, "lesson"),
+  Reflux.connect(LessonConfigStore, "lesson"),
   Navigation],
 
   getInitialState: function(){
