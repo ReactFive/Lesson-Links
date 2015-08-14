@@ -1,3 +1,69 @@
+@import "Theme.scss";
+
+$dropDown       : false;
+.navbar-special {
+  background-color: $dark-blue;
+  border-color: $light-blue;
+  .navbar-brand {
+    color: $background-color;
+    font-family: @subheader-font;
+    font-weight: thin;
+    &:hover, &:focus { 
+      color: $light-blue; }}
+  .navbar-text {
+    color: $background-color; }
+  .navbar-nav {
+    > li {
+      > a {
+        color: $background-color;
+        &:hover,  &:focus {
+          color: $dark-blue; }}
+      @if $dropDown {
+        > .dropdown-menu {
+          background-color: $dark-blue;
+          > li > a {
+            color: $background-color;
+            &:hover,  &:focus {
+              color: $dark-blue;
+              background-color: $light-blue; }}
+          .divider {
+            background-color: $light-blue;}}}
+    }
+    > .active {
+      > a, > a:hover, > a:focus {
+        color: $dark-blue;
+        background-color: $light-blue; }}
+    > .open {
+      > a, > a:hover, > a:focus {
+        color: $dark-blue;
+        background-color: $light-blue; }}}
+  .navbar-toggle {
+    border-color: $light-blue;
+    &:hover, &:focus {
+      background-color: $light-blue; }
+    .icon-bar {
+      background-color: $background-color; }}
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $background-color; 
+    font-family: $subheader-font;
+
+  }
+  .navbar-link {
+    color: $background-color;
+    &:hover {
+      color: $dark-blue; }}}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu {
+    > li > a {
+      color: $background-color;
+      &:hover, &:focus {
+        color: $dark-blue; }}
+    > .active {
+      > a, > a:hover, > a:focus {
+        color: $dark-blue;
+        background-color: $light-blue; }}}
+}
 .signup-container {
   padding-top: 25px;
   padding-bottom: 80px;
