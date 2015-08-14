@@ -5,9 +5,9 @@ var Reply = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <li className="reply"> 
         <ReplyContent author={this.props.reply.author} text={this.props.reply.text} />
-      </div>
+      </li>
     );
   }
 
