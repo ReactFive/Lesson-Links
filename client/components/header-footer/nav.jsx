@@ -4,10 +4,10 @@ var Link = Router.Link;
 var Reflux = require('reflux');
 var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions');
-
+var Navigation = Router.Navigation;
 
 var nav = React.createClass({
-  mixins: [Reflux.connect(AuthStore,"auth")],
+  mixins: [Reflux.connect(AuthStore,"auth"), Navigation],
 
   getInitialState: function(){
   },
@@ -68,6 +68,7 @@ var nav = React.createClass({
   handleLogout: function() {
     event.preventDefault();
     Actions.logout();
+    this.transitionTo('/');
   },
 
   handleSubmit: function(event){
@@ -80,6 +81,8 @@ var nav = React.createClass({
 
     this.refs.email.getDOMNode().value = "";
     this.refs.password.getDOMNode().value = "";
+
+    this.transitionTo('/library');
 
   }
 });

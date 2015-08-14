@@ -8,7 +8,7 @@ var AddLessonView = React.createClass({
   render: function() {
     return (
       <div className="addwrapper">
-          <div className='add-lesson-view'>
+          <div className='container'>
             <AddVideoBox />
           </div>
       </div>
