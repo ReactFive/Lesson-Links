@@ -73,7 +73,9 @@ module.exports = function(passport) {
   function(req, email, password, done) { // callback with email and password from our form
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
-    User.findOne({ 'local.email' :  email }, function(err, user) {
+    User.findOne({ 'local.email' :  email })
+        .populate('lessons')
+        .exec(function(err, user) {
       // if there are any errors, return the error before anything else
       if (err)
         return done(err);
@@ -91,7 +93,7 @@ module.exports = function(passport) {
           // and save it to session as flashdata
         } else {
           // all is well, return successful user
-          console.log(user)
+          console.log("is there a lesson?", user);
           var newUser = _.omit(user, "password");
           return done(null, newUser);
         }
