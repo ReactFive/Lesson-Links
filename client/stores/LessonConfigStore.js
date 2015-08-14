@@ -4,15 +4,17 @@ var Actions = require('../actions');
 var AuthStore = require('./AuthStore')
 var _ = require('lodash');
 
-var AddLessonStore = Reflux.createStore({
+var LessonConfigStore = Reflux.createStore({
   listenables: [Actions],
 
   createLesson: function(lesson){
-    console.log(Api)
+    var self = this;
+
     Api.createLesson(lesson)
     .then(function(res){
       console.log("successfully created lesson");
-      console.log(res);
+      console.log(lesson);
+      self.lesson = lesson;
       AuthStore.getUser();
     }) 
     .catch(function(res){
@@ -60,4 +62,4 @@ var AddLessonStore = Reflux.createStore({
 
 });
 
-module.exports = AddLessonStore;
+module.exports = LessonConfigStore;
