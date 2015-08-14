@@ -6,7 +6,8 @@ var LessonConfigStore = require('../../stores/LessonConfigStore');
 var VideoPlayer = require('./ConfigVideoPlayer.jsx');
 var ExerciseTypes = require('./ExerciseTypes.jsx');
 var MultiChoiceCreation = require('../basicExercises/MultiChoiceCreation.jsx');
-//var VideoBox = require('./VideoBox.jsx');
+var TrueFalseCreation = require('../basicExercises/TrueFalseCreation.jsx');
+
 
 var LessonConfiguration = React.createClass({
   mixins: [Reflux.connect(LessonConfigStore, "lesson")],
@@ -17,6 +18,15 @@ var LessonConfiguration = React.createClass({
     }
   },
 
+  mapExerciseType: function() {
+    var exerciseTypeMap = {
+      'multiplechoice' : <MultiChoiceCreation onComplete={this.setEditing}/>,
+      'truefalse' : <TrueFalseCreation onComplete={this.setEditing}/>
+    }
+
+    return exerciseTypeMap[this.state.editing];
+  },
+
   render: function() {
     return (
       <div>
@@ -25,7 +35,7 @@ var LessonConfiguration = React.createClass({
           <ExerciseTypes chooseType={this.setEditing} />
         }
         {this.state.editing && 
-          <MultiChoiceCreation onComplete={this.setEditing}/>}
+          this.mapExerciseType()}
       </div>
     );
   },
