@@ -11,7 +11,7 @@ var Multichoice = React.createClass({
     return {
      name: "Exercise 1",
      question: "What is 4 + 7?",
-     options: ["11", "7", "32", "43"],
+     options: ["11", "7", "32", "43", "22"],
      posFeedback: "This was a fairly easy item, right?",
      negFeedback: "Oops, that should have been easy!?",
      time: 3,

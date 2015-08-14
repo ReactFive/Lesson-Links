@@ -12,7 +12,10 @@ module.exports = function(passport) {
 
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+    User.findById(id)
+        .populate('lessons')
+        .exec(function(err, user) {
+          console.log("deserialized", user);
       done(err, user);
     });
   });
