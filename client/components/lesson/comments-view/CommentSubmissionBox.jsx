@@ -35,18 +35,19 @@ var CommentSubmissionBox = React.createClass({
     }
   },
   handleSubmit: function(e){
-    debugger;
     e.preventDefault();
-
     Actions.submitComment({
       text: this.state.text,
       marked_at: videojs('attachmentVideo').currentTime(),
       time: videojs('attachmentVideo').currentTime(),
-      author: window.currentUser.local.name,
-
       replies: [],
-      likes: []
+      likes: [],
+      author: {
+        name: window.currentUser.local.name,
+        id: window.currentUser._id
+      }
     });
+
     this.setState({
       text: ''
     });

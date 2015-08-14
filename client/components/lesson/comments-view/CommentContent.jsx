@@ -1,10 +1,11 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../../../actions');
-var AuthStore = require('../../../stores/AuthStore.js');
+var LessonStore = require('../../../stores/lesson-store');
 
 var CommentContent = React.createClass({
-  mixins: [Reflux.connect(AuthStore)],
+
+  mixins: [Reflux.connect(LessonStore)],
 
   getInitialState: function(){
     return {
@@ -27,11 +28,11 @@ var CommentContent = React.createClass({
     this.setState({user : user});
   },
 
-  componentDidMount: function() {
+  componentWillMount: function(){
     this.state.user = window.currentUser;
-
     //for the comment, will look to see if the user has already liked it or not, and set it accordingly
-    this.state.liked = this.props.comment.likes.indexOf(this.state.user) >= 0;
+    this.state.liked = this.props.comment.likes.indexOf(this.state.user._id) >= 0;
+   
   },
 
   deleteComment: function(e){
@@ -59,35 +60,48 @@ var CommentContent = React.createClass({
   },
 
   render: function() {
-    
-    return (
-      <div className="comment-content">
-        { this.state.starred ? 
-          <p className="comment-star-button glyphicon glyphicon-star" onClick={this.starComment}> </p> 
-          :
-          <p className="comment-star-button glyphicon glyphicon-star-empty" onClick={this.starComment}> </p> 
-        }
-        <p className="comment-author">{this.props.comment.author} </p> 
-        <p className="comment-video-timestamp">@ {this.props.comment.time} seconds </p> 
-       
-       
-        <p className="comment-text">{this.props.comment.text} </p>
 
-        <div className="comment-toolbar">
-          { this.state.liked ? 
-            <p className="comment-like-button" onClick={this.unlikeComment}>Unlike &nbsp; &middot; &nbsp;</p> 
+    if(LessonStore.lesson){
+
+      var teacher = LessonStore.lesson.teacher.id;
+      
+      var emptyStar = (this.state.user._id === teacher) ? 
+        <p className="comment-star-button glyphicon glyphicon-star-empty" onClick={this.starComment}> </p> : null;
+
+      var deleteButton = (this.state.user._id === teacher || this.state.user._id === this.props.comment.author.id) ?
+        <p className="comment-delete-button" onClick={this.deleteComment}>[Delete]</p> : null;
+
+      return (
+        <div className="comment-content">
+          { this.state.starred ? 
+            <p className="comment-star-button glyphicon glyphicon-star" onClick={this.starComment}> </p>
             :
-            <p className="comment-like-button" onClick={this.likeComment}>Like &nbsp; &middot; &nbsp;</p> 
+            {emptyStar} 
           }
-          <p className="comment-reply-button" onClick={this.props.toggleReplyForm}>Reply</p>  &nbsp; &middot; &nbsp;
-          <p className="comment-like-icon glyphicon glyphicon-thumbs-up"></p>
-          <p className="comment-likes"> {this.props.comment.likes.length === 0 ? null : this.props.comment.likes.length}</p>
-          <p className="comment-delete-button" onClick={this.deleteComment}>[Delete]</p>
-        </div>
-      </div>
-    );
-  }
+          <p className="comment-author">{this.props.comment.author.name} </p> 
+          <p className="comment-video-timestamp">@ {this.props.comment.time} seconds </p> 
+         
+         
+          <p className="comment-text">{this.props.comment.text} </p>
 
-});
+          <div className="comment-toolbar">
+            { this.state.liked ? 
+              <p className="comment-like-button" onClick={this.unlikeComment}>Unlike &nbsp; &middot; &nbsp;</p> 
+              :
+              <p className="comment-like-button" onClick={this.likeComment}>Like &nbsp; &middot; &nbsp;</p> 
+            }
+            <p className="comment-reply-button" onClick={this.props.toggleReplyForm}>Reply</p>  &nbsp; &middot; &nbsp;
+            <p className="comment-like-icon glyphicon glyphicon-thumbs-up"></p>
+            <p className="comment-likes"> {this.props.comment.likes.length === 0 ? null : this.props.comment.likes.length}</p>
+            {deleteButton}
+
+          </div>
+        </div>
+      );
+    } else {
+      return null
+    }
+  }
+})
 
 module.exports = CommentContent;

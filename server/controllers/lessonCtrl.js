@@ -34,7 +34,7 @@ exports.getLessonByUrl = function(req, res, next) {
 
 
 exports.updateLesson = function(req, res, next){
-  console.log("REQ DOT BODY", req.body);
+  console.log("REQ DOOOTT BODY", req.body);
 
   Lesson.update({lesson_url : req.params.url}, {$set : 
     {
@@ -44,7 +44,7 @@ exports.updateLesson = function(req, res, next){
       comments : req.body.comments
     }
   }, function(err, raw){
-    if (err) return handleError(err);
+    if (err) console.log(err);
     console.log(raw)
   })
 }

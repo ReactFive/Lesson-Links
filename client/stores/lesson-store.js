@@ -37,7 +37,6 @@ module.exports = Reflux.createStore({
     //remove the index
     this.lesson.comments.splice(commentIndex, 1);
     this.trigger(this.lesson);
-    debugger;
     Api.updateLesson(this.lesson);
 
   },

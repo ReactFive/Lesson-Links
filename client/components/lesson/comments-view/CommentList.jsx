@@ -7,6 +7,7 @@ var _ = require('lodash');
 var CommentList = React.createClass({
 
   mixins: [Reflux.connect(LessonStore, "lesson")],
+  
   render: function() {
     if (this.state.lesson) {
       var that=this;

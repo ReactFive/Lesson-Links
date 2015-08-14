@@ -7,7 +7,6 @@ var DefaultRoute = Router.DefaultRoute;
 var App = require('./components/App');
 var LandingPage = require('./components/LandingPage.jsx');
 var LessonView = require('./components/lesson/LessonView.jsx');
-var LessonView2 = require('./components/lesson/LessonView2.jsx');
 var LibraryView = require('./components/library_components/LibraryView.jsx');
 var SignupView = require('./components/signup/SignupView.jsx');
 var AddLessonView = require('./components/add_lesson_view/AddLessonView.jsx');
@@ -25,7 +24,7 @@ var routes = (
       <Route path='/edit' handler={EditView} />
       <Route path='/exercise' handler={Exercise} />
       <Route path='/multiplechoice' handler={MultiChoiceCreation} />
-      <Route path='/:url' handler={LessonView2} />
+      <Route path='/:url' handler={LessonView} />
       <NotFoundRoute handler={NotFound}/>
     </Route>
 );

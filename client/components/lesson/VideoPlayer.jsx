@@ -77,8 +77,6 @@ var VideoPlayer = React.createClass({
   },
   render: function() {
 
-
-
     return (
       this.state.lesson && this.state.lesson.video_url ?
         <div className="row">
