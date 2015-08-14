@@ -46,7 +46,7 @@ exports.updateLesson = function(req, res, next){
     Lesson.update({'lesson_url' : req.params.url}, {
       $set : 
         {
-          title : req.body.title
+          title : req.body.title,
           video_url : req.body.video_url,
           publish : req.body.publish,
           comments : req.body.comments
