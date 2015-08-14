@@ -95,7 +95,7 @@ var TrueFalseCreation = React.createClass({
 
     if (exercise.question.length && exercise.correct !== undefined) {
       Actions.createExercise(exercise);
-      this.transitionTo('/edit');
+      this.transitionTo('/configure');
     } else {
       toastr['warning']('Make sure you have a question');
     }
