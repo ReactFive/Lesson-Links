@@ -6,8 +6,6 @@ var Actions = require('../../actions');
 var LessonStore = require('../../stores/lesson-store.js');
 var Reflux = require('reflux');
 
-module.exports = LessonView;
-
 var LessonView = React.createClass({
 
   contextTypes: {

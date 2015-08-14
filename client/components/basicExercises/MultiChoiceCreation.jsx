@@ -61,8 +61,7 @@ var MultiChoiceCreation = React.createClass({
               name="Number of items"
               value="Select the number of alternative answers"
               options={this.state.options}
-              onChange={this.formSetup}
-              />
+              onChange={this.formSetup} />
 
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
             <h5>Write your question/prompt/problem</h5>
@@ -207,10 +206,10 @@ var MultiChoiceCreation = React.createClass({
     var options = [option1, option2, option3, option4, option5];
     var allFeedback = [feedback1, feedback2, feedback3, feedback4, feedback5];
 
-    //var time = videojs("#attachmentVideo").currentTime;
+    var time = videojs("#attachmentVideo").currentTime();
 
     var exercise = {};
-    //exercise.time = time;
+    exercise.time = time;
     exercise.type = "multi";
     exercise.question = question;
     exercise.options = removeBlanks(options);
@@ -219,7 +218,7 @@ var MultiChoiceCreation = React.createClass({
 
     if (exercise.question.length && exercise.options.length) {
       Actions.createExercise(exercise);
-      this.transitionTo('/edit');
+      this.props.onComplete(null);
     } else {
       toastr['warning']('Make sure you have a question and options');
     }
