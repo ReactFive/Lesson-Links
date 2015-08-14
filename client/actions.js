@@ -14,5 +14,6 @@ module.exports = Reflux.createActions([
   'unlikeComment',
   'createLesson',
   'getUser',
-  'createExercise'
+  'createExercise',
+  'followLesson'
 ]);

@@ -7,15 +7,15 @@ var LessonStore = require('../../stores/lesson-store.js');
 var Reflux = require('reflux');
 
 var LessonView = React.createClass({
-
+  
   contextTypes: {
     router: React.PropTypes.func
   },
 
   componentWillMount: function(){
     Actions.fetchLesson(this.context.router.getCurrentParams().url)
+    Actions.followLesson(this.context.router.getCurrentParams().url)
   },
-
   render: function() {
     return (
       <div>
@@ -25,7 +25,7 @@ var LessonView = React.createClass({
         </div>
       </div>
     );
-  } 
+  }, 
 });
 
 module.exports = LessonView;

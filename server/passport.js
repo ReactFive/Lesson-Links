@@ -15,7 +15,6 @@ module.exports = function(passport) {
     User.findById(id)
         .populate('lessons')
         .exec(function(err, user) {
-          console.log("deserialized", user);
       done(err, user);
     });
   });
@@ -93,7 +92,7 @@ module.exports = function(passport) {
           // and save it to session as flashdata
         } else {
           // all is well, return successful user
-          console.log("is there a lesson?", user);
+          console.log("is there a lesson?");
           var newUser = _.omit(user, "password");
           return done(null, newUser);
         }
