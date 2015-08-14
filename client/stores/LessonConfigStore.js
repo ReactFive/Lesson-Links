@@ -21,6 +21,11 @@ var AddLessonStore = Reflux.createStore({
     })
   },
 
+  createExercise: function(exercise) {
+    this.lesson.exercises.push(exercise);
+    this.trigger(this.lesson);
+    //Api.updateLesson(this.lesson);
+  },
 
   /* this is for testing purposes */
   init: function() {
@@ -38,6 +43,7 @@ var AddLessonStore = Reflux.createStore({
           "name": "Colin Wiley"
       },
       "comments": [],
+      "exercises": [],
       "publish": true,
       "created_at": {
           "$date": "2015-08-13T15:23:56.760Z"
@@ -45,7 +51,6 @@ var AddLessonStore = Reflux.createStore({
       "__v": 0
     }
 
-    console.log(this.lesson);
     var self = this;
     setTimeout(function() {
       self.trigger(self.lesson)

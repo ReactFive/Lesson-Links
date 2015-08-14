@@ -6,23 +6,22 @@ var AddLessonStore = require('../../stores/AddLessonStore');
 
 var VideoPlayer = React.createClass({
   mixins: [Reflux.connect(AddLessonStore, "lesson")],
+
   getInitialState: function() {
-    videoSetupCompleted: false;
+    return {
+      videoSetupCompleted: false
+    }
   },
-  componentWillReceiveProps: function(nextProps){
+
+  componentWillUpdate: function(nextProps, nextState) {
+    if(this.state.videoSetupCompleted) {
+      var player = videojs('attachmentVideo');
+      var pastExercises = player.markers.getMarkers();
+      var newExercises = _.difference(nextState.lesson.exercises, pastExercises);
+      player.markers.add(newExercises);
+    }
   },
-  componentWillMount: function(){
-  },
-  componentDidMount: function(){
-  },
-  // componentWillUpdate: function(nextProps, nextState) {
-  //   if(this.state.videoSetupCompleted) {
-  //     var player = videojs('attachmentVideo');
-  //     var pastComments = player.markers.getMarkers();
-  //     var newComments = _.difference(nextState.lesson.comments, pastComments);
-  //     player.markers.add(newComments);
-  //   }
-  // },
+
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted){
 
@@ -35,11 +34,15 @@ var VideoPlayer = React.createClass({
   videoSetup: function(){
     // initialize video.js
     var player = videojs('attachmentVideo');
+    player.markers({
+      markers: []
+    });
     
     return player;
   },
   render: function() {
-
+    console.log("# exercises", this.state.lesson &&
+      this.state.lesson.exercises.length);
     return (
       this.state.lesson && this.state.lesson.video_url ?
         <div className="row">
