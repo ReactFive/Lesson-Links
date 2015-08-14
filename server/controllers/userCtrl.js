@@ -40,17 +40,17 @@ exports.addLesson = function(req, res){
 
 exports.getUser = function(req, res){
   if(req.user) {
-    User.findById(req.user._id, function (err, obj) {
-      if (!obj) {
-        res.status(401).send({user: false});
-      }
-      if (err) {
-        console.log(err)
-      }
-      res.send({user:_.omit(obj, 'local')})
+    User
+    .findById(req.user._id)
+    .populate('lessons')
+    .exec(
+    function(err, obj){
+      if (err) {console.log(err)}
+      console.log(obj)
+      res.status(200).send({user:obj})
     })
-  }else{
-    res.status(401).send({user: false});
+  } else {
+    res.sendStatus(401)
   }
 }
 
