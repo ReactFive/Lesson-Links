@@ -6,9 +6,10 @@ var LibAddLesson = React.createClass({
 
   render:function(){
     return (
-      <Link to="/add-lesson" className="lib-add-lesson">
-        <p className="add-me">+</p>
-      </Link>
+      <span className="lib-add-lesson">
+        <Link to="/add-lesson" className="addMe">+
+        </Link>
+      </span>
     )
   }
 });
