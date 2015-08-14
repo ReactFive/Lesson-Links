@@ -17,7 +17,7 @@ var nav = React.createClass({
   },
 
   render: function() {
-    return ( <nav className="navbar navbar-special navbar-fixed-top">
+    return ( <nav className="navbar navbar-lessonlinks navbar-fixed-top">
       <div className="container">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -32,7 +32,7 @@ var nav = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
+              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">My Library</Link>}
             </li>
             <li className="pull-right">
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
