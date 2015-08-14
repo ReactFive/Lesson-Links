@@ -4,14 +4,14 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Link = Router.Link;
 var AuthStore = require('../../stores/AuthStore');
-var AddLessonStore = require('../../stores/AddLessonStore');
+var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
 var Select = require('react-select');
 var _ = require('lodash');
 
 var TrueFalseCreation = React.createClass({
   mixins: [Reflux.connect(AuthStore, "auth"),
-    Reflux.connect(AddLessonStore, "lesson"),
+    Reflux.connect(LessonConfigStore, "lesson"),
     Navigation],
 
   getInitialState: function() {
@@ -33,6 +33,23 @@ var TrueFalseCreation = React.createClass({
                 <input ref="question" className="form-control" name="name" type='text' placeholder="Question"/>
               </div>
 
+
+              <div className="form-group">
+                <label htmlFor="feedbackTrue">Feedback if the user selects "true":</label>
+                  <textarea id="feedbackTrue"
+                            className="form-control"
+                            rows="2"
+                            ref="feedbackTrue"/>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="feedbackFalse">Feedback if the user selects "false":</label>
+                  <textarea id="feedbackFalse"
+                            className="form-control"
+                            rows="2"
+                            ref="feedbackFalse"/>
+              </div>
+
               <div onChange={this.checkHandle} className="correct-answer-label">
                  <span className="correct-answer-label">
                    <strong>Indicate the correct answer: </strong>
@@ -45,22 +62,6 @@ var TrueFalseCreation = React.createClass({
                   <input ref="correct2" type="radio" name="correct" value="False"/>
                   False
                 </label>
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="feedbackTrue">Feedback if the user selects "true":</label>
-                  <textarea id="feedbackTrue"
-                            className="form-control"
-                            rows="2"
-                            ref="feedbackTrue"/>
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="feedbackFalse">Feedback if the user selects "false":</label>
-                  <textarea id="feedbackFalse"
-                            className="form-control"
-                            rows="2"
-                            ref="feedbackFalse"/>
               </div>
 
               <button type="submit" className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
@@ -92,11 +93,11 @@ var TrueFalseCreation = React.createClass({
     exercise.feedbackFalse = feedbackFalse;
     exercise.correct = this.state.correctOption;
 
-    if (exercise.question.length) {
+    if (exercise.question.length && exercise.correct !== undefined) {
       Actions.createExercise(exercise);
       this.transitionTo('/edit');
     } else {
-      toastr['warning']('Make sure you have a question and options');
+      toastr['warning']('Make sure you have a question');
     }
 
   },

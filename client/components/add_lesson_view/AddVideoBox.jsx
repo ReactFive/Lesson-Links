@@ -1,6 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
-var AddLessonStore = require('../../stores/AddLessonStore.js');
+var LessonConfigStore = require('../../stores/LessonConfigStore.js');
 var Actions = require('../../actions.js');
 var AddVideoBox = React.createClass({
 
