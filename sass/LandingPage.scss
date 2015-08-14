@@ -3,13 +3,13 @@
 .logo {
   font-size: 120px;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 150px;
   font-family: $header-font;
   color: $dark-blue;
 } 
 
 .sublogo{
-  padding-bottom: 200px;
+  padding-bottom: 150px;
   text-align: center;
   font-family: $header-font;
   letter-spacing: .16em;
@@ -17,13 +17,19 @@
 }
 
 .teaser{
-  text-align: center;
   font-family: $header-font;
-  
-}
-
-.learnMore{
+  background-color: $light-purple;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
   text-align: center;
+  margin: 0 auto;
+  h3{
+    vertical-align: center;
+    text-align: center;
+    color: $background-color;
+    padding-top: 35px;
+  }
 }
 
 .Site-content{
