@@ -14,7 +14,8 @@ var LessonConfigStore = Reflux.createStore({
     .then(function(res){
       console.log("successfully created lesson");
       console.log(lesson);
-      self.lesson = lesson;
+      self.lesson = res.data;
+      self.trigger(self.lesson);
       AuthStore.getUser();
     }) 
     .catch(function(res){

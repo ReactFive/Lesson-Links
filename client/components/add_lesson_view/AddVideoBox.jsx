@@ -31,7 +31,6 @@ var AddVideoBox = React.createClass({
         lesson_url: this.state.lesson_url,
         published: this.state.published
       });
-      debugger;
       this.transitionTo('/configure');
 
     },
