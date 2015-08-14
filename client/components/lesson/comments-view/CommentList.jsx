@@ -4,11 +4,13 @@ var Comment = require('./Comment.jsx');
 var LessonStore = require('../../../stores/lesson-store');
 var _ = require('lodash');
 
+
 var CommentList = React.createClass({
 
   mixins: [Reflux.connect(LessonStore, "lesson")],
   
   render: function() {
+
     if (this.state.lesson) {
       var that=this;
       var comments = _.sortBy(this.state.lesson.comments,function(o){
@@ -19,7 +21,7 @@ var CommentList = React.createClass({
         return comment.time >= 0 ;
       })
       .map(function(comment, index) {
-        return <li className="comment-box" key={index}> <Comment comment={comment} submitReply={that.props.submitReply}/> </li>
+        return <Comment key={comment.text + "key"} comment={comment} submitReply={that.props.submitReply}/>
       });
   
       return (
