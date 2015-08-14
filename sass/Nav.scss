@@ -48,29 +48,29 @@ $dropDown       : false;
     border-color: $background-color; 
     font-family: $subheader-font;
     input, textarea{
-        color: @background-color;
+        color: $background-color;
     }
     /* ADJUST PLACEHOLDER INPUT- */
     ::-webkit-input-placeholder {
-       color: @background-color;
+       color: $background-color;
     }
     :-moz-placeholder { 
-       color: @background-color;  
+       color: $background-color;  
     }
 
     ::-moz-placeholder {  /* Firefox 19+ */
-       color: @background-color;  
+       color: $background-color;  
     }
 
     :-ms-input-placeholder {  
-       color: @background-color;  
+       color: $background-color;  
     }
     input:focus {
-        color: @background-color;
+        color: $background-color;
     }
 
     input, select, textarea{
-        color: @background-color;
+        color: $background-color;
     }
   }
   .navbar-link {
