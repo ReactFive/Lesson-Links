@@ -47,10 +47,11 @@ var ExerciseTypes = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    Actions.createExercise({
-      time: videojs('attachmentVideo').currentTime(),
-      type: this.state.selectedType
-    });
+    this.props.chooseType(this.state.selectedType);
+    // Actions.createExercise({
+    //   time: videojs('attachmentVideo').currentTime(),
+    //   type: this.state.selectedType
+    // });
   }
 })
 
