@@ -4,17 +4,20 @@ var LibAddLesson = require('./LibAddLesson.jsx')
 var AuthStore = require('../../stores/AuthStore')
 var Router = require('react-router')
 var Link = Router.Link;
+var lock = '../../public/assets/lock.png';
+var unlock = '../../public/assets/unlock.png';
 
 
 var LibLessonEntry = React.createClass({
 
   render:function(){
     var owner = this.props.owner;
+    var lessonList = this.props.lessons;
     var lessons = this.props.lessons.map(function(lesson, index){
-    var handleClick = function(index){
-      LibraryStore.togglePublish(this.props.lessons)
+    var handleClick = function(index, event){
+      LibraryStore.togglePublish(lessonList[index])
     }
-    var boundClick = handleClick.bind(this);
+    var boundClick = handleClick.bind(this,index);
     return <span className="lib-lesson-entry" key={index}>
         <p>
           <p className="lib-less-title">
@@ -26,7 +29,10 @@ var LibLessonEntry = React.createClass({
         </p> 
 
         <p className="lib-lock">
-          {owner ? <a onClick={boundClick}>Publish?</a> : ''}
+          {owner ? lesson.publish ? 
+            <img onClick={boundClick} src={unlock} /> : 
+            <img onClick={boundClick} src={lock} /> 
+          : ''}
           
         </p> 
       </span>

@@ -16,14 +16,13 @@ var Library = React.createClass({
   componentWillMount: function(){
   },
   render:function(){
-    {/*Grab Teacher's Name*/}
-    console.log(AuthStore.auth.user)
 
     {/*Declare apostrophe*/}
     var apo = "'"
 
     if (AuthStore.auth.user){
       var user = AuthStore.auth.user
+      {/*Grab User's Name*/}
       var name = user.local.name
 
       return (
