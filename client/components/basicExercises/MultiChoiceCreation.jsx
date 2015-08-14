@@ -218,6 +218,9 @@ var MultiChoiceCreation = React.createClass({
 
     if (exercise.question.length && exercise.options.length) {
       Actions.createExercise(exercise);
+      this.transitionTo('/edit');
+    } else {
+      toastr['warning']('Make sure you have a question and options');
     }
 
     function removeBlanks(array) {
@@ -228,7 +231,6 @@ var MultiChoiceCreation = React.createClass({
       return arr;
     }
 
-    this.transitionTo('/edit');
   },
 
   onChange: function(event, user){
