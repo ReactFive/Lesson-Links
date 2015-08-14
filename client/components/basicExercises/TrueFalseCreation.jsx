@@ -37,17 +37,17 @@ var TrueFalseCreation = React.createClass({
                  <span className="correct-answer-label">
                    <strong>Indicate the correct answer: </strong>
                  </span>
-                <label htmlFor="correct1" className={radioClassString[0]}>
+                <label htmlFor="correct1" className="radio-inline">
                   <input ref="correct1" type="radio" name="correct" value="True"/>
                   True
                 </label>
-                <label htmlFor="correct2" className={radioClassString[1]}>
+                <label htmlFor="correct2" className="radio-inline">
                   <input ref="correct2" type="radio" name="correct" value="False"/>
-                  Fale
+                  False
                 </label>
               </div>
 
-              <div className={classString[1]}>
+              <div className="form-control">
                 <label htmlFor="feedbackTrue">Feedback if the user selects "true":</label>
                   <textarea id="feedbackTrue"
                             className="form-control"
@@ -55,7 +55,7 @@ var TrueFalseCreation = React.createClass({
                             ref="feedbackTrue"/>
               </div>
 
-              <div className={classString[1]}>
+              <div className="form-control">
                 <label htmlFor="feedbackFalse">Feedback if the user selects "false":</label>
                   <textarea id="feedbackFalse"
                             className="form-control"
