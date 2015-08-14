@@ -28,7 +28,11 @@ h1{
   color: $dark-purple;
 }
 
-h2{
+label{
+  color: $dark-blue;
+}
+
+h2, h3{
   font-family: $subheader-font;
   color: $dark-blue;
 }
