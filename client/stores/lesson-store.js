@@ -100,6 +100,23 @@ module.exports = Reflux.createStore({
     Api.updateLesson(this.lesson);
   },
 
+  starComment: function(commentKey, userID){
+    //find the index of the comment to which the reply should be added
+    var commentIndex;
+    _.forEach(this.lesson.comments, function(comment, key){
+      if(comment.key === commentKey){
+        commentIndex = key;
+      }
+    })
+    
+    //toggle the star
+    this.lesson.comments[commentIndex].star = !this.lesson.comments[commentIndex].star;
+ 
+
+    this.trigger(this.lesson);
+    Api.updateLesson(this.lesson);
+  },
+
 
   submitReply: function(reply, commentKey) {
     //wrap the reply in an object
