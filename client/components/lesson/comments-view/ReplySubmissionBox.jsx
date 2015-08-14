@@ -37,7 +37,7 @@ var ReplySubmissionBox = React.createClass({
       <div id="reply-creation-box">
         { this.props.showReplyForm ? 
           <form onSubmit={this.handleSubmit} className="reply-form-box">
-            <Textarea className="form-control reply-form" rows={2} onChange={this.onChange} value={this.state.text} ref="test"></Textarea>
+            <Textarea className="form-control reply-form" onChange={this.onChange} value={this.state.text} ref="test"></Textarea>
             <button type="submit" className="btn btn-primary btn-xs pull-right reply-button" onClick={this.handleSubmit} >Submit</button>
             <button type="submit" className="btn btn-default btn-xs pull-right reply-button" onClick={this.props.toggleReplyForm} >Cancel</button>
           </form>
