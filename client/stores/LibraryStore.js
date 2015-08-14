@@ -10,6 +10,7 @@ module.exports = Reflux.createStore({
   init: function(){
   },
   togglePublish: function(lesson){
+    console.log(lesson)
     lesson.published = !lesson.published
     api.updateLesson(lesson)
     .then(function(){

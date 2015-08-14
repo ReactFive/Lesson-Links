@@ -39,6 +39,7 @@ exports.addLesson = function(req, res){
 }
 
 exports.getUser = function(req, res){
+  console.log('Getting User')
   if(req.user) {
     User
     .findById(req.user._id)

@@ -14,10 +14,10 @@ var Library = React.createClass({
   },
 
   componentWillMount: function(){
-    console.log(AuthStore.auth.user)
   },
   render:function(){
     {/*Grab Teacher's Name*/}
+    console.log(AuthStore.auth.user)
 
     {/*Declare apostrophe*/}
     var apo = "'"
