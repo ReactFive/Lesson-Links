@@ -1,4 +1,5 @@
 var User = require('mongoose').model('User');
+var Lesson = require('mongoose').model('Lesson');
 var passport = require('passport');
 var _ = require('lodash');
 
@@ -58,15 +59,21 @@ exports.getUser = function(req, res){
 
 exports.updateUser = function(req, res){
   console.log('Updating User')
+  console.log(req.body)
   if(req.user && req.body.addLesson === true){
-    User
-    .findByIdAndUpdate(req.user._id,
-    {$push:{'lessons':{req.user.lesson}}},
-    {safe:true, upsert: false, new: true},
-    function(err, user){
-      if (err) {console.log(err)}
-      res.status(200).send(user)       
-    }
+    Lesson
+    .findOne({'lesson_url': req.body.lesson_url})
+    .exec(
+      function(err, lesson){
+      User
+      .findByIdAndUpdate(req.user._id,
+      {$push:{'lessons': lesson._id}},
+      {safe:true, upsert: false, new: true},
+      function(err, user){
+        if (err) {console.log(err)}
+        res.status(200).send(user)       
+      })
+    })
   }
 }
 

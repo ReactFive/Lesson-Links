@@ -14,10 +14,9 @@ var LessonView = React.createClass({
 
   componentWillMount: function(){
     Actions.fetchLesson(this.context.router.getCurrentParams().url)
+    Actions.followLesson(this.context.router.getCurrentParams().url)
   },
-
   render: function() {
-    Actions.followLesson()
     return (
       <div>
         <div id='lesson-view'>
@@ -26,7 +25,7 @@ var LessonView = React.createClass({
         </div>
       </div>
     );
-  } 
+  }, 
 });
 
 module.exports = LessonView;

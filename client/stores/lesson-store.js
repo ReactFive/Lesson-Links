@@ -6,6 +6,7 @@ var _ = require('lodash');
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
+  mixins: [Reflux.connect(AuthStore)],
 
   init: function() {},
 
@@ -20,21 +21,27 @@ module.exports = Reflux.createStore({
     })
   },
 
-  followLesson : function(lesson){
-    if(AuthStore.auth.user.lessons._reduce(function(found, elem, key){
-     {/*Check if the user is already following this lesson*/}
-     if (found) {
-       return true
-     } else {
-       return (elem.lesson_url === lesson.lesson_url)
-     }
+  followLesson : function(url){
+    {/*Check if the user is already following this lesson*/}
+    var following = _.reduce(window.currentUser.lessons, function(found, elem, key){
+      if (found) {
+        return true
+      } else {
+        return (elem.lesson_url === url)
+      }}, false
+    )
+    console.log(following)
+    if(!following) 
+    {
       console.log('adding lesson')
-      Api.followLesson({
-        lesson_url : lesson.lesson_url,
+      console.log(url)
+      Api.updateUser({
+        test: 'wat',
+        lesson_url : url,
         addLesson : true
-      })}
-    }) 
-  }
+      })
+    }
+  },
 
   submitComment: function(comment) {
     this.lesson.comments.push(comment);

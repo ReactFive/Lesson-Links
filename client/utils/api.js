@@ -40,7 +40,7 @@ module.exports.updateUser = function(user) {
   var url  = rootUrl + '/api/user/'
   var obj = {
     addLesson: user.addLesson,
-    lesson : user.lesson
+    lesson_url : user.lesson_url
   }
   return axios.put(url, obj);
 }
