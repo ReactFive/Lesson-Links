@@ -22,14 +22,15 @@ var LessonConfiguration = React.createClass({
       <div>
         <VideoPlayer />
         {!this.state.editing && 
-          <ExerciseTypes chooseType={this.startEditing} />
+          <ExerciseTypes chooseType={this.setEditing} />
         }
-        {this.state.editing && <MultiChoiceCreation />}
+        {this.state.editing && 
+          <MultiChoiceCreation onComplete={this.setEditing}/>}
       </div>
     );
   },
 
-  startEditing: function(exerciseType) {
+  setEditing: function(exerciseType) {
     this.setState({
       editing : exerciseType
     })

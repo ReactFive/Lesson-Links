@@ -18,7 +18,10 @@ var VideoPlayer = React.createClass({
       var player = videojs('attachmentVideo');
       var pastExercises = player.markers.getMarkers();
       var newExercises = _.difference(nextState.lesson.exercises, pastExercises);
-      player.markers.add(newExercises);
+
+      if(newExercises.length > 0) {
+        player.markers.add(newExercises);
+      }
     }
   },
 
