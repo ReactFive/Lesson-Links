@@ -1,7 +1,9 @@
 var React = require('react');
+var Reflux = require('reflux');
 var LibraryStore = require('../../stores/LibraryStore')
 var LibAddLesson = require('./LibAddLesson.jsx')
 var AuthStore = require('../../stores/AuthStore')
+var Actions = require('../../action');
 var Router = require('react-router')
 var Link = Router.Link;
 
@@ -12,9 +14,10 @@ var LibLessonEntry = React.createClass({
     var lessonList = this.props.lessons;
     var lessons = this.props.lessons.map(function(lesson, index){
     var handleClick = function(index, event){
-      LibraryStore.togglePublish(lessonList[index])
-      lessonList[index].publish = !lessonList[index].publish
-    }
+      Actions.togglePublish(lessonList[index]);
+      lessonList[index].publish = !lessonList[index].publish;
+    };
+    
     var boundClick = handleClick.bind(this,index);
 
 
