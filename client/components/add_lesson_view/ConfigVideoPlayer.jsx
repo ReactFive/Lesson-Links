@@ -37,29 +37,33 @@ var VideoPlayer = React.createClass({
   videoSetup: function(){
     // initialize video.js
     var player = videojs('attachmentVideo');
-    player.markers({
-      markers: []
-    });
-    
+    if(typeof player.markers === 'function') {
+        player.markers({
+        markers: []
+      });
+    }
+
     return player;
   },
   render: function() {
     console.log("# exercises", this.state.lesson &&
       this.state.lesson.exercises.length);
-    return (
-      this.state.lesson && this.state.lesson.video_url ?
-          <div className="col-xs-7 col-xs-offset-1">
-            <div className="">
-              <video id='attachmentVideo'
-                className='video-js vjs-default-skin'
-                width='500' height='300'
-                controls preload='auto'
-                data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
-              </video>
-            </div>
+    if(this.state.lesson && this.state.lesson.video_url) {
+      return (
+        <div className="col-xs-7 col-xs-offset-1">
+          <div className="">
+            <video id='attachmentVideo'
+              className='video-js vjs-default-skin'
+              width='500' height='300'
+              controls preload='auto'
+              data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
+            </video>
           </div>
-        : null
-    )
+        </div>
+      )
+    } else {
+      return null;
+    }
   }  
 })
 

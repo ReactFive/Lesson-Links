@@ -32,32 +32,33 @@ var LessonConfigStore = Reflux.createStore({
 
   /* this is for testing purposes */
   init: function() {
-    this.lesson = {
-      "_id": {
-          "$oid": "55ccb68c274e1b1949373f5b"
-      },
-      "title": "Syncing Async",
-      "lesson_url": "async",
-      "video_url": "https://www.youtube.com/watch?v=-wYw0bZZ38Y",
-      "teacher": {
-          "id": {
-              "$oid": "55cbd41377d0abd441067a7e"
-          },
-          "name": "Colin Wiley"
-      },
-      "comments": [],
-      "exercises": [],
-      "publish": true,
-      "created_at": {
-          "$date": "2015-08-13T15:23:56.760Z"
-      },
-      "__v": 0
-    }
-
     var self = this;
     setTimeout(function() {
+      if(!self.lesson) {
+        self.lesson = {
+          "_id": {
+              "$oid": "55ccb68c274e1b1949373f5b"
+          },
+          "title": "Syncing Async",
+          "lesson_url": "async",
+          "video_url": "https://www.youtube.com/watch?v=-wYw0bZZ38Y",
+          "teacher": {
+              "id": {
+                  "$oid": "55cbd41377d0abd441067a7e"
+              },
+              "name": "Colin Wiley"
+          },
+          "comments": [],
+          "exercises": [],
+          "publish": true,
+          "created_at": {
+              "$date": "2015-08-13T15:23:56.760Z"
+          },
+          "__v": 0
+        }
+      }
       self.trigger(self.lesson)
-    }, 200);
+    }, 500);
   }
   /* end testing */
 
