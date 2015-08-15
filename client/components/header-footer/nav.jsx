@@ -40,8 +40,10 @@ var nav = React.createClass({
             <li className="pull-right">
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
+            <li>
+              { (this.state.auth && this.state.auth.loggedIn) ? this.renderLogout() : this.renderLogin() }
+            </li>
           </ul>
-            { (this.state.auth && this.state.auth.loggedIn) ? this.renderLogout() : this.renderLogin() }
         </div>
     </nav> )
   },
