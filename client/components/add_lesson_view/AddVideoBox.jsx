@@ -1,12 +1,12 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
-var LessonConfigStore = require('../../stores/LessonConfigStore.js');
+var CreateLessonStore = require('../../stores/CreateLessonStore.js');
 var Actions = require('../../actions.js');
 var Navigation = Router.Navigation;
 
 var AddVideoBox = React.createClass({
-  mixins: [Navigation, Reflux.connect(LessonConfigStore, "validURL"), Reflux.connect(LessonConfigStore, "createdLesson")],
+  mixins: [Navigation, Reflux.connect(CreateLessonStore, "result")],
 
   getInitialState: function(){
     return {
@@ -14,8 +14,10 @@ var AddVideoBox = React.createClass({
       video_url: '',
       lesson_url: '',
       published: false,
-      validURL: true,
-      createdLesson: false  
+      result: {
+        validURL: true,
+        createdLesson: false  
+      }
     }
   },
 
@@ -42,13 +44,13 @@ var AddVideoBox = React.createClass({
     
   render: function() {
     //This error message appears underneath the video URL if it is already in the database
-    var errorMessage =  this.state.validURL ? null : 
+    var errorMessage =  this.state.result.validURL ? null : 
       <div className="invalid-URL-error">
         <p>This URL is taken. Please try a different one.</p>
       </div>
 
     //This success message appears underneath the form when the lesson is successfully saved.
-    var successMessage = this.state.createdLesson ? 
+    var successMessage = this.state.result.createdLesson ? 
       <div className="success-message">
         <p>Nice bruh! Your lesson has been created: </p>
         <p>Title:  {this.state.title}</p>
@@ -62,7 +64,7 @@ var AddVideoBox = React.createClass({
 
     //Once the user successfully creates a lesson, saves it successfully, and clicks 'save',
     //the button changes to 'next' so they can click it to continue to the configure page.
-    var button = this.state.createdLesson ? 
+    var button = this.state.result.createdLesson ? 
       <button
         type="submit" 
         className="btn btn-primary pull-right"
