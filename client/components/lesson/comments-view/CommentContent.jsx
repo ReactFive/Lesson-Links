@@ -99,7 +99,12 @@ var CommentContent = React.createClass({
     // else if(minutes>0) timestamp = mins + " and " + secs;
     // else  timestamp += secs;
     
-    return timestamp;
+    //return timestamp;
+  },
+
+  gotoTimestamp : function(){
+    //TODO
+    console.log("TODO: build out the gotoTimestamp function in CommentContent.jsx so this click makes the player go to this time");
   },
 
   render: function() {
@@ -139,7 +144,7 @@ var CommentContent = React.createClass({
         <div className="comment-content">
           { this.state.starred ? {fullStar} : {emptyStar} }
           <p className="comment-author">{this.props.comment.author.name} </p> 
-          <p className="comment-video-timestamp">@ {this.getTimestamp(this.props.comment.time)}</p> 
+          <p className="comment-video-timestamp" onClick={this.gotoTimestamp}>@ {this.getTimestamp(this.props.comment.time)}</p> 
           <p className="comment-text">{this.props.comment.text} </p>
           <div className="comment-toolbar">
             { this.state.liked ? {likeButton} : {unlikeButton} }
