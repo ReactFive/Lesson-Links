@@ -36,6 +36,15 @@ module.exports.createLesson = function(lesson) {
   return axios.post(url, lesson);
 };
 
+module.exports.updateUser = function(user) {
+  var url  = rootUrl + '/api/user/'
+  var obj = {
+    addLesson: user.addLesson,
+    lesson_url : user.lesson_url
+  }
+  return axios.put(url, obj);
+}
+
 module.exports.getStatus = function(){
   var url  = rootUrl + '/api/authenticate';
   return axios.post(url);

@@ -13,6 +13,7 @@ var LibLessonEntry = React.createClass({
     var lessons = this.props.lessons.map(function(lesson, index){
     var handleClick = function(index, event){
       LibraryStore.togglePublish(lessonList[index])
+      lessonList[index].publish = !lessonList[index].publish
     }
     var boundClick = handleClick.bind(this,index);
     return <span className="lib-lesson-entry" key={index}>

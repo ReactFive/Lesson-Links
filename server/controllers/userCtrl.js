@@ -1,4 +1,5 @@
 var User = require('mongoose').model('User');
+var Lesson = require('mongoose').model('Lesson');
 var passport = require('passport');
 var _ = require('lodash');
 
@@ -49,7 +50,6 @@ exports.getUser = function(req, res){
     function(err, user){
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
-      console.log(user)
       res.status(200).send({user:user})
     })
   } else {
@@ -57,7 +57,32 @@ exports.getUser = function(req, res){
   }
 }
 
+exports.updateUser = function(req, res){
+  console.log('Updating User')
+  console.log(req.body)
+  if(req.user && req.body.addLesson === true){
+    Lesson
+    .findOne({'lesson_url': req.body.lesson_url})
+    .exec(
+      function(err, lesson){
+      if (lesson === null) {
+        res.status(500).send('That lesson does not exist')
+      } else {
+        User
+        .findByIdAndUpdate(req.user._id,
+        {$push:{'lessons': lesson._id}},
+        {safe:true, upsert: false, new: true},
+        function(err, user){
+          if (err) {console.log(err)}
+          res.status(200).send(user)       
+        })
+      }
+    })
+  }
+}
+
 exports.logout = function(req, res){
+  console.log('logging out')
   req.logout();
   req.session.destroy(function (err) {
     if (err) { return next(err); }

@@ -23,6 +23,7 @@ module.exports = function(app) {
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
   app.get('/api/user', UserCtrl.getUser);
+  app.put('/api/user', UserCtrl.updateUser);
 
   /**
    * EXERCISE API
