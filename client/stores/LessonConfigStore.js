@@ -14,10 +14,7 @@ var LessonConfigStore = Reflux.createStore({
     .then(function(res){
       console.log("successfully created lesson");
       console.log(lesson);
-      self.validURL = true; 
-      self.createdLesson = true; 
-      self.trigger(self.validURL);
-      self.trigger(self.createdLesson);
+      console.log("res.data", res.data)
       self.lesson = res.data;
       self.trigger(self.lesson);
       Actions.getUser();
@@ -25,8 +22,6 @@ var LessonConfigStore = Reflux.createStore({
     .catch(function(res){
       console.log("failed to create lesson");
       console.log(res.data.reason);
-      self.validURL = false;
-      self.trigger(self.validURL);
     })
   },
 

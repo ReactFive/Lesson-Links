@@ -28,6 +28,7 @@ var LessonConfiguration = React.createClass({
   },
 
   render: function() {
+    debugger;
     return (
       <div>
         <VideoPlayer />
