@@ -24,7 +24,7 @@ var Library = React.createClass({
     var apo = "'";
 
     if (this.state.auth && this.state.auth.user){
-      //var user = this.state.auth.user;
+      var user = this.state.auth.user;
       {/*Grab User's Name*/}
       console.log("here is the user", this.state.auth.user);
       var name = this.state.auth.user.local.name;

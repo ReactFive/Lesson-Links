@@ -3,7 +3,9 @@ var Reflux = require('reflux');
 
 var CurrentExercisesList = React.createClass({
   exerciseEntries: function() {
-    
+    return this.props.exercises.map(function(exercise) {
+      return <p>{exercise.type} {exercise.time}</p>
+    })
   },
 
   render: function() {
@@ -11,7 +13,9 @@ var CurrentExercisesList = React.createClass({
       <div id="current-exercises" className="col-xs-3 panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">Current exercises</h3>
-          {exerciseEntries()}
+        </div>
+        <div className="panel-body">
+          {this.exerciseEntries()}
         </div>
       </div>
     )

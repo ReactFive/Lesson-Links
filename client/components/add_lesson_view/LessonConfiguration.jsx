@@ -34,7 +34,7 @@ var LessonConfiguration = React.createClass({
       <div>
         <div className="row">
           <VideoPlayer />
-          <CurrentExercisesList exercises={this.state.lesson && this.state.lesson.exercises}/>
+          {this.state.lesson && <CurrentExercisesList exercises={this.state.lesson.exercises}/>}
         </div>
         <div className="row">
         {!this.state.editing && 
