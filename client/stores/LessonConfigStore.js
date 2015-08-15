@@ -25,39 +25,31 @@ var LessonConfigStore = Reflux.createStore({
   },
 
   createExercise: function(exercise) {
-    this.lesson.exercises.push(exercise);
+    var newExercise = {
+      exercise : exercise,
+      time : exercise.time,
+      text : "Exercise!",
+      lesson_id : this.lesson._id
+    };
+    this.lesson.exercises.push(newExercise);
+    console.log("sending exercise to database", newExercise);
+    Api.createExercise(newExercise);
     this.trigger(this.lesson);
-    //Api.updateLesson(this.lesson);
   },
+
 
   /* this is for testing purposes */
   init: function() {
-    this.lesson = {
-      "_id": {
-          "$oid": "55ccb68c274e1b1949373f5b"
-      },
-      "title": "Syncing Async",
-      "lesson_url": "async",
-      "video_url": "https://www.youtube.com/watch?v=-wYw0bZZ38Y",
-      "teacher": {
-          "id": {
-              "$oid": "55cbd41377d0abd441067a7e"
-          },
-          "name": "Colin Wiley"
-      },
-      "comments": [],
-      "exercises": [],
-      "publish": true,
-      "created_at": {
-          "$date": "2015-08-13T15:23:56.760Z"
-      },
-      "__v": 0
-    }
-
     var self = this;
     setTimeout(function() {
-      self.trigger(self.lesson)
-    }, 200);
+      if(!self.lesson) {
+        Api.getLesson('love')
+        .then(function(res) {
+          self.lesson = res.data;
+          self.trigger(self.lesson);
+        })
+      }
+    }, 500);
   }
   /* end testing */
 

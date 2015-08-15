@@ -17,27 +17,24 @@ var ExerciseTypes = React.createClass({
     }
   },
 
-  // shouldComponentUpdate: function() {
-  //   return false;
-  // },
-
   render: function() {
     return (
-      <div className="container">
-        <div id="ExerciseTypeSelection" className="col-md-6 col-md-offset-3">
+        <div id="ExerciseTypeSelection" className="">
 
-          <form name="exerciseTypeForm" onSubmit={this.handleSubmit}>
-            <Select
-              ref="ExerciseType"
-              name="Type of Exercise"
-              placeholder="Select the type of exercise"
-              options={this.state.exerciseTypes}
-              onChange={this.updateSelected} />
+          <form id="exerciseTypeForm" className="form-inline" onSubmit={this.handleSubmit}>
+            <div className="row">
+              <Select
+                className="col-xs-6 col-xs-offset-1"
+                ref="ExerciseType"
+                name="Type of Exercise"
+                placeholder="Select the type of exercise"
+                options={this.state.exerciseTypes}
+                onChange={this.updateSelected} />
 
-            <button className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
+              <button className="col-xs-3 signup-cancel-btn btn btn-primary">Add to your lesson</button>
+            </div>
           </form>
         </div>
-      </div>
     )
   },
 
@@ -48,10 +45,6 @@ var ExerciseTypes = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     this.props.chooseType(this.state.selectedType);
-    // Actions.createExercise({
-    //   time: videojs('attachmentVideo').currentTime(),
-    //   type: this.state.selectedType
-    // });
   }
 })
 

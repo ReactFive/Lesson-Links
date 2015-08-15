@@ -65,7 +65,7 @@ var TrueFalseCreation = React.createClass({
               </div>
 
               <button type="submit" className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
-              <Link activeClassName="active" to="/edit"><button className=" btn btn-default pull-right">Cancel</button></Link>
+              <button onClick={this.handleCancel} className=" btn btn-default pull-right">Cancel</button>
             </form>
           </div>
         </div>
@@ -76,6 +76,12 @@ var TrueFalseCreation = React.createClass({
     this.state.correctOption = event.target.value;
   },
 
+  handleCancel: function(event) {
+    event.preventDefault();
+    console.log("cancel clicked");
+    this.props.onComplete(null);
+  },
+  
   handleSubmit: function(event) {
     event.preventDefault();
     var question = this.refs.question.getDOMNode().value.trim();
@@ -88,6 +94,7 @@ var TrueFalseCreation = React.createClass({
     var exercise = {};
     //exercise.time = time;
     exercise.type = "TrueFalse";
+    exercise.time = videojs("#attachmentVideo").currentTime();
     exercise.question = question;
     exercise.feedbackTrue = feedbackTrue;
     exercise.feedbackFalse = feedbackFalse;
@@ -95,7 +102,7 @@ var TrueFalseCreation = React.createClass({
 
     if (exercise.question.length && exercise.correct !== undefined) {
       Actions.createExercise(exercise);
-      this.transitionTo('/edit');
+      this.props.onComplete(null);
     } else {
       toastr['warning']('Make sure you have a question');
     }

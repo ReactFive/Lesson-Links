@@ -4,6 +4,7 @@ api.js
 client/bower_components
 server/config.js
 client/public/css/*
+.DS_store
 
 bundle.js
 vendor.bundle.js

@@ -176,7 +176,7 @@ var MultiChoiceCreation = React.createClass({
                 </div>
 
               <button type="submit" className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
-              <Link activeClassName="active" to="/edit"><button className=" btn btn-default pull-right">Cancel</button></Link>
+              <button onClick={this.handleCancel} className=" btn btn-default pull-right">Cancel</button>
             </form>
           </div>
         </div>
@@ -230,7 +230,12 @@ var MultiChoiceCreation = React.createClass({
       });
       return arr;
     }
+  },
 
+  handleCancel: function(event) {
+    event.preventDefault();
+    console.log("cancel clicked");
+    this.props.onComplete(null);
   },
 
   onChange: function(event, user){

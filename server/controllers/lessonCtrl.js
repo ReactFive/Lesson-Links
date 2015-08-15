@@ -17,6 +17,7 @@ exports.getAllLessons = function(req, res) {
 exports.getLessonByUrl = function(req, res, next) {
   var lessonUrl = req.params.url;
   Lesson.findOne({'lesson_url':lessonUrl})
+  .populate('exercises')
   .exec(function(err, lesson) {
     if (!lesson) {
       err = new Error('That lesson does not exist');
