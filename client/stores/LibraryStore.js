@@ -15,7 +15,7 @@ module.exports = Reflux.createStore({
       publish : !lesson.publish
     })
     .then(function(){
-      AuthStore.getUser()
-    })
+      AuthStore.getUser();
+    });
   }
-})
+});

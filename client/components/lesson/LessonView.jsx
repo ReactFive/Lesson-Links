@@ -5,6 +5,7 @@ var _ = require('lodash');
 var Actions = require('../../actions');
 var LessonStore = require('../../stores/lesson-store.js');
 var Reflux = require('reflux');
+//var Constrainable = require('rnr-constrained-route');
 
 var LessonView = React.createClass({
   
@@ -16,6 +17,7 @@ var LessonView = React.createClass({
     Actions.fetchLesson(this.context.router.getCurrentParams().url)
     Actions.followLesson(this.context.router.getCurrentParams().url)
   },
+
   render: function() {
     return (
       <div>
