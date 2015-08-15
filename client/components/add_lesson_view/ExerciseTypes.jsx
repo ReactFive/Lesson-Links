@@ -17,13 +17,9 @@ var ExerciseTypes = React.createClass({
     }
   },
 
-  // shouldComponentUpdate: function() {
-  //   return false;
-  // },
-
   render: function() {
     return (
-        <div id="ExerciseTypeSelection" className="col-md-4">
+        <div id="ExerciseTypeSelection" className="col-xs-4">
 
           <form name="exerciseTypeForm" onSubmit={this.handleSubmit}>
             <Select
@@ -46,10 +42,6 @@ var ExerciseTypes = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     this.props.chooseType(this.state.selectedType);
-    // Actions.createExercise({
-    //   time: videojs('attachmentVideo').currentTime(),
-    //   type: this.state.selectedType
-    // });
   }
 })
 

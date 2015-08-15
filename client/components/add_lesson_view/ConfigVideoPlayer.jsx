@@ -48,7 +48,7 @@ var VideoPlayer = React.createClass({
       this.state.lesson.exercises.length);
     return (
       this.state.lesson && this.state.lesson.video_url ?
-          <div className="col-md-6 col-md-offset-1">
+          <div className="col-xs-7 col-xs-offset-1">
             <div className="">
               <video id='attachmentVideo'
                 className='video-js vjs-default-skin'

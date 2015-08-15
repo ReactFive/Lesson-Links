@@ -5,6 +5,8 @@ var Actions = require('../../actions');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var VideoPlayer = require('./ConfigVideoPlayer.jsx');
 var ExerciseTypes = require('./ExerciseTypes.jsx');
+var CurrentExercisesList = require('./CurrentExercisesList.jsx');
+
 var MultiChoiceCreation = require('../basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('../basicExercises/TrueFalseCreation.jsx');
 
@@ -32,12 +34,14 @@ var LessonConfiguration = React.createClass({
       <div>
         <div className="row">
           <VideoPlayer />
-          {!this.state.editing && 
-            <ExerciseTypes chooseType={this.setEditing} />
-          }
+          <CurrentExercisesList />
         </div>
+        <div className="row">
+        {!this.state.editing && 
+          <ExerciseTypes chooseType={this.setEditing} />}
         {this.state.editing && 
           this.mapExerciseType()}
+        </div>
       </div>
     );
   },
