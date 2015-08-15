@@ -12,6 +12,7 @@ var Library = React.createClass({
   mixins: [Reflux.connect(AuthStore, 'auth')],
 
   getInitialState: function(){
+    Actions.getUser();
   },
 
   componentWillMount: function(){
@@ -22,11 +23,11 @@ var Library = React.createClass({
     {/*Declare apostrophe*/}
     var apo = "'";
 
-    console.log(this.auth);
-    if (this.auth.user){
-      var user = this.auth.user;
+    if (this.state.auth && this.state.auth.user){
+      //var user = this.state.auth.user;
       {/*Grab User's Name*/}
-      var name = user.local.name;
+      console.log("here is the user", this.state.auth.user);
+      var name = this.state.auth.user.local.name;
 
       return (
         <div className="lib-lesson-container">
