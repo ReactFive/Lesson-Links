@@ -22,23 +22,29 @@ var LibLessonEntry = React.createClass({
     var boundClick = handleClick.bind(this,index);
 
 
-    return <span className="lib-lesson-entry" id="pulse" key={index}>
-        <p>
-          <p className="lib-less-title">
-            <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
-              {lesson.title || 'title not found'}
-            </a>
-          </p>
-          <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}</p>
-        </p> 
-        <p>
-          {owner ? lesson.publish ? 
-            <a className="lib-lock" onClick={boundClick}>Published< /a> : 
-            <a className="lib-lock" onClick={boundClick}>Not Published< /a> 
-          : ''}
-          
-        </p> 
-      </span>
+
+    return <div className="row">
+      <div className="col12">
+        <div className="lib-lesson-entry" id="pulse" key={index}>
+          <img className="videoSnippet" src="../../public/assets/video_sample.png"></img>
+          <div className="lib-lesson-info">
+            <p className="lib-less-title">
+              <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
+                {lesson.title || 'title not found'}
+              </a>
+              <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}
+              </p>
+            </p>
+            <p className="lib-lesson-stats">
+              Comments: 12    Exercises: 5
+              <p>
+                Published: June 20th, 2015 2:45PM
+              </p>
+            </p>
+          </div>
+        </div> 
+      </div>
+    </div>
     })
      return (
         <span >
