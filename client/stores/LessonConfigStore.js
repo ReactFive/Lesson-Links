@@ -25,9 +25,21 @@ var LessonConfigStore = Reflux.createStore({
   },
 
   createExercise: function(exercise) {
+    exercise.text = exercise.text || "Exercise!";
     this.lesson.exercises.push(exercise);
     this.trigger(this.lesson);
     //Api.updateLesson(this.lesson);
+  },
+
+  updateAndTrigger: function(){
+    var self = this;
+    Api.updateLesson(this.lesson)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.trigger(this.lesson);
   },
 
   /* this is for testing purposes */

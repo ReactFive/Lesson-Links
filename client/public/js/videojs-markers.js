@@ -8,6 +8,7 @@
    var defaultSetting = {
       markerStyle: {
          'width':'7px',
+         'height':'7px',
          'border-radius': '30%',
          'background-color': 'red'
       },
