@@ -1,27 +1,27 @@
 @import "Theme.scss";
 
 .lib-lesson-entry{
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 7px solid $dark-purple;
+  height: 100px;
+  border: 1px solid $dark-purple;
   background: $light-purple;
   color: $dark-purple;
-  margin: 7px;
-  padding-left: 5px;
-  text-align: center;
+  text-align: left;
+  line-height: 1.5;
 }
 
 .titleAnchor{
-  width: 180px;
   color: $dark-purple;
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   font-family: $subheader-font;
-  padding-bottom: 5%;
-  padding-top: 10%;
+  padding-bottom: 0%;
+  padding-top: 0%;
+}
+
+.videoSnippet{
+  max-height:100%;
 }
 
 .titleAnchor:hover{
@@ -33,11 +33,14 @@
     float: left;
 }
 
+.lib-lesson-info{
+  display: inline-block;
+  margin-left: 10px;
+}
+
 .filterColor{
   color: $dark-blue;
   border-bottom: 1px solid $dark-blue;
-  padding-bottom: 5px;
-
 }
 
 .test67 :hover{
@@ -56,15 +59,12 @@
 }
 
 .lib-less-author{
-  width: 180px;
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   font-weight: 300;
   font-size: 16px;
-  padding-bottom: 15%;
-  padding-top: 10%;
 }
 
 .lib-lock{
@@ -76,19 +76,6 @@
 .lib-lock:hover{
   text-decoration: none;
   color: $dark-pink;
-}
-
-#library-view{
-  padding-left: 40px;
-}
-
-.lib-add-lesson{
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 7px dashed;
-  color: $dark-purple;
-  text-align: center;
 }
 
 @keyframes pulse {

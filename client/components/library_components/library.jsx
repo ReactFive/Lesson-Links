@@ -30,13 +30,15 @@ var Library = React.createClass({
       var name = this.state.auth.user.local.name;
 
       return (
-        <div className="lib-lesson-container">
-          <div id="library-filter-header">
-            <h1 className="filterColor">
-              {name}{apo}s Library
-            </h1>
+        <div className="container lib-lesson-container">
+          <div className="row">
+            <div id="library-filter-header">
+              <h1 className="filterColor">
+                {name}{apo}s Library
+              </h1>
           </div>
-          <div className="library-filter">
+        </div>
+          <div className="col-md-12 library-filter">
             <LibLessonEntry lessons = {
               _.filter(user.lessons, function(lesson){return lesson.teacher.id === user._id
               })
