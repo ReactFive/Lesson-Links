@@ -14,6 +14,7 @@ var AddLessonView = require('./components/add_lesson_view/AddLessonView.jsx');
 var NotFound = require('./components/404/NotFound.jsx');
 var LessonConfiguration = require('./components/add_lesson_view/LessonConfiguration.jsx');
 var Exercise = require('./components/basicExercises/Multichoice.jsx');
+var ExerciseTrueFalse = require('./components/basicExercises/TrueFalse.jsx');
 var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('./components/basicExercises/TrueFalseCreation.jsx');
 var EditView = require('./components/edit/EditView.jsx');
@@ -30,6 +31,7 @@ var routes = (
         <Redirect from="/edit" to="/configure"/>
         {/*these two routes are for development purposes*/}
         <Route path='/exercise' handler={Exercise} />
+        <Route path='/exerciseTF' handler={ExerciseTrueFalse} />
         <Route path='/multiplechoice' handler={MultiChoiceCreation} />
         <Route path='/truefalse' handler={TrueFalseCreation} />
         <Route path='/:url' handler={LessonView} />
