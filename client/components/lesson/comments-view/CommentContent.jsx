@@ -14,6 +14,13 @@ var CommentContent = React.createClass({
     }
   },
 
+  componentWillMount: function(){
+    //grabs pre-exiting data about the comment, such as whether the user has liked it or whether it is starred
+    this.state.user = window.currentUser;
+    this.state.liked = this.props.comment.likes.indexOf(this.state.user._id) >= 0;
+    this.state.starred = this.props.comment.star;
+  },
+
   toggleLikeButton: function(e) {
     e.preventDefault();
     this.setState({ liked: !this.state.liked });
@@ -24,41 +31,27 @@ var CommentContent = React.createClass({
     this.setState({ starred: !this.state.starred });
   },
 
-  onChange: function(event, user) {
-    this.setState({user : user});
-  },
-
-  componentWillMount: function(){
-    this.state.user = window.currentUser;
-    //for the comment, will look to see if the user has already liked it or not, and set it accordingly
-    this.state.liked = this.props.comment.likes.indexOf(this.state.user._id) >= 0;
-
-    //for the comment, will check to see if it's starred/unstarred and set it accordingly
-    this.state.starred = this.props.comment.star;
-  },
-
-  deleteComment: function(e){
-    e.preventDefault();
-    Actions.deleteComment(this.props.comment.key);
-  },
-
   likeComment: function(e){
     e.preventDefault();
-    Actions.likeComment(this.props.comment.key, this.state.user._id);
+    Actions.likeComment(this.props.comment._id, this.state.user._id);
     this.toggleLikeButton(e);
   },
 
   unlikeComment: function(e){
     e.preventDefault();
-    Actions.unlikeComment(this.props.comment.key, this.state.user._id);
+    Actions.unlikeComment(this.props.comment._id, this.state.user._id);
     this.toggleLikeButton(e);
   },
 
   starComment: function(e){
     e.preventDefault();
-    // Mark that comment as 'starred' or 'unstarred' on the server by toggling it's star property
-    Actions.starComment(this.props.comment.key, this.state.user._id);
+    Actions.starComment(this.props.comment._id, this.state.user._id);
     this.toggleStarButton(e);
+  },
+
+  deleteComment: function(e){
+    e.preventDefault();
+    Actions.deleteComment(this.props.comment._id);
   },
 
   render: function() {
