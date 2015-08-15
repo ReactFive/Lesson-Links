@@ -23,7 +23,10 @@ var ReplySubmissionBox = React.createClass({
     e.preventDefault();
 
     var replyObj = {
-      author: window.currentUser.local.name,
+      author: {
+        name: window.currentUser.local.name,
+        id: window.currentUser._id
+      },
       text: this.state.text,
       likes: [],
       star: false,

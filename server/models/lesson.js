@@ -61,7 +61,11 @@ var lessonSchema = new mongoose.Schema ({
     },
     replies   :
     [{
-      author    : String,
+      author    : 
+      {
+        name  : String,
+        id    : String
+      },
       text      :
       {
         type    : String,
