@@ -39,7 +39,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-warning text-center" id="qid"></span>Incorrect</h3>
+                    <h3><span className="label label-warning text-center" id="qid"><i className="fa fa-thumbs-down fa-lg"></i></span>Incorrect</h3>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">
@@ -65,7 +65,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-success text-center" id="qid"></span>Correct!</h3>
+                    <h3><span className="label label-success text-center" id="qid"><i className="fa fa-thumbs-up fa-lg"></i></span>Correct!</h3>
                   </div>
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
