@@ -13,11 +13,11 @@ function createSeedExercise() {
   Exercise.find({}).exec(function(err, collection) {
     if (collection.length === 0) {
       Exercise.create({
-      user: "Rick",
-      exercise: {"this":{"that": "this"}}
-    });
- }
-});
+        user: "Rick",
+        exercise: {"this":{"that": "this"}}
+      });
+    }
+  });
 }
 
 createSeedExercise();
