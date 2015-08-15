@@ -28,19 +28,20 @@ var Library = React.createClass({
       return (
         <div className="lib-lesson-container">
           <div id="library-filter-header">
-            <h1>{name}{apo}s Library</h1>
+            <h1 className="filterColor">
+              {name}{apo}s Library
+            </h1>
           </div>
-          <div id="library-filter" className="row">
+          <div className="library-filter">
             <LibLessonEntry lessons = {
               _.filter(user.lessons, function(lesson){return lesson.teacher.id === user._id
               })
             } owner = {true}/>
-            <LibAddLesson />
           </div>
-          <div id="library-filter-header">
-            <h1>{name}{apo}s Studies</h1>
+          <div className="library-filter-header">
+            <h1 className="filterColor">{name}{apo}s Studies</h1>
           </div>
-          <div id="library-filter">
+          <div className="library-filter row">
             <LibLessonEntry lessons = {
               _.filter(user.lessons, function(lesson){return lesson.teacher.id !== user._id
               })

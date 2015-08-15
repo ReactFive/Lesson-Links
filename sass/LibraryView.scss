@@ -12,36 +12,74 @@
   text-align: center;
 }
 
+.titleAnchor{
+  width: 180px;
+  color: $dark-purple;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-family: $subheader-font;
+  padding-bottom: 5%;
+  padding-top: 10%;
+}
+
+.titleAnchor:hover{
+  text-decoration: none;
+  color: $dark-pink
+}
+
+.library-filter{
+    float: left;
+}
+
+.filterColor{
+  color: $dark-blue;
+  border-bottom: 1px solid $dark-blue;
+  padding-bottom: 5px;
+
+}
+
+.test67 :hover{
+  border-color: $dark-pink;
+  background: $light-pink;
+  color: $dark-pink;
+}
+
+.dummy{
+  margin-top: 100%;
+}
+
 .lib-less-title{
   font-weight: bold;
   font-size: 22px;
 }
 
 .lib-less-author{
+  width: 180px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-weight: 300;
   font-size: 16px;
+  padding-bottom: 15%;
+  padding-top: 10%;
 }
 
 .lib-lock{
   font-size: 12px;
   text-decoration: none;
+  color: $dark-purple;
 }
 
 .lib-lock:hover{
   text-decoration: none;
   color: $dark-pink;
-
 }
 
-.library-filter-header{
-  font-size: 16px;
-}
-
-.lib-lesson-container{
-}
-
-.lib-filter-header{
-  color: $dark-purple;
+#library-view{
+  padding-left: 40px;
 }
 
 .lib-add-lesson{
@@ -50,29 +88,23 @@
   width: 200px;
   border: 7px dashed;
   color: $dark-purple;
-  margin: 7px;
-  padding-left: 5px;
   text-align: center;
-  p{
-    font-weight: bold;
-    font-size: 150px;
-    color: $dark-purple;
-    line-height: 1.25;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
   }
-  p:hover{
-    font-size: 200px;
-    text-decoration: none;
-    color: $dark-pink;
-    line-height: 0.99;
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
   }
 }
 
-.lib-lock{
-  a{
-    text-decoration: none;
-    color: $dark-purple;
-  a:hover{
-    text-decoration: none;
-  }
-  }
+#pulse {
+  animation-name: pulse;
 }
