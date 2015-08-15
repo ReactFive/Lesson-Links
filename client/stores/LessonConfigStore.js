@@ -14,13 +14,19 @@ var LessonConfigStore = Reflux.createStore({
     .then(function(res){
       console.log("successfully created lesson");
       console.log(lesson);
+      self.validURL = true; 
+      self.createdLesson = true; 
+      self.trigger(self.validURL);
+      self.trigger(self.createdLesson);
       self.lesson = res.data;
       self.trigger(self.lesson);
       Actions.getUser();
     }) 
     .catch(function(res){
       console.log("failed to create lesson");
-      console.log(res);
+      console.log(res.data.reason);
+      self.validURL = false;
+      self.trigger(self.validURL);
     })
   },
 
@@ -35,23 +41,8 @@ var LessonConfigStore = Reflux.createStore({
     console.log("sending exercise to database", newExercise);
     Api.createExercise(newExercise);
     this.trigger(this.lesson);
-  },
-
-
-  /* this is for testing purposes */
-  init: function() {
-    var self = this;
-    setTimeout(function() {
-      if(!self.lesson) {
-        Api.getLesson('love')
-        .then(function(res) {
-          self.lesson = res.data;
-          self.trigger(self.lesson);
-        })
-      }
-    }, 500);
+    //Api.updateLesson(this.lesson);
   }
-  /* end testing */
 
 });
 

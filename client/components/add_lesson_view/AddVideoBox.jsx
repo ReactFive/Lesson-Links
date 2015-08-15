@@ -6,36 +6,73 @@ var Actions = require('../../actions.js');
 var Navigation = Router.Navigation;
 
 var AddVideoBox = React.createClass({
-    mixins: [Navigation],
+  mixins: [Navigation, Reflux.connect(LessonConfigStore, "validURL"), Reflux.connect(LessonConfigStore, "createdLesson")],
 
-    getInitialState: function(){
-      return {
-        title: '',
-        video_url: '',
-        lesson_url: '',
-        published: false      
-      }
-    },
+  getInitialState: function(){
+    return {
+      title: '',
+      video_url: '',
+      lesson_url: '',
+      published: false,
+      validURL: true,
+      createdLesson: false  
+    }
+  },
 
-    onInputChange: function(e){
-      this.setState({title: React.findDOMNode(this.refs.title).value})
-      this.setState({video_url: React.findDOMNode(this.refs.video_url).value})
-      this.setState({lesson_url: React.findDOMNode(this.refs.lesson_url).value})
-    },
+  onInputChange: function(e){
+    this.setState({title: React.findDOMNode(this.refs.title).value})
+    this.setState({video_url: React.findDOMNode(this.refs.video_url).value})
+    this.setState({lesson_url: React.findDOMNode(this.refs.lesson_url).value})
+  },
 
-    handleSubmit: function(e){
-      e.preventDefault();
-      Actions.createLesson({
-        title: this.state.title,
-        video_url: this.state.video_url,
-        lesson_url: this.state.lesson_url,
-        published: this.state.published
-      });
-      this.transitionTo('/configure');
+  handleSubmit: function(e){
+    e.preventDefault();
+    Actions.createLesson({
+      title: this.state.title,
+      video_url: this.state.video_url,
+      lesson_url: this.state.lesson_url,
+      published: this.state.published 
+    });
+  },
 
-    },
+  gotoConfigure: function(e){
+    e.preventDefault();
+    this.transitionTo('/configure');
+  },
     
   render: function() {
+    //This error message appears underneath the video URL if it is already in the database
+    var errorMessage =  this.state.validURL ? null : 
+      <div className="invalid-URL-error">
+        <p>This URL is taken. Please try a different one.</p>
+      </div>
+
+    //This success message appears underneath the form when the lesson is successfully saved.
+    var successMessage = this.state.createdLesson ? 
+      <div className="success-message">
+        <p>Nice bruh! Your lesson has been created: </p>
+        <p>Title:  {this.state.title}</p>
+        <p>Video:  {this.state.video_url}</p>
+        <p>Your lessons unique URL: www.lesson-links.com/ {this.state.lesson_url}</p>
+        <br/>
+        <p>Click NEXT to configure your lesson exercises</p>
+      </div>
+      : null;
+
+
+    //Once the user successfully creates a lesson, saves it successfully, and clicks 'save',
+    //the button changes to 'next' so they can click it to continue to the configure page.
+    var button = this.state.createdLesson ? 
+      <button
+        type="submit" 
+        className="btn btn-primary pull-right"
+        onClick={this.gotoConfigure}>Next</button>
+      :
+      <button
+        type="submit" 
+        className="btn btn-primary pull-right"
+        onClick={this.handleSubmit}>Save</button>
+    
     return (
       <div className="lesson-create col-xs-8 col-xs-offset-1">
         <div className="panel panel-default">
@@ -85,13 +122,14 @@ var AddVideoBox = React.createClass({
                   ref="lesson_url"
                   value={this.state.lesson_url}
                   onChange={this.onInputChange} />
+                {errorMessage}
               </div>
             </div>
 
-            <button
-              type="submit" 
-              className="btn btn-primary pull-right"
-              onClick={this.handleSubmit}>Save & Continue</button>
+            {successMessage}
+
+            {button}
+
           </form>
           </div>
         </div>
@@ -102,3 +140,7 @@ var AddVideoBox = React.createClass({
 });
 
 module.exports = AddVideoBox;
+
+
+
+
