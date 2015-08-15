@@ -113,9 +113,10 @@ module.exports = Reflux.createStore({
     this.updateAndTrigger();
   },
 
-  starComment: function(replyID, commentID, userID){
+  starReply: function(replyID, commentID){
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
+
     this.lesson.comments[commentIndex].replies[replyIndex].star = !this.lesson.comments[commentIndex].replies[replyIndex].star;
     this.updateAndTrigger();
   },
