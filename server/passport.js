@@ -78,8 +78,6 @@ module.exports = function(passport) {
       // if there are any errors, return the error before anything else
       if (err)
         return done(err);
-
-
       // if no user is found, return the message
       if (!user)
         return done(null, false); // req.flash is the way to set
@@ -92,7 +90,6 @@ module.exports = function(passport) {
           // and save it to session as flashdata
         } else {
           // all is well, return successful user
-          console.log("is there a lesson?");
           var newUser = _.omit(user, "password");
           return done(null, newUser);
         }
