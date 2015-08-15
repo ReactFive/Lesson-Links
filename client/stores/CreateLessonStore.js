@@ -18,19 +18,16 @@ var CreateLessonStore = Reflux.createStore({
 
     Api.createLesson(lesson)
     .then(function(res){
-      console.log("successfully created lesson");
-      console.log(lesson);
+      console.log("successfully created lesson: ", res.data);
       self.result = {};
       self.result.validURL = true; 
       self.result.createdLesson = true; 
       self.trigger(self.result);
-      console.log("it worked. Here it is: ", res.data);
       Actions.sendLesson(res.data);
       Actions.getUser();
     }) 
     .catch(function(res){
       console.log("failed to create lesson");
-
       self.result = {};
       self.result.validURL = false;
       self.trigger(self.result);
