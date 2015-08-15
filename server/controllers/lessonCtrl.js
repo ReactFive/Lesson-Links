@@ -60,6 +60,7 @@ exports.updateLesson = function(req, res, next){
 
 exports.createLesson = function(req, res, next){
     console.log(req.user)
+
     var newLesson = new Lesson ({
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,
@@ -74,7 +75,10 @@ exports.createLesson = function(req, res, next){
     newLesson.save(function(err, lesson){
       if(err) {
         if(err.toString().indexOf('E11000') > -1) {
+          //lesson_url is the only one required to be unique on the schema, so if we get this E11000 error
+          //from mongolabs it's because the submitted lesson url already exists. 
           err = new Error('This lesson url already exists');
+          console.log(err);
           res.status(409);
           return res.send({reason:err.toString()});
         } else {
