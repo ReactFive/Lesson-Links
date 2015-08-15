@@ -33,7 +33,7 @@ var lessonSchema = new mongoose.Schema ({
     default   : true
   },
   comments    : [{
-    marked_at :
+    time      :
     {
       type    : Number,
       required: true
@@ -61,7 +61,11 @@ var lessonSchema = new mongoose.Schema ({
     },
     replies   :
     [{
-      author    : String,
+      author    : 
+      {
+        name  : String,
+        id    : String
+      },
       text      :
       {
         type    : String,
@@ -70,14 +74,15 @@ var lessonSchema = new mongoose.Schema ({
       },
       likes     : 
       {
-      type   : Array,
-      default : []
+        type   : Array,
+        default : []
       },
       star      : 
       {
         type    : Boolean,
         default : false
-      }
+      },
+      parent    : String
     }]
   }],
   teacher      :
@@ -128,7 +133,7 @@ function createSeedLesson() {
           name: "Rick"
         },
         comments: [{
-          marked_at : 13.345,
+          time      : 13.345,
           author    : "Abhi",
           text      : "I didn't really get what you are doing with that for loop?",
           replies   : [{
