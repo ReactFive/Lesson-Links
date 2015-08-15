@@ -34,11 +34,11 @@ var CommentSubmissionBox = React.createClass({
       this.onToggleCommentForm();
     }
   },
+
   handleSubmit: function(e){
     e.preventDefault();
     Actions.submitComment({
       text: this.state.text,
-      marked_at: videojs('attachmentVideo').currentTime(),
       time: videojs('attachmentVideo').currentTime(),
       replies: [],
       likes: [],

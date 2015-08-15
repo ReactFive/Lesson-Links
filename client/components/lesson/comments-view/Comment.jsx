@@ -20,7 +20,6 @@ var Comment = React.createClass({
       <li className="comment-box">
         <CommentContent comment={this.props.comment} toggleReplyForm={this.onToggleReplyForm}/>
         <ReplyList replies={this.props.comment.replies}/>
-
         <ReplySubmissionBox id="reply-submission-box"
           comment={this.props.comment}
           showReplyForm={this.state.showReplyForm}

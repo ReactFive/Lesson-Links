@@ -1,12 +1,10 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Actions = require('../actions');
-var AuthStore = require('./AuthStore')
 var _ = require('lodash');
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
-  mixins: [Reflux.connect(AuthStore)],
 
   init: function() {},
 
@@ -16,9 +14,19 @@ module.exports = Reflux.createStore({
     Api.getLesson(url)
     .then(function(res) {
       self.lesson = res.data;
-      console.log(self.lesson)
       self.trigger(self.lesson);
     })
+  },
+
+  updateAndTrigger: function(){
+    var self = this;
+    Api.updateLesson(this.lesson)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.trigger(this.lesson);
   },
 
   followLesson : function(url){
@@ -45,78 +53,102 @@ module.exports = Reflux.createStore({
 
   submitComment: function(comment) {
     this.lesson.comments.push(comment);
-    this.trigger(this.lesson);
-    Api.updateLesson(this.lesson);
+    this.updateAndTrigger();
   },
 
-  deleteComment: function(commentKey){
-    //find the index of the comment to which the reply should be added
-    var commentIndex;
-    _.forEach(this.lesson.comments, function(comment, key){
-      if(comment.key === commentKey){
-        commentIndex = key;
-      }
-    })
-
-    //remove the index
+  deleteComment: function(commentID){
+    var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments.splice(commentIndex, 1);
-    this.trigger(this.lesson);
-    Api.updateLesson(this.lesson);
-
+    this.updateAndTrigger();
   },
 
-  likeComment: function(commentKey, userID){
-    //find the index of the comment to which the reply should be added
-    var commentIndex;
-    _.forEach(this.lesson.comments, function(comment, key){
-      if(comment.key === commentKey){
-        commentIndex = key;
-      }
-    })
-    
+  likeComment: function(commentID, userID){
+    var commentIndex = this.findCommentIndex(commentID);
     if(this.lesson.comments[commentIndex].likes.indexOf(userID)  === -1){
       this.lesson.comments[commentIndex].likes.push(userID);
     }
-
-    this.trigger(this.lesson);
-    Api.updateLesson(this.lesson);
+    this.updateAndTrigger();
   },
 
-  unlikeComment: function(commentKey, userID){
-    //find the index of the comment to which the reply should be added
-    var commentIndex;
-    _.forEach(this.lesson.comments, function(comment, key){
-      if(comment.key === commentKey){
-        commentIndex = key;
-      }
-    })
-    
+  unlikeComment: function(commentID, userID){
+    var commentIndex = this.findCommentIndex(commentID);
     if(this.lesson.comments[commentIndex].likes.indexOf(userID) >= 0){
       var index = this.lesson.comments[commentIndex].likes.indexOf(userID);
       this.lesson.comments[commentIndex].likes.splice(index, 1);
     }
+    this.updateAndTrigger();
+  },
 
-    this.trigger(this.lesson);
-    Api.updateLesson(this.lesson);
+  starComment: function(commentID, userID){
+    var commentIndex = this.findCommentIndex(commentID);
+    this.lesson.comments[commentIndex].star = !this.lesson.comments[commentIndex].star;
+    this.updateAndTrigger();
   },
 
 
-  submitReply: function(reply, commentKey) {
-    //wrap the reply in an object
-    var replyObj = {
-      author: reply.author,
-      text: reply.text
-    };
-    //find the index of the comment to which the reply should be added
-    var commentIndex;
-    _.forEach(this.lesson.comments, function(comment, key){
-      if(comment.key === commentKey){
-        commentIndex = key;
+  submitReply: function(reply, commentID) {
+    var commentIndex = this.findCommentIndex(commentID);
+    this.lesson.comments[commentIndex].replies.push(reply);
+    this.updateAndTrigger();
+  },
+
+  likeReply: function(replyID, commentID, userID) {
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+    if(this.lesson.comments[commentIndex].replies[replyIndex].likes.indexOf(userID)  === -1){
+      this.lesson.comments[commentIndex].replies[replyIndex].likes.push(userID);
+    }
+    this.updateAndTrigger();
+  },
+
+  unlikeReply: function(replyID, commentID, userID) {
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+    var likes = this.lesson.comments[commentIndex].replies[replyIndex].likes;
+    var index = likes.indexOf(userID);
+
+    if(index >= 0){
+      likes.splice(index, 1);
+    }
+    this.updateAndTrigger();
+  },
+
+  starReply: function(replyID, commentID){
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+
+    this.lesson.comments[commentIndex].replies[replyIndex].star = !this.lesson.comments[commentIndex].replies[replyIndex].star;
+    this.updateAndTrigger();
+  },
+
+  deleteReply: function(replyID, commentID) {
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+
+    this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
+    this.updateAndTrigger();
+  },
+
+  findCommentIndex: function(commentID){
+    var index;
+    _.forEach(this.lesson.comments, function(comment, i){
+      if(comment._id === commentID){
+        index = i;
       }
     })
-    //add the reply to the comments
-    this.lesson.comments[commentIndex].replies.push(replyObj);
-    this.trigger(this.lesson);
-    Api.updateLesson(this.lesson);
-  }
+    return index;
+  },
+
+  findReplyIndex: function(commentIndex, replyID){
+    var index;
+    _.forEach(this.lesson.comments[commentIndex].replies, function(reply, i){
+      if(reply._id === replyID){
+        index = i;
+      }
+    })
+    return index;
+  },
+
+
+
 })

@@ -10,8 +10,7 @@ var CommentList = React.createClass({
   mixins: [Reflux.connect(LessonStore, "lesson")],
   
   render: function() {
-
-    if (this.state.lesson) {
+    if (this.state.lesson && this.state.lesson.comments.length) {
       var that=this;
       var comments = _.sortBy(this.state.lesson.comments,function(o){
 		    return o.likes.length;
@@ -21,7 +20,7 @@ var CommentList = React.createClass({
         return comment.time >= 0 ;
       })
       .map(function(comment, index) {
-        return <Comment key={comment.text + "key"} comment={comment} submitReply={that.props.submitReply}/>
+        return <Comment key={comment._id} comment={comment} submitReply={that.props.submitReply}/>
       });
   
       return (
