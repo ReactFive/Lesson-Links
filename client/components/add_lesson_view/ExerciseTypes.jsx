@@ -19,17 +19,20 @@ var ExerciseTypes = React.createClass({
 
   render: function() {
     return (
-        <div id="ExerciseTypeSelection" className="col-xs-4">
+        <div id="ExerciseTypeSelection" className="">
 
-          <form name="exerciseTypeForm" onSubmit={this.handleSubmit}>
-            <Select
-              ref="ExerciseType"
-              name="Type of Exercise"
-              placeholder="Select the type of exercise"
-              options={this.state.exerciseTypes}
-              onChange={this.updateSelected} />
+          <form id="exerciseTypeForm" className="form-inline" onSubmit={this.handleSubmit}>
+            <div className="row">
+              <Select
+                className="col-xs-6 col-xs-offset-1"
+                ref="ExerciseType"
+                name="Type of Exercise"
+                placeholder="Select the type of exercise"
+                options={this.state.exerciseTypes}
+                onChange={this.updateSelected} />
 
-            <button className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
+              <button className="col-xs-3 signup-cancel-btn btn btn-primary">Add to your lesson</button>
+            </div>
           </form>
         </div>
     )

@@ -37,8 +37,8 @@ var VideoPlayer = React.createClass({
     // initialize video.js
     var player = videojs('attachmentVideo');
     if(typeof player.markers === 'function') {
-        player.markers({
-        markers: []
+      player.markers({
+        markers: this.state.lesson.exercises
       });
     }
 
