@@ -3,7 +3,7 @@ var Reflux = require('reflux');
 var LibraryStore = require('../../stores/LibraryStore')
 var LibAddLesson = require('./LibAddLesson.jsx')
 var AuthStore = require('../../stores/AuthStore')
-var Actions = require('../../action');
+var Actions = require('../../actions');
 var Router = require('react-router')
 var Link = Router.Link;
 
