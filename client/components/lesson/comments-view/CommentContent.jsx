@@ -54,6 +54,54 @@ var CommentContent = React.createClass({
     Actions.deleteComment(this.props.comment._id);
   },
 
+  getTimestamp: function(time){
+    //OPTION A (Youtube format)
+    //e.g. 00:23
+    //e.g. 02:23:01
+    
+    var hours = Math.floor(time/(60*60))
+    var minutes = Math.floor(time/60%60)
+    var seconds = Math.floor(time%60)
+
+    var mins= (minutes>9 ? "" + minutes: "0" + minutes)
+    var secs= (seconds>9 ? "" + seconds: "0" + seconds)
+
+    var timestamp = "";
+    if(hours > 0) timestamp = hours + ":" + mins + ":" + secs;
+    else if(minutes>0) timestamp = mins + ":" + secs;
+    else  timestamp += mins + ":" + secs;
+
+    return timestamp; 
+
+    //OPTION B 
+    //e.g. 2 hours 40 minutes and 21 seconds
+    //e.g. 1 minute and 20 seconds
+    //
+    // var hours = Math.floor(time/(60*60))
+    // var minutes = Math.floor(time/60)
+    // var seconds = Math.floor(time%60)
+    // 
+    // var hrs = ""
+    // var mins = ""
+    // var secs = ""
+    // 
+    // if(hours===1) hrs = "" + hours + " hour "
+    // else hrs = "" + hours + " hours "
+
+    // if(minutes===1) mins = "" + minutes + " minute "
+    // else mins = "" + minutes + " minutes "
+
+    // if(seconds===1) secs = "" + seconds + " second "
+    // else secs = "" + seconds + " seconds "
+
+    // var timestamp = "";
+    // if(hours>0) timestamp = hrs + mins + " and " + secs;
+    // else if(minutes>0) timestamp = mins + " and " + secs;
+    // else  timestamp += secs;
+    
+    return timestamp;
+  },
+
   render: function() {
 
     if(LessonStore.lesson){
@@ -91,7 +139,7 @@ var CommentContent = React.createClass({
         <div className="comment-content">
           { this.state.starred ? {fullStar} : {emptyStar} }
           <p className="comment-author">{this.props.comment.author.name} </p> 
-          <p className="comment-video-timestamp">@ {this.props.comment.time} seconds </p> 
+          <p className="comment-video-timestamp">@ {this.getTimestamp(this.props.comment.time)}</p> 
           <p className="comment-text">{this.props.comment.text} </p>
           <div className="comment-toolbar">
             { this.state.liked ? {likeButton} : {unlikeButton} }
