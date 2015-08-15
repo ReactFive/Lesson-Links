@@ -5,7 +5,7 @@ var ReplyList = React.createClass({
 
   render: function() {
     var replies = this.props.replies.map(function(reply, index) {
-      return <Reply key={reply.text + "2"} reply={reply}/>
+      return <Reply key={reply._id} reply={reply}/>
     });
     return ( 
       <ul id="reply-list">

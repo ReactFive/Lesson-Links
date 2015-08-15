@@ -27,10 +27,6 @@ var VideoPlayer = React.createClass({
   },
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted){
-      this.state.lesson.comments.forEach(function(comment) {
-        comment.time = comment.marked_at;
-      });
-
       var player = this.videoSetup(this.state.lesson.comments);
       this.setState({
         videoSetupCompleted : true,
