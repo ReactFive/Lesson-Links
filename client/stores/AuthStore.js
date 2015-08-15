@@ -23,7 +23,7 @@ module.exports = Reflux.createStore({
     var user = Identity().currentUser;
     if (user._id){
       this.auth.loggedIn = true;
-      this.getUser();
+      this.onGetUser();
       this.triggerChange();
     }
     return Api.getStatus()
@@ -42,7 +42,6 @@ module.exports = Reflux.createStore({
     return Api.getUser()
         .then(function (res) {
           if (res.data.user) {
-            console.log('updating user')
             this.auth.user = res.data.user;
             this.triggerChange();
           } else {
@@ -56,7 +55,6 @@ module.exports = Reflux.createStore({
     return Api.login(email, password)
     .then(function(res){
       this.auth.user = res.data.user;
-      console.log(this.auth.user)
       this.auth.loggedIn = true;
       this.triggerChange();
       toastr.options.fadeOut = 1000;

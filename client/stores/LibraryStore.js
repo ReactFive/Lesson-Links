@@ -9,13 +9,13 @@ module.exports = Reflux.createStore({
 
   init: function(){
   },
-  togglePublish: function(lesson){
+  onTogglePublish: function(lesson){
     api.updateLesson({
       lesson_url : lesson.lesson_url,
       publish : !lesson.publish
     })
     .then(function(){
-      AuthStore.getUser();
+      Actions.getUser();
     });
   }
 });
