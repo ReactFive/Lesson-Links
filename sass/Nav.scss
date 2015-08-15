@@ -78,7 +78,13 @@ $dropDown       : false;
   .navbar-link {
     color: $background-color;
     &:hover {
-      color: $dark-blue; }}}
+      color: $dark-blue; }}
+
+  #navbar-link {
+    color: $background-color;
+    &:hover {
+      color: $dark-blue; }}
+    }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu {
     > li > a {
