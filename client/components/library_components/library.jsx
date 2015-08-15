@@ -37,7 +37,6 @@ var Library = React.createClass({
               _.filter(user.lessons, function(lesson){return lesson.teacher.id === user._id
               })
             } owner = {true}/>
-            <LibAddLesson />
           </div>
           <div className="library-filter-header">
             <h1 className="filterColor">{name}{apo}s Studies</h1>

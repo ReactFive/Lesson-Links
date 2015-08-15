@@ -16,7 +16,10 @@ var LibLessonEntry = React.createClass({
       lessonList[index].publish = !lessonList[index].publish
     }
     var boundClick = handleClick.bind(this,index);
-    return <span className="lib-lesson-entry" key={index}>
+
+
+
+    return <span className="lib-lesson-entry" id="pulse" key={index}>
         <p>
           <p className="lib-less-title">
             <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
