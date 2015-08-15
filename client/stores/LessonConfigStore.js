@@ -33,6 +33,7 @@ var LessonConfigStore = Reflux.createStore({
     };
     this.lesson.exercises.push(newExercise);
     console.log("sending exercise to database", newExercise);
+    Api.createExercise(newExercise);
     this.trigger(this.lesson);
   },
 

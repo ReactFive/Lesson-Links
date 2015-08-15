@@ -36,6 +36,11 @@ module.exports.createLesson = function(lesson) {
   return axios.post(url, lesson);
 };
 
+module.exports.createExercise = function(exercise) {
+  var url = rootUrl + '/api/exercise';
+  return axios.post(url, exercise);
+}
+
 module.exports.updateUser = function(user) {
   var url  = rootUrl + '/api/user/'
   var obj = {

@@ -94,6 +94,7 @@ var TrueFalseCreation = React.createClass({
     var exercise = {};
     //exercise.time = time;
     exercise.type = "TrueFalse";
+    exercise.time = videojs("#attachmentVideo").currentTime();
     exercise.question = question;
     exercise.feedbackTrue = feedbackTrue;
     exercise.feedbackFalse = feedbackFalse;
