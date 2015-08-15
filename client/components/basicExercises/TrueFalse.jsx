@@ -9,8 +9,7 @@ var TrueFalse = React.createClass({
 
   getInitialState: function(){
     return {
-      name: "Exercise 1",
-      statement: "4 + 7 = 12",
+      prompt: "4 + 7 = 12",
       correct: false,
       posFeedback: "This was a fairly easy item, right?",
       negFeedback: "Oops, that should have been easy!?",
@@ -19,7 +18,8 @@ var TrueFalse = React.createClass({
   },
 
   handleClick: function(clickedOpt){
-    if(this.state.correct === clickedOpt) {
+    console.log(clickedOpt);
+    if(clickedOpt === "true") {
       this.setState({outcome: true});
     } else{
       this.setState({outcome: false});
@@ -29,35 +29,17 @@ var TrueFalse = React.createClass({
 
   render: function() {
     var view;
-    var i = this.state.item;
-    var number = this.state.counter;
-    var question = this.state.question;
-    var title = this.state.name;
-    var outcome = this.state.outcome;
-    var opts = this.state.options.map(function (option, index) {
-      number++;
-      var classString = "element-animation";
-      classString += number;
-      classString += " btn btn-lg btn-primary btn-block";
-      var refString = "opts";
-      refString += index;
-      var handle = this.handleClick;
-      return (
-          <label className={classString}>
-            <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-            <input onClick={handle.bind(null,index)} type="radio" name="q_answer" ref={refString}
-                   value={index}/>{option}</label>
-      )
-    }.bind(this));
-    console.log(outcome);
-    switch (outcome) {
+    var prompt = this.state.statement;
+    var title = this.state.title;
+
+    switch (this.state.outcome) {
       case false:
         view = (
             <div className="container-fluid">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-warning text-center" id="qid"></span>Incorrect</h3>
+                    <h3><span className="label label-warning text-center" id="qid"><i className="fa fa-thumbs-down fa-lg"></i></span>Incorrect</h3>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">
@@ -69,7 +51,6 @@ var TrueFalse = React.createClass({
                   </div>
                   <div className="modal-footer">
                     <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
-                    <Link activeClassName="active" to="/exercise"><button className="btn btn-primary try-again-btn">Try Again</button></Link>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -80,11 +61,11 @@ var TrueFalse = React.createClass({
         break;
       case true:
         view = (
-            <div className="container-fluid bg-info">
+            <div className="container-fluid">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-success text-center" id="qid"></span>Correct!</h3>
+                    <h3><span className="label label-success text-center" id="qid"><i className="fa fa-thumbs-up fa-lg"></i></span>Correct!</h3>
                   </div>
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
@@ -109,7 +90,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-warning" id="qid">{i}</span>{question}</h3>
+                    <h3><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.prompt}</h3>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">
@@ -126,7 +107,17 @@ var TrueFalse = React.createClass({
                       </div>
                     </div>
                     <div className="quiz" id="quiz" data-toggle="buttons">
-                      {opts}
+
+                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
+                      <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
+                      <input onClick={this.handleClick.bind(this, "true")} type="radio" name="q_answer" ref="true"
+                      value="true"/>TRUE</label>
+
+                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
+                        <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
+                        <input onClick={this.handleClick.bind(null, "false")} type="radio" name="q_answer" ref="false"
+                               value="false"/>FALSE</label>
+
                     </div>
                   </div>{/*end modal-body*/}
                   <div className="modal-footer text-muted">
