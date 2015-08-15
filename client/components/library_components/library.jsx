@@ -1,29 +1,33 @@
 var React = require('react');
 var Router = require('react-router');
-var LibraryStore = require('../../stores/LibraryStore')
-var AuthStore = require('../../stores/AuthStore')
+var LibraryStore = require('../../stores/LibraryStore');
+var AuthStore = require('../../stores/AuthStore');
+var Actions = require('../../actions.js');
 var Reflux = require('reflux');
 var LibLessonEntry = require('./LibLessonEntry.jsx');
 var LibAddLesson = require('./LibAddLesson.jsx');
-var _ = require('lodash')
+var _ = require('lodash');
 
 var Library = React.createClass({
-  mixins: [Reflux.connect(AuthStore)],
+  mixins: [Reflux.connect(AuthStore, 'auth')],
 
   getInitialState: function(){
+    Actions.getUser();
   },
 
   componentWillMount: function(){
   },
+
   render:function(){
 
     {/*Declare apostrophe*/}
-    var apo = "'"
-    console.log(AuthStore.auth.user)
-    if (AuthStore.auth.user){
-      var user = AuthStore.auth.user
+    var apo = "'";
+
+    if (this.state.auth && this.state.auth.user){
+      //var user = this.state.auth.user;
       {/*Grab User's Name*/}
-      var name = user.local.name
+      console.log("here is the user", this.state.auth.user);
+      var name = this.state.auth.user.local.name;
 
       return (
         <div className="lib-lesson-container">
@@ -51,7 +55,7 @@ var Library = React.createClass({
         </div>
       )
     } else {
-      AuthStore.getUser()
+      Actions.getUser();
       return null
     }
   }

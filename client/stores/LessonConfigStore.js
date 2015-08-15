@@ -1,7 +1,7 @@
 var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Actions = require('../actions');
-var AuthStore = require('./AuthStore')
+var AuthStore = require('./AuthStore');
 var _ = require('lodash');
 
 var LessonConfigStore = Reflux.createStore({
@@ -16,7 +16,7 @@ var LessonConfigStore = Reflux.createStore({
       console.log(lesson);
       self.lesson = res.data;
       self.trigger(self.lesson);
-      AuthStore.getUser();
+      Actions.getUser();
     }) 
     .catch(function(res){
       console.log("failed to create lesson");

@@ -11,9 +11,7 @@ var Actions = require('../../actions');
 var Library = require('./library.jsx');
 
 var LibraryView = React.createClass({
-  onLockClick: function(lock){
-    console.log("locked!")
-  },
+
   render: function() {
     return (
       <div id="library-view">

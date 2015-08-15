@@ -1,22 +1,25 @@
 var React = require('react');
-var LibraryStore = require('../../stores/LibraryStore')
-var LibAddLesson = require('./LibAddLesson.jsx')
-var AuthStore = require('../../stores/AuthStore')
-var Router = require('react-router')
+var Reflux = require('reflux');
+var LibraryStore = require('../../stores/LibraryStore');
+var LibAddLesson = require('./LibAddLesson.jsx');
+var AuthStore = require('../../stores/AuthStore');
+var Actions = require('../../actions');
+var Router = require('react-router');
 var Link = Router.Link;
 
 var LibLessonEntry = React.createClass({
+
+  mixins: [Reflux.connect(AuthStore,"auth")],
 
   render:function(){
     var owner = this.props.owner;
     var lessonList = this.props.lessons;
     var lessons = this.props.lessons.map(function(lesson, index){
     var handleClick = function(index, event){
-      LibraryStore.togglePublish(lessonList[index])
-      lessonList[index].publish = !lessonList[index].publish
-    }
+      Actions.togglePublish(lessonList[index]);
+      lessonList[index].publish = !lessonList[index].publish;
+    };
     var boundClick = handleClick.bind(this,index);
-
 
 
     return <span className="lib-lesson-entry" id="pulse" key={index}>

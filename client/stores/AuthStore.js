@@ -19,11 +19,11 @@ module.exports = Reflux.createStore({
     };
   },
 
-  authenticate: function(){
+  onAuthenticate: function(){
     var user = Identity().currentUser;
     if (user._id){
       this.auth.loggedIn = true;
-      this.getUser();
+      this.onGetUser();
       this.triggerChange();
     }
     return Api.getStatus()
@@ -38,11 +38,10 @@ module.exports = Reflux.createStore({
         }.bind(this));
   },
 
-  getUser: function(){
+  onGetUser: function(){
     return Api.getUser()
         .then(function (res) {
           if (res.data.user) {
-            console.log('updating user')
             this.auth.user = res.data.user;
             this.triggerChange();
           } else {
@@ -52,11 +51,10 @@ module.exports = Reflux.createStore({
         }.bind(this));
   },
 
-  login: function (email, password) {
+  onLogin: function (email, password) {
     return Api.login(email, password)
     .then(function(res){
       this.auth.user = res.data.user;
-      console.log(this.auth.user)
       this.auth.loggedIn = true;
       this.triggerChange();
       toastr.options.fadeOut = 1000;
@@ -72,7 +70,7 @@ module.exports = Reflux.createStore({
     }.bind(this));
   },
 
-  logout: function(){
+  onLogout: function(){
     this.auth.user = null;
     this.auth.loggedIn = false;
     delete window.currentUser;
@@ -81,7 +79,7 @@ module.exports = Reflux.createStore({
     return Api.logout();
   },
 
-  signup: function(name, email, password){
+  onSignup: function(name, email, password){
     return Api.signup(name, email, password)
       .then(function(res){
         this.auth.user = res.data.user;

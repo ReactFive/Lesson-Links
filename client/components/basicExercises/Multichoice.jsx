@@ -59,7 +59,7 @@ var Multichoice = React.createClass({
     switch (outcome) {
       case false:
         view = (
-            <div className="container-fluid bg-info">
+            <div className="container-fluid">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -111,7 +111,7 @@ var Multichoice = React.createClass({
         break;
       default:
         view = (
-            <div className="container-fluid bg-info">
+            <div className="container-fluid">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
