@@ -113,6 +113,21 @@ module.exports = Reflux.createStore({
     this.updateAndTrigger();
   },
 
+  starComment: function(replyID, commentID, userID){
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+    this.lesson.comments[commentIndex].replies[replyIndex].star = !this.lesson.comments[commentIndex].replies[replyIndex].star;
+    this.updateAndTrigger();
+  },
+
+  deleteReply: function(replyID, commentID) {
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+
+    this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
+    this.updateAndTrigger();
+  },
+
   findCommentIndex: function(commentID){
     var index;
     _.forEach(this.lesson.comments, function(comment, i){

@@ -15,6 +15,8 @@ module.exports = Reflux.createActions([
   'starComment',
   'likeReply',
   'unlikeReply',
+  'starReply',
+  'deleteReply',
   'createLesson',
   'getUser',
   'createExercise',
