@@ -30,10 +30,12 @@ var LessonConfiguration = React.createClass({
   render: function() {
     return (
       <div>
-        <VideoPlayer />
-        {!this.state.editing && 
-          <ExerciseTypes chooseType={this.setEditing} />
-        }
+        <div className="row">
+          <VideoPlayer />
+          {!this.state.editing && 
+            <ExerciseTypes chooseType={this.setEditing} />
+          }
+        </div>
         {this.state.editing && 
           this.mapExerciseType()}
       </div>

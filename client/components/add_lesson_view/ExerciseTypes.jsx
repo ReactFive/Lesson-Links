@@ -23,8 +23,7 @@ var ExerciseTypes = React.createClass({
 
   render: function() {
     return (
-      <div className="container">
-        <div id="ExerciseTypeSelection" className="col-md-6 col-md-offset-3">
+        <div id="ExerciseTypeSelection" className="col-md-4">
 
           <form name="exerciseTypeForm" onSubmit={this.handleSubmit}>
             <Select
@@ -37,7 +36,6 @@ var ExerciseTypes = React.createClass({
             <button className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
           </form>
         </div>
-      </div>
     )
   },
 
