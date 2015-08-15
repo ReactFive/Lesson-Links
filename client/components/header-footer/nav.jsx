@@ -32,6 +32,9 @@ var nav = React.createClass({
         </div>
           <ul className="nav navbar-nav navbar-right">
             <li>
+              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" className="navCreate" to="/add-lesson">Create Lesson</Link>}
+            </li>
+            <li>
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">My Library</Link>}
             </li>
             <li className="pull-right">
