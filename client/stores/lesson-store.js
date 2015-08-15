@@ -25,6 +25,8 @@ module.exports = Reflux.createStore({
       self.lesson = res.data;
       self.trigger(self.lesson);
     });
+    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.trigger(this.lesson);
   },
 
   followLesson : function(url){
