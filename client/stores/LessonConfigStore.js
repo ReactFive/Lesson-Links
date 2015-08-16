@@ -7,21 +7,9 @@ var _ = require('lodash');
 var LessonConfigStore = Reflux.createStore({
   listenables: [Actions],
 
-  createLesson: function(lesson){
-    var self = this;
-
-    Api.createLesson(lesson)
-    .then(function(res){
-      console.log("successfully created lesson");
-      console.log(lesson);
-      self.lesson = res.data;
-      self.trigger(self.lesson);
-      Actions.getUser();
-    }) 
-    .catch(function(res){
-      console.log("failed to create lesson");
-      console.log(res);
-    })
+  sendLesson: function(lesson){
+    this.lesson = lesson;
+    console.log("LessonConfigStore has received the lesson: ", this.lesson)
   },
 
   createExercise: function(exercise) {
@@ -35,23 +23,7 @@ var LessonConfigStore = Reflux.createStore({
     console.log("sending exercise to database", newExercise);
     Api.createExercise(newExercise);
     this.trigger(this.lesson);
-  },
-
-
-  /* this is for testing purposes */
-  init: function() {
-    var self = this;
-    setTimeout(function() {
-      if(!self.lesson) {
-        Api.getLesson('love')
-        .then(function(res) {
-          self.lesson = res.data;
-          self.trigger(self.lesson);
-        })
-      }
-    }, 500);
   }
-  /* end testing */
 
 });
 
