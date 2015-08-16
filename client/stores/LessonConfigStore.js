@@ -23,10 +23,11 @@ var LessonConfigStore = Reflux.createStore({
       text : "Exercise!",
       lesson_id : this.lesson._id
     };
+    
     this.lesson.exercises.push(newExercise);
     console.log("sending exercise to database", newExercise);
-    Api.createExercise(newExercise);
-    this.trigger(this.lesson);
+    Api.createExercise(newExercise)
+    .then(this.triggerConfigStore)
   }
 
 });
