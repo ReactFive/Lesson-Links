@@ -18,6 +18,7 @@ var ExerciseTrueFalse = require('./components/basicExercises/TrueFalse.jsx');
 var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('./components/basicExercises/TrueFalseCreation.jsx');
 var EditView = require('./components/edit/EditView.jsx');
+var ShortAnswerCreation = require('./components/basicExercises/ShortAnswerCreation.jsx');
 
 
 var routes = (
@@ -34,6 +35,7 @@ var routes = (
         <Route path='/exerciseTF' handler={ExerciseTrueFalse} />
         <Route path='/multiplechoice' handler={MultiChoiceCreation} />
         <Route path='/truefalse' handler={TrueFalseCreation} />
+        <Route path='/shortanswer' handler={ShortAnswerCreation} />
         <Route path='/:url' handler={LessonView} />
         <NotFoundRoute handler={NotFound}/>
       </Route>

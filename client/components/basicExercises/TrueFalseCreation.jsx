@@ -64,8 +64,8 @@ var TrueFalseCreation = React.createClass({
                 </label>
               </div>
 
-              <button type="submit" className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
-              <button onClick={this.handleCancel} className=" btn btn-default pull-right">Cancel</button>
+              <button type="submit" onClick={ this.handleSubmit } className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
+              <button onClick={ this.handleCancel } className=" btn btn-default pull-right">Cancel</button>
             </form>
           </div>
         </div>
@@ -89,10 +89,7 @@ var TrueFalseCreation = React.createClass({
     var feedbackTrue = this.refs.feedbackTrue.getDOMNode().value.trim();
     var feedbackFalse = this.refs.feedbackFalse.getDOMNode().value.trim();
 
-    //var time = videojs("#attachmentVideo").currentTime;
-
     var exercise = {};
-    //exercise.time = time;
     exercise.type = "TrueFalse";
     exercise.time = videojs("#attachmentVideo").currentTime();
     exercise.question = question;
