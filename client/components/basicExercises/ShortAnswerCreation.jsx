@@ -2,11 +2,9 @@ var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
-var Link = Router.Link;
 var AuthStore = require('../../stores/AuthStore');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
-var Select = require('react-select');
 var _ = require('lodash');
 
 var ShortAnswerCreation = React.createClass({
@@ -82,28 +80,24 @@ var ShortAnswerCreation = React.createClass({
 
     event.preventDefault();
 
-    var prompt = this.refs.prompt.getDOMNode().value.trim();
-    var bestAnswers = this.refs.bestAnswers.getDOMNode().value.trim();
-    var altAnswers = this.refs.altAnswers.getDOMNode().value.trim();
-    var bestFeedback = this.refs.bestFeedback.getDOMNode().value.trim();
-    var altFeedback = this.refs.altFeedback.getDOMNode().value.trim();
-
     var exercise = {};
     exercise.type = "ShortAnswer";
     //exercise.time = videojs("#attachmentVideo").currentTime();
-    exercise.question = prompt;
-    exercise.bestAnswers = createRegex(bestAnswers);
-    exercise.altFeedback = bestFeedback;
+    exercise.question = this.refs.prompt.getDOMNode().value.trim();
+    exercise.bestAnswers = createRegex(this.refs.bestAnswers.getDOMNode().value.trim());
+    exercise.bestFeedback = this.refs.bestFeedback.getDOMNode().value.trim();
 
     if (altAnswers.length) {
-      exercise.altAnswers = createRegex(altAnswers);
-      exercise.altFeedback = altFeedback;
+      exercise.altAnswers = createRegex(this.refs.altAnswers.getDOMNode().value.trim());
+      exercise.altFeedback = this.refs.altFeedback.getDOMNode().value.trim();
     }
 
-    if (exercise.question.length && exercise.altAnswers.length) {
-        console.log(exercise);
-        Actions.createExercise(exercise);
-        this.props.onComplete(null);
+    if (exercise.question.length && exercise.bestAnswers) {
+      if (exercise.bestAnswers.length) {
+          console.log(exercise);
+          Actions.createExercise(exercise);
+          this.props.onComplete(null);
+        }
       } else {
         toastr['warning']('Make sure you have a question and answer(s)');
       }
