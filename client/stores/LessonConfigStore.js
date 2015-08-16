@@ -12,6 +12,10 @@ var LessonConfigStore = Reflux.createStore({
     console.log("LessonConfigStore has received the lesson: ", this.lesson)
   },
 
+  triggerConfigStore: function() {
+    this.trigger(this.lesson);
+  },
+
   createExercise: function(exercise) {
     var newExercise = {
       exercise : exercise,

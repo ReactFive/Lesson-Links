@@ -20,6 +20,10 @@ var LessonConfiguration = React.createClass({
     }
   },
 
+  componentWillMount: function() {
+    Actions.triggerConfigStore();
+  },
+
   mapExerciseType: function() {
     var exerciseTypeMap = {
       'multiplechoice' : <MultiChoiceCreation onComplete={this.setEditing}/>,
