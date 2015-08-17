@@ -7,7 +7,6 @@ var AuthStore = require('../../stores/AuthStore');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
 var Select = require('react-select');
-var TextInput = require('./textInput')
 var _ = require('lodash');
 
 var MultiChoiceCreation = React.createClass({
@@ -69,14 +68,7 @@ var MultiChoiceCreation = React.createClass({
               <div className="form-group">
                 <input ref="question" className="form-control" name="name" type='text' placeholder="Question"/>
               </div>
-              {/*
-              <TextInput
-                wrapperClass={classString[0]}
-                id="option1"
-                name="option1"
-                label="Option 1"
-                placeholder="Add an option here" />
-              */}
+
               <div className={classString[0]}>
                 <label htmlFor="option1"><strong>Option 1</strong></label>
                   <input id="option1"
