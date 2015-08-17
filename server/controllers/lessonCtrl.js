@@ -62,9 +62,13 @@ exports.getLessonByUrl = function(req, res, next) {
 exports.updateLesson = function(req, res, next){
   Lesson.findOne({'lesson_url':req.params.url})
   .exec(function(err, lesson){
-    //Only update parts of the lesson supplied in req.body   
-    if (!req.body.hasOwnProperty('video_url')) {req.body.video_url = lesson.video_url}
-    if (!req.body.hasOwnProperty('publish')) {req.body.publish = lesson.publish}
+    //Ensure only the teacher can update certain parts of a lesson
+    var owner = lesson.teacher.id.toString() === req.user._id.toString()   
+    //Only update parts of the lesson supplied in req.body
+    if (!owner || !req.body.hasOwnProperty('video_url')) {
+      req.body.video_url = lesson.video_url
+    }
+    if (!owner || !req.body.hasOwnProperty('publish') || !req.body.publish) {req.body.publish = lesson.publish}
     if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
     Lesson.update({'lesson_url' : req.params.url}, {
       $set : 
@@ -98,7 +102,7 @@ exports.createLesson = function(req, res, next){
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,
       video_url : req.body.video_url || null,
-      published : req.body.published || true,
+      published : req.body.published || false,
       teacher: {
         id: req.user._id,
         name: req.user.local.name
