@@ -37,34 +37,26 @@ exports.getLessonByUrl = function(req, res, next) {
   });
 };
 
-
-// exports.updateLesson = function(req, res, next){
-//   //returns the modified lesson after updating it
-//   Lesson.findOneAndUpdate({'lesson_url':req.params.url},
-//     {
-//       title : req.body.title,
-//       video_url : req.body.video_url,
-//       publish : req.body.publish,
-//       comments : req.body.comments
-//     }
-//    , {'new': true}, function(err, updatedLesson){
-//       if (err) {
-//         console.log("ERROR")
-//         console.log(err)
-//         res.sendStatus(500)
-//       }
-//       console.log("Updated lesson: ", updatedLesson);
-//       res.send(updatedLesson)
-//     }
-//   )
-// }
-
 exports.updateLesson = function(req, res, next){
   Lesson.findOne({'lesson_url':req.params.url})
   .exec(function(err, lesson){
-    //Only update parts of the lesson supplied in req.body   
-    if (!req.body.hasOwnProperty('video_url')) {req.body.video_url = lesson.video_url}
-    if (!req.body.hasOwnProperty('publish')) {req.body.publish = lesson.publish}
+    //Ensure only the teacher can update certain parts of a lesson
+    var owner = lesson.teacher.id.toString() === req.user._id.toString()   
+    //Only update parts of the lesson supplied in req.body
+    if (!owner || !req.body.hasOwnProperty('video_url')) {
+      req.body.video_url = lesson.video_url
+    }
+    if (!owner || !req.body.hasOwnProperty('publish') || lesson.publish) {
+      req.body.publish = lesson.publish
+    //Set publish date
+    } else {
+      Lesson.findOneAndUpdate(
+        {'lesson_url':req.params.url}, 
+        {published_at : Date.now()},
+        {upsert: true, 'new': true}, function(err, res){
+          if (err) {console.log(err)}
+        })
+    }
     if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
     Lesson.update({'lesson_url' : req.params.url}, {
       $set : 
@@ -83,7 +75,7 @@ exports.updateLesson = function(req, res, next){
         Lesson.findOne({'lesson_url':req.params.url})
         .exec(function(err, lesson){
           if (err) {console.log(err)
-          res.sendStatus(200).send(lesson)
+          res.status(200).send(lesson)
           }
         })
       }
@@ -98,7 +90,7 @@ exports.createLesson = function(req, res, next){
       title : req.body.title || "Your lesson",
       lesson_url : req.params.url,
       video_url : req.body.video_url || null,
-      published : req.body.published || true,
+      published : req.body.published || false,
       teacher: {
         id: req.user._id,
         name: req.user.local.name

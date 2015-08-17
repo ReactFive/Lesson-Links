@@ -41,8 +41,7 @@ module.exports.createExercise = function(exercise) {
   return axios.post(url, exercise);
 }
 
-module.exports.updateUser = function(result
-  ) {
+module.exports.updateUser = function(result) {
   var url  = rootUrl + '/api/user/'
   var obj = {
     addLesson: result.addLesson,
