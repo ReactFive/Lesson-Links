@@ -15,6 +15,7 @@ var LibLessonEntry = React.createClass({
     var owner = this.props.owner;
     var lessonList = this.props.lessons;
     var lessons = this.props.lessons.map(function(lesson, index){
+    
     var handleClick = function(index, event){
       Actions.togglePublish(lessonList[index]);
       lessonList[index].publish = !lessonList[index].publish;
@@ -59,8 +60,7 @@ var LibLessonEntry = React.createClass({
               Created on: {createdDate}
             </li>
           </ul>
-          <i class="fa fa-trash-o"></i>
-          <i class="fa fa-unlock-alt"></i>
+          <span className="fa fa-trash-o pull-right" onClick={boundClickDel}></span>
         </div> 
       </div>
     </div>
