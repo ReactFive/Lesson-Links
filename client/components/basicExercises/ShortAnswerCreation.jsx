@@ -6,6 +6,8 @@ var AuthStore = require('../../stores/AuthStore');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
 var TextInput = require('./TextInput.jsx');
+var Textarea = require('./Textarea.jsx');
+
 var _ = require('lodash');
 
 var ShortAnswerCreation = React.createClass({
@@ -60,36 +62,27 @@ var ShortAnswerCreation = React.createClass({
              onChange={this.setExerciseState}
              placeholder="Separate answers with a pipe: red | white | blue" />
 
-
-          <div className="form-group">
-            <label htmlFor="bestFeedback">Feedback to these answers when entered by a learner:</label>
-              <textarea id="bestFeedback"
-                className="form-control"
-                name="bestFeedback"
-                rows="2"
-                ref="bestFeedback"
-                value={this.state.exercise.bestFeedback}
-                onChange={this.setExerciseState}/>
-          </div>
+          <Textarea
+            label="Feedback to these answers when entered by a learner:"
+            wrapperClass="form-group"
+            name="bestFeedback"
+            value={this.state.exercise.bestFeedback}
+            onChange={this.setExerciseState}/>
 
           <TextInput
-              wrapperClass="form-group"
-              name="altAnswers"
-              label="Alternative answer(s)"
-              value={this.state.exercise.altAnswers}
-              onChange={this.setExerciseState}
-              placeholder="Separate answers with a pipe: red | white | blue" />
+            wrapperClass="form-group"
+            name="altAnswers"
+            label="Alternative answer(s)"
+            value={this.state.exercise.altAnswers}
+            onChange={this.setExerciseState}
+            placeholder="Separate answers with a pipe: red | white | blue" />
 
-          <div className="form-group">
-            <label htmlFor="altFeedback">Feedback to these answers when selected by a learner:</label>
-              <textarea id="altFeedback"
-                className="form-control"
-                name="altFeedback"
-                rows="2"
-                ref="altFeedback"
-                value={this.state.exercise.altFeedback}
-                onChange={this.setExerciseState}/>
-          </div>
+          <Textarea
+            label="Feedback to these answers when entered by a learner:"
+            wrapperClass="form-group"
+            name="altFeedback"
+            value={this.state.exercise.altFeedback}
+            onChange={this.setExerciseState}/>
 
           <button
             type="submit"
