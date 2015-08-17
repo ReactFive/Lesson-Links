@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
+var Link = Router.Link;
 
 var ShortAnswer = React.createClass({
 
@@ -8,13 +9,14 @@ var ShortAnswer = React.createClass({
     return {
       exercise: {
         question: "What do the stars represent on the US flag?",
-        bestAnswers: "/(states|50states|fiftystates)/",
+        bestAnswers: "(states|50states|fiftystates)",
         bestFeedback: "Well done",
-        altAnswers: "/(nations|municipalities)/",
-        altFeedback: "Uuuh, your close but the wrong scale"
+        altAnswers: "(nations|municipalities)",
+        altFeedback: "Uuuh, your close but the wrong scale",
+        wrongFeedback: "oh man, are you kidding?"
       },
       answer: "",
-      feedback: ""
+      outcome: 0
     };
   },
 
@@ -23,6 +25,23 @@ var ShortAnswer = React.createClass({
     this.setState({answer: event.target.value});
   },
 
+  submitAnswer: function(event){
+    event.preventDefault();
+    this.setState({answer: event.target.value.trim()});
+
+    var bestCheck = new RegExp(this.state.exercise.bestAnswers);
+    var altCheck = new RegExp(this.state.exercise.altAnswers);
+
+    if(bestCheck.test(this.state.answer)){
+      this.setState({outcome: 2});
+    }
+    else if (altCheck.test(this.state.answer)){
+      this.setState({outcome: 1});
+    } else {
+      this.setState({outcome: -1});
+    }
+
+  },
 
   render: function() {
     var view;
@@ -30,7 +49,7 @@ var ShortAnswer = React.createClass({
     var title = this.state.title;
 
     switch (this.state.outcome) {
-      case false:
+      case -1:
         view = (
             <div className="container-fluid">
               <div className="modal-dialog">
@@ -42,7 +61,33 @@ var ShortAnswer = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.negFeedback ? this.state.negFeedback : null }</p>
+                        <p>{ this.state.exercise.wrongFeedback ? this.state.exercise.wrongFeedback : null }</p>
+                      </blockquote>
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <Link activeClassName="active" to="/exerciseSA"><button className="btn btn-primary">Try Again</button></Link>
+                    <Link activeClassName="active" to="/"><button className="btn btn-success try-again-btn">Continue Video</button></Link>
+                  </div>
+                </div>
+                {/*end modal-content*/}
+              </div>
+              {/*end modal-dialog*/}
+            </div>
+        );
+        break;
+      case 2:
+        view = (
+            <div className="container-fluid">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h3><span className="label label-success text-center" id="qid"><i className="fa fa-thumbs-up fa-lg"></i></span>Correct!</h3>
+                  </div>
+                  <div className="modal-body">
+                    <div className="col-xs-10 col-xs-offset-2">
+                      <blockquote>
+                        { this.state.exercise.bestFeedback ? this.state.exercise.bestFeedback : null }
                       </blockquote>
                     </div>
                   </div>
@@ -56,23 +101,24 @@ var ShortAnswer = React.createClass({
             </div>
         );
         break;
-      case true:
+      case 1:
         view = (
             <div className="container-fluid">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-success text-center" id="qid"><i className="fa fa-thumbs-up fa-lg"></i></span>Correct!</h3>
+                    <h3><span className="label label-warning text-center" id="qid"><i className="fa fa-thumbs-up fa-lg"></i></span>Partially Correct</h3>
                   </div>
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        { this.state.posFeedback ? this.state.posFeedback : null }
+                        { this.state.exercise.altFeedback ? this.state.exercise.altFeedback : null }
                       </blockquote>
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <Link activeClassName="active" to="/exerciseSA"><button className="btn btn-primary">Try Again</button></Link>
+                    <Link activeClassName="active" to="/"><button className="btn btn-success try-again-btn">Continue Video</button></Link>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -87,30 +133,25 @@ var ShortAnswer = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.question}</h3>
+                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.question}</h4>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">
-                    <div className="col-xs-3 col-xs-offset-5">
-                      <div id="loadbar">
-                        <div className="blockG" id="rotateG_01"></div>
-                        <div className="blockG" id="rotateG_02"></div>
-                        <div className="blockG" id="rotateG_03"></div>
-                        <div className="blockG" id="rotateG_04"></div>
-                        <div className="blockG" id="rotateG_05"></div>
-                        <div className="blockG" id="rotateG_06"></div>
-                        <div className="blockG" id="rotateG_07"></div>
-                        <div className="blockG" id="rotateG_08"></div>
-                      </div>
-                    </div>
-                    <div className="quiz" id="quiz" data-toggle="buttons">
+                    <form>
+                      <div className="form-group">
+                        <label htmlFor="answer"><strong>Answer</strong></label>
+                        <input id="answer"
+                               className="form-control"
+                               name="answer"
+                               type="text"
+                               ref="answer"
+                               value={this.state.answer}
+                               onChange={this.setAnswerState}
+                               placeholder="Your answer here"/>
+                       </div>
+                          <button onClick={this.submitAnswer} type="submit" className="btn btn-primary pull-right">Submit</button>
+                    </form>
 
-                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
-                        <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-                        <input className="form-control" onChange={this.setAnswerState} type="text" name="q_answer" ref="input"
-                               value={this.state.answer}/></label>
-
-                    </div>
                   </div>{/*end modal-body*/}
                   <div className="modal-footer text-muted">
                     <span id="answer"></span>

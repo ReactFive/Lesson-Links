@@ -124,7 +124,7 @@ var ShortAnswerCreation = React.createClass({
 
     function createRegex(value){
       var strippedOfSpacesAndPunc = value.replace(/ |\,|\.|\;/g, '').toLowerCase();
-      return "/(" + strippedOfSpacesAndPunc+ ")/";
+      return "(" + strippedOfSpacesAndPunc + ")";
     }
 
   },
