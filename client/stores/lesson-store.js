@@ -3,18 +3,23 @@ var Api = require('../utils/api');
 var Actions = require('../actions');
 var _ = require('lodash');
 
+
 module.exports = Reflux.createStore({
   listenables: [Actions],
 
   init: function() {},
 
-  fetchLesson : function(url){
-    url = url// || 'sass-101'
+
+  fetchLesson : function(payload){
+    var url = payload.url// || 'sass-101'
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
       self.lesson = res.data;
       self.trigger(self.lesson);
+    })
+    .catch(function(res){
+      payload.sourceComponent.transitionTo('/404');
     })
   },
 
