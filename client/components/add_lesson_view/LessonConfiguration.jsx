@@ -46,8 +46,18 @@ var LessonConfiguration = React.createClass({
         {this.state.editing && 
           this.mapExerciseType()}
         </div>
+        <div className="row">
+          <button className="col-xs-2 col-xs-offset-5 btn btn-primary">Publish your lesson</button>
+        </div>
       </div>
     );
+  },
+
+  publishLesson: function() {
+    Actions.publish(this.state.lesson)
+    .then(function(res) {
+      console.log(res);
+    })
   },
 
   setEditing: function(exerciseType) {
