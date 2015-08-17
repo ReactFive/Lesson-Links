@@ -1,5 +1,20 @@
 @import "Theme.scss";
 
+
+.navbar{
+  background: $darkest-blue;
+  a, input{
+    color: $lightest-blue !important;
+    text-decoration:none;
+  }
+  li:hover{
+    a{
+      color: $darkest-blue !important;
+    }
+    background: $lightest-blue;
+  }
+}
+
 .signup-container {
   padding-top: 25px;
   padding-bottom: 80px;
@@ -21,31 +36,4 @@
   height:30px;
   width:100%;
   background:#999;
-}
-
-.navbar, .navbar-inverse {
-  border-radius: 0;
-  border: none;
-  margin-bottom: 0;
-  min-height: 45px;
-  background-color: $dark-blue;
-}
-
-.nav li {
-  display: inline;
-  color: white;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-  color: #ffffff;
-  font-family: Lato;
-  font-size: 1.7em;
-  font-weight: 300;
-  padding: 30px 25px 33px 25px;
-}
-
-.navbar-inverse .navbar-nav li a:hover {
-  background-color: #444444;
-  transition: 0.7s all linear;
-  height: 100%;
 }
