@@ -5,7 +5,7 @@ var Navigation = Router.Navigation;
 var AuthStore = require('../../stores/AuthStore');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
-var TextInput = require('./textInput');
+var TextInput = require('./TextInput');
 var _ = require('lodash');
 
 var ShortAnswerCreation = React.createClass({
