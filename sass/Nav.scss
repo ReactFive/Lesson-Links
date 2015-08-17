@@ -1,104 +1,5 @@
 @import "Theme.scss";
 
-$dropDown       : false;
-.navbar-lessonlinks {
-  background-color: $dark-blue;
-  border-color: $light-blue;
-  .navbar-brand {
-    color: $background-color;
-    font-family: $subheader-font;
-    font-weight: 200;
-    &:hover, &:focus { 
-      color: $light-blue; }}
-  .navbar-text {
-    color: $background-color; 
-    font-size: 18px;
-    font-weight: 300;
-  }
-  .navbar-nav {
-    > li {
-      > a {
-        color: $background-color;
-        &:hover,  &:focus {
-          color: $dark-blue; }}
-      @if $dropDown {
-        > .dropdown-menu {
-          background-color: $dark-blue;
-          > li > a {
-            color: $background-color;
-            &:hover,  &:focus {
-              color: $dark-blue;
-              background-color: $light-blue; }}
-          .divider {
-            background-color: $light-blue;}}}
-    }
-    > .active {
-      > a, > a:hover, > a:focus {
-        color: $dark-blue;
-        background-color: $light-blue; }}
-    > .open {
-      > a, > a:hover, > a:focus {
-        color: $dark-blue;
-        background-color: $light-blue; }}}
-  .navbar-toggle {
-    border-color: $light-blue;
-    &:hover, &:focus {
-      background-color: $light-blue; }
-    .icon-bar {
-      background-color: $background-color; }}
-  .navbar-collapse,
-  .navbar-form {
-    border-color: $background-color; 
-    font-family: $subheader-font;
-    font-weight: 200;
-    input, textarea{
-        color: $background-color;
-    }
-    /* ADJUST PLACEHOLDER INPUT- */
-    ::-webkit-input-placeholder {
-       color: $background-color;
-    }
-    :-moz-placeholder { 
-       color: $background-color;  
-    }
-
-    ::-moz-placeholder {  /* Firefox 19+ */
-       color: $background-color;  
-    }
-
-    :-ms-input-placeholder {  
-       color: $background-color;  
-    }
-    input:focus {
-        color: $background-color;
-        border-color: $light-blue;
-    }
-
-    input, select, textarea{
-        color: $background-color;
-    }
-  }
-  .navbar-link {
-    color: $background-color;
-    &:hover {
-      color: $dark-blue; }}
-
-  #navbar-link {
-    color: $background-color;
-    &:hover {
-      color: $dark-blue; }}
-    }
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu {
-    > li > a {
-      color: $background-color;
-      &:hover, &:focus {
-        color: $dark-blue; }}
-    > .active {
-      > a, > a:hover, > a:focus {
-        color: $dark-blue;
-        background-color: $light-blue; }}}
-}
 .signup-container {
   padding-top: 25px;
   padding-bottom: 80px;
@@ -122,3 +23,29 @@ $dropDown       : false;
   background:#999;
 }
 
+.navbar, .navbar-inverse {
+  border-radius: 0;
+  border: none;
+  margin-bottom: 0;
+  min-height: 45px;
+  background-color: $dark-blue;
+}
+
+.nav li {
+  display: inline;
+  color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #ffffff;
+  font-family: Lato;
+  font-size: 1.7em;
+  font-weight: 300;
+  padding: 30px 25px 33px 25px;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+  background-color: #444444;
+  transition: 0.7s all linear;
+  height: 100%;
+}
