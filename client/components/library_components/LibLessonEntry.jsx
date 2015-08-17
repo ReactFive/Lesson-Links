@@ -17,8 +17,13 @@ var LibLessonEntry = React.createClass({
       Actions.togglePublish(lessonList[index]);
       lessonList[index].publish = !lessonList[index].publish;
     };
+    var handleClickDel = function(index, event){
+      console.log('inside click handler')
+      Actions.deleteLesson(lessonList[index])
+    }
     
-    var boundClick = handleClick.bind(this,index);
+    var boundClick = handleClick.bind(this, index);
+    var boundClickDel = handleClickDel.bind(this, index);
 
 
 
@@ -39,6 +44,7 @@ var LibLessonEntry = React.createClass({
               <p>
                 Published: June 20th, 2015 2:45PM
               </p>
+              <a onClick={boundClickDel}>Remove< /a>
             </p>
           </div>
         </div> 

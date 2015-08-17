@@ -22,5 +22,6 @@ module.exports = Reflux.createActions([
   'getUser',
   'createExercise',
   'followLesson',
-  'togglePublish'
+  'togglePublish',
+  'deleteLesson'
 ]);

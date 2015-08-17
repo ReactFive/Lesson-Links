@@ -17,5 +17,12 @@ module.exports = Reflux.createStore({
     .then(function(){
       Actions.getUser();
     });
+  },
+  onDeleteLesson: function(lesson){
+    console.log('inside store', lesson)
+    api.updateUser({
+      unfollowLesson : true,
+      _id : lesson._id
+    })
   }
 });
