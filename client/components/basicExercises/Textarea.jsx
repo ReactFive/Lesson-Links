@@ -1,6 +1,6 @@
 var React = require('react');
 
-var TextInput = React.createClass({
+var Textarea = React.createClass({
   propTypes: {
     wrapperClass: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,

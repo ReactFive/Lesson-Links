@@ -90,7 +90,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h3><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.prompt}</h3>
+                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.prompt}</h4>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">
