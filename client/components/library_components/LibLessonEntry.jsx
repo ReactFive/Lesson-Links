@@ -20,7 +20,6 @@ var LibLessonEntry = React.createClass({
       lessonList[index].publish = !lessonList[index].publish;
     };
     var handleClickDel = function(index, event){
-      console.log('inside click handler')
       Actions.deleteLesson(lessonList[index])
     }
     
@@ -29,7 +28,6 @@ var LibLessonEntry = React.createClass({
 
     var commentCount = _.reduce(
       lesson.comments, function(total, comment){
-        console.log(total)
         return total + comment.replies.length + 1
       }, 0)
     
@@ -38,23 +36,25 @@ var LibLessonEntry = React.createClass({
     return <div className="row">
       <div className="col12">
         <div className="lib-lesson-entry" id="pulse" key={index}>
-          <img className="videoSnippet" src="../../public/assets/video_sample.png"></img>
-          <div className="lib-lesson-info">
-            <p className="lib-less-title">
+          <img className="media pull-left videoSnippet" src="../../public/assets/video_sample.png"></img>
+          <ul className="lib-lesson-info list-unstyled">
+            <li className="lib-less-title">
               <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
                 {lesson.title || 'title not found'}
               </a>
-              <p className="lib-less-author">By: {lesson.teacher.name || 'anonymous'}
-              </p>
-            </p>
-            <p className="lib-lesson-stats">
+            </li>
+            <li className="lib-less-author">
+              Author: {lesson.teacher.name || 'anonymous'}
+            </li>
+            <li className="lib-lesson-stats">
               Comments: {commentCount}    Exercises: {lesson.exercises.length}
-              <p>
-                Published: {createdDate}
-              </p>
-              <a onClick={boundClickDel}>Remove< /a>
-            </p>
-          </div>
+            </li> 
+            <li>
+              Created on: {createdDate}
+            </li>
+          </ul>
+          <i class="fa fa-trash-o"></i>
+          <i class="fa fa-unlock-alt"></i>
         </div> 
       </div>
     </div>
