@@ -22,13 +22,6 @@ var LessonView = React.createClass({
     .then(function(res){
       Actions.followLesson(self.context.router.getCurrentParams().url)
     })
-   
-
-    // if(this.state.lesson){
-    //   Actions.followLesson(this.context.router.getCurrentParams().url)
-    // }else{
-    //   this.transitionTo('/404');
-    // }
   },
 
   render: function() {

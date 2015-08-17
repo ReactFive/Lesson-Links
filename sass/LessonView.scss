@@ -1,25 +1,38 @@
 @import "Theme.scss";
 
 #video-box{
-  background-color: black;
   width: 100%;
   height: 480px;
+  border: 0px solid black;
+  background: black;
+}
+
+#test{
+  width: 854px;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+   @media screen and (max-width: 640px) {
+    width: 426px;
+  }
+}
+
+.video-wrapper{
+  position: relative;
+  top: 0px;
+  width: 854px;
+  height: 480px;
+  @media screen and (max-width: 640px) {
+    width: 426px;
+    height: 240px ;
+  }
 }
 
 #attachmentVideo {
   padding-top: 0px;
-  margin: 40 auto;
-}
-
-.wrapper{
-  background-color: black;
+  border: 0px solid red; 
   width: 100%;
-  height: 480px;
-}
-
-.videocontent{
-  width: 854px;
-  height: 480px;
+  height: 100%;
 }
 
 .comments-view{
@@ -36,6 +49,7 @@
 
 .comment-box{
   list-style-type: none;
+
   margin: 0 0 16px;
   font-size: 12px;
 }
