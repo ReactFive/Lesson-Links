@@ -78,6 +78,26 @@ exports.updateUser = function(req, res){
         })
       }
     })
+  } else if (req.user && req.body.unfollowLesson === true) {
+    //Removes lesson from user's lesson array
+    User
+    .findByIdAndUpdate(req.user._id,
+    {$pull:{'lessons': req.body._id}},
+    function(err, user){
+      if (err) {console.log(err)}
+      Lesson
+      .findById(req.body._id, function(err, lesson){
+        //If the owner removes a lesson, the lesson is also deleted.
+        if (lesson.teacher.id.toString() === req.user._id.toString()) {
+          console.log('test')
+          Lesson
+          .findByIdAndRemove(req.body._id, function(err, lesson){
+            console.log('test2')
+          })
+        }
+        res.status(200).send(user)       
+      })
+    })
   }
 }
 

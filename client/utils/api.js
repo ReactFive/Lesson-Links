@@ -41,11 +41,14 @@ module.exports.createExercise = function(exercise) {
   return axios.post(url, exercise);
 }
 
-module.exports.updateUser = function(user) {
+module.exports.updateUser = function(result
+  ) {
   var url  = rootUrl + '/api/user/'
   var obj = {
-    addLesson: user.addLesson,
-    lesson_url : user.lesson_url
+    addLesson: result.addLesson,
+    unfollowLesson: result.unfollowLesson,
+    lesson_url : result.lesson_url,
+    _id : result._id
   }
   return axios.put(url, obj);
 }
