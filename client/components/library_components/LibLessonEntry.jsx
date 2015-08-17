@@ -33,10 +33,16 @@ var LibLessonEntry = React.createClass({
     
     var createdDate = Moment(lesson.created_at).format('MMMM Do YYYY, h:mm a')
 
+    var video_id = lesson.video_url.split('v=')[1]
+    var ampersandPosition = video_id.indexOf('&');
+    if(ampersandPosition != -1) {
+      video_id = video_id.substring(0, ampersandPosition);
+    }
+
     return <div className="row">
       <div className="col12">
         <div className="lib-lesson-entry" id="pulse" key={index}>
-          <img className="media pull-left videoSnippet" src="../../public/assets/video_sample.png"></img>
+          <img className="media pull-left videoSnippet" src={'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'} />
           <ul className="lib-lesson-info list-unstyled">
             <li className="lib-less-title">
               <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
