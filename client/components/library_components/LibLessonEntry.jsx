@@ -7,6 +7,7 @@ var Actions = require('../../actions');
 var Router = require('react-router')
 var Link = Router.Link;
 var _ = require('lodash')
+var Moment = require('moment')
 
 var LibLessonEntry = React.createClass({
 
@@ -31,7 +32,8 @@ var LibLessonEntry = React.createClass({
         console.log(total)
         return total + comment.replies.length + 1
       }, 0)
-
+    
+    var createdDate = Moment(lesson.created_at).format('MMMM Do YYYY, h:mm a')
 
     return <div className="row">
       <div className="col12">
@@ -48,7 +50,7 @@ var LibLessonEntry = React.createClass({
             <p className="lib-lesson-stats">
               Comments: {commentCount}    Exercises: {lesson.exercises.length}
               <p>
-                Published: {lesson.created_at}
+                Published: {createdDate}
               </p>
               <a onClick={boundClickDel}>Remove< /a>
             </p>
