@@ -10,13 +10,14 @@ var _ = require('lodash')
 var Moment = require('moment')
 
 var LibLessonEntry = React.createClass({
+  mixins: [Reflux.connect(AuthStore, 'auth')],
+
 
   render:function(){
     var owner = this.props.owner;
     var lessonList = this.props.lessons;
     var lessons = this.props.lessons.map(function(lesson, index){
-    
-    var handleClick = function(index, event){
+    var handleClickPub = function(index, event){
       Actions.togglePublish(lessonList[index]);
       lessonList[index].publish = !lessonList[index].publish;
     };
@@ -24,7 +25,7 @@ var LibLessonEntry = React.createClass({
       Actions.deleteLesson(lessonList[index])
     }
     
-    var boundClick = handleClick.bind(this, index);
+    var boundClickPub = handleClickPub.bind(this, index);
     var boundClickDel = handleClickDel.bind(this, index);
 
     var commentCount = _.reduce(
@@ -32,7 +33,11 @@ var LibLessonEntry = React.createClass({
         return total + comment.replies.length + 1
       }, 0)
     
-    var createdDate = Moment(lesson.created_at).format('MMMM Do YYYY, h:mm a')
+    var createdDate;
+    if(lesson.published_at) {
+      createdDate = Moment(lesson.created_at).format('MMMM Do YYYY, h:mm a')
+    } else {
+      createdDate = 'Not published'
 
     var video_id = lesson.video_url.split('v=')[1]
     var ampersandPosition = video_id.indexOf('&');
@@ -56,9 +61,14 @@ var LibLessonEntry = React.createClass({
             <li className="lib-lesson-stats">
               Comments: {commentCount}    Exercises: {lesson.exercises.length}
             </li> 
-            <li>
-              Created on: {createdDate}
-            </li>
+            {!!lesson.publish ? 
+             <li>
+              Published on: {createdDate}
+            </li> :
+            <a onClick={boundClickPub}>
+              Publish
+            < /a>
+          }
           </ul>
           <span className="fa fa-trash-o pull-right" onClick={boundClickDel}></span>
         </div> 

@@ -1,3 +1,4 @@
+var React = require('react')
 var Reflux = require('reflux');
 var api = require('../utils/api');
 var Actions = require('../actions');
@@ -12,17 +13,19 @@ module.exports = Reflux.createStore({
   onTogglePublish: function(lesson){
     api.updateLesson({
       lesson_url : lesson.lesson_url,
-      publish : !lesson.publish
+      publish : true
     })
-    .then(function(){
+    .then(function(res){
       Actions.getUser();
     });
   },
   onDeleteLesson: function(lesson){
-    console.log('inside store', lesson)
     api.updateUser({
       unfollowLesson : true,
       _id : lesson._id
     })
+    .then(function(){
+      Actions.getUser();
+    });
   }
 });

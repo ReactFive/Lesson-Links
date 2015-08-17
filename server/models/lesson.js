@@ -35,6 +35,7 @@ var lessonSchema = new mongoose.Schema ({
   published_at: 
   {
     type      : Date,
+    default   : null
   },
   comments    : [{
     time      :
