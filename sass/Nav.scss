@@ -11,7 +11,10 @@ $dropDown       : false;
     &:hover, &:focus { 
       color: $light-blue; }}
   .navbar-text {
-    color: $background-color; }
+    color: $background-color; 
+    font-size: 18px;
+    font-weight: 300;
+  }
   .navbar-nav {
     > li {
       > a {

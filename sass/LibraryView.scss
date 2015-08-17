@@ -2,15 +2,20 @@
 
 .lib-lesson-entry{
   height: 100px;
-  border: 1px solid $dark-purple;
-  background: $light-purple;
-  color: $dark-purple;
+  border: 1px solid $dark-blue;
+  background: $lightest-blue;
+  color: $darkest-blue;
   text-align: left;
   line-height: 1.5;
+  font-style: bold;
+}
+
+.lib-lesson-entry:hover{
+  background: $light-blue;
 }
 
 .titleAnchor{
-  color: $dark-purple;
+  color: $darkest-blue;
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -36,17 +41,12 @@
 .lib-lesson-info{
   display: inline-block;
   margin-left: 10px;
+  font-style: bold;
 }
 
 .filterColor{
   color: $dark-blue;
   border-bottom: 1px solid $dark-blue;
-}
-
-.test67 :hover{
-  border-color: $dark-pink;
-  background: $light-pink;
-  color: $dark-pink;
 }
 
 .dummy{
@@ -63,14 +63,14 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
 }
 
 .lib-lock{
   font-size: 12px;
   text-decoration: none;
-  color: $dark-purple;
+  color: $dark-blue;
 }
 
 .lib-lock:hover{
