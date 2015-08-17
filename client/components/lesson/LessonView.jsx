@@ -5,17 +5,30 @@ var _ = require('lodash');
 var Actions = require('../../actions');
 var LessonStore = require('../../stores/lesson-store.js');
 var Reflux = require('reflux');
-//var Constrainable = require('rnr-constrained-route');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
 
 var LessonView = React.createClass({
-  
+
+  mixins: [Router.Navigation, Reflux.connect(LessonStore)],
+
   contextTypes: {
     router: React.PropTypes.func
   },
 
   componentWillMount: function(){
-    Actions.fetchLesson(this.context.router.getCurrentParams().url)
-    Actions.followLesson(this.context.router.getCurrentParams().url)
+    var self=this;
+    Actions.fetchLesson({sourceComponent: this, url: this.context.router.getCurrentParams().url})
+    .then(function(res){
+      Actions.followLesson(self.context.router.getCurrentParams().url)
+    })
+   
+
+    // if(this.state.lesson){
+    //   Actions.followLesson(this.context.router.getCurrentParams().url)
+    // }else{
+    //   this.transitionTo('/404');
+    // }
   },
 
   render: function() {

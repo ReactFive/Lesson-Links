@@ -36,6 +36,7 @@ var routes = (
         <Route path='/multiplechoice' handler={MultiChoiceCreation} />
         <Route path='/truefalse' handler={TrueFalseCreation} />
         <Route path='/shortanswer' handler={ShortAnswerCreation} />
+        <Route path='/404' handler={NotFound}/>
         <Route path='/:url' handler={LessonView} />
         <NotFoundRoute handler={NotFound}/>
       </Route>
