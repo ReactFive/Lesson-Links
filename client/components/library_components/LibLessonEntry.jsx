@@ -16,6 +16,7 @@ var LibLessonEntry = React.createClass({
   render:function(){
     var owner = this.props.owner;
     var lessonList = this.props.lessons;
+    console.log(lessonList)
     var lessons = this.props.lessons.map(function(lesson, index){
     var handleClickPub = function(index, event){
       Actions.togglePublish(lessonList[index]);
@@ -51,7 +52,9 @@ var LibLessonEntry = React.createClass({
           <img className="media pull-left videoSnippet" src={'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'} />
           <ul className="lib-lesson-info list-unstyled">
             <li className="lib-less-title">
-              <a className ="titleAnchor" href={lesson.lesson_url || '/'}>
+              <a className ="titleAnchor" href= {lesson.publish ? 
+                lesson.lesson_url : (Actions.sendLesson(lesson),
+                  '/configure')}>
                 {lesson.title || 'title not found'}
               </a>
             </li>
@@ -67,14 +70,13 @@ var LibLessonEntry = React.createClass({
             </li> :
             <a onClick={boundClickPub}>
               Publish
-            < /a>
-          }
+            < /a>}
           </ul>
-          <span className="fa fa-trash-o pull-right" onClick={boundClickDel}></span>
+         <span className="fa fa-trash-o pull-right" onClick={boundClickDel}></span>
         </div> 
       </div>
     </div>
-    })
+    }})
      return (
         <span >
           {lessons}
