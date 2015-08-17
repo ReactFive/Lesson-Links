@@ -23,15 +23,15 @@ var LibLessonEntry = React.createClass({
       lessonList[index].publish = !lessonList[index].publish;
     };
     var handleClickDel = function(index, event){
-      Actions.deleteLesson(lessonList[index])
-    }
+      Actions.deleteLesson(lessonList[index]);
+    };
     
     var boundClickPub = handleClickPub.bind(this, index);
     var boundClickDel = handleClickDel.bind(this, index);
 
     var commentCount = _.reduce(
       lesson.comments, function(total, comment){
-        return total + comment.replies.length + 1
+        return total + comment.replies.length + 1;
       }, 0)
     
     var createdDate;
@@ -40,7 +40,7 @@ var LibLessonEntry = React.createClass({
     } else {
       createdDate = 'Not published'
 
-    var video_id = lesson.video_url.split('v=')[1]
+    var video_id = lesson.video_url.split('v=')[1];
     var ampersandPosition = video_id.indexOf('&');
     if(ampersandPosition != -1) {
       video_id = video_id.substring(0, ampersandPosition);

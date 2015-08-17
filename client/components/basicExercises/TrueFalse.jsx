@@ -7,12 +7,14 @@ var Route = Router.Route;
 
 var TrueFalse = React.createClass({
 
-  getInitialState: function(){
+  getInitialState: function() {
     return {
-      prompt: "4 + 7 = 12",
-      correct: false,
-      posFeedback: "This was a fairly easy item, right?",
-      negFeedback: "Oops, that should have been easy!?",
+      exercise: {
+        prompt: "4 + 7 = 12",
+        correct: false,
+        posFeedback: "This was a fairly easy item, right?",
+        negFeedback: "Oops, that should have been easy!?"
+      },
       outcome: null
     };
   },
@@ -26,11 +28,8 @@ var TrueFalse = React.createClass({
     }
   },
 
-
   render: function() {
     var view;
-    var prompt = this.state.statement;
-    var title = this.state.title;
 
     switch (this.state.outcome) {
       case false:
@@ -45,7 +44,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.negFeedback ? this.state.negFeedback : null }</p>
+                        <p>{ this.state.exercise.negFeedback ? this.state.exercise.negFeedback : null }</p>
                       </blockquote>
                     </div>
                   </div>
@@ -70,7 +69,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        { this.state.posFeedback ? this.state.posFeedback : null }
+                        { this.state.exercise.posFeedback ? this.state.exercise.posFeedback : null }
                       </blockquote>
                     </div>
                   </div>
@@ -90,7 +89,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.prompt}</h4>
+                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.prompt}</h4>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">

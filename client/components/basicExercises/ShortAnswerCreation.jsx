@@ -32,7 +32,7 @@ var ShortAnswerCreation = React.createClass({
     var field = event.target.name;
     this.state.exercise[field] = event.target.value;
     return this.setState({exercise: this.state.exercise});
-},
+ },
 
   render: function(){
 

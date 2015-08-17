@@ -16,36 +16,45 @@ var MultiChoiceCreation = React.createClass({
 
   getInitialState: function(){
     return {
-      numbs: 6,
-      optNumbs: 3,
-      correctOption: null,
-      options: [
-        { value: '1', label: 'One' },
-        { value: '2', label: 'Two' },
-        { value: '3', label: 'Three' },
-        { value: '4', label: 'Four' },
-        { value: '5', label: 'Five' }
-      ]
+      exercise: {
+        numbs: 6,
+        optNumbs: 3,
+        correctOption: null,
+        feedback: ["","","","",""],
+        options: [
+          {value: '1', label: 'Option 1'},
+          {value: '2', label: 'Option 2'},
+          {value: '3', label: 'Option 3'},
+          {value: '4', label: 'Option 4'},
+          {value: '5', label: 'Option 5'}
+        ]
+      }
     }
   },
 
   formSetup: function(event){
-    var e = event * 2;
-    this.setState({optNumbs: event, numbs: e});
+    this.state.exercise['optNumbs'] = event;
+    this.state.exercise['numbs'] = event * 2;
+    this.setState({exercise: this.state.exercise});
+  },
+
+  setExerciseState : function(event){
+    console.log(event);
+    //this probably needs to be on the parent...
   },
 
   render: function(){
     var classString = {};
     var radioClassString = {};
    for (var i = 0; i < 10; i++){
-     if(i < this.state.numbs) {
+     if(i < this.state.exercise.numbs) {
        classString[i] = "form-group";
      } else {
        classString[i] = "hidden";
      }
    }
     for (var i = 0; i < 5; i++){
-      if(i < this.state.optNumbs) {
+      if(i < this.state.exercise.optNumbs) {
         radioClassString[i] = "radio-inline";
       } else {
         radioClassString[i] = "hidden";
@@ -60,94 +69,118 @@ var MultiChoiceCreation = React.createClass({
             <Select
               name="Number of items"
               value="Select the number of alternative answers"
-              options={this.state.options}
+              options={this.state.exercise.options}
               onChange={this.formSetup} />
 
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
             <h5>Write your question/prompt/problem</h5>
               <div className="form-group">
-                <input ref="question" className="form-control" name="name" type='text' placeholder="Question"/>
+                <input ref="question"
+                   className="form-control"
+                   name="name"
+                   type='text'
+                   value={this.state.exercise.question}
+                   placeholder="Question"/>
               </div>
 
               <div className={classString[0]}>
-                <label htmlFor="option1"><strong>Option 1</strong></label>
+                <label htmlFor="option1"><strong>{this.state.exercise.options[0].label}</strong></label>
                   <input id="option1"
-                         className="form-control"
-                         name="option1"
-                         type='text'
-                         ref="option1"
-                         placeholder="Add an option here"/>
+                     className="form-control"
+                     name="option1"
+                     type='text'
+                     ref="option1"
+                     value={(this.props.exercise && this.props.exercise.options[0].value) || ""}
+                     onChange={this.setExerciseState}
+                     placeholder="Add an option here"/>
               </div>
               <div className={classString[1]}>
                   <label htmlFor="feedback1">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback1"
-                            className="form-control"
-                            rows="2"
-                            ref="feedback1"/>
+                    className="form-control"
+                    rows="2"
+                    ref="feedback1"
+                    value={(this.props.exercise && this.props.exercise.feedback[0]) || ""}
+                    onChange={this.setExerciseState}/>
               </div>
               <div className={classString[2]}>
-                <label htmlFor="option2"><strong>Option 2</strong></label>
+                <label htmlFor="option2"><strong>{this.state.exercise.options[1].label}</strong></label>
                 <input id="option2"
-                       className="form-control"
-                       name="option2"
-                       type='text'
-                       ref="option2"
-                       placeholder="Add an option here"/>
+                   className="form-control"
+                   name="option2"
+                   type='text'
+                   ref="option2"
+                   value={(this.props.exercise && this.props.exercise.options[1].value) || ""}
+                   onChange={this.setExerciseState}
+                   placeholder="Add an option here"/>
               </div>
               <div className={classString[3]}>
                 <label htmlFor="feedback2">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback2"
-                            className="form-control"
-                            rows="2"
-                            ref="feedback2"/>
+                    className="form-control"
+                    rows="2"
+                    value={(this.props.exercise && this.props.exercise.feedback[1]) || ""}
+                    onChange={this.setExerciseState}
+                    ref="feedback2"/>
               </div>
               <div className={classString[4]}>
-                <label htmlFor="option3"><strong>Option 3</strong></label>
+                <label htmlFor="option3"><strong>{this.state.exercise.options[2].label}</strong></label>
                 <input id="option3"
-                       className="form-control"
-                       name="option3"
-                       type='text'
-                       ref="option3"
-                       placeholder="Add an option here"/>
+                   className="form-control"
+                   name="option3"
+                   type='text'
+                   ref="option3"
+                   value={(this.props.exercise && this.props.exercise.options[2].value) || ""}
+                   onChange={this.setExerciseState}
+                   placeholder="Add an option here"/>
               </div>
               <div className={classString[5]}>
                 <label htmlFor="feedback3">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback3"
-                            ref="feedback3"
-                            className="form-control"
-                            rows="2"/>
+                    ref="feedback3"
+                    className="form-control"
+                    rows="2"
+                    onChange={this.setExerciseState}
+                    value={(this.props.exercise && this.props.exercise.feedback[2]) || ""}/>
               </div>
               <div className={classString[6]}>
-                <label htmlFor="option4"><strong>Option 4</strong></label>
+                <label htmlFor="option4"><strong>{this.state.exercise.options[3].label}</strong></label>
                 <input id="option4"
-                       className="form-control"
-                       name="option4"
-                       ref="option4"
-                       type='text'
-                       placeholder="Add an option here"/>
+                   className="form-control"
+                   name="option4"
+                   ref="option4"
+                   type='text'
+                   onChange={this.setExerciseState}
+                   value={(this.props.exercise && this.props.exercise.options[3].value) || ""}
+                   placeholder="Add an option here"/>
               </div>
               <div className={classString[7]}>
                 <label htmlFor="feedback4">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback4"
-                            ref="feedback4"
-                            className="form-control"
-                            rows="2"/>
+                    ref="feedback4"
+                    className="form-control"
+                    rows="2"
+                    onChange={this.setExerciseState}
+                    value={(this.props.exercise && this.props.exercise.feedback[3]) || ""}/>
               </div>
               <div className={classString[8]}>
-                <label htmlFor="option5"><strong>Option 5</strong></label>
+                <label htmlFor="option5"><strong>value={this.state.exercise.options[4].value}</strong></label>
                 <input id="option5"
-                       className="form-control"
-                       name="option5"
-                       ref="option5"
-                       type='text'
-                       placeholder="Add an option here"/>
+                   className="form-control"
+                   name="option5"
+                   ref="option5"
+                   type='text'
+                   value={(this.props.exercise && this.props.exercise.options[4].value) || ""}
+                   placeholder="Add an option here"/>
               </div>
               <div className={classString[9]}>
                 <label htmlFor="feedback5">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback5"
-                            ref="feedback5"
-                            className="form-control"
-                            rows="2"/>
+                    ref="feedback5"
+                    className="form-control"
+                    rows="2"
+                    onChange={this.setExerciseState}
+                    value={(this.props.exercise && this.props.exercise.feedback[4]) || ""}/>
               </div>
                <div onChange={this.checkHandle} className="correct-answer-label">
                  <span className="correct-answer-label">
