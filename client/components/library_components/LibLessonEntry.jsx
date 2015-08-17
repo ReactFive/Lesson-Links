@@ -6,6 +6,7 @@ var AuthStore = require('../../stores/AuthStore')
 var Actions = require('../../actions');
 var Router = require('react-router')
 var Link = Router.Link;
+var _ = require('lodash')
 
 var LibLessonEntry = React.createClass({
 
@@ -25,6 +26,11 @@ var LibLessonEntry = React.createClass({
     var boundClick = handleClick.bind(this, index);
     var boundClickDel = handleClickDel.bind(this, index);
 
+    var commentCount = _.reduce(
+      lesson.comments, function(total, comment){
+        console.log(total)
+        return total + comment.replies.length + 1
+      }, 0)
 
 
     return <div className="row">
@@ -40,9 +46,9 @@ var LibLessonEntry = React.createClass({
               </p>
             </p>
             <p className="lib-lesson-stats">
-              Comments: 12    Exercises: 5
+              Comments: {commentCount}    Exercises: {lesson.exercises.length}
               <p>
-                Published: June 20th, 2015 2:45PM
+                Published: {lesson.created_at}
               </p>
               <a onClick={boundClickDel}>Remove< /a>
             </p>
