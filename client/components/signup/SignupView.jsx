@@ -19,22 +19,22 @@ module.exports = React.createClass({
 
           <div className="form-group">
             <label id="name">Name</label>
-            <input ref="name" className="form-control" name="name" type='text' placeholder="First Last"/>
+            <input ref="name" className="form-control" name="name" type='text' required placeholder="First Last"/>
           </div>
 
           <div className="form-group">
             <label id="email">Email</label>
-            <input ref="email" className="form-control" name="email" type='text' placeholder="you@mail.com"/>
+            <input ref="email" className="form-control" name="email" type='email' required placeholder="you@mail.com"/>
           </div>
 
           <div className="form-group">
             <label id="password">Password</label>
-            <input ref="password" className="form-control" name="password" type="password" placeholder="combination of 6+ letters and numbers"/>
+            <input ref="password" className="form-control" name="password" type="password" required placeholder="combination of 6+ letters and numbers"/>
           </div>
 
           <div className="form-group">
             <label id="password2">Confirm Password</label>
-            <input ref="password2" className="form-control" name="password2" type="password" placeholder="same password again"/>
+            <input ref="password2" className="form-control" name="password2" type="password" required placeholder="same password again"/>
           </div>
 
           <button className="btn btn-primary">Signup</button>
@@ -50,8 +50,16 @@ module.exports = React.createClass({
     var password = this.refs.password.getDOMNode().value;
     var password2 = this.refs.password2.getDOMNode().value;
 
+    var emailValidator = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/
+
+    if(!emailValidator.test(email.toUpperCase())){
+      toastr["warning"]("Please enter a valid email address");
+    }
+    if (password.length.trim() < 6) {
+      toastr["warning"]("Your password is too short");
+    }
     if (password !== password2) {
-      toastr["warning"]("Your passwords do not match")
+      toastr["warning"]("Your passwords do not match");
     } else {
       Actions.signup(name, email, password)
       .then(function(){
