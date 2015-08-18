@@ -20,17 +20,7 @@ var LibLessonCollection = React.createClass({
     var lessons = this.props.lessons.map(function(lesson, index){
       return <LibLessonEntry lesson={lesson}/>
     });
-    // var handleClickPub = function(index, event){
-    //   Actions.togglePublish(lessonList[index]);
-    //   lessonList[index].publish = !lessonList[index].publish;
-    // };
-    // var handleClickDel = function(index, event){
-    //   Actions.deleteLesson(lessonList[index])
-    // }
     
-    // var boundClickPub = handleClickPub.bind(this, index);
-    // var boundClickDel = handleClickDel.bind(this, index);
-    console.log(lessons);
     return (
       <div >
         {lessons}
