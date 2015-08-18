@@ -3,6 +3,7 @@ var Reflux = require('reflux');
 var Actions = require('../../actions');
 var Router = require('react-router')
 var Link = Router.Link;
+var Navigation = Router.Navigation;
 
 var _ = require('lodash');
 var Moment = require('moment');
@@ -20,7 +21,7 @@ var LibLessonEntry = React.createClass({
   },
 
   gotoConfigure: function () {
-    Actions.sendLesson(this.lesson);
+    Actions.sendLesson(this.props.lesson);
     this.transitionTo('/configure');
   },
 
@@ -57,8 +58,7 @@ var LibLessonEntry = React.createClass({
         <img className="media pull-left videoSnippet" src={imgUrl} />
         <ul className="lib-lesson-info list-unstyled">
           <li className="lib-less-title">
-            <button className ="titleAnchor" href= {lesson.publish ? 
-              lesson.lesson_url : '/configure'}>
+            <button className ="titleAnchor" onClick={this.gotoConfigure}>
               {lesson.title || 'title not found'}
             </button>
           </li>
