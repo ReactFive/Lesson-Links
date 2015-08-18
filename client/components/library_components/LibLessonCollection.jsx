@@ -32,9 +32,9 @@ var LibLessonCollection = React.createClass({
     // var boundClickDel = handleClickDel.bind(this, index);
     console.log(lessons);
     return (
-      <span >
+      <div >
         {lessons}
-      </span>
+      </div>
     )
   }
 })

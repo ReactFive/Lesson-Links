@@ -32,14 +32,23 @@ var Library = React.createClass({
 
       return (
         <div className="container lib-lesson-container">
-          <div className="row">
-            <div id="library-filter-header">
-              <h1 className="filterColor">
-                {name}{apo}s Library
-              </h1>
-            </div>
+          <div id="library-filter-header">
+            <h1 className="filterColor">
+              {name}{apo}s Library
+            </h1>
           </div>
-          <LibLessonCollection lessons = {user.lessons} />
+          <LibLessonCollection lessons = {
+              _.filter(user.lessons, function(lesson){return lesson.teacher.id === user._id
+              })
+            } owner = {true}/>
+
+          <div className="library-filter-header">
+            <h1 className="filterColor">{name}{apo}s Studies</h1>
+          </div>
+          <LibLessonCollection lessons = {
+            _.filter(user.lessons, function(lesson){return lesson.teacher.id !== user._id
+            })
+          } owner = {false}/>
         </div>
       )
       

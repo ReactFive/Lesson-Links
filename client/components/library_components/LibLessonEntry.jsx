@@ -9,6 +9,15 @@ var Moment = require('moment');
 
 var LibLessonEntry = React.createClass({
 
+  publish: function() {
+    console.log("publish clicked!");
+    Actions.togglePublish(this.props.lesson);
+  },
+
+  deleteLesson: function() {
+    Actions.deleteLesson(this.props.lesson);
+  },
+
   render: function() {
     var lesson = this.props.lesson;
     console.log(lesson);
@@ -33,10 +42,9 @@ var LibLessonEntry = React.createClass({
 
     var publishDisplay = lesson.publish ?
         <li> Published on: {createdDate} </li>
-      : <p>Publish</p>;
+      : <p onClick={this.publish}>Publish</p>;
 
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
-    debugger;
 
     return (
       <div className="lib-lesson-entry">
@@ -56,6 +64,7 @@ var LibLessonEntry = React.createClass({
           </li>
           {publishDisplay}
         </ul>
+        <span className="fa fa-trash-o pull-right" onClick={this.deleteLesson}></span>
       </div>
     );
   }
