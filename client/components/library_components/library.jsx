@@ -13,10 +13,10 @@ var Library = React.createClass({
   mixins: [Reflux.connect(AuthStore, 'auth')],
 
   getInitialState: function(){
-    Actions.getUser();
   },
 
   componentWillMount: function(){
+    Actions.getUser();
   },
 
   render:function(){
@@ -59,9 +59,7 @@ var Library = React.createClass({
       )
       
     } else {
-      Actions.getUser();
-      console.log("no user yet");
-      return null
+      return null;
     }
   }
 });
