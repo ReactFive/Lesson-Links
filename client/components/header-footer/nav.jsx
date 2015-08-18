@@ -35,7 +35,7 @@ var nav = React.createClass({
             <li className="hoverNavSpecial">
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" className="navCreate" to="/add-lesson">Create Lesson</Link>}
             </li>
-            <li>
+            <li className="hoverNavSpecial">
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
             </li>
             <li className="hoverNavSpecial pull-right">
