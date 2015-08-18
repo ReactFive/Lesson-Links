@@ -21,7 +21,7 @@ var nav = React.createClass({
     return ( <nav className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
-          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
             <span className="sr-only">Toggle navigation</span>
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
@@ -31,6 +31,7 @@ var nav = React.createClass({
             LESSON LINKS
           </Link>
         </div>
+        <div id="navbar" className="collapse navbar-collapse">
           <ul className="nav navbar-nav navbar-right">
             <li>
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" className="navCreate" to="/add-lesson">Create Lesson</Link>}
@@ -52,6 +53,7 @@ var nav = React.createClass({
             </li>
           </ul>
         </div>
+      </div>
     </nav> )
   },
 
