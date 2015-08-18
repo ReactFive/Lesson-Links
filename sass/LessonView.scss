@@ -44,6 +44,7 @@
 }
 
 .comments-view{
+  padding-top: 15px;
   font-size: 12px;
 }
 
@@ -53,13 +54,20 @@
 
 .comment-creation-form{
   margin: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.comment-list{
+  background: $dark-blue;
 }
 
 .comment-box{
   list-style-type: none;
-
   margin: 0 0 16px;
   font-size: 12px;
+  border: 1px solid $dark-blue;
+  background: $lightest-blue;
+  color: $darkest-blue;
 }
 
 .comment-content{
@@ -88,7 +96,7 @@
 
 .comment-author{
   vertical-align: top;
-  color: #167ac6;
+  color: $darkest-blue;
   font-weight: 500;
   text-decoration: none;
   word-break: break-all;
@@ -119,10 +127,10 @@
   color: rgba(25, 25, 25, 0.4);
 }
 
-
 .comment-toolbar{
   opacity: .50;
 }
+
 .comment-like-button,
 .comment-reply-button,
 .comment-like-icon,
@@ -150,13 +158,13 @@
 
 .comment-form{
   font-size: 12px !important;
-  border: none;
-  border-top: 1px solid rgba(33,150, 243, 0.2 ) !important;
   box-shadow: none !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
   padding-top: 12px !important;
-  padding-bottom: 5px !important;
+  padding-bottom: 10px !important;
+  border: 1px solid $light-blue !important;
+  color: $darkest-blue;
 }
 
 #reply-creation-box{
@@ -173,7 +181,7 @@
   list-style-type: none;
   margin: 0 0 16px;
   font-size: 12px;
-  border-left: 5px solid #eeeeee;
+  border-left: 5px solid $light-blue;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 2px;

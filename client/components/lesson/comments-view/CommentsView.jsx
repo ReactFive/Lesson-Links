@@ -8,7 +8,6 @@ var CommentsView = React.createClass({
 
     return (
       <div className="comments-view col-lg-10 col-lg-offset-1">
-        <VideoNavBar/>
         <CommentSubmissionBox/>
         <CommentList />
       </div>
