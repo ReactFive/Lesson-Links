@@ -29,12 +29,12 @@ module.exports = React.createClass({
 
           <div className="form-group">
             <label id="password">Password</label>
-            <input ref="password" className="form-control" name="password" type="password" required placeholder="combination of 6+ letters and numbers"/>
+            <input ref="password" className="form-control" min="6" name="password" type="password" required placeholder="combination of 6+ letters and numbers"/>
           </div>
 
           <div className="form-group">
             <label id="password2">Confirm Password</label>
-            <input ref="password2" className="form-control" name="password2" type="password" required placeholder="same password again"/>
+            <input ref="password2" className="form-control" min="6" name="password2" type="password" required placeholder="same password again"/>
           </div>
 
           <button className="btn btn-primary">Signup</button>
@@ -53,6 +53,7 @@ module.exports = React.createClass({
     var emailValidator = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/
 
     if(!emailValidator.test(email.toUpperCase())){
+      console.log("in email validation");
       toastr["warning"]("Please enter a valid email address");
     }
     if (password.length.trim() < 6) {
