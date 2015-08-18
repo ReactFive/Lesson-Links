@@ -56,7 +56,7 @@ module.exports = React.createClass({
       console.log("in email validation");
       toastr["warning"]("Please enter a valid email address");
     }
-    if (password.length.trim() < 6) {
+    if (password.length < 6) {
       toastr["warning"]("Your password is too short");
     }
     if (password !== password2) {

@@ -33,7 +33,7 @@ var AddVideoBox = React.createClass({
     Actions.createLesson({
       title: this.state.title,
       video_url: this.state.video_url,
-      lesson_url: this.state.lesson_url,
+      lesson_url: lesson_url,
       published: this.state.published 
     });
   },
