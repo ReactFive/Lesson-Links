@@ -24,7 +24,7 @@ module.exports = Reflux.createStore({
       unfollowLesson : true,
       _id : lesson._id
     })
-    .then(function(){
+    .then(function(res){
       Actions.getUser();
     });
   }

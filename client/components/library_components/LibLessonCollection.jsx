@@ -16,7 +16,6 @@ var LibLessonCollection = React.createClass({
   render:function(){
     var owner = this.props.owner;
     var lessonList = this.props.lessons;
-    console.log("lessonList", lessonList)
     var lessons = this.props.lessons.map(function(lesson, index){
       return <LibLessonEntry lesson={lesson}/>
     });

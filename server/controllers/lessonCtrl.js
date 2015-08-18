@@ -58,7 +58,7 @@ exports.updateLesson = function(req, res, next){
         })
     }
     if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
-    Lesson.update({'lesson_url' : req.params.url}, {
+    Lesson.findOneAndUpdate({'lesson_url' : req.params.url}, {
       $set : 
         {
           title : req.body.title,
@@ -66,18 +66,14 @@ exports.updateLesson = function(req, res, next){
           publish : req.body.publish,
           comments : req.body.comments
         }
-      }, function(err, raw){
+      },{}, function(err, raw){
         if (err) {
           console.log(err)
           res.sendStatus(500)
-        }
+        } else {
         //Sends lesson back if update was successful
-        Lesson.findOne({'lesson_url':req.params.url})
-        .exec(function(err, lesson){
-          if (err) {console.log(err)
-          res.status(200).send(lesson)
-          }
-        })
+        res.status(200).send(lesson)
+        }
       }
     )
   })
