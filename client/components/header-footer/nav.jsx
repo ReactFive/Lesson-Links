@@ -6,6 +6,7 @@ var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions');
 var Navigation = Router.Navigation;
 
+
 var nav = React.createClass({
   mixins: [Reflux.connect(AuthStore,"auth"), Navigation],
 
@@ -17,9 +18,7 @@ var nav = React.createClass({
   },
 
   render: function() {
-    return ( 
-
-    <nav className="navbar navbar-inverse navbar-static-top" role="navigation">
+    return ( <nav className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -28,18 +27,11 @@ var nav = React.createClass({
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-
           <Link to="/" className="navbar-brand">
             LESSON LINKS
           </Link>
         </div>
-
-        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
           <ul className="nav navbar-nav navbar-right">
-            <li>
-              {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" className="navCreate" to="/add-lesson">Create Lesson</Link>}
-            </li>
             <li>
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
             </li>
@@ -47,17 +39,22 @@ var nav = React.createClass({
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
             <li>
-              { (this.state.auth && this.state.auth.loggedIn) ? this.renderLogout() : this.renderLogin() }
+              { (this.state.auth && this.state.auth.loggedIn) ? null : this.renderLogin() }
+            </li>
+            <li>
+              { (this.state.auth && this.state.auth.loggedIn) ? 
+                 <a onClick={this.handleLogout}>Logout</a>
+                 : 
+                 <a className="authButtons pull-right" type="submit" onClick={this.handleSubmit}>Login</a> }
             </li>
           </ul>
-
         </div>
-
-      </div>
     </nav> )
   },
+
   renderLogin: function(){
-    return <form onSubmit={this.handleSubmit} className="navbar-form navbar-right" role="search">
+    return (
+    <form onSubmit={this.handleSubmit} className="navbar-form navbar-right" role="search">
       <div className="form-group form-group-lg">
         <div className="col-sm-4">
           <input ref="email" type="text" className="form-control nav-login" placeholder="Email"/>
@@ -68,15 +65,8 @@ var nav = React.createClass({
           <input ref="password" type="password" className="form-control nav-login" placeholder="Password"/>
         </div>
       </div>
-      <button type="submit" className="btn btn-default">Login</button>
       {/* add error message */}
-    </form>
-  },
-
-  renderLogout: function(){
-    return <form className="navbar-form navbar-right">
-      <button className="btn btn-default" onClick={this.handleLogout}>Logout</button>
-    </form>
+    </form>)
   },
 
   handleLogout: function() {
