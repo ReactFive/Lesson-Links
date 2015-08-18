@@ -8,6 +8,7 @@ var _ = require('lodash');
 var Moment = require('moment');
 
 var LibLessonEntry = React.createClass({
+  mixins: [Navigation],
 
   publish: function() {
     console.log("publish clicked!");
@@ -16,6 +17,11 @@ var LibLessonEntry = React.createClass({
 
   deleteLesson: function() {
     Actions.deleteLesson(this.props.lesson);
+  },
+
+  gotoConfigure: function () {
+    Actions.sendLesson(this.lesson);
+    this.transitionTo('/configure');
   },
 
   render: function() {
@@ -51,10 +57,10 @@ var LibLessonEntry = React.createClass({
         <img className="media pull-left videoSnippet" src={imgUrl} />
         <ul className="lib-lesson-info list-unstyled">
           <li className="lib-less-title">
-            <a className ="titleAnchor" href= {lesson.publish ? 
+            <button className ="titleAnchor" href= {lesson.publish ? 
               lesson.lesson_url : '/configure'}>
               {lesson.title || 'title not found'}
-            </a>
+            </button>
           </li>
           <li className="lib-less-author">
             Author: {lesson.teacher.name || 'anonymous'}
