@@ -6,7 +6,7 @@ module.exports = React.createClass({
        <div role="navigation">
         <div className="container">
           <div className="navbar-text pull-left">
-            <p>@ 2015 Team Acid Reflux</p>
+            <p>© 2015 Team React 5</p>
         </div>
       </div>
      </div>
