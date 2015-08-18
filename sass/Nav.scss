@@ -7,13 +7,16 @@
     color: $lightest-blue !important;
     text-decoration:none;
   }
-  li:hover{
+
+
+.hoverNavSpecial:hover{
     a{
       color: $darkest-blue !important;
     }
     background: $lightest-blue;
   }
 }
+
 
 .signup-container {
   padding-top: 25px;
