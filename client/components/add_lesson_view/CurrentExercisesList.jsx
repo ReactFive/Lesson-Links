@@ -3,8 +3,9 @@ var Reflux = require('reflux');
 
 var CurrentExercisesList = React.createClass({
   exerciseEntries: function() {
-    return this.props.exercises.map(function(exercise) {
-      return <p>{exercise.type} {exercise.time}</p>
+    return this.props.exercises.map(function(exerciseInfo) {
+      var exercise = exerciseInfo.exercise;
+      return <p key={exerciseInfo.key}>{exercise.type} {exercise.time}</p>
     })
   },
 
