@@ -9,6 +9,7 @@ var Moment = require('moment');
 
 var LibLessonEntry = React.createClass({
 
+
   publish: function() {
     console.log("publish clicked!");
     Actions.togglePublish(this.props.lesson);
@@ -20,7 +21,6 @@ var LibLessonEntry = React.createClass({
 
   render: function() {
     var lesson = this.props.lesson;
-    console.log(lesson);
 
     var commentCount = _.reduce(
       lesson.comments, function(total, comment){
