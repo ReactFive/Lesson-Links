@@ -29,6 +29,7 @@ var AddVideoBox = React.createClass({
 
   handleSubmit: function(e){
     e.preventDefault();
+    var lesson_url = this.state.lesson_url.replace(/\s+/g, '-');
     Actions.createLesson({
       title: this.state.title,
       video_url: this.state.video_url,
@@ -51,11 +52,12 @@ var AddVideoBox = React.createClass({
 
     //This success message appears underneath the form when the lesson is successfully saved.
     var successMessage = this.state.result.createdLesson ? 
-      <div className="success-message">
-        <p>Nice bruh! Your lesson has been created: </p>
+      <div className="alert alert-success">
+        <p><strong>Your lesson has been created!</strong></p>
         <p>Title:  {this.state.title}</p>
         <p>Video:  {this.state.video_url}</p>
-        <p>Your lessons unique URL: www.lesson-links.com/ {this.state.lesson_url}</p>
+        <p>Your lessons unique URL:<br/>
+        <strong>www.lesson-links.com/{this.state.lesson_url.replace(/\s+/g, '-')}</strong></p>
         <br/>
         <p>Click NEXT to configure your lesson exercises</p>
       </div>
@@ -67,7 +69,7 @@ var AddVideoBox = React.createClass({
     var button = this.state.result.createdLesson ? 
       <button
         type="submit" 
-        className="btn btn-primary pull-right"
+        className="btn btn-success pull-right"
         onClick={this.gotoConfigure}>Next</button>
       :
       <button
@@ -127,9 +129,9 @@ var AddVideoBox = React.createClass({
                 {errorMessage}
               </div>
             </div>
-
+            <div className="col-md-offset-3 col-md-7">
             {successMessage}
-
+            </div>
             {button}
 
           </form>
