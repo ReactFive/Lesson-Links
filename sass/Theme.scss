@@ -6,7 +6,7 @@ $header-font     : Vidaloka, serif;
 
 $subheader-font  : Roboto, sans-serif;
 
-$background-color: #ffffff;
+$background-color: #5c94c0;
 
 $dark-purple     : #3a406b;
 $light-purple    : #b8b6e4;
@@ -46,7 +46,8 @@ a{
 }
 
 body {
-  padding-top: 65px; 
+  padding-top: 65px;
+  background-color: $background-color;
 }
 
 p{
