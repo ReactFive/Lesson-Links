@@ -5,6 +5,7 @@ var AuthStore = require('../../stores/AuthStore');
 var Actions = require('../../actions.js');
 var Reflux = require('reflux');
 var LibLessonEntry = require('./LibLessonEntry.jsx');
+var LibLessonCollection = require('./LibLessonCollection.jsx');
 var LibAddLesson = require('./LibAddLesson.jsx');
 var _ = require('lodash');
 
@@ -25,6 +26,7 @@ var Library = React.createClass({
 
     if (this.state.auth && this.state.auth.user){
       var user = this.state.auth.user;
+      console.log(user);
       {/*Grab User's Name*/}
       var name = this.state.auth.user.local.name;
 
@@ -35,28 +37,15 @@ var Library = React.createClass({
               <h1 className="filterColor">
                 {name}{apo}s Library
               </h1>
+            </div>
           </div>
-        </div>
-          <div className="col-md-12 library-filter">
-            <LibLessonEntry lessons = {
-              _.filter(user.lessons, function(lesson){return lesson.teacher.id === user._id
-              })
-            } owner = {true}/>
-          </div>
-          <div className="library-filter-header">
-            <h1 className="filterColor">{name}{apo}s Studies</h1>
-          </div>
-          <div className="library-filter row">
-            <LibLessonEntry lessons = {
-              _.filter(user.lessons, function(lesson){return lesson.teacher.id !== user._id
-              })
-            } owner = {false}/>
-
-          </div>
+          <LibLessonCollection lessons = {user.lessons} />
         </div>
       )
+      
     } else {
       Actions.getUser();
+      console.log("no user yet");
       return null
     }
   }
