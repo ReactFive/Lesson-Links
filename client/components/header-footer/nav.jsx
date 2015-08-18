@@ -33,23 +33,23 @@ var nav = React.createClass({
         </div>
         <div id="navbar" className="collapse navbar-collapse">
           <ul className="nav navbar-nav navbar-right">
-            <li>
+            <li className="hoverNavSpecial">
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" className="navCreate" to="/add-lesson">Create Lesson</Link>}
             </li>
-            <li>
+            <li className="hoverNavSpecial">
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
             </li>
-            <li className="pull-right">
+            <li className="hoverNavSpecial pull-right">
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
             <li>
               { (this.state.auth && this.state.auth.loggedIn) ? null : this.renderLogin() }
             </li>
-            <li>
+            <li className="hoverNavSpecial">
               { (this.state.auth && this.state.auth.loggedIn) ? 
                  <a onClick={this.handleLogout}>Logout</a>
                  : 
-                 <a className="authButtons pull-right" type="submit" onClick={this.handleSubmit}>Login</a> }
+                 <a className="pull-right" type="submit" onClick={this.handleSubmit}>Login</a> }
             </li>
           </ul>
         </div>
@@ -60,12 +60,12 @@ var nav = React.createClass({
   renderLogin: function(){
     return (
     <form onSubmit={this.handleSubmit} className="navbar-form navbar-right" role="search">
-      <div className="form-group form-group-lg">
+      <div className="form-group form-group-md">
         <div className="col-sm-4">
           <input ref="email" type="text" className="form-control nav-login" placeholder="Email"/>
         </div>
       </div>
-      <div className="form-group form-group-lg">
+      <div className="form-group form-group-md">
         <div className="col-sm-4">
           <input ref="password" type="password" className="form-control nav-login" placeholder="Password"/>
         </div>
