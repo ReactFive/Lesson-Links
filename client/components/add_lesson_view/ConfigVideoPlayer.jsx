@@ -48,6 +48,7 @@ var VideoPlayer = React.createClass({
     console.log("# exercises", this.state.lesson &&
       this.state.lesson.exercises);
     if(this.state.lesson && this.state.lesson.video_url) {
+      console.log("rendering video");
       return (
         <div className="col-xs-7 col-xs-offset-1">
           <div className="">
