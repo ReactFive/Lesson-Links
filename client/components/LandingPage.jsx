@@ -16,26 +16,35 @@ var Home = module.exports = React.createClass({
   </ol>
   <div className="carousel-inner">
     <div className="item active">
-      <img src="../public/assets/Landing.png" className="fill" />
       <div className="container">
         <div className="carousel-caption">
-          <h1>Bootstrap 3 Carousel Layout</h1>
+          <h1 className="logo">Lesson Links</h1>
+          <h3 className="sublogo">Annotated  Educational  Videos.</h3>
+          <p>To be colored, styled, and replaced with a gif soon! </p>
           <p>
             <p>
             </p>
-            <p><a className="btn btn-lg btn-primary" href="http://getbootstrap.com">Learn More</a>
-            </p>
-            </p>
+          </p>
         </div>
       </div>
     </div>
-    <div className="item">
-      <img src="http://lorempixel.com/1500/600/abstract/1" />
+    <div className="item item2">
       <div className="container">
         <div className="carousel-caption">
-          <h1>Changes to the Grid</h1>
-          <p>Bootstrap 3 still features a 12-column grid, but many of the CSS className names have completely changed.</p>
-          <p><a className="btn btn-large btn-primary" href="#">Learn more</a></p>
+          <h1>How it all Works</h1>
+          <p>Information and graphics coming soon...</p>
+        </div>
+      </div>
+    </div>
+    <div className="item item3">
+      <div className="container">
+        <div className="carousel-caption">
+          <h1>Our Team</h1>
+          <p>Images to be added - Richard Van Camp, Isto Barton, Colin Wiley, Abhi Gulati, Esteban Castaño</p>
+        </div>
+        <div className="carousel-caption">
+          <h1>Our Stack</h1>
+          <p>Images to be added: Node Express React Reflux MongoDB</p>
         </div>
       </div>
     </div>
