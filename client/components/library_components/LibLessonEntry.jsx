@@ -58,7 +58,7 @@ var LibLessonEntry = React.createClass({
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
 
     return (
-      <li className="lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
+      <li className="list-group-item col-xs-4 lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
           <img className="media pull-left videoSnippet" src={imgUrl} />
           <ul className="lib-lesson-info list-unstyled">
             <li className="lib-less-title">
