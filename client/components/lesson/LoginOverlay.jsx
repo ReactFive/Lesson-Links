@@ -6,8 +6,8 @@ var LoginOverlay
   render: function() {
     return (
       <div className="login-overlay">
-        <div> 
-          You have to login! 
+        <div className="arrow-box"> 
+          <p className="arrow-box-message">Login or Signup to view this lesson!</p>
         </div>
       </div>
     );
