@@ -13,6 +13,7 @@
   line-height: 1.5;
   font-style: bold;
   margin-bottom: 10px;
+  font-size: 1.5vh;
 }
 
 .emptyLibrary{
@@ -94,8 +95,15 @@
 #trashcan{
   color: $darkest-blue;
   text-shadow: 1px 1px 1px #ccc;
-  font-size: 1.5em;
-  cursor: pointer; cursor: hand;
+  font-size: 3em;
+  cursor: pointer; 
+  cursor: hand;
+}
+
+#chart{
+  color: $darkest-blue;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 3em;
 }
 
 @keyframes pulse {
