@@ -9,6 +9,7 @@ var CurrentExercisesList = require('./CurrentExercisesList.jsx');
 
 var MultiChoiceCreation = require('../basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('../basicExercises/TrueFalseCreation.jsx');
+var ShortAnswerCreation = require('../basicExercises/ShortAnswerCreation.jsx');
 
 
 var LessonConfiguration = React.createClass({
@@ -26,11 +27,20 @@ var LessonConfiguration = React.createClass({
 
   mapExerciseType: function() {
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoiceCreation onComplete={this.setEditing}/>,
-      'truefalse' : <TrueFalseCreation onComplete={this.setEditing}/>
+      'multiplechoice' : <MultiChoiceCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
+      'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
+      'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
     }
 
     return exerciseTypeMap[this.state.editing];
+  },
+
+  loadExercise: function(exerciseInfo) {
+    var exercise = exerciseInfo.exercise;
+    this.setState({
+      editing: exercise.type,
+      exerciseState : exercise
+    })
   },
 
   render: function() {
@@ -38,7 +48,7 @@ var LessonConfiguration = React.createClass({
       <div>
         <div className="row">
           <VideoPlayer />
-          {this.state.lesson && <CurrentExercisesList exercises={this.state.lesson.exercises}/>}
+          {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
         </div>
         <div className="row">
         {!this.state.editing && 

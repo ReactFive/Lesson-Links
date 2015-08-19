@@ -15,12 +15,39 @@ var TrueFalseCreation = React.createClass({
     Navigation],
 
   getInitialState: function() {
+    var loadedState = this.props.exerciseState;
     return {
-      correctOption: undefined
+      exercise: {
+        question: loadedState.question || "",
+        correctOption: loadedState.correctOption || undefined,
+        feedbackTrue: loadedState.feedbackTrue || "",
+        feedbackFalse: loadedState.feedbackFalse || "",
+      }
     };
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    var loadedState = nextProps.exerciseState;
+    console.log(loadedState);
+    this.setState({
+      exercise: {
+        question: loadedState.question || "",
+        correctOption: loadedState.correctOption || undefined,
+        feedbackTrue: loadedState.feedbackTrue || "",
+        feedbackFalse: loadedState.feedbackFalse || "",
+      }
+    });
+  },
+
+  setExerciseState: function(event){
+    var field = event.target.name;
+    console.log(field, event.target.value)
+    this.state.exercise[field] = event.target.value;
+    return this.setState({exercise: this.state.exercise});
+  },
+
   render: function(){
+    console.log(this.state.exercise);
     return (
         <div className="container multichoice-container">
           <div className="col-md-8 col-md-offset-2">
@@ -30,36 +57,54 @@ var TrueFalseCreation = React.createClass({
             <form name="trueFalseForm" onSubmit={this.handleSubmit}>
               <h5>Write a statement which is true or false</h5>
               <div className="form-group">
-                <input ref="question" className="form-control" name="name" type='text' placeholder="Question"/>
+                <input 
+                  ref="question" 
+                  className="form-control" 
+                  name="question" 
+                  type='text' 
+                  value={this.state.exercise.question}
+                  onChange={this.setExerciseState}
+                  placeholder="Question" />
               </div>
 
 
               <div className="form-group">
                 <label htmlFor="feedbackTrue">Feedback if the user selects "true":</label>
-                  <textarea id="feedbackTrue"
-                            className="form-control"
-                            rows="2"
-                            ref="feedbackTrue"/>
+                  <textarea 
+                    id="feedbackTrue"
+                    className="form-control"
+                    rows="2"
+                    name="feedbackTrue"
+                    value={this.state.exercise.feedbackTrue}
+                    onChange={this.setExerciseState}
+                    ref="feedbackTrue"/>
               </div>
 
               <div className="form-group">
                 <label htmlFor="feedbackFalse">Feedback if the user selects "false":</label>
-                  <textarea id="feedbackFalse"
-                            className="form-control"
-                            rows="2"
-                            ref="feedbackFalse"/>
+                  <textarea 
+                    id="feedbackFalse"
+                    className="form-control"
+                    rows="2"
+                    name="feedbackFalse"
+                    value={this.state.exercise.feedbackFalse}
+                    onChange={this.setExerciseState}
+                    ref="feedbackFalse"/>
               </div>
 
               <div onChange={this.checkHandle} className="correct-answer-label">
-                 <span className="correct-answer-label">
-                   <strong>Indicate the correct answer: </strong>
-                 </span>
+                <span className="correct-answer-label">
+                  <strong>Indicate the correct answer: </strong>
+                </span>
                 <label htmlFor="correct1" className="radio-inline">
-                  <input ref="correct1" type="radio" name="correct" value="True"/>
+                  <input ref="correct1" type="radio" name="correct" value={"true"}
+                   defaultChecked={this.state.exercise.correctOption === "true"}/>
                   True
                 </label>
                 <label htmlFor="correct2" className="radio-inline">
-                  <input ref="correct2" type="radio" name="correct" value="False"/>
+                  <input ref="correct2" type="radio" name="correct" value={"false"}
+                   defaultChecked={!this.state.exercise.correctOption === "false"}/>
+                  }
                   False
                 </label>
               </div>
@@ -73,7 +118,8 @@ var TrueFalseCreation = React.createClass({
   },
 
   checkHandle: function (event){
-    this.state.correctOption = event.target.value;
+    this.state.exercise.correctOption = event.target.value;
+    this.setState({exercise: this.state.exercise});
   },
 
   handleCancel: function(event) {
@@ -84,20 +130,16 @@ var TrueFalseCreation = React.createClass({
   
   handleSubmit: function(event) {
     event.preventDefault();
-    var question = this.refs.question.getDOMNode().value.trim();
-
-    var feedbackTrue = this.refs.feedbackTrue.getDOMNode().value.trim();
-    var feedbackFalse = this.refs.feedbackFalse.getDOMNode().value.trim();
 
     var exercise = {};
-    exercise.type = "TrueFalse";
+    exercise.type = "truefalse";
     exercise.time = videojs("#attachmentVideo").currentTime();
-    exercise.question = question;
-    exercise.feedbackTrue = feedbackTrue;
-    exercise.feedbackFalse = feedbackFalse;
-    exercise.correct = this.state.correctOption;
+    exercise.question = this.state.exercise.question;
+    exercise.feedbackTrue = this.state.exercise.feedbackTrue;
+    exercise.feedbackFalse = this.state.exercise.feedbackFalse;
+    exercise.correctOption = this.state.exercise.correctOption;
 
-    if (exercise.question.length && exercise.correct !== undefined) {
+    if (exercise.question.length && exercise.correctOption !== undefined) {
       Actions.createExercise(exercise);
       this.props.onComplete(null);
     } else {

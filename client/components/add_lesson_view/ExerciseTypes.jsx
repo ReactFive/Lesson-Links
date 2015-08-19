@@ -11,7 +11,8 @@ var ExerciseTypes = React.createClass({
     return {
       exerciseTypes: [
         {label: 'Multiple Choice', value: 'multiplechoice'},
-        {label: 'True/False', value: 'truefalse'}
+        {label: 'True/False', value: 'truefalse'},
+        {label: 'Short Answer', value: 'shortanswer'},
       ],
       selectedType : null
     }

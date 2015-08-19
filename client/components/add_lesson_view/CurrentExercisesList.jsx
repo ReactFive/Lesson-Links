@@ -3,9 +3,14 @@ var Reflux = require('reflux');
 
 var CurrentExercisesList = React.createClass({
   exerciseEntries: function() {
+    var self = this;
+
     return this.props.exercises.map(function(exerciseInfo) {
       var exercise = exerciseInfo.exercise;
-      return <p key={exerciseInfo.key}>{exercise.type} {exercise.time}</p>
+      var reloadMe = function() {
+        this.props.reloadExercise(exerciseInfo);
+      }.bind(self);
+      return <p key={exerciseInfo.key} onClick={reloadMe}> {exercise.type} {exercise.time}</p>
     })
   },
 

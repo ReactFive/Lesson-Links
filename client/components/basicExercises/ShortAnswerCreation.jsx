@@ -17,13 +17,15 @@ var ShortAnswerCreation = React.createClass({
     Navigation],
 
   getInitialState: function() {
+    console.log(this.props.exerciseState);
+    var loadedState = this.props.exerciseState;
     return {
       exercise: {
-        question: "",
-        bestAnswers: "",
-        bestFeedback: "",
-        altAnswers: "",
-        altFeedback: ""
+        question: loadedState.question || "",
+        bestAnswers: loadedState.bestAnswers || "",
+        bestFeedback: loadedState.bestFeedback || "",
+        altAnswers: loadedState.altAnswers || "",
+        altFeedback: loadedState.altFeedback || ""
       }
     }
   },
@@ -32,7 +34,21 @@ var ShortAnswerCreation = React.createClass({
     var field = event.target.name;
     this.state.exercise[field] = event.target.value;
     return this.setState({exercise: this.state.exercise});
- },
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    console.log(nextProps.exerciseState);
+    var loadedState = nextProps.exerciseState;
+    this.setState({
+      exercise: {
+        question: loadedState.question || "",
+        bestAnswers: loadedState.bestAnswers || "",
+        bestFeedback: loadedState.bestFeedback || "",
+        altAnswers: loadedState.altAnswers || "",
+        altFeedback: loadedState.altFeedback || ""
+      }
+    });
+  },
 
   render: function(){
 
@@ -103,8 +119,8 @@ var ShortAnswerCreation = React.createClass({
     event.preventDefault();
 
     var exercise = {};
-    exercise.type = "ShortAnswer";
-    //exercise.time = videojs("#attachmentVideo").currentTime();
+    exercise.type = "shortanswer";
+    exercise.time = videojs("#attachmentVideo").currentTime();
     exercise.question = this.state.exercise.question;
     exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
     exercise.bestFeedback = this.state.exercise.bestFeedback;
@@ -118,9 +134,9 @@ var ShortAnswerCreation = React.createClass({
       console.log(exercise);
       Actions.createExercise(exercise);
       this.props.onComplete(null);
-      } else {
-        toastr['warning']('Make sure you have a question and answer(s)');
-      }
+    } else {
+      toastr['warning']('Make sure you have a question and answer(s)');
+    }
 
     function createRegex(value){
       var strippedOfSpacesAndPunc = value.replace(/ |\,|\.|\;/g, '').toLowerCase();
