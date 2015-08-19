@@ -18,6 +18,10 @@
   font-weight: bold;
 }
 
+.testWash{
+  background-color: $darkest-blue;
+}
+
 .teaser{
   font-family: $header-font;
   background-color: $light-purple;
@@ -32,10 +36,73 @@
   }
 }
 
-.landing1{
-  
+.carousel {
+  height: 92%;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+  position: inherit;
 }
 
-.landing2{
-  background-color: $light-blue;
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 100%;
+  background-color:$darkest-blue;
+}
+
+.carousel .item2 {
+  background-color:$dark-teal;
+}
+
+.carousel .item3 {
+  background-color:$dark-purple;
+}
+
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 100%;
+}
+
+.carousel-control.left, .carousel-control.right {
+   background-image:none;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+display: block;
+height: 100%;
+max-width: 100%;
+line-height: 1;
+width: 100%; // Add this
+}
+
+@media (min-width: 768px) {
+
+  /* Remve the edge padding needed for mobile */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+    margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+  }
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+    text-shadow: none !important;
+  }
 }
