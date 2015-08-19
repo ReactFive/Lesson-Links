@@ -45,7 +45,7 @@ exports.getUser = function(req, res){
   if(req.user) {
     User
     .findById(req.user._id)
-    .populate('lessons')
+    .deepPopulate('lessons.exercises')
     .exec(
     function(err, user){
       if (err) {console.log(err)}
