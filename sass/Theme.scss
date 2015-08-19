@@ -28,12 +28,6 @@ html,
   height: 100%;
 }
 
-body {
-  padding-top: 65px;
-  background-color: $background-color;
-  padding-bottom: 65px !important;
-}
-
 h1{
   font-family: $header-font;
   color: $darkest-blue;
@@ -54,6 +48,11 @@ a{
   cursor: pointer;
 }
 
+body {
+  padding-top: 65px;
+  background-color: $background-color;
+  padding-bottom: 70px;
+}
 
 p{
   margin: 0 !important;
@@ -76,6 +75,11 @@ hr{
 
 .Site-content {
   flex: 1;
+}
+
+#main-content{
+  height: 100%;
+  display: inline;
 }
 
 .content{
