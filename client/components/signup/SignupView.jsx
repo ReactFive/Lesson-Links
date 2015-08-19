@@ -12,9 +12,9 @@ module.exports = React.createClass({
 
   render: function(){
     return ( <div className="container signup-container" id='signup'>
-      <div className="col-md-6 col-md-offset-3">
+      <div className="col-md-6 col-md-offset-3 signup-panel">
 
-        <h1>signup</h1>
+        <h1>sign up</h1>
         <form name="signupForm" onSubmit={this.handleSubmit}>
 
           <div className="form-group">
