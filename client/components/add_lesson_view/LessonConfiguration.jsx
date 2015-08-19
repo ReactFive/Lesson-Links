@@ -9,6 +9,7 @@ var CurrentExercisesList = require('./CurrentExercisesList.jsx');
 
 var MultiChoiceCreation = require('../basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('../basicExercises/TrueFalseCreation.jsx');
+var ShortAnswerCreation = require('../basicExercises/ShortAnswerCreation.jsx');
 
 
 var LessonConfiguration = React.createClass({
@@ -26,8 +27,9 @@ var LessonConfiguration = React.createClass({
 
   mapExerciseType: function() {
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoiceCreation onComplete={this.setEditing}/>,
-      'truefalse' : <TrueFalseCreation onComplete={this.setEditing}/>
+      'multiplechoice' : <MultiChoiceCreation  onComplete={this.setEditing}/>,
+      'truefalse' : <TrueFalseCreation onComplete={this.setEditing}/>,
+      'shortanswer' : <ShortAnswerCreation exerciseState={{}} onComplete={this.setEditing}/>,
     }
 
     return exerciseTypeMap[this.state.editing];
