@@ -42,6 +42,9 @@ var nav = React.createClass({
             <li className="hoverNavSpecial pull-right">
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
+            <li className="hoverNavSpecial pull-right">
+              {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/api/facebook">Facebook</Link>}
+            </li>
             <li>
               { (this.state.auth && this.state.auth.loggedIn) ? null : this.renderLogin() }
             </li>
