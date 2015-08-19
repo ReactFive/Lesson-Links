@@ -27,7 +27,6 @@ var LibLessonEntry = React.createClass({
   },
 
   gotoLesson: function() {
-    console.log("going to lesson");
     this.transitionTo('/' + this.props.lesson.lesson_url);
   },
 
