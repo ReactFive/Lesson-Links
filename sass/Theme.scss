@@ -28,6 +28,12 @@ html,
   height: 100%;
 }
 
+body {
+  padding-top: 65px;
+  background-color: $background-color;
+  padding-bottom: 65px !important;
+}
+
 h1{
   font-family: $header-font;
   color: $darkest-blue;
@@ -48,10 +54,6 @@ a{
   cursor: pointer;
 }
 
-body {
-  padding-top: 65px;
-  background-color: $background-color;
-}
 
 p{
   margin: 0 !important;
