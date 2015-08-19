@@ -30,7 +30,8 @@ module.exports = function(app) {
    */
 
   app.post('/api/exercise', ExerciseCtrl.addExercise);
-  app.put('/api/exercise/:id', ExerciseCtrl.addExercise);
+  app.put('/api/exercise/:id', ExerciseCtrl.updateExercise);
+  app.delete('/api/exercise/:id', ExerciseCtrl.deleteExercise);
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){
