@@ -26,6 +26,10 @@ var LibLessonEntry = React.createClass({
     this.transitionTo('/configure');
   },
 
+  gotoLesson: function() {
+    this.transitionTo('/' + this.props.lesson.lesson_url);
+  },
+
   render: function() {
     var lesson = this.props.lesson;
 
@@ -58,7 +62,7 @@ var LibLessonEntry = React.createClass({
         <img className="media pull-left videoSnippet" src={imgUrl} />
         <ul className="lib-lesson-info list-unstyled">
           <li className="lib-less-title">
-            <button className ="titleAnchor" onClick={this.gotoConfigure}>
+            <button className ="titleAnchor" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
               {lesson.title || 'title not found'}
             </button>
           </li>

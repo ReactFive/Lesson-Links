@@ -26,13 +26,17 @@ var VideoPlayer = React.createClass({
 
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted){
-
       var player = this.videoSetup();
       this.setState({
         videoSetupCompleted : true,
       });
     }
   },
+
+  componentWillUnmount: function() {
+    videojs('attachmentVideo').dispose();
+  },
+
   videoSetup: function(){
     // initialize video.js
     var player = videojs('attachmentVideo');
