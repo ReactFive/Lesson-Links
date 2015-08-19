@@ -84,6 +84,12 @@
   color: $dark-pink;
 }
 
+#trashcan{
+  color: $darkest-blue;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 1.5em;
+}
+
 @keyframes pulse {
   from {
     transform: scale3d(1, 1, 1);
