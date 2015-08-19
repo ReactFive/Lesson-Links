@@ -50,6 +50,8 @@ var AddVideoBox = React.createClass({
         <p>This URL is taken. Please try a different one.</p>
       </div>
 
+    var apo = "'";
+
     //This success message appears underneath the form when the lesson is successfully saved.
     var successMessage = this.state.result.createdLesson ? 
       <div className="alert alert-success">
