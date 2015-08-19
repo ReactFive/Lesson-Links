@@ -27,29 +27,31 @@ module.exports = Reflux.createStore({
       this.triggerChange();
     }
     return Api.getStatus()
-        .then(function (res) {
-          if (res.data) {
-            this.auth.loggedIn = res.data;
-            this.triggerChange();
-          } else {
-            this.auth.loggedIn = false;
-            this.triggerChange();
-          }
-        }.bind(this));
+    .then(function (res) {
+      if (res.data) {
+        this.auth.loggedIn = res.data;
+        this.triggerChange();
+      } else {
+        this.auth.loggedIn = false;
+        this.triggerChange();
+      }
+    }.bind(this));
   },
 
   onGetUser: function(){
+    var self=this;
     return Api.getUser()
-        .then(function (res) {
-          if (res.data.user) {
-            console.log('fetched user')
-            this.auth.user = res.data.user;
-            this.triggerChange();
-          } else {
-            this.auth.user = false;
-            this.triggerChange();
-          }
-        }.bind(this));
+    .then(function (res) {
+      if (res.data.user) {
+        console.log('fetched user')
+        self.auth.user = res.data.user;
+        self.triggerChange();
+        self.trigger(self.auth)
+      } else {
+        self.auth.user = false;
+        self.triggerChange();
+      }
+    }.bind(this));
   },
 
   onLogin: function (email, password) {
