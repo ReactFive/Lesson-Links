@@ -40,6 +40,10 @@
   color: $dark-pink
 }
 
+#ulCollection{
+  list-style-type: none;
+}
+
 .library-filter{
     float: left;
 }
@@ -52,7 +56,6 @@
 
 .filterColor{
   color: $lightest-blue;
-  border-bottom: 1px solid $dark-blue;
 }
 
 .dummy{
@@ -82,6 +85,12 @@
 .lib-lock:hover{
   text-decoration: none;
   color: $dark-pink;
+}
+
+#trashcan{
+  color: $darkest-blue;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 1.5em;
 }
 
 @keyframes pulse {
