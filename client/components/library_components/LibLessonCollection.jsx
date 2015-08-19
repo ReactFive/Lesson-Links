@@ -23,7 +23,7 @@ var LibLessonCollection = React.createClass({
     });
     
     return (
-      <ul className="list-group row">
+      <ul className="list-group row" id="ulCollection">
         {lessons.length ? {lessons} : <p className="emptyLibrary"> [ None ] </p>}
       </ul>
     )

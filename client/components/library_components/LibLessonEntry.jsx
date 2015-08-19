@@ -12,12 +12,16 @@ var LibLessonEntry = React.createClass({
   mixins: [Navigation],
 
 
-  publish: function() {
+  publish: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
     console.log("publish clicked!");
     Actions.togglePublish(this.props.lesson);
   },
 
-  deleteLesson: function() {
+  deleteLesson: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
     Actions.deleteLesson(this.props.lesson);
   },
 
@@ -58,7 +62,7 @@ var LibLessonEntry = React.createClass({
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
 
     return (
-      <li className="list-group-item col-xs-4 lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
+      <li className="lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
           <img className="media pull-left videoSnippet" src={imgUrl} />
           <ul className="lib-lesson-info list-unstyled">
             <li className="lib-less-title">
