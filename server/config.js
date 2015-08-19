@@ -1,10 +1,10 @@
 var path = require('path');
 var rootPath = path.normalize(__dirname +'/../');
-
 module.exports = {
   development: {
     rootPath: rootPath,
-    database: 'mongodb://vancamp:test1@ds043971.mongolab.com:43971/testapp',
+    database: 'mongodb://test:thesis@ds031203.mongolab.com:31203/opal-test',
+    // database: 'mongodb://vancamp:test1@ds043971.mongolab.com:43971/testapp',
     port: process.env.PORT || 3000
   },
   production: {

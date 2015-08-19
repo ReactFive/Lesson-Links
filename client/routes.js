@@ -40,8 +40,8 @@ var routes = (
         <Route path='/shortanswer' handler={ShortAnswerCreation} />
         <Route path='/404' handler={NotFound}/>
         <Route path='/:url' handler={LessonView} />
-        <NotFoundRoute handler={NotFound}/>
-      </Route>
+        {/*<NotFoundRoute handler={NotFound}/>*/}
+              </Route>
 );
 
 module.exports = routes;

@@ -25,6 +25,11 @@ exports.loginUser = function(req, res) {
   )
 };
 
+exports.loginRedirect = {
+  successRedirect : '/library',
+  failureRedirect : '/'
+},
+
 exports.addLesson = function(req, res){
   User.findByIdAndUpdate(req.user.id, {
     $addToSet: {

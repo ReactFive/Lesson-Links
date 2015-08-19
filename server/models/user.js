@@ -6,12 +6,12 @@ var userSchema = new mongoose.Schema ({
   local            : {
     email: {
       type: String,
-      required: true,
+      // required: true,
       trim: true
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
       trim: true
     },
     name: String
@@ -22,18 +22,18 @@ var userSchema = new mongoose.Schema ({
     email        : String,
     name         : String
   },
-  // twitter          : {
-  //   id           : String,
-  //   token        : String,
-  //   displayName  : String,
-  //   username     : String
-  // },
-  // google           : {
-  //   id           : String,
-  //   token        : String,
-  //   email        : String,
-  //   name         : String
-  // },
+  twitter          : {
+    id           : String,
+    token        : String,
+    displayName  : String,
+    username     : String
+  },
+  google           : {
+    id           : String,
+    token        : String,
+    email        : String,
+    name         : String
+  },
   lessons : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Lesson'}]
 });
 
