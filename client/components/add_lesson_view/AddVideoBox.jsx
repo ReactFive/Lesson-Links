@@ -78,8 +78,8 @@ var AddVideoBox = React.createClass({
         onClick={this.handleSubmit}>Save</button>
     
     return (
-      <div className="lesson-create col-xs-8 col-xs-offset-1">
-        <div className="panel panel-default">
+      <div className="lesson-create col-xs-8 col-xs-offset-2">
+        <div className="panel panel-default lesson-create-panel">
           <div className="panel-header text-center">
             <h3>CREATE A LESSON</h3>
             </div>
