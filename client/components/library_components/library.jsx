@@ -38,6 +38,7 @@ var Library = React.createClass({
             <h1 className="filterColor">
               {name}{apo}s Library
             </h1>
+            <hr/>
           </div>
           <LibLessonCollection lessons = {
               _.filter(user.lessons, function (lesson) {
@@ -48,7 +49,9 @@ var Library = React.createClass({
           {/* Lessons where user is not the teacher */}
           <div className="library-filter-header">
             <h1 className="filterColor">{name}{apo}s Studies</h1>
+            <hr/>
           </div>
+
           <LibLessonCollection lessons = {
             _.filter(user.lessons, function (lesson) {
               return lesson.teacher.id !== user._id && lesson.publish

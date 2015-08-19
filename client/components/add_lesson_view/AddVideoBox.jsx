@@ -56,7 +56,7 @@ var AddVideoBox = React.createClass({
         <p><strong>Your lesson has been created!</strong></p>
         <p>Title:  {this.state.title}</p>
         <p>Video:  {this.state.video_url}</p>
-        <p>Your lessons unique URL:<br/>
+        <p>Your lesson{apo}s unique URL:<br/>
         <strong>www.lesson-links.com/{this.state.lesson_url.replace(/\s+/g, '-')}</strong></p>
         <br/>
         <p>Click NEXT to configure your lesson exercises</p>

@@ -24,7 +24,7 @@ var LibLessonCollection = React.createClass({
     
     return (
       <div >
-        {lessons}
+        {lessons.length ? {lessons} : <p className="emptyLibrary"> [ None ] </p>}
       </div>
     )
   }
