@@ -5,8 +5,10 @@ var Actions = require('../../actions');
 //This is the parent component for the library view. The file Structure is as follows:
   //LibraryView
     //Library
-      //LibLessonEntry
-      //LibAddLesson
+      //Lib Lesson Collection
+        //LibLessonEntry
+      //Lib Lesson Collection
+        //LibLessonEntry
 
 var Library = require('./library.jsx');
 
