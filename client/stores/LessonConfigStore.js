@@ -20,7 +20,7 @@ var LessonConfigStore = Reflux.createStore({
     var newExercise = {
       exercise : exercise,
       time : exercise.time,
-      text : "Exercise!",
+      text : exercise.type,
       lesson_id : this.lesson._id
     };
     
