@@ -29,10 +29,18 @@ var LessonConfiguration = React.createClass({
     var exerciseTypeMap = {
       'multiplechoice' : <MultiChoiceCreation  onComplete={this.setEditing}/>,
       'truefalse' : <TrueFalseCreation onComplete={this.setEditing}/>,
-      'shortanswer' : <ShortAnswerCreation exerciseState={{}} onComplete={this.setEditing}/>,
+      'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
     }
 
     return exerciseTypeMap[this.state.editing];
+  },
+
+  loadExercise: function(exerciseInfo) {
+    var exercise = exerciseInfo.exercise;
+    this.setState({
+      editing: exercise.type,
+      exerciseState : exercise
+    })
   },
 
   render: function() {
@@ -40,7 +48,7 @@ var LessonConfiguration = React.createClass({
       <div>
         <div className="row">
           <VideoPlayer />
-          {this.state.lesson && <CurrentExercisesList exercises={this.state.lesson.exercises}/>}
+          {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
         </div>
         <div className="row">
         {!this.state.editing && 
