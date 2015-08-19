@@ -34,7 +34,21 @@ var ShortAnswerCreation = React.createClass({
     var field = event.target.name;
     this.state.exercise[field] = event.target.value;
     return this.setState({exercise: this.state.exercise});
- },
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    console.log(nextProps.exerciseState);
+    var loadedState = nextProps.exerciseState;
+    this.setState({
+      exercise: {
+        question: loadedState.question || "",
+        bestAnswers: loadedState.bestAnswers || "",
+        bestFeedback: loadedState.bestFeedback || "",
+        altAnswers: loadedState.altAnswers || "",
+        altFeedback: loadedState.altFeedback || ""
+      }
+    });
+  },
 
   render: function(){
 
@@ -105,7 +119,7 @@ var ShortAnswerCreation = React.createClass({
     event.preventDefault();
 
     var exercise = {};
-    exercise.type = "ShortAnswer";
+    exercise.type = "shortanswer";
     exercise.time = videojs("#attachmentVideo").currentTime();
     exercise.question = this.state.exercise.question;
     exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
