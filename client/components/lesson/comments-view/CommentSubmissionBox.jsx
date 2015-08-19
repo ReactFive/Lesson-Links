@@ -67,7 +67,7 @@ var CommentSubmissionBox = React.createClass({
               onBlur={this.onFormBlur}></Textarea>
             
             { this.state.showCommentForm ? 
-              <div> <br/> <button type="submit" className="btn btn-primary btn-sm pull-right" onClick={this.handleSubmit}>Submit</button></div>
+              <div> <br/> <button type="submit" className="btn btn-primary btn-sm pull-right submit-comment-btn" onClick={this.handleSubmit}>Submit</button></div>
             : null }
           </form>
         </div>
