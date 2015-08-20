@@ -31,7 +31,14 @@ var LessonConfigStore = Reflux.createStore({
   },
 
   onUpdateExercise: function(exercise) {
-    console.log(exercise);
+    var updatedExercise = {
+      exercise: exercise,
+      time: exercise.time,
+      text: exercise.type
+    };
+    var exercise_id = excercise.id;
+    Api.updateExercise(updatedExercise, exercise_id)
+    .then(this.triggerConfigStore);
   },
 
   onPublish: function(lesson){

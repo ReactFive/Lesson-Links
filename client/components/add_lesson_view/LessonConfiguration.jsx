@@ -47,6 +47,7 @@ var LessonConfiguration = React.createClass({
 
   loadExercise: function(exerciseInfo) {
     var exercise = exerciseInfo.exercise;
+    exercise.id = exerciseInfo._id;
     this.setState({
       editing: exercise.type,
       exerciseState : exercise

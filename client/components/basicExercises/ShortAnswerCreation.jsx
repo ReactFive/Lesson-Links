@@ -17,17 +17,16 @@ var ShortAnswerCreation = React.createClass({
     Navigation],
 
   getInitialState: function() {
-    console.log(this.props.exerciseState);
     var loadedState = this.props.exerciseState || {};
     var updating = Object.keys(loadedState).length;
-    console.log(!!updating);
     return {
       exercise: {
         question: loadedState.question || "",
         bestAnswers: loadedState.bestAnswers || "",
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || ""
+        altFeedback: loadedState.altFeedback || "",
+        id: loadedState.id || undefined
       },
       updating: !!updating
     };
@@ -42,14 +41,14 @@ var ShortAnswerCreation = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     var loadedState = nextProps.exerciseState;
     var updating = Object.keys(loadedState).length;
-    console.log("here is the loaded state:", !!loadedState);
     this.setState({
       exercise: {
         question: loadedState.question || "",
         bestAnswers: loadedState.bestAnswers || "",
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || ""
+        altFeedback: loadedState.altFeedback || "",
+        id: loadedState.id || undefined
       },
       updating: !!updating
     });
@@ -146,11 +145,11 @@ var ShortAnswerCreation = React.createClass({
       if(!this.state.updating){
         Actions.createExercise(exercise);
         this.props.onComplete();
-        toastr['success']('Your exercise has been updated');
+        toastr['success']('Your new exercise has been created');
       } else {
         Actions.updateExercise(exercise);
         this.props.onComplete();
-        toastr['success']('Your new exercise has been saved');
+        toastr['success']('Your exercise has been updated');
       }
     } else {
       toastr['warning']('Make sure you have a question and answer(s)');
