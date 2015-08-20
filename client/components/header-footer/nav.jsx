@@ -58,7 +58,8 @@ var nav = React.createClass({
                         <input ref="password" type="password" className="form-control" placeholder="Password"/>
                       </div>
                       <br/>
-                      <button type="button" id="btnLogin" className="btn" onClick={this.handleSubmit}>Login</button>
+                      <button type="button" id="btnLogin" className="btn btn-default" style={{width: "100%"}} onClick={this.handleSubmit}>Login</button>
+                      <Link to="/register" className="signup-link" data-toggle="dropdown">Create new account</Link>
                     </form>
                   </li>
                   <p style={{marginLeft: "100px !important"}}>OR</p>
@@ -78,9 +79,6 @@ var nav = React.createClass({
               </div>
             </li>
             }
-            <li className="hoverNavSpecial pull-right">
-              {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
-            </li>
           </ul>
         </div>
       </div>
