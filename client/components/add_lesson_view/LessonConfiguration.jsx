@@ -48,7 +48,7 @@ var LessonConfiguration = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="container">
         <div className="row">
           <VideoPlayer />
           {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
@@ -58,11 +58,6 @@ var LessonConfiguration = React.createClass({
           <ExerciseTypes chooseType={this.setEditing} />}
         {this.state.editing && 
           this.mapExerciseType()}
-        </div>
-        <div className="row">
-          <button onClick={this.publishLesson} className="col-xs-2 col-xs-offset-5 btn btn-primary">
-            Publish your lesson
-          </button>
         </div>
       </div>
     );
