@@ -57,7 +57,7 @@ var LibLessonEntry = React.createClass({
 
     var publishDisplay = lesson.publish ?
         <li> Published on: {createdDate} </li>
-      : <p onClick={this.publish}>Publish</p>;
+      : null;
 
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
 

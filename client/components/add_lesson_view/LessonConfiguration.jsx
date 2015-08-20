@@ -57,7 +57,9 @@ var LessonConfiguration = React.createClass({
           this.mapExerciseType()}
         </div>
         <div className="row">
-          <button className="col-xs-2 col-xs-offset-5 btn btn-primary">Publish your lesson</button>
+          <button onClick={this.publishLesson} className="col-xs-2 col-xs-offset-5 btn btn-primary">
+            Publish your lesson
+          </button>
         </div>
       </div>
     );
