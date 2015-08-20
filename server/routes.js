@@ -24,15 +24,8 @@ module.exports = function(app) {
   app.get('/api/facebook/callback', passport.authenticate('facebook', UserCtrl.loginRedirect))
   app.get('/api/google', passport.authenticate('google-openidconnect',{scope : 'email'}));
   app.get('/api/google/callback', passport.authenticate('google-openidconnect', UserCtrl.loginRedirect));
-  
-  // app.post('/api/signup', passport.authorize('local-signup'), UserCtrl.signupUser);
-//   app.get('/authorize/facebook', passport.authorize('facebook', { scope : 'email' }));
-//   app.post('/authorize/facebook/callback', passport.authorize('facebook', UserCtrl.loginRedirect))
-//   app.get('/authorize/google', passport.authorize('google-openidconnect', { scope : 'email' }));
-//   app.post('/authorize/google/callback', passport.authorize('google-openidconnect', {
-//   successRedirect : '/library',
-//   failureRedirect : '/'
-// }))
+  app.get('/api/twitter', passport.authenticate('twitter',{scope : 'email'}));
+  app.get('/api/twitter/callback', passport.authenticate('twitter', UserCtrl.loginRedirect));
 
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);

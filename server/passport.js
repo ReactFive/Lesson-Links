@@ -1,5 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-openidconnect').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('mongoose').model('User');
 var _               = require('lodash');
@@ -125,7 +126,6 @@ module.exports = function(passport) {
           } else {
             // if there is no user found with that facebook id, create them
             var newUser            = new User();
-            console.log(profile)
 
             // set all of the facebook information in our user model
             newUser.local.name     = profile.name.givenName + ' ' + profile.name.familyName;
@@ -204,6 +204,79 @@ module.exports = function(passport) {
               newUser.google.token = accessToken;
               newUser.google.name  = profile.displayName;
               newUser.google.email = profile.email
+
+              console.log(newUser)
+              // save the user
+              newUser.save(function(err) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('successful google')
+                }
+                return done(null, user);
+              });
+            }
+          })
+        } else {
+          //User already exists and is logged in
+          var user            = req.user;
+
+          // update the current users facebook credentials
+          user.google.id    = profile.id;
+          user.google.token = accessToken;
+          user.google.name  = profile.displayName;
+          user.google.email = profile.email
+          // save the user
+          user.save(function(err) {
+            if (err)
+              throw err;
+            return done(null, user);
+          });
+        }
+      })
+    }
+  ));
+  passport.use(new TwitterStrategy({
+    consumerKey: api.twitterAuth.consumerKey,
+    consumerSecret: api.twitterAuth.consumerSecret,
+    callbackURL: api.twitterAuth.callbackURL,
+    passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+  },
+    // User.findOne won't fire until we have all our data back from Google
+    function(req, token, tokenSecret, profile, done) {
+      // try to find the user based on their google id
+      process.nextTick(function() {
+        if(!req.user) {
+          User.findOne({'twitter.id': profile.id}, function(err, user) {
+            if (err) {
+              return done(err);
+            }
+            // if a user is found, log them in
+            if (user) {
+              // if there is a user id already but no token (user was linked at one point and then removed)
+              // just add our token and profile information
+              if (!user.twitter.token) {
+                user.twitter.id    = profile.id;
+                user.twitter.token = token;
+                user.twitter.username = profile.username;
+                user.twitter.name  = profile.displayName;
+
+                user.save(function(err) {
+                  if (err)
+                    throw err;
+                  return done(null, user);
+                });
+              }
+              return done(null, user); // user found, return that user
+            } else {
+              // if the user isnt in our database, create a new user
+              var newUser          = new User();
+
+              // set all of the relevant information
+              newUser.local.name = profile.displayName;
+              newUser.twitter.id    = profile.id;
+              newUser.twitter.token = token;
+              newUser.twitter.name  = profile.displayName;
 
               console.log(newUser)
               // save the user

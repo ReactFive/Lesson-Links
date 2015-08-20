@@ -40,13 +40,16 @@ var nav = React.createClass({
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
             </li>
             <li className="hoverNavSpecial pull-right">
-              {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
-            </li>
-            <li className="hoverNavSpecial pull-right">
              <a href="/api/google">Google< /a>
             </li>            
             <li className="hoverNavSpecial pull-right">
               <a href="/api/facebook">Facebook< /a>
+            </li>
+            <li className="hoverNavSpecial pull-right">
+              <a href="/api/twitter">Twitter < /a>
+            </li>
+            <li className="hoverNavSpecial pull-right">
+              {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
             </li>
             <li>
               { (this.state.auth && this.state.auth.loggedIn) ? null : this.renderLogin() }

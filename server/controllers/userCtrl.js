@@ -26,8 +26,8 @@ exports.loginUser = function(req, res) {
 };
 
 exports.loginRedirect = {
-  successRedirect : '/library',
-  failureRedirect : '/'
+successRedirect : '/library',
+failureRedirect : '/'
 },
 
 exports.addLesson = function(req, res){
