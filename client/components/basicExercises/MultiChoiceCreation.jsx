@@ -18,11 +18,12 @@ var MultiChoiceCreation = React.createClass({
     var loadedState = this.props.exerciseState;
     return {
       exercise: {
-        numbs: 6,
-        optNumbs: 3,
-        correctOption: null,
-        answers: ["","","","",""],
-        feedback: ["","","","",""],
+        question: loadedState.question || "",
+        numbs: loadedState.numbs || 6,
+        optNumbs: loadedState.optNumbs || 3,
+        correctOption: loadedState.correctOption || null,
+        answers: loadedState.answers ||["","","","",""],
+        feedback: loadedState.feedback || ["","","","",""],
         options: [
           {value: '1', label: 'Option 1'},
           {value: '2', label: 'Option 2'},
@@ -37,6 +38,11 @@ var MultiChoiceCreation = React.createClass({
   formSetup: function(event){
     this.state.exercise['optNumbs'] = event;
     this.state.exercise['numbs'] = event * 2;
+    this.setState({exercise: this.state.exercise});
+  },
+
+  checkHandle: function(event){
+    this.state.exercise.correctOption = event.target.value;
     this.setState({exercise: this.state.exercise});
   },
 
@@ -209,23 +215,28 @@ var MultiChoiceCreation = React.createClass({
                    <strong>Indicate the best option: </strong>
                  </span>
                  <label htmlFor="correct1" className={radioClassString[0]}>
-                   <input ref="correct1" type="radio" name="correct" value="1"/>
+                   <input ref="correct1" type="radio" name="correct" value="0"
+                   defaultChecked={this.state.exercise.correctOption === "0"} />
                    1
                  </label>
                  <label htmlFor="correct2" className={radioClassString[1]}>
-                   <input ref="correct2" type="radio" name="correct" value="2"/>
+                   <input ref="correct2" type="radio" name="correct" value="1"
+                   defaultChecked={this.state.exercise.correctOption === "1"} />
                    2
                  </label>
                  <label htmlFor="correct3" className={radioClassString[2]}>
-                   <input ref="correct3" type="radio" name="correct" value="3"/>
+                   <input ref="correct3" type="radio" name="correct" value="2"
+                   defaultChecked={this.state.exercise.correctOption === "2"} />
                    3
                  </label>
                  <label htmlFor="correct4" className={radioClassString[3]}>
-                   <input ref="correct4" type="radio" name="correct" value="4"/>
+                   <input ref="correct4" type="radio" name="correct" value="3"
+                   defaultChecked={this.state.exercise.correctOption === "3"} />
                    4
                  </label>
                  <label htmlFor="correct5" className={radioClassString[4]}>
-                   <input ref="correct5" type="radio" name="correct" value="5"/>
+                   <input ref="correct5" type="radio" name="correct" value="4"
+                   defaultChecked={this.state.exercise.correctOption === "4"} />
                    5
                  </label>
                 </div>
@@ -236,10 +247,6 @@ var MultiChoiceCreation = React.createClass({
           </div>
         </div>
     )
-  },
-
-  checkHandle(event){
-    this.state.correctOption = event.target.value;
   },
 
   handleSubmit: function(event) {
