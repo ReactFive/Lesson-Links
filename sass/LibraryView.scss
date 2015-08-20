@@ -38,6 +38,7 @@
 .videoSnippet{
   height:100%;
   position: 0;
+  margin-right: 10px;
 }
 
 .pubdate{
@@ -67,8 +68,6 @@
   padding-left: 15px;
   display: block;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
   width: 90vh;
 }
 
