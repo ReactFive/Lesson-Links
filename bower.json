@@ -19,6 +19,7 @@
     "jquery": "~2.1.4",
     "toastr": "~2.1.1",
     "videojs-youtube": "~1.2.12",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "bootstrap-social": "~4.9.1"
   }
 }
