@@ -283,7 +283,7 @@ var MultiChoiceCreation = React.createClass({
   handleCancel: function(event) {
     event.preventDefault();
     console.log("cancel clicked");
-    this.props.onComplete(null);
+    this.props.onComplete();
   },
 
   onChange: function(event, user){

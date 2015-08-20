@@ -105,7 +105,7 @@ var TrueFalseCreation = React.createClass({
                 </label>
                 <label htmlFor="correct2" className="radio-inline">
                   <input ref="correct2" type="radio" name="correct" value={"false"}
-                   defaultChecked={!this.state.exercise.correctOption === "false"}/>
+                   defaultChecked={this.state.exercise.correctOption === "false"}/>
                   False
                 </label>
               </div>
@@ -131,7 +131,7 @@ var TrueFalseCreation = React.createClass({
   handleCancel: function(event) {
     event.preventDefault();
     console.log("cancel clicked");
-    this.props.onComplete(null);
+    this.props.onComplete();
   },
   
   handleSubmit: function(event) {
@@ -147,7 +147,7 @@ var TrueFalseCreation = React.createClass({
 
     if (exercise.question.length && exercise.correctOption !== undefined) {
       Actions.createExercise(exercise);
-      this.props.onComplete(null);
+      this.props.onComplete();
     } else {
       toastr['warning']('Make sure you have a question');
     }

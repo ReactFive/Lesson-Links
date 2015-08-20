@@ -140,7 +140,7 @@ var ShortAnswerCreation = React.createClass({
     if (this.state.exercise.question.length && this.state.exercise.bestAnswers.length) {
       console.log(exercise);
       Actions.createExercise(exercise);
-      this.props.onComplete(null);
+      this.props.onComplete();
     } else {
       toastr['warning']('Make sure you have a question and answer(s)');
     }
@@ -155,7 +155,7 @@ var ShortAnswerCreation = React.createClass({
   handleCancel: function(event) {
     event.preventDefault();
     console.log("cancel clicked");
-    this.props.onComplete(null);
+    this.props.onComplete();
   },
 
 });
