@@ -72,10 +72,16 @@ hr{
   min-height: 100vh;
   flex-direction: column;
   padding: 0px;
+  height: 100%;
 }
 
 .Site-content {
   flex: 1;
+}
+
+#main-content{
+  height: 100%;
+  display: inline;
 }
 
 .content{
