@@ -5,6 +5,7 @@ client/bower_components
 server/config.js
 client/public/css/*
 .DS_store
+config.js
 
 bundle.js
 vendor.bundle.js
