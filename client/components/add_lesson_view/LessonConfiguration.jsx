@@ -29,10 +29,17 @@ var LessonConfiguration = React.createClass({
   },
 
   mapExerciseType: function() {
+    var onDoneEditing = function() {
+      this.setState({
+        editing: null,
+        exerciseState : null
+      })
+    }.bind(this);
+
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoiceCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
-      'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
-      'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
+      'multiplechoice' : <MultiChoiceCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
+      'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
+      'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
     }
 
     return exerciseTypeMap[this.state.editing];
@@ -48,22 +55,22 @@ var LessonConfiguration = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <div className="row">
-          <VideoPlayer />
-          {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
-        </div>
-        <div className="row">
-        {!this.state.editing && 
-          <ExerciseTypes chooseType={this.setEditing} />}
-        {this.state.editing && 
-          this.mapExerciseType()}
-        </div>
-        <div className="row">
-          <button onClick={this.publishLesson} className="col-xs-2 col-xs-offset-5 btn btn-primary">
-            Publish your lesson
-          </button>
-        </div>
+      <div className="container">
+        <ul className="list-group row config-container">
+          <li className="list-group-item col-md-8">
+            <VideoPlayer />
+          </li>
+          {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
+
+          <li className="list-group-item col-md-12">
+            {!this.state.editing &&
+            <ExerciseTypes chooseType={this.setEditing} />}
+          </li>
+        </ul>
+          <div className="panel panel-default">
+            {this.state.editing &&
+            this.mapExerciseType()}
+          </div>
       </div>
     );
   },
@@ -73,7 +80,7 @@ var LessonConfiguration = React.createClass({
 
     Actions.publish(this.state.lesson)
     .then(function(res) {
-      console.log(res);
+      console.log("published: ", res);
       self.transitionTo('/library');
     })
   },

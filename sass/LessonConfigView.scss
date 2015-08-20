@@ -3,3 +3,23 @@
 #current-exercises {
   margin-top: 40px;
 }
+
+.config-container {
+  margin-top: 40px;
+}
+
+.glyphicon-remove {
+  color: #fc8a8a;
+}
+
+@media (min-width: 950px) {
+  .exercise-list-body {
+    min-height: 230px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .exercise-list-body-wide {
+    min-height: 305px;
+  }
+}
