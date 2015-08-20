@@ -18,6 +18,7 @@ var nav = React.createClass({
   },
 
   render: function() {
+
     return ( <nav className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
@@ -39,48 +40,51 @@ var nav = React.createClass({
             <li className="hoverNavSpecial">
               {(this.state.auth && this.state.auth.loggedIn) && <Link activeClassName="active" to="/library">Library</Link>}
             </li>
-            <li className="hoverNavSpecial pull-right">
-             <a href="/api/google">Google< /a>
-            </li>            
-            <li className="hoverNavSpecial pull-right">
-              <a href="/api/facebook">Facebook< /a>
+            <li className="hoverNavSpecial">
+              {(this.state.auth && this.state.auth.loggedIn) && <a onClick={this.handleLogout}>Logout</a> }
             </li>
-            <li className="hoverNavSpecial pull-right">
-              <a href="/api/twitter">Twitter < /a>
+            { (this.state.auth && !this.state.auth.loggedIn) &&
+            <li className="dropdown hoverNavSpecial2" id="menuLogin">
+              <a className="dropdown-toggle" style={{zIndex: 20}} href="#" data-toggle="dropdown" id="navLogin">Login</a>
+              <div className="dropdown-menu">
+                <ul style={{padding:0, listStyleType: "none"}}>
+                  <li>
+                    <form className="form" id="formLogin"> 
+                      <div className="form-group form-group-md">
+                        <input ref="email" type="text" className="form-control" placeholder="Email"/>
+                      </div>
+                      <br/>
+                      <div className="form-group form-group-md">
+                        <input ref="password" type="password" className="form-control" placeholder="Password"/>
+                      </div>
+                      <br/>
+                      <button type="button" id="btnLogin" className="btn" onClick={this.handleSubmit}>Login</button>
+                    </form>
+                  </li>
+                  <p style={{marginLeft: "100px !important"}}>OR</p>
+                  <hr/>
+                  <li style={{opacity:0.7, marginTop:10}}>
+                    <a className="btn btn-block btn-social btn-google" href="/api/twitter">
+                      <i className="fa fa-google"></i>Sign in with Google
+                    </a>
+                    <a className="btn btn-block btn-social btn-facebook" href="/api/facebook">
+                      <i className="fa fa-facebook"></i>Sign in with Facebook
+                    </a>
+                    <a className="btn btn-block btn-social btn-twitter" href="/api/twitter">
+                      <i className="fa fa-twitter"></i>Sign in with Twitter
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
+            }
             <li className="hoverNavSpecial pull-right">
               {(this.state.auth && !this.state.auth.loggedIn) && <Link activeClassName="active" to="/register">Signup</Link>}
-            </li>
-            <li>
-              { (this.state.auth && this.state.auth.loggedIn) ? null : this.renderLogin() }
-            </li>
-            <li className="hoverNavSpecial">
-              { (this.state.auth && this.state.auth.loggedIn) ? 
-                 <a onClick={this.handleLogout}>Logout</a>
-                 : 
-                 <a className="pull-right" type="submit" onClick={this.handleSubmit}>Login</a> }
             </li>
           </ul>
         </div>
       </div>
     </nav> )
-  },
-
-  renderLogin: function(){
-    return (
-    <form onSubmit={this.handleSubmit} className="navbar-form navbar-right" role="search">
-      <div className="form-group form-group-md">
-        <div className="col-sm-4">
-          <input ref="email" type="text" className="form-control nav-login" placeholder="Email"/>
-        </div>
-      </div>
-      <div className="form-group form-group-md">
-        <div className="col-sm-4">
-          <input ref="password" type="password" className="form-control nav-login" placeholder="Password"/>
-        </div>
-      </div>
-      {/* add error message */}
-    </form>)
   },
 
   handleLogout: function() {
