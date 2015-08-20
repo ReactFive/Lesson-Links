@@ -23,8 +23,9 @@ var LibLessonCollection = React.createClass({
       return <LibLessonEntry key={index} lesson={lesson}/>
     });
     
-    return (<ul>
-        {lessons.length ? {lessons} : <p className="emptyLibrary"> [ None ] </p>}
+    return (
+      <ul className="list-group row" id="ulCollection">
+        {lessons.length ? {lessons} : <h4 className="emptyLibrary"> No lessons found! </h4>}
       </ul>
     );
   }

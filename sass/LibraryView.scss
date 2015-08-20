@@ -21,8 +21,10 @@
 }
 
 .emptyLibrary{
-  color: $darkest-blue;
+  color: $light-blue;
   margin-top: 15px !important;
+  font-family: $header-font;
+
 }
 
 .lib-lesson-entry:hover{
@@ -114,6 +116,14 @@
   right: 10px;
   cursor: pointer; 
   cursor: hand;
+}
+
+#trashcan:hover{
+  color: $dark-pink;
+  position: relative;
+  float: right;
+  top: -60px;
+  right: 10px;
 }
 
 @keyframes pulse {
