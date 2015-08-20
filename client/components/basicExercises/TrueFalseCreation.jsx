@@ -50,7 +50,7 @@ var TrueFalseCreation = React.createClass({
     console.log(this.state.exercise);
     return (
         <div className="container multichoice-container">
-          <div className="col-md-8 col-md-offset-2">
+          <div className="col-md-8 col-md-offset-2 lesson-create-panel">
 
             <h3>Create a True-False Question</h3>
 
