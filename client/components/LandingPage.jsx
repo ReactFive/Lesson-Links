@@ -40,6 +40,7 @@ var Home = module.exports = React.createClass({
       <div className="container">
         <div className="carousel-caption">
           <h1>Our Team</h1>
+          <img className="carContent" src="../../public/assets/isto.jpg" />
           <p>Images to be added - Richard Van Camp, Isto Barton, Colin Wiley, Abhi Gulati, Esteban Castaño</p>
         </div>
         <div className="carousel-caption">
