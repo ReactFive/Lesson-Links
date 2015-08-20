@@ -46,16 +46,21 @@ var LessonConfiguration = React.createClass({
   render: function() {
     return (
       <div className="container">
-        <div className="row">
-          <VideoPlayer />
+        <ul className="list-group row config-container">
+          <li className="list-group-item col-md-8">
+            <VideoPlayer />
+          </li>
           {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
-        </div>
-        <div className="row">
-        {!this.state.editing && 
-          <ExerciseTypes chooseType={this.setEditing} />}
-        {this.state.editing && 
-          this.mapExerciseType()}
-        </div>
+
+          <li className="list-group-item col-md-12">
+            {!this.state.editing &&
+            <ExerciseTypes chooseType={this.setEditing} />}
+          </li>
+        </ul>
+          <div className="panel panel-default">
+            {this.state.editing &&
+            this.mapExerciseType()}
+          </div>
       </div>
     );
   },
