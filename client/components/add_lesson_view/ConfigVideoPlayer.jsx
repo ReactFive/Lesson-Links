@@ -54,9 +54,9 @@ var VideoPlayer = React.createClass({
     if(this.state.lesson && this.state.lesson.video_url) {
       return (
         <div className="col-xs-6">
-          <div className="embed-responsive-item">
+          <div className="">
             <video id='attachmentVideo'
-              className='video-js vjs-default-skin'
+              className='video-js vjs-default-skin embed-responsive-item'
               width='500' height='300'
               controls preload='auto'
               data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
