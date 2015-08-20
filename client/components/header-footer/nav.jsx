@@ -86,13 +86,17 @@ var nav = React.createClass({
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
 
-    var self = this;
+    var self=this;
+    Actions.login({sourceComponent: this, email: email, password: password})
+    .then(function(res){
+      console.log("User logged in: ", res)
+      self.refs.email.getDOMNode().value = "";
+      self.refs.password.getDOMNode().value = "";
+    })
+    .catch(function(res){
+      console.log("Error", res);
+    })
 
-    Actions.login(email, password);
-
-    self.refs.email.getDOMNode().value = "";
-    self.refs.password.getDOMNode().value = "";
-    self.transitionTo('/library'); 
 
   }
 });

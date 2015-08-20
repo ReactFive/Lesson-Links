@@ -39,27 +39,27 @@ module.exports = Reflux.createStore({
   },
 
   onGetUser: function(){
-    var self=this;
+
     return Api.getUser()
     .then(function (res) {
       if (res.data.user) {
         console.log('fetched user')
-        self.auth.user = res.data.user;
-        self.triggerChange();
-        self.trigger(self.auth)
+        this.auth.user = res.data.user;
+        this.triggerChange();
       } else {
-        self.auth.user = false;
-        self.triggerChange();
+        this.auth.user = false;
+        this.triggerChange();
       }
     }.bind(this));
   },
 
-  onLogin: function (email, password) {
-    return Api.login(email, password)
+  onLogin: function (payload) {
+    return Api.login(payload.email, payload.password)
     .then(function(res){
       this.auth.user = res.data.user;
       this.auth.loggedIn = true;
       this.triggerChange();
+      payload.sourceComponent.transitionTo('/library');
       toastr.options.fadeOut = 1000;
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);
     }.bind(this))
