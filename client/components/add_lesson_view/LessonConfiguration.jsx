@@ -29,10 +29,17 @@ var LessonConfiguration = React.createClass({
   },
 
   mapExerciseType: function() {
+    var onDoneEditing = function() {
+      this.setState({
+        editing: null,
+        exerciseState : null
+      })
+    }.bind(this);
+
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoiceCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
-      'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
-      'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={this.setEditing}/>,
+      'multiplechoice' : <MultiChoiceCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
+      'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
+      'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
     }
 
     return exerciseTypeMap[this.state.editing];

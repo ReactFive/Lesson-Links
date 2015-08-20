@@ -81,9 +81,9 @@ var MultiChoiceCreation = React.createClass({
         <div className="container">
           <div className="modal-dialog">
             <div className="modal-content">
-            <div className="modal-header">
-              <h3>Create a Multiple Choice Question</h3>
-            </div>
+              <div className="modal-header">
+                <h3>Create a Multiple Choice Question</h3>
+              </div>
               <div className="modal-body">
                 <Select
                   name="Number of items"
@@ -266,7 +266,7 @@ var MultiChoiceCreation = React.createClass({
     console.log(exercise);
     if (exercise.question.length && exercise.options.length) {
       Actions.createExercise(exercise);
-      this.props.onComplete(null);
+      this.props.onComplete();
     } else {
       toastr['warning']('Make sure you have a question and options');
     }
@@ -292,3 +292,4 @@ var MultiChoiceCreation = React.createClass({
 });
 
 module.exports = MultiChoiceCreation;
+
