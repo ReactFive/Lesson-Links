@@ -16,6 +16,8 @@ var CurrentExercisesList = React.createClass({
 
   render: function() {
     return (
+    <div className="row col-md-5">
+      <button className="col-xs-2 col-xs-offset-5 btn-block btn-primary">Publish your lesson</button>
       <div id="current-exercises" className="col-xs-3 panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">Current exercises</h3>
@@ -23,6 +25,7 @@ var CurrentExercisesList = React.createClass({
         <div className="panel-body">
           {this.exerciseEntries()}
         </div>
+      </div>
       </div>
     )
   }
