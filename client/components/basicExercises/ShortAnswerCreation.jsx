@@ -18,7 +18,7 @@ var ShortAnswerCreation = React.createClass({
 
   getInitialState: function() {
     console.log(this.props.exerciseState);
-    var loadedState = this.props.exerciseState;
+    var loadedState = this.props.exerciseState || {};
     return {
       exercise: {
         question: loadedState.question || "",
@@ -53,64 +53,71 @@ var ShortAnswerCreation = React.createClass({
   render: function(){
 
     return (
-    <div className="container multichoice-container">
-      <div className="col-md-8 col-md-offset-2">
-
-        <h3>Create a Short Answer Question</h3>
-        <form name="shortAnswerForm">
-          <h5>Write a prompt requiring a short answer</h5>
-          <div className="form-group">
-            <input
-              ref="question"
-              className="form-control"
-              name="question"
-              type='text'
-              value={this.state.exercise.question}
-              onChange={this.setExerciseState}
-              placeholder="Question"/>
+    <div className="container">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h3>Create a Short Answer Question</h3>
           </div>
+            <div className="modal-body">
+              <form name="shortAnswerForm">
+                <h5>Write a prompt requiring a short answer</h5>
+                <div className="form-group">
+                  <input
+                    ref="question"
+                    className="form-control"
+                    name="question"
+                    type='text'
+                    value={this.state.exercise.question}
+                    onChange={this.setExerciseState}
+                    placeholder="Question"/>
+                </div>
 
-           <TextInput
-             wrapperClass="form-group"
-             name="bestAnswers"
-             label="Best answer(s)"
-             value={this.state.exercise.bestAnswers}
-             onChange={this.setExerciseState}
-             placeholder="Separate answers with a pipe: red | white | blue" />
+                 <TextInput
+                   wrapperClass="form-group"
+                   name="bestAnswers"
+                   label="Best answer(s)"
+                   value={this.state.exercise.bestAnswers}
+                   onChange={this.setExerciseState}
+                   placeholder="Separate answers with a pipe: red | white | blue" />
 
-          <Textarea
-            label="Feedback to these answers when entered by a learner:"
-            wrapperClass="form-group"
-            name="bestFeedback"
-            value={this.state.exercise.bestFeedback}
-            onChange={this.setExerciseState}/>
+                <Textarea
+                  label="Feedback to these answers when entered by a learner:"
+                  wrapperClass="form-group"
+                  name="bestFeedback"
+                  value={this.state.exercise.bestFeedback}
+                  onChange={this.setExerciseState}/>
 
-          <TextInput
-            wrapperClass="form-group"
-            name="altAnswers"
-            label="Alternative answer(s)"
-            value={this.state.exercise.altAnswers}
-            onChange={this.setExerciseState}
-            placeholder="Separate answers with a pipe: red | white | blue" />
+                <TextInput
+                  wrapperClass="form-group"
+                  name="altAnswers"
+                  label="Alternative answer(s)"
+                  value={this.state.exercise.altAnswers}
+                  onChange={this.setExerciseState}
+                  placeholder="Separate answers with a pipe: red | white | blue" />
 
-          <Textarea
-            label="Feedback to these answers when entered by a learner:"
-            wrapperClass="form-group"
-            name="altFeedback"
-            value={this.state.exercise.altFeedback}
-            onChange={this.setExerciseState}/>
-
-          <button
-            type="submit"
-            onClick={this.handleSubmit}
-            className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
-          <button
-            onClick={this.handleCancel}
-            className=" btn btn-default pull-right">Cancel</button>
-
-      </form>
+                <Textarea
+                  label="Feedback to these answers when entered by a learner:"
+                  wrapperClass="form-group"
+                  name="altFeedback"
+                  value={this.state.exercise.altFeedback}
+                  onChange={this.setExerciseState}/>
+                <div className="row">
+                  <div className="col-md-offset-6">
+                    <button
+                      type="submit"
+                      onClick={this.handleSubmit}
+                      className="signup-cancel-btn btn btn-primary margin-right">Add to your lesson</button>
+                    <button
+                      onClick={this.handleCancel}
+                      className="btn btn-default">Cancel</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
     )
   },
 

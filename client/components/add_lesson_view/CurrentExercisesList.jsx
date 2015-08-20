@@ -10,20 +10,25 @@ var CurrentExercisesList = React.createClass({
       var reloadMe = function() {
         this.props.reloadExercise(exerciseInfo);
       }.bind(self);
-      return <p key={exerciseInfo.key} onClick={reloadMe}> {exercise.type} {exercise.time}</p>
+      return <div key={exerciseInfo.key} onClick={reloadMe}> {exercise.type} {exercise.time}<span className="glyphicon glyphicon-remove pull-right"></span></div>
     })
   },
 
   render: function() {
     return (
-      <div id="current-exercises" className="col-xs-3 panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title">Current exercises</h3>
-        </div>
-        <div className="panel-body">
-          {this.exerciseEntries()}
-        </div>
-      </div>
+        <li className="list-group-item col-md-4">
+          <div id="current-exercises" className="panel panel-default">
+            <div className="panel-heading">
+              <h3 className="panel-title">Current exercises</h3>
+            </div>
+            <div className="panel-body exercise-list-body">
+              {this.exerciseEntries()}
+            </div>
+            <div className="panel-footer">
+              <button className="btn-block btn-default">Publish your lesson</button>
+            </div>
+          </div>
+        </li>
     )
   }
 })

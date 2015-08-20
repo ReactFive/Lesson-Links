@@ -45,22 +45,22 @@ var LessonConfiguration = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <div className="row">
-          <VideoPlayer />
+      <div className="container">
+        <ul className="list-group row config-container">
+          <li className="list-group-item col-md-8">
+            <VideoPlayer />
+          </li>
           {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
-        </div>
-        <div className="row">
-        {!this.state.editing && 
-          <ExerciseTypes chooseType={this.setEditing} />}
-        {this.state.editing && 
-          this.mapExerciseType()}
-        </div>
-        <div className="row">
-          <button onClick={this.publishLesson} className="col-xs-2 col-xs-offset-5 btn btn-primary">
-            Publish your lesson
-          </button>
-        </div>
+
+          <li className="list-group-item col-md-12">
+            {!this.state.editing &&
+            <ExerciseTypes chooseType={this.setEditing} />}
+          </li>
+        </ul>
+          <div className="panel panel-default">
+            {this.state.editing &&
+            this.mapExerciseType()}
+          </div>
       </div>
     );
   },
