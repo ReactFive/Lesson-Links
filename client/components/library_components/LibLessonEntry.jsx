@@ -22,7 +22,9 @@ var LibLessonEntry = React.createClass({
   deleteLesson: function(e) {
     e.preventDefault();
     e.stopPropagation();
-    Actions.deleteLesson(this.props.lesson);
+    console.log("Yep, I'm running!")
+    swal("Here's a message!");
+    {/*Actions.deleteLesson(this.props.lesson);*/}
   },
 
   gotoConfigure: function () {
