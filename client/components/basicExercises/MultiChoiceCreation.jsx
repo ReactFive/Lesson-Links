@@ -110,7 +110,7 @@ var MultiChoiceCreation = React.createClass({
                          name="answers-0"
                          type='text'
                          ref="option1"
-                         value={(this.props.exercise && this.props.exercise.options[0].value) || ""}
+                         value={this.state.exercise.answers[0] || ""}
                          onChange={this.setExerciseState}
                          placeholder="Add an option here"/>
                   </div>
@@ -121,7 +121,7 @@ var MultiChoiceCreation = React.createClass({
                         name="feedback-0"
                         rows="2"
                         ref="feedback1"
-                        value={(this.props.exercise && this.props.exercise.feedback[0]) || ""}
+                        value={this.state.exercise.feedback[0] || ""}
                         onChange={this.setExerciseState}/>
                   </div>
                   <div className={classString[2]}>
@@ -131,7 +131,7 @@ var MultiChoiceCreation = React.createClass({
                        name="answers-1"
                        type='text'
                        ref="option2"
-                       value={(this.props.exercise && this.props.exercise.options[1].value) || ""}
+                       value={this.state.exercise.answers[1] || ""}
                        onChange={this.setExerciseState}
                        placeholder="Add an option here"/>
                   </div>
@@ -141,7 +141,7 @@ var MultiChoiceCreation = React.createClass({
                         name="feedback-1"
                         className="form-control"
                         rows="2"
-                        value={(this.props.exercise && this.props.exercise.feedback[1]) || ""}
+                        value={this.state.exercise.feedback[1] || ""}
                         onChange={this.setExerciseState}
                         ref="feedback2"/>
                   </div>
@@ -152,7 +152,7 @@ var MultiChoiceCreation = React.createClass({
                        name="answers-2"
                        type='text'
                        ref="option3"
-                       value={(this.props.exercise && this.props.exercise.options[2].value) || ""}
+                       value={this.state.exercise.answers[2] || ""}
                        onChange={this.setExerciseState}
                        placeholder="Add an option here"/>
                   </div>
@@ -164,7 +164,7 @@ var MultiChoiceCreation = React.createClass({
                         className="form-control"
                         rows="2"
                         onChange={this.setExerciseState}
-                        value={(this.props.exercise && this.props.exercise.feedback[2]) || ""}/>
+                        value={this.state.exercise.feedback[2] || ""}/>
                   </div>
                   <div className={classString[6]}>
                     <label htmlFor="option4"><strong>{this.state.exercise.options[3].label}</strong></label>
@@ -174,18 +174,18 @@ var MultiChoiceCreation = React.createClass({
                        ref="option4"
                        type='text'
                        onChange={this.setExerciseState}
-                       value={(this.props.exercise && this.props.exercise.options[3].value) || ""}
+                       value={this.state.exercise.answers[3] || ""}
                        placeholder="Add an option here"/>
                   </div>
                   <div className={classString[7]}>
                     <label htmlFor="feedback4">Feedback to this option when selected by learner:</label>
                       <textarea id="feedback4"
                         ref="feedback4"
-                        name="answers-3"
+                        name="feedback-3"
                         className="form-control"
                         rows="2"
                         onChange={this.setExerciseState}
-                        value={(this.props.exercise && this.props.exercise.feedback[3]) || ""}/>
+                        value={this.state.exercise.feedback[3] || ""}/>
                   </div>
                   <div className={classString[8]}>
                     <label htmlFor="option5"><strong>value={this.state.exercise.options[4].value}</strong></label>
@@ -194,7 +194,7 @@ var MultiChoiceCreation = React.createClass({
                        name="answers-4"
                        ref="option5"
                        type='text'
-                       value={(this.props.exercise && this.props.exercise.options[4].value) || ""}
+                       value={this.state.exercise.answers[4] || ""}/>
                        placeholder="Add an option here"/>
                   </div>
                   <div className={classString[9]}>
@@ -205,7 +205,7 @@ var MultiChoiceCreation = React.createClass({
                         className="form-control"
                         rows="2"
                         onChange={this.setExerciseState}
-                        value={(this.props.exercise && this.props.exercise.feedback[4]) || ""}/>
+                        value={this.state.exercise.feedback[4] || ""}/>
                   </div>
 
                    <div onChange={this.checkHandle} className="correct-answer-label">
