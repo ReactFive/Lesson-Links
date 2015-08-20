@@ -29,7 +29,13 @@ var VideoPlayer = React.createClass({
   },
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted && this.state.lesson){
-      var player = this.videoSetup(this.state.lesson.comments);
+      var comments = this.state.lesson.comments,
+          exercises = this.state.lesson.exercises;
+      exercises.forEach(function(exerciseInfo) {
+        exerciseInfo.text = exerciseInfo.exercise.type;
+      });
+
+      var player = this.videoSetup(_.union(comments, exercises));
       this.setState({
         videoSetupCompleted : true,
         currentComments : this.state.lesson.comments
@@ -47,35 +53,34 @@ var VideoPlayer = React.createClass({
     // setup plugin
     player.markers({
       markers: comments,
-      markerStyle: {
-        'width':'7px',
-        'border-radius': '30%',
-        'background-color': 'red'
+      markerStyle: function(marker) {
+        if(marker.replies) { // indicates the marker is for a comment
+          return {
+            'width':'7px',
+            'border-radius': '30%',
+            'background-color': 'red'
+          }
+        } else {
+          return {
+            'width':'7px',
+            'border-radius': '30%',
+            'background-color': 'yellow'
+          }
+        }
       },
       markerTip:{
         display: true,
         text: function(marker) {
-          return "Break: "+ marker.text;
+          if(marker.author) {
+            return marker.author.name;
+          } else {
+            return marker.text;
+          }
         },
         time: function(marker) {
           return marker.time;
         }
       },
-      breakOverlay:{
-        display: false,
-        displayTime: 3,
-        style:{
-          'width':'100%',
-          'height': '20%',
-          'background-color': 'rgba(0,0,0,0.7)',
-          'color': 'white',
-          'font-size': '17px'
-        },
-        text: function(marker) {
-          return "Break overlay: " + marker.overlayText;
-        }
-      },
-      onMarkerClick: function(marker) {},
       onMarkerReached: function(marker) {}
     });
     return player;
