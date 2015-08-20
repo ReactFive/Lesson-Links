@@ -35,6 +35,27 @@ var MultiChoiceCreation = React.createClass({
     }
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    var loadedState = nextProps.exerciseState;
+    this.setState({
+      exercise: {
+        question: loadedState.question || "",
+        numbs: loadedState.numbs || 6,
+        optNumbs: loadedState.optNumbs || 3,
+        correctOption: loadedState.correctOption || null,
+        answers: loadedState.answers ||["","","","",""],
+        feedback: loadedState.feedback || ["","","","",""],
+        options: [
+          {value: '1', label: 'Option 1'},
+          {value: '2', label: 'Option 2'},
+          {value: '3', label: 'Option 3'},
+          {value: '4', label: 'Option 4'},
+          {value: '5', label: 'Option 5'}
+        ]
+      }
+    });
+  },
+
   formSetup: function(event){
     this.state.exercise['optNumbs'] = event;
     this.state.exercise['numbs'] = event * 2;
