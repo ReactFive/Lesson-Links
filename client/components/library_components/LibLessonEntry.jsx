@@ -14,12 +14,14 @@ var LibLessonEntry = React.createClass({
 
   publish: function(e) {
     e.preventDefault();
+    e.stopPropagation();
     console.log("publish clicked!");
     Actions.togglePublish(this.props.lesson);
   },
 
   deleteLesson: function(e) {
     e.preventDefault();
+    e.stopPropagation();
     Actions.deleteLesson(this.props.lesson);
   },
 
