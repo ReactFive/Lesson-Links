@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Actions = require('../../actions');
 
 var _ = require('lodash');
 var LessonStore = require('../../stores/lesson-store');
@@ -16,6 +17,7 @@ var VideoPlayer = React.createClass({
   componentWillMount: function(){
   },
   componentDidMount: function(){
+    Actions.triggerLessonStore();
   },
   componentWillUpdate: function(nextProps, nextState) {
     if(this.state.videoSetupCompleted) {
@@ -26,7 +28,7 @@ var VideoPlayer = React.createClass({
     }
   },
   componentDidUpdate: function() {
-    if(!this.state.videoSetupCompleted){
+    if(!this.state.videoSetupCompleted && this.state.lesson){
       var player = this.videoSetup(this.state.lesson.comments);
       this.setState({
         videoSetupCompleted : true,
@@ -34,6 +36,11 @@ var VideoPlayer = React.createClass({
       });
     }
   },
+
+  componentWillUnmount: function() {
+    videojs('attachmentVideo').dispose();
+  },
+  
   videoSetup: function(comments){
     // initialize video.js
     var player = videojs('attachmentVideo');
@@ -74,6 +81,8 @@ var VideoPlayer = React.createClass({
     return player;
   },
   render: function() {
+   
+    console.log("test", this.state.lesson);
 
     return (
       this.state.lesson && this.state.lesson.video_url ?

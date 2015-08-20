@@ -12,31 +12,43 @@ var Navigation = Router.Navigation;
 
 var LessonView = React.createClass({
 
-  mixins: [Router.Navigation, Reflux.connect(LessonStore), Reflux.connect(AuthStore, 'auth')],
+  mixins: [Router.Navigation, Reflux.connect(LessonStore, "lesson"), Reflux.connect(AuthStore, 'auth')],
 
   contextTypes: {
     router: React.PropTypes.func
   },
 
   componentWillMount: function(){
+    
     var self=this;
-    Actions.fetchLesson({sourceComponent: this, url: this.context.router.getCurrentParams().url})
+    Actions.getUser()
     .then(function(res){
-      Actions.followLesson(self.context.router.getCurrentParams().url)
+      return Actions.fetchLesson({sourceComponent: self, url: self.context.router.getCurrentParams().url});
     })
+    .then(function(res){
+      return Actions.followLesson(self.context.router.getCurrentParams().url);
+    });
+    
   },
 
-  render: function() {
-    return (
-      <div>
-        <div id='lesson-view'>
-          {this.state.auth && this.state.auth.user ? null : <LoginOverlay/>}
-          <VideoBox />
-          <Content/>
 
+  render: function() {
+
+    if(this.state.auth){
+      var overlay = this.state.auth && this.state.auth.user ? null : <LoginOverlay/>
+
+      return (
+        <div>
+          <div id='lesson-view'>
+            {overlay}
+            <VideoBox />
+            <Content/>
+          </div>
         </div>
-      </div>
-    );
+      );      
+    }else{
+      return null;
+    }
   }, 
 });
 
