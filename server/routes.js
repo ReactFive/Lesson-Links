@@ -20,6 +20,13 @@ module.exports = function(app) {
    */
   app.post('/api/signup', passport.authenticate('local-signup'), UserCtrl.signupUser);
   app.post('/api/login', passport.authenticate('local-login'), UserCtrl.loginUser);
+  app.get('/api/facebook', passport.authenticate('facebook', {scope: 'email'}))
+  app.get('/api/facebook/callback', passport.authenticate('facebook', UserCtrl.loginRedirect))
+  app.get('/api/google', passport.authenticate('google-openidconnect',{scope : 'email'}));
+  app.get('/api/google/callback', passport.authenticate('google-openidconnect', UserCtrl.loginRedirect));
+  app.get('/api/twitter', passport.authenticate('twitter',{scope : 'email'}));
+  app.get('/api/twitter/callback', passport.authenticate('twitter', UserCtrl.loginRedirect));
+
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
   app.get('/api/user', UserCtrl.getUser);
