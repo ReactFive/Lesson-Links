@@ -57,28 +57,31 @@ var LibLessonEntry = React.createClass({
 
     var publishDisplay = lesson.publish ?
         <li> Published on: {createdDate} </li>
-      : null;
+      : <li>Not Published</li>;
 
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
 
     return (
-      <li className="lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
-        <img className="media pull-left videoSnippet" src={imgUrl} />
-        <ul className="lib-lesson-info list-unstyled">
-          <li className="lib-less-title">
-            <a className ="titleAnchor">
-              {lesson.title || 'title not found'}
-            </a>
-          </li>
-          <li className="lib-less-author">
-            Author: {lesson.teacher.name || 'anonymous'}
-          </li>
-          <li className="lib-lesson-stats">
-            Comments: {commentCount}    Exercises: {lesson.exercises.length}
-          </li>
-          {publishDisplay}
-        </ul>
-        <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
+      <li className="list-group-item col-md-6 col-xs-12 lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
+          <img className="hidden-xs media pull-left videoSnippet" src={imgUrl} />
+          <ul className="lib-lesson-info list-unstyled">
+            <li className="lib-less-title">
+              <li className ="titleAnchor">
+                {lesson.title || 'title not found'}
+              </li>
+            </li>
+            <li className="lib-less-author">
+              Author: {lesson.teacher.name || 'anonymous'}
+            </li>
+            <li className="lib-lesson-stats">
+              Comments: {commentCount}    Exercises: {lesson.exercises.length}
+            </li>
+            <li className="pubdate">
+              {publishDisplay}
+            </li>
+          </ul>
+          <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
+          {/* UNCOMMENT FOR CHART GRAPHIC <span className="fa fa-bar-chart-o pull-right" id="chart"></span>*/}
       </li>
     );
   }

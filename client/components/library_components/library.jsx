@@ -44,7 +44,6 @@ var Library = React.createClass({
             <h1 className="filterColor">
               {name}{apo}s Library
             </h1>
-            <hr/>
           </div>
 
           <LibLessonCollection lessons={lessonsA} owner={true} />
@@ -53,7 +52,6 @@ var Library = React.createClass({
           {/* Lessons where user is not the teacher */}
           <div className="library-filter-header">
             <h1 className="filterColor">{name}{apo}s Studies</h1>
-            <hr/>
           </div>
 
           <LibLessonCollection lessons={lessonsB} owner={false} />

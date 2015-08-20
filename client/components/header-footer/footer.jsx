@@ -6,7 +6,7 @@ module.exports = React.createClass({
        <div role="navigation" className="footer">
         <div className="container">
           <div className="navbar-text pull-left">
-            <p>© 2015 Team React 5</p> 
+            <p className="footerCopy">© 2015 Team React 5</p> 
         </div>
       </div>
      </div>
