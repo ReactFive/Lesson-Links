@@ -4,7 +4,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('mongoose').model('User');
 var _               = require('lodash');
-var api             = require('./api.js');
+var config             = require('./config.js');
 
 module.exports = function(passport) {
 
@@ -103,9 +103,9 @@ module.exports = function(passport) {
 
   passport.use(new FacebookStrategy({
     // pull in our app id and secret from our auth.js file
-    clientID        : api.facebookAuth.clientID,
-    clientSecret    : api.facebookAuth.clientSecret,
-    callbackURL     : api.facebookAuth.callbackURL,
+    clientID        : config.facebookAuth.clientID,
+    clientSecret    : config.facebookAuth.clientSecret,
+    callbackURL     : config.facebookAuth.callbackURL,
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
 
@@ -162,9 +162,9 @@ module.exports = function(passport) {
   }));
 
   passport.use(new GoogleStrategy({
-    clientID: api.googleAuth.clientID,
-    clientSecret: api.googleAuth.clientSecret,
-    callbackURL: api.googleAuth.callbackURL,
+    clientID: config.googleAuth.clientID,
+    clientSecret: config.googleAuth.clientSecret,
+    callbackURL: config.googleAuth.callbackURL,
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
     // User.findOne won't fire until we have all our data back from Google
@@ -237,9 +237,9 @@ module.exports = function(passport) {
     }
   ));
   passport.use(new TwitterStrategy({
-    consumerKey: api.twitterAuth.consumerKey,
-    consumerSecret: api.twitterAuth.consumerSecret,
-    callbackURL: api.twitterAuth.callbackURL,
+    consumerKey: config.twitterAuth.consumerKey,
+    consumerSecret: config.twitterAuth.consumerSecret,
+    callbackURL: config.twitterAuth.callbackURL,
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
     // User.findOne won't fire until we have all our data back from Google
