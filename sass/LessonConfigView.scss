@@ -17,3 +17,9 @@
     min-height: 230px;
   }
 }
+
+@media (min-width: 1200px) {
+  .exercise-list-body-wide {
+    min-height: 305px;
+  }
+}

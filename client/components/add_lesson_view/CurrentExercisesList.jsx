@@ -21,11 +21,11 @@ var CurrentExercisesList = React.createClass({
             <div className="panel-heading">
               <h3 className="panel-title">Current exercises</h3>
             </div>
-            <div className="panel-body exercise-list-body">
+            <div className="panel-body exercise-list-body exercise-list-body-wide">
               {this.exerciseEntries()}
             </div>
             <div className="panel-footer">
-              <button className="btn-block btn-default">Publish your lesson</button>
+              <button onClick={this.props.onPublish} className="btn-block btn-default">Publish your lesson</button>
             </div>
           </div>
         </li>

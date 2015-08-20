@@ -53,7 +53,7 @@ var LessonConfiguration = React.createClass({
           <li className="list-group-item col-md-8">
             <VideoPlayer />
           </li>
-          {this.state.lesson && <CurrentExercisesList reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
+          {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
 
           <li className="list-group-item col-md-12">
             {!this.state.editing &&
@@ -73,7 +73,7 @@ var LessonConfiguration = React.createClass({
 
     Actions.publish(this.state.lesson)
     .then(function(res) {
-      console.log(res);
+      console.log("published: ", res);
       self.transitionTo('/library');
     })
   },
