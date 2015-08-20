@@ -27,37 +27,39 @@ module.exports = Reflux.createStore({
       this.triggerChange();
     }
     return Api.getStatus()
-        .then(function (res) {
-          if (res.data) {
-            this.auth.loggedIn = res.data;
-            this.triggerChange();
-          } else {
-            this.auth.loggedIn = false;
-            this.triggerChange();
-          }
-        }.bind(this));
+    .then(function (res) {
+      if (res.data) {
+        this.auth.loggedIn = res.data;
+        this.triggerChange();
+      } else {
+        this.auth.loggedIn = false;
+        this.triggerChange();
+      }
+    }.bind(this));
   },
 
   onGetUser: function(){
+
     return Api.getUser()
-        .then(function (res) {
-          if (res.data.user) {
-            console.log('fetched user')
-            this.auth.user = res.data.user;
-            this.triggerChange();
-          } else {
-            this.auth.user = false;
-            this.triggerChange();
-          }
-        }.bind(this));
+    .then(function (res) {
+      if (res.data.user) {
+        console.log('fetched user')
+        this.auth.user = res.data.user;
+        this.triggerChange();
+      } else {
+        this.auth.user = false;
+        this.triggerChange();
+      }
+    }.bind(this));
   },
 
-  onLogin: function (email, password) {
-    return Api.login(email, password)
+  onLogin: function (payload) {
+    return Api.login(payload.email, payload.password)
     .then(function(res){
       this.auth.user = res.data.user;
       this.auth.loggedIn = true;
       this.triggerChange();
+      payload.sourceComponent.transitionTo('/library');
       toastr.options.fadeOut = 1000;
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);
     }.bind(this))

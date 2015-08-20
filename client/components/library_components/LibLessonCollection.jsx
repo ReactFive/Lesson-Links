@@ -13,20 +13,20 @@ var _ = require('lodash');
 var Moment = require('moment');
 
 var LibLessonCollection = React.createClass({
+
   mixins: [Reflux.connect(AuthStore, 'auth')],
 
   render:function(){
     var owner = this.props.owner;
-    var lessonList = this.props.lessons;
+
     var lessons = this.props.lessons.map(function(lesson, index){
-      return <LibLessonEntry lesson={lesson}/>
+      return <LibLessonEntry key={index} lesson={lesson}/>
     });
     
-    return (
-      <ul className="list-group row" id="ulCollection">
+    return (<ul>
         {lessons.length ? {lessons} : <p className="emptyLibrary"> [ None ] </p>}
       </ul>
-    )
+    );
   }
 })
 

@@ -63,22 +63,22 @@ var LibLessonEntry = React.createClass({
 
     return (
       <li className="lib-lesson-entry" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
-          <img className="media pull-left videoSnippet" src={imgUrl} />
-          <ul className="lib-lesson-info list-unstyled">
-            <li className="lib-less-title">
-              <a className ="titleAnchor">
-                {lesson.title || 'title not found'}
-              </a>
-            </li>
-            <li className="lib-less-author">
-              Author: {lesson.teacher.name || 'anonymous'}
-            </li>
-            <li className="lib-lesson-stats">
-              Comments: {commentCount}    Exercises: {lesson.exercises.length}
-            </li>
-            {publishDisplay}
-          </ul>
-          <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
+        <img className="media pull-left videoSnippet" src={imgUrl} />
+        <ul className="lib-lesson-info list-unstyled">
+          <li className="lib-less-title">
+            <a className ="titleAnchor">
+              {lesson.title || 'title not found'}
+            </a>
+          </li>
+          <li className="lib-less-author">
+            Author: {lesson.teacher.name || 'anonymous'}
+          </li>
+          <li className="lib-lesson-stats">
+            Comments: {commentCount}    Exercises: {lesson.exercises.length}
+          </li>
+          {publishDisplay}
+        </ul>
+        <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
       </li>
     );
   }
@@ -86,3 +86,5 @@ var LibLessonEntry = React.createClass({
 })
 
 module.exports = LibLessonEntry;
+
+
