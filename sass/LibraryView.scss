@@ -14,6 +14,7 @@
   font-style: bold;
   margin-bottom: 10px;
   padding: 0;
+  cursor: pointer; cursor: hand;
 }
 
 .list-group-item:first-child {
@@ -24,7 +25,7 @@
   color: $light-blue;
   margin-top: 15px !important;
   font-family: $header-font;
-
+  margin-left: 15px;
 }
 
 .lib-lesson-entry:hover{
@@ -33,6 +34,8 @@
 
 .titleAnchor{
   color: $darkest-blue;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .videoSnippet{
@@ -44,16 +47,7 @@
 .pubdate{
   color: $darkest-blue;
   text-decoration: none;
-}
-
-.pubdate:hover{
-  color: $dark-pink;
-  text-decoration: none;
-}
-
-.titleAnchor:hover{
-  text-decoration: none;
-  color: $dark-pink
+  font-style: bold;
 }
 
 #ulCollection{
@@ -113,7 +107,7 @@
   float: right;
   top: -60px;
   right: 10px;
-  cursor: pointer; 
+  cursor: pointer;
   cursor: hand;
 }
 
@@ -125,20 +119,3 @@
   right: 10px;
 }
 
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-#pulse {
-  animation-name: pulse;
-}

@@ -57,7 +57,7 @@ var LibLessonEntry = React.createClass({
 
     var publishDisplay = lesson.publish ?
         <li> Published on: {createdDate} </li>
-      : null;
+      : <li>Not Published</li>;
 
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
 
@@ -66,9 +66,9 @@ var LibLessonEntry = React.createClass({
           <img className="hidden-xs media pull-left videoSnippet" src={imgUrl} />
           <ul className="lib-lesson-info list-unstyled">
             <li className="lib-less-title">
-              <a className ="titleAnchor">
+              <li className ="titleAnchor">
                 {lesson.title || 'title not found'}
-              </a>
+              </li>
             </li>
             <li className="lib-less-author">
               Author: {lesson.teacher.name || 'anonymous'}
@@ -76,9 +76,9 @@ var LibLessonEntry = React.createClass({
             <li className="lib-lesson-stats">
               Comments: {commentCount}    Exercises: {lesson.exercises.length}
             </li>
-            <a className="pubdate">
+            <li className="pubdate">
               {publishDisplay}
-            </a>
+            </li>
           </ul>
           <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
           {/* UNCOMMENT FOR CHART GRAPHIC <span className="fa fa-bar-chart-o pull-right" id="chart"></span>*/}
