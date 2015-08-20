@@ -201,7 +201,7 @@ var MultiChoiceCreation = React.createClass({
                         onChange={this.setExerciseState}
                         value={(this.props.exercise && this.props.exercise.feedback[4]) || ""}/>
                   </div>
-                  
+
                    <div onChange={this.checkHandle} className="correct-answer-label">
                      <span className="correct-answer-label">
                        <strong>Indicate the best option: </strong>
