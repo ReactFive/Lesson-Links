@@ -15,7 +15,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
-      console.log("working?", res.data);
       self.lesson = res.data;
       self.trigger(self.lesson);
     })
