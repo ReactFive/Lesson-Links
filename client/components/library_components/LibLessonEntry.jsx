@@ -76,7 +76,9 @@ var LibLessonEntry = React.createClass({
             <li className="lib-lesson-stats">
               Comments: {commentCount}    Exercises: {lesson.exercises.length}
             </li>
-            {publishDisplay}
+            <a className="pubdate">
+              {publishDisplay}
+            </a>
           </ul>
           <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
           {/* UNCOMMENT FOR CHART GRAPHIC <span className="fa fa-bar-chart-o pull-right" id="chart"></span>*/}

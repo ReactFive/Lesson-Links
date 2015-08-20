@@ -38,6 +38,16 @@
   position: 0;
 }
 
+.pubdate{
+  color: $darkest-blue;
+  text-decoration: none;
+}
+
+.pubdate:hover{
+  color: $dark-pink;
+  text-decoration: none;
+}
+
 .titleAnchor:hover{
   text-decoration: none;
   color: $dark-pink
@@ -52,16 +62,17 @@
 }
 
 .lib-lesson-info{
-  padding-left: 5px;
+  padding-left: 15px;
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 75vh;
+  width: 90vh;
 }
 
 .filterColor{
   color: $lightest-blue;
+  font-size: 40px;
 }
 
 .dummy{
@@ -96,15 +107,13 @@
 #trashcan{
   color: $darkest-blue;
   text-shadow: 1px 1px 1px #ccc;
-  font-size: 3em;
+  font-size: 2em;
+  position: relative;
+  float: right;
+  top: -60px;
+  right: 10px;
   cursor: pointer; 
   cursor: hand;
-}
-
-#trashcan{
-  color: $darkest-blue;
-  text-shadow: 1px 1px 1px #ccc;
-  font-size: 3em;
 }
 
 @keyframes pulse {
