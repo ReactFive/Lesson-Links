@@ -39,10 +39,15 @@ module.exports.createLesson = function(lesson) {
 module.exports.createExercise = function(exercise) {
   var url = rootUrl + '/api/exercise';
   return axios.post(url, exercise);
-}
+};
+
+module.exports.updateExercise = function(exercise) {
+  var url = rootUrl + '/api/exercise' + exercise._id;
+  return axios.put(url, exercise._id);
+};
 
 module.exports.updateUser = function(result) {
-  var url  = rootUrl + '/api/user/'
+  var url  = rootUrl + '/api/user/';
   var obj = {
     addLesson: result.addLesson,
     unfollowLesson: result.unfollowLesson,

@@ -19,6 +19,7 @@ var ShortAnswerCreation = React.createClass({
   getInitialState: function() {
     console.log(this.props.exerciseState);
     var loadedState = this.props.exerciseState || {};
+    console.log("here is the loaded state:", !!loadedState);
     return {
       exercise: {
         question: loadedState.question || "",
@@ -26,8 +27,9 @@ var ShortAnswerCreation = React.createClass({
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
         altFeedback: loadedState.altFeedback || ""
-      }
-    }
+      },
+      updating: !!loadedState
+    };
   },
 
   setExerciseState: function(event){
@@ -37,8 +39,8 @@ var ShortAnswerCreation = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    console.log(nextProps.exerciseState);
     var loadedState = nextProps.exerciseState;
+    console.log("here is the loaded state:", !!loadedState);
     this.setState({
       exercise: {
         question: loadedState.question || "",
@@ -46,7 +48,8 @@ var ShortAnswerCreation = React.createClass({
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
         altFeedback: loadedState.altFeedback || ""
-      }
+      },
+      updating: !!loadedState
     });
   },
 

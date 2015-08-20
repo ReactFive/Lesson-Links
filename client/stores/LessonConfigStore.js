@@ -30,6 +30,10 @@ var LessonConfigStore = Reflux.createStore({
     .then(this.triggerConfigStore)
   },
 
+  onUpdateExercise: function(exercise) {
+    console.log(exercise);
+  },
+
   onPublish: function(lesson){
     return Api.updateLesson({
       lesson_url : lesson.lesson_url,
