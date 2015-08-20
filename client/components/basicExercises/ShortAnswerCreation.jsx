@@ -19,7 +19,8 @@ var ShortAnswerCreation = React.createClass({
   getInitialState: function() {
     console.log(this.props.exerciseState);
     var loadedState = this.props.exerciseState || {};
-    console.log("here is the loaded state:", !!loadedState);
+    var updating = Object.keys(loadedState).length;
+    console.log(!!updating);
     return {
       exercise: {
         question: loadedState.question || "",
@@ -28,7 +29,7 @@ var ShortAnswerCreation = React.createClass({
         altAnswers: loadedState.altAnswers || "",
         altFeedback: loadedState.altFeedback || ""
       },
-      updating: !!loadedState
+      updating: !!updating
     };
   },
 
@@ -40,6 +41,7 @@ var ShortAnswerCreation = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     var loadedState = nextProps.exerciseState;
+    var updating = Object.keys(loadedState).length;
     console.log("here is the loaded state:", !!loadedState);
     this.setState({
       exercise: {
@@ -49,7 +51,7 @@ var ShortAnswerCreation = React.createClass({
         altAnswers: loadedState.altAnswers || "",
         altFeedback: loadedState.altFeedback || ""
       },
-      updating: !!loadedState
+      updating: !!updating
     });
   },
 
@@ -141,9 +143,15 @@ var ShortAnswerCreation = React.createClass({
     }
 
     if (this.state.exercise.question.length && this.state.exercise.bestAnswers.length) {
-      console.log(exercise);
-      Actions.createExercise(exercise);
-      this.props.onComplete();
+      if(!this.state.updating){
+        Actions.createExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      } else {
+        Actions.updateExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been saved');
+      }
     } else {
       toastr['warning']('Make sure you have a question and answer(s)');
     }
