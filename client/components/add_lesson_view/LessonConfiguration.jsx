@@ -2,6 +2,9 @@ var _ = require('lodash');
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../../actions');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
+
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var VideoPlayer = require('./ConfigVideoPlayer.jsx');
 var ExerciseTypes = require('./ExerciseTypes.jsx');
@@ -13,7 +16,7 @@ var ShortAnswerCreation = require('../basicExercises/ShortAnswerCreation.jsx');
 
 
 var LessonConfiguration = React.createClass({
-  mixins: [Reflux.connect(LessonConfigStore, "lesson")],
+  mixins: [Reflux.connect(LessonConfigStore, "lesson"), Navigation],
 
   getInitialState: function() {
     return {
@@ -66,9 +69,12 @@ var LessonConfiguration = React.createClass({
   },
 
   publishLesson: function() {
+    var self = this;
+
     Actions.publish(this.state.lesson)
     .then(function(res) {
       console.log(res);
+      self.transitionTo('/library');
     })
   },
 
