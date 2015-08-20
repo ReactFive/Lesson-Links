@@ -15,12 +15,15 @@ var MultiChoiceCreation = React.createClass({
   Navigation],
 
   getInitialState: function(){
+    var loadedState = this.props.exerciseState;
     return {
       exercise: {
-        numbs: 6,
-        optNumbs: 3,
-        correctOption: null,
-        feedback: ["","","","",""],
+        question: loadedState.question || "",
+        numbs: loadedState.numbs || 6,
+        optNumbs: loadedState.optNumbs || 3,
+        correctOption: loadedState.correctOption || null,
+        answers: loadedState.answers ||["","","","",""],
+        feedback: loadedState.feedback || ["","","","",""],
         options: [
           {value: '1', label: 'Option 1'},
           {value: '2', label: 'Option 2'},
@@ -38,21 +41,35 @@ var MultiChoiceCreation = React.createClass({
     this.setState({exercise: this.state.exercise});
   },
 
+  checkHandle: function(event){
+    this.state.exercise.correctOption = event.target.value;
+    this.setState({exercise: this.state.exercise});
+  },
+
   setExerciseState : function(event){
-    console.log(event);
-    //this probably needs to be on the parent...
+    if(event.target.name.indexOf('answers')>=0 || event.target.name.indexOf('feedback')>=0) {
+      var fieldInfo = event.target.name.split('-');
+      var optionInfoType = fieldInfo[0],
+          optionInfoIndex = fieldInfo[1];
+
+      this.state.exercise[optionInfoType][optionInfoIndex] = event.target.value;
+      this.setState({exercise: this.state.exercise});
+    } else {
+      this.state.exercise[event.target.name] = event.target.value;
+      this.setState({exercise: this.state.exercise});
+    }
   },
 
   render: function(){
     var classString = {};
     var radioClassString = {};
-   for (var i = 0; i < 10; i++){
-     if(i < this.state.exercise.numbs) {
-       classString[i] = "form-group";
-     } else {
-       classString[i] = "hidden";
-     }
-   }
+    for (var i = 0; i < 10; i++){
+      if(i < this.state.exercise.numbs) {
+        classString[i] = "form-group";
+      } else {
+        classString[i] = "hidden";
+      }
+    }
     for (var i = 0; i < 5; i++){
       if(i < this.state.exercise.optNumbs) {
         radioClassString[i] = "radio-inline";
@@ -73,24 +90,25 @@ var MultiChoiceCreation = React.createClass({
               onChange={this.formSetup} />
 
             <form name="multichoiceForm" onSubmit={this.handleSubmit}>
-            <h5>Write your question/prompt/problem</h5>
+              <h5>Write your question/prompt/problem</h5>
               <div className="form-group">
                 <input ref="question"
-                   className="form-control"
-                   name="name"
-                   type='text'
-                   value={this.state.exercise.question}
-                   placeholder="Question"/>
+                  className="form-control"
+                  name="question"
+                  type='text'
+                  value={this.state.exercise.question}
+                  onChange={this.setExerciseState}
+                  placeholder="Question"/>
               </div>
 
               <div className={classString[0]}>
                 <label htmlFor="option1"><strong>{this.state.exercise.options[0].label}</strong></label>
                   <input id="option1"
                      className="form-control"
-                     name="option1"
+                     name="answers-0"
                      type='text'
                      ref="option1"
-                     value={(this.props.exercise && this.props.exercise.options[0].value) || ""}
+                     value={this.state.exercise.answers[0] || ""}
                      onChange={this.setExerciseState}
                      placeholder="Add an option here"/>
               </div>
@@ -98,19 +116,21 @@ var MultiChoiceCreation = React.createClass({
                   <label htmlFor="feedback1">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback1"
                     className="form-control"
+                    name="feedback-0"
                     rows="2"
                     ref="feedback1"
-                    value={(this.props.exercise && this.props.exercise.feedback[0]) || ""}
+                    value={this.state.exercise.feedback[0] || ""}
                     onChange={this.setExerciseState}/>
               </div>
+
               <div className={classString[2]}>
                 <label htmlFor="option2"><strong>{this.state.exercise.options[1].label}</strong></label>
                 <input id="option2"
                    className="form-control"
-                   name="option2"
+                   name="answers-1"
                    type='text'
                    ref="option2"
-                   value={(this.props.exercise && this.props.exercise.options[1].value) || ""}
+                   value={this.state.exercise.answers[1] || ""}
                    onChange={this.setExerciseState}
                    placeholder="Add an option here"/>
               </div>
@@ -118,92 +138,105 @@ var MultiChoiceCreation = React.createClass({
                 <label htmlFor="feedback2">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback2"
                     className="form-control"
+                    name="feedback-1"
                     rows="2"
-                    value={(this.props.exercise && this.props.exercise.feedback[1]) || ""}
+                    value={this.state.exercise.feedback[1] || ""}
                     onChange={this.setExerciseState}
                     ref="feedback2"/>
               </div>
+
               <div className={classString[4]}>
                 <label htmlFor="option3"><strong>{this.state.exercise.options[2].label}</strong></label>
                 <input id="option3"
                    className="form-control"
-                   name="option3"
+                   name="answers-2"
                    type='text'
                    ref="option3"
-                   value={(this.props.exercise && this.props.exercise.options[2].value) || ""}
+                   value={this.state.exercise.answers[2] || ""}
                    onChange={this.setExerciseState}
                    placeholder="Add an option here"/>
               </div>
               <div className={classString[5]}>
                 <label htmlFor="feedback3">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback3"
-                    ref="feedback3"
+                    ref="feedback-2"
+                    name="feedback-2"
                     className="form-control"
                     rows="2"
                     onChange={this.setExerciseState}
-                    value={(this.props.exercise && this.props.exercise.feedback[2]) || ""}/>
+                    value={this.state.exercise.feedback[2] || ""}/>
               </div>
+
               <div className={classString[6]}>
                 <label htmlFor="option4"><strong>{this.state.exercise.options[3].label}</strong></label>
                 <input id="option4"
                    className="form-control"
-                   name="option4"
+                   name="answers-3"
                    ref="option4"
                    type='text'
                    onChange={this.setExerciseState}
-                   value={(this.props.exercise && this.props.exercise.options[3].value) || ""}
+                   value={this.state.exercise.answers[3] || ""}
                    placeholder="Add an option here"/>
               </div>
               <div className={classString[7]}>
                 <label htmlFor="feedback4">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback4"
-                    ref="feedback4"
+                    ref="feedback-3"
+                    name="feedback-3"
                     className="form-control"
                     rows="2"
                     onChange={this.setExerciseState}
-                    value={(this.props.exercise && this.props.exercise.feedback[3]) || ""}/>
+                    value={this.state.exercise.feedback[3] || ""}/>
               </div>
+
               <div className={classString[8]}>
                 <label htmlFor="option5"><strong>value={this.state.exercise.options[4].value}</strong></label>
                 <input id="option5"
                    className="form-control"
-                   name="option5"
+                   name="answers-4"
                    ref="option5"
                    type='text'
-                   value={(this.props.exercise && this.props.exercise.options[4].value) || ""}
+                   value={this.state.exercise.answers[4] || ""}
                    placeholder="Add an option here"/>
               </div>
               <div className={classString[9]}>
                 <label htmlFor="feedback5">Feedback to this option when selected by learner:</label>
                   <textarea id="feedback5"
-                    ref="feedback5"
+                    ref="feedback-4"
+                    name="feedback-4"
                     className="form-control"
                     rows="2"
                     onChange={this.setExerciseState}
-                    value={(this.props.exercise && this.props.exercise.feedback[4]) || ""}/>
+                    value={this.state.exercise.feedback[4] || ""}/>
               </div>
+
                <div onChange={this.checkHandle} className="correct-answer-label">
                  <span className="correct-answer-label">
                    <strong>Indicate the best option: </strong>
                  </span>
                  <label htmlFor="correct1" className={radioClassString[0]}>
-                   <input ref="correct1" type="radio" name="correct" value="1"/>
+                   <input ref="correct1" type="radio" name="correct" value="0"
+                   defaultChecked={this.state.exercise.correctOption === "0"} />
                    1
                  </label>
                  <label htmlFor="correct2" className={radioClassString[1]}>
-                   <input ref="correct2" type="radio" name="correct" value="2"/>
+                   <input ref="correct2" type="radio" name="correct" value="1"
+                   defaultChecked={this.state.exercise.correctOption === "1"} />
                    2
                  </label>
                  <label htmlFor="correct3" className={radioClassString[2]}>
-                   <input ref="correct3" type="radio" name="correct" value="3"/>
+                   <input ref="correct3" type="radio" name="correct" value="2"
+                   defaultChecked={this.state.exercise.correctOption === "2"} />
                    3
                  </label>
                  <label htmlFor="correct4" className={radioClassString[3]}>
-                   <input ref="correct4" type="radio" name="correct" value="4"/>
+                   <input ref="correct4" type="radio" name="correct" value="3"
+                   defaultChecked={this.state.exercise.correctOption === "3"} />
                    4
                  </label>
                  <label htmlFor="correct5" className={radioClassString[4]}>
-                   <input ref="correct5" type="radio" name="correct" value="5"/>
+                   <input ref="correct5" type="radio" name="correct" value="4"
+                   defaultChecked={this.state.exercise.correctOption === "4"} />
                    5
                  </label>
                 </div>
@@ -216,39 +249,18 @@ var MultiChoiceCreation = React.createClass({
     )
   },
 
-  checkHandle(event){
-    this.state.correctOption = event.target.value;
-  },
-
   handleSubmit: function(event) {
     event.preventDefault();
-    var question = this.refs.question.getDOMNode().value.trim();
-
-    var option1 = this.refs.option1.getDOMNode().value.trim();
-    var option2 = this.refs.option2.getDOMNode().value.trim();
-    var option3 = this.refs.option3.getDOMNode().value.trim();
-    var option4 = this.refs.option4.getDOMNode().value.trim();
-    var option5 = this.refs.option5.getDOMNode().value.trim();
-
-    var feedback1 = this.refs.feedback1.getDOMNode().value.trim();
-    var feedback2 = this.refs.feedback2.getDOMNode().value.trim();
-    var feedback3 = this.refs.feedback3.getDOMNode().value.trim();
-    var feedback4 = this.refs.feedback4.getDOMNode().value.trim();
-    var feedback5 = this.refs.feedback5.getDOMNode().value.trim();
-
-    var options = [option1, option2, option3, option4, option5];
-    var allFeedback = [feedback1, feedback2, feedback3, feedback4, feedback5];
 
     var time = videojs("#attachmentVideo").currentTime();
 
-    var exercise = {};
+    var exercise = _.cloneDeep(this.state.exercise);
     exercise.time = time;
-    exercise.type = "multi";
-    exercise.question = question;
-    exercise.options = removeBlanks(options);
-    exercise.feedback = removeBlanks(allFeedback);
-    exercise.correct = this.state.correctOption;
+    exercise.type = "multiplechoice";
+    exercise.answers = removeBlanks(exercise.answers);
+    exercise.feedback = removeBlanks(exercise.feedback);
 
+    console.log(exercise);
     if (exercise.question.length && exercise.options.length) {
       Actions.createExercise(exercise);
       this.props.onComplete(null);
