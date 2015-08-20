@@ -15,7 +15,7 @@ var TrueFalseCreation = React.createClass({
     Navigation],
 
   getInitialState: function() {
-    var loadedState = this.props.exerciseState;
+    var loadedState = this.props.exerciseState || {};
     return {
       exercise: {
         question: loadedState.question || "",
@@ -49,11 +49,13 @@ var TrueFalseCreation = React.createClass({
   render: function(){
     console.log(this.state.exercise);
     return (
-        <div className="container multichoice-container">
-          <div className="col-md-8 col-md-offset-2 lesson-create-panel">
-
-            <h3>Create a True-False Question</h3>
-
+        <div className="container">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3>Create a True-False Question</h3>
+              </div>
+               <div className="modal-body">
             <form name="trueFalseForm" onSubmit={this.handleSubmit}>
               <h5>Write a statement which is true or false</h5>
               <div className="form-group">
@@ -104,16 +106,20 @@ var TrueFalseCreation = React.createClass({
                 <label htmlFor="correct2" className="radio-inline">
                   <input ref="correct2" type="radio" name="correct" value={"false"}
                    defaultChecked={!this.state.exercise.correctOption === "false"}/>
-                  }
                   False
                 </label>
               </div>
-
-              <button type="submit" onClick={ this.handleSubmit } className="signup-cancel-btn btn btn-primary pull-right">Add to your lesson</button>
-              <button onClick={ this.handleCancel } className=" btn btn-default pull-right">Cancel</button>
+                 <div className="row">
+                   <div className="col-md-offset-6">
+                      <button type="submit" onClick={ this.handleSubmit } className="signup-cancel-btn btn btn-primary margin-right">Add to your lesson</button>
+                      <button onClick={ this.handleCancel } className=" btn btn-default">Cancel</button>
+                  </div>
+               </div>
             </form>
           </div>
         </div>
+      </div>
+    </div>
     )
   },
 
