@@ -10,7 +10,14 @@ var CurrentExercisesList = React.createClass({
       var reloadMe = function() {
         this.props.reloadExercise(exerciseInfo);
       }.bind(self);
-      return <div key={exerciseInfo.key} onClick={reloadMe}> {exercise.type} {exercise.time}<span className="glyphicon glyphicon-remove pull-right"></span></div>
+
+      var minutes = Math.floor(exercise.time / 60).toString();
+      if(minutes.length < 2) minutes = '0' + minutes;
+      var seconds = (Math.floor(exercise.time) % 60).toString();
+      if(seconds.length < 2) seconds = '0' + seconds;
+      var timeDisplay = minutes + ':' + seconds;
+
+      return <div key={exerciseInfo.key} onClick={reloadMe}> {timeDisplay} {exercise.type} <span className="glyphicon glyphicon-remove pull-right"></span></div>
     })
   },
 
