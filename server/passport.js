@@ -110,10 +110,9 @@ module.exports = function(passport) {
 
   // facebook will send back the token and profile
   function(req, token, refreshToken, profile, done) {
-    //Create a new user
-    if(!req.user) {
-      // asynchronous
-      process.nextTick(function() {
+    // asynchronous
+    process.nextTick(function() {
+      if(!req.user) {
         // find the user in the database based on their facebook id
         User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
         // if there is an error, stop everything and return that
@@ -144,22 +143,22 @@ module.exports = function(passport) {
               return done(null, newUser);
             });
           }
-        });
-      });
-    //Add Facebook Credentials to an existing user
-    } else {
-      var user            = req.user;
-      user.facebook.id    = profile.id;
-      user.facebook.token = token;
-      user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-      user.facebook.email = profile.email;
+        })
+      //Add Facebook Credentials to an existing user
+      } else {
+        var user            = req.user;
+        user.facebook.id    = profile.id;
+        user.facebook.token = token;
+        user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+        user.facebook.email = profile.email;
 
-      user.save(function(err) {
-        if (err)
-          throw err;
-        return done(null, user);
-      });
-    }
+        user.save(function(err) {
+          if (err)
+            throw err;
+          return done(null, user);
+        });
+      }
+    })
   }));
 
   passport.use(new GoogleStrategy({
@@ -169,17 +168,31 @@ module.exports = function(passport) {
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
     // User.findOne won't fire until we have all our data back from Google
-    function(iss, sub, profile, accessToken, refreshToken, done) {
+    function(req, iss, sub, profile, accessToken, refreshToken, done) {
       // try to find the user based on their google id
       process.nextTick(function() {
         if(!req.user) {
           User.findOne({'google.id': profile.id}, function(err, user) {
-            if (err)
+            if (err) {
               return done(err);
+            }
+            // if a user is found, log them in
             if (user) {
-              // if a user is found, log them in
-              console.log('user found ', user)
-              return done(null, user);
+
+              // if there is a user id already but no token (user was linked at one point and then removed)
+              // just add our token and profile information
+              if (!user.google.token) {
+                user.google.token = token;
+                user.google.name  = profile.displayName;
+                user.google.email = profile.email;
+
+                user.save(function(err) {
+                  if (err)
+                    throw err;
+                  return done(null, user);
+                });
+              }
+              return done(null, user); // user found, return that user
             } else {
               // if the user isnt in our database, create a new user
               var newUser          = new User();
@@ -204,6 +217,21 @@ module.exports = function(passport) {
               });
             }
           })
+        } else {
+          //User already exists and is logged in
+          var user            = req.user;
+
+          // update the current users facebook credentials
+          user.google.id    = profile.id;
+          user.google.token = accessToken;
+          user.google.name  = profile.displayName;
+          user.google.email = profile.email
+          // save the user
+          user.save(function(err) {
+            if (err)
+              throw err;
+            return done(null, user);
+          });
         }
       })
     }
