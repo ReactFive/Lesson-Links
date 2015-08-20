@@ -13,7 +13,11 @@
   line-height: 1.5;
   font-style: bold;
   margin-bottom: 10px;
-  font-size: 1.5vh;
+  padding: 0;
+}
+
+.list-group-item:first-child {
+  border-radius: none;
 }
 
 .emptyLibrary{
@@ -27,17 +31,11 @@
 
 .titleAnchor{
   color: $darkest-blue;
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-family: $subheader-font;
-  padding-bottom: 0%;
-  padding-top: 0%;
 }
 
 .videoSnippet{
   height:100%;
+  position: 0;
 }
 
 .titleAnchor:hover{
@@ -54,9 +52,12 @@
 }
 
 .lib-lesson-info{
-  display: inline-block;
-  margin-left: 10px;
-  font-style: bold;
+  padding-left: 5px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 75vh;
 }
 
 .filterColor{
@@ -100,7 +101,7 @@
   cursor: hand;
 }
 
-#chart{
+#trashcan{
   color: $darkest-blue;
   text-shadow: 1px 1px 1px #ccc;
   font-size: 3em;
