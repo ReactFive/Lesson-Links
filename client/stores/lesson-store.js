@@ -15,12 +15,17 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
+      console.log("working?", res.data);
       self.lesson = res.data;
       self.trigger(self.lesson);
     })
     .catch(function(res){
       payload.sourceComponent.transitionTo('/404');
     })
+  },
+
+  triggerLessonStore: function(){
+    this.trigger(this.lesson);
   },
 
   updateAndTrigger: function(){
