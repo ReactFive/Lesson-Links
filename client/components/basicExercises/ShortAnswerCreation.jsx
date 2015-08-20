@@ -54,7 +54,7 @@ var ShortAnswerCreation = React.createClass({
 
     return (
     <div className="container multichoice-container">
-      <div className="col-md-8 col-md-offset-2">
+      <div className="col-md-8 col-md-offset-2 lesson-create-panel">
 
         <h3>Create a Short Answer Question</h3>
         <form name="shortAnswerForm">

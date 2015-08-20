@@ -54,7 +54,7 @@ var VideoPlayer = React.createClass({
     if(this.state.lesson && this.state.lesson.video_url) {
       return (
         <div className="col-xs-7 col-xs-offset-1">
-          <div className="">
+          <div className="embed-responsive-item">
             <video id='attachmentVideo'
               className='video-js vjs-default-skin'
               width='500' height='300'
