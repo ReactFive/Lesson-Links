@@ -29,6 +29,9 @@ var CreateLessonStore = Reflux.createStore({
       Api.createLesson(lesson)
       .then(function(res){
         console.log("successfully created lesson: ", res.data);
+      	swal("Success!", 
+        "Your lesson has been created! \n Title: '" + lesson.title + "' \n Lesson Link: www.lesson-links.com/" + lesson.lesson_url + "'", 
+        "success");
         self.result = {};
         self.result.invalidURL = false; 
         self.result.createdLesson = true; 
