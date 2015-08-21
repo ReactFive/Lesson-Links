@@ -36,19 +36,10 @@ var LessonConfigStore = Reflux.createStore({
       time: exercise.time,
       text: exercise.type
     };
-    var exercise_id = exercise.id;
-    var exercises = this.lesson.exercises;
-    
-    var index = getIndex(exercises, id);
 
-    function getIndex(ex, id){
-      for (var i = 0; ex.length < 0; i++){
-        if(ex._id === id){
-          return i;
-        }
-      }
-    }
-    Api.updateExercise(updatedExercise, exercise_id)
+    this.updateExerciseOptimistically(exercise.id, updatedExercise);
+
+    Api.updateExercise(updatedExercise, exercise.id)
     .then(function(err, res){
       this.triggerConfigStore();
     });
@@ -61,6 +52,15 @@ var LessonConfigStore = Reflux.createStore({
     })
   },
 
+  updateExerciseOptimistically(id, newExercise){
+  for (var i = 0; i < this.lesson.exercises.length; i++){
+    if(this.lesson.exercises[i]._id === id){
+      this.lesson.exercises.splice(i, 1, newExercise);
+    }
+  }
+}
+
 });
 
 module.exports = LessonConfigStore;
+
