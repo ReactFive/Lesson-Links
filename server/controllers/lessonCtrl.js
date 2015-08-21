@@ -66,13 +66,14 @@ exports.updateLesson = function(req, res, next){
           publish : req.body.publish,
           comments : req.body.comments
         }
-      },{}, function(err, raw){
+      },{'new': true}, function(err, updatedLesson){
         if (err) {
           console.log(err)
           res.sendStatus(500)
         } else {
         //Sends lesson back if update was successful
-        res.status(200).send(lesson)
+        console.log(updatedLesson)
+        res.status(200).send(updatedLesson)
         }
       }
     )
