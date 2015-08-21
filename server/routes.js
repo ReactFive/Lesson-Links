@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
+var requiresApiLogin = passport.requiresApiLogin;
 var LessonCtrl = require('./controllers/lessonCtrl');
 var UserCtrl = require('./controllers/userCtrl');
 var ExerciseCtrl = require('./controllers/exerciseCtrl');
@@ -10,10 +11,10 @@ module.exports = function(app) {
   /**
    * LESSON API
    */
-  app.get('/api/lessons', LessonCtrl.getAllLessons);
-  app.get('/api/lesson/:url', LessonCtrl.getLessonByUrl);
-  app.post('/api/lesson/:url', LessonCtrl.createLesson);
-  app.put('/api/lesson/:url', LessonCtrl.updateLesson);
+  app.get('/api/lessons', requiresApiLogin, LessonCtrl.getAllLessons);
+  app.get('/api/lesson/:url', requiresApiLogin, LessonCtrl.getLessonByUrl);
+  app.post('/api/lesson/:url', requiresApiLogin, LessonCtrl.createLesson);
+  app.put('/api/lesson/:url', requiresApiLogin, LessonCtrl.updateLesson);
 
   /**
    * USER API
@@ -30,15 +31,15 @@ module.exports = function(app) {
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
   app.get('/api/user', UserCtrl.getUser);
-  app.put('/api/user', UserCtrl.updateUser);
+  app.put('/api/user', requiresApiLogin, UserCtrl.updateUser);
 
   /**
    * EXERCISE API
    */
 
-  app.post('/api/exercise', ExerciseCtrl.addExercise);
-  app.put('/api/exercise/:id', ExerciseCtrl.updateExercise);
-  app.delete('/api/exercise/:id', ExerciseCtrl.deleteExercise);
+  app.post('/api/exercise', requiresApiLogin, ExerciseCtrl.addExercise);
+  app.put('/api/exercise/:id', requiresApiLogin, ExerciseCtrl.updateExercise);
+  app.delete('/api/exercise/:id', requiresApiLogin, ExerciseCtrl.deleteExercise);
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){
