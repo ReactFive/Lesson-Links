@@ -29,7 +29,7 @@ var AddVideoBox = React.createClass({
 
   handleSubmit: function(e){
     e.preventDefault();
-    var lesson_url = this.state.lesson_url.replace(/\s+/g, '-');
+    var lesson_url = this.state.lesson_url;
     Actions.createLesson({
       title: this.state.title,
       video_url: this.state.video_url,
@@ -45,10 +45,6 @@ var AddVideoBox = React.createClass({
     
   render: function() {
     //This error message appears underneath the video URL if it is already in the database
-    var errorMessage =  this.state.result.validURL ? null : 
-      <div className="invalid-URL-error">
-        <p>This URL is taken. Please try a different one.</p>
-      </div>
 
     var apo = "'";
 
@@ -128,7 +124,6 @@ var AddVideoBox = React.createClass({
                   ref="lesson_url"
                   value={this.state.lesson_url}
                   onChange={this.onInputChange} />
-                {errorMessage}
               </div>
             </div>
             <div className="col-md-offset-3 col-md-7">

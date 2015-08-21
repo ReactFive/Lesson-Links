@@ -28,9 +28,7 @@ var CreateLessonStore = Reflux.createStore({
     }) 
     .catch(function(res){
       console.log("failed to create lesson");
-      self.result = {};
-      self.result.validURL = false;
-      self.trigger(self.result);
+      swal("Oops!", "The URL '" + lesson.lesson_url + "' already exists! Try another combination of words.", "error");
     })
   },
 
