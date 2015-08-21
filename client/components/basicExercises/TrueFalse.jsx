@@ -105,18 +105,15 @@ var TrueFalse = React.createClass({
                         <div className="blockG" id="rotateG_08"></div>
                       </div>
                     </div>
+
                     <div className="quiz" id="quiz" data-toggle="buttons">
-
-                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
+                      <label onClick={this.handleClick.bind(null, "true")} className="element-animation1 btn btn-lg btn-primary btn-block">
                       <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-                      <input onClick={this.handleClick.bind(this, "true")} type="radio" name="q_answer" ref="true"
-                      value="true"/>TRUE</label>
+                      <input type="radio" name="q_answer" ref="true" value="true"/>TRUE</label>
 
-                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
+                      <label onClick={this.handleClick.bind(null, "false")}className="element-animation1 btn btn-lg btn-primary btn-block">
                         <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-                        <input onClick={this.handleClick.bind(null, "false")} type="radio" name="q_answer" ref="false"
-                               value="false"/>FALSE</label>
-
+                        <input type="radio" name="q_answer" ref="false" value="false"/>FALSE</label>
                     </div>
                   </div>{/*end modal-body*/}
                   <div className="modal-footer text-muted">
