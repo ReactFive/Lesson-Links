@@ -1,20 +1,20 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
-var requiresApiLogin = passport.requiresApiLogin;
 var LessonCtrl = require('./controllers/lessonCtrl');
 var UserCtrl = require('./controllers/userCtrl');
 var ExerciseCtrl = require('./controllers/exerciseCtrl');
 var _ = require('lodash');
+var auth = require('./auth');
 
 module.exports = function(app) {
 
   /**
    * LESSON API
    */
-  app.get('/api/lessons', requiresApiLogin, LessonCtrl.getAllLessons);
-  app.get('/api/lesson/:url', requiresApiLogin, LessonCtrl.getLessonByUrl);
-  app.post('/api/lesson/:url', requiresApiLogin, LessonCtrl.createLesson);
-  app.put('/api/lesson/:url', requiresApiLogin, LessonCtrl.updateLesson);
+  app.get('/api/lessons', auth.requiresApiLogin, LessonCtrl.getAllLessons);
+  app.get('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.getLessonByUrl);
+  app.post('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.createLesson);
+  app.put('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.updateLesson);
 
   /**
    * USER API
@@ -31,15 +31,15 @@ module.exports = function(app) {
   app.post('/api/logout', UserCtrl.logout);
   app.post('/api/authenticate', UserCtrl.checkAuthentication);
   app.get('/api/user', UserCtrl.getUser);
-  app.put('/api/user', requiresApiLogin, UserCtrl.updateUser);
+  app.put('/api/user', auth.requiresApiLogin, UserCtrl.updateUser);
 
   /**
    * EXERCISE API
    */
 
-  app.post('/api/exercise', requiresApiLogin, ExerciseCtrl.addExercise);
-  app.put('/api/exercise/:id', requiresApiLogin, ExerciseCtrl.updateExercise);
-  app.delete('/api/exercise/:id', requiresApiLogin, ExerciseCtrl.deleteExercise);
+  app.post('/api/exercise', auth.requiresApiLogin, ExerciseCtrl.addExercise);
+  app.put('/api/exercise/:id', auth.requiresApiLogin, ExerciseCtrl.updateExercise);
+  app.delete('/api/exercise/:id', auth.requiresApiLogin, ExerciseCtrl.deleteExercise);
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){
@@ -53,4 +53,3 @@ module.exports = function(app) {
     });
   });
 };
-
