@@ -70,7 +70,7 @@ var LibLessonEntry = React.createClass({
     if(ampersandPosition != -1) {
       video_id = video_id.substring(0, ampersandPosition);
     }
-
+    
     var publishDisplay = lesson.publish ?
         <li> Published on: {createdDate} </li>
       : <li>Not Published</li>;

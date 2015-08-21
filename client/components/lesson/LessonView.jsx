@@ -28,14 +28,23 @@ var LessonView = React.createClass({
     }
   },
 
-  componentWillMount: function(){
-  },
-
   componentDidMount: function(){
     var self=this;
     Actions.getUser(function(){
       Actions.fetchLesson({sourceComponent: self, url: self.context.router.getCurrentParams().url});
     })
+
+    //Set up a timer to fetch the lesson again every 10 seconds to get any new comments
+    this.timer = setInterval(function(){
+      Actions.fetchLesson({
+        sourceComponent: self, url: self.context.router.getCurrentParams().url
+      })
+    }, 30000);
+  },
+
+  componentWillUnmount: function(){
+    //Stops the lesson from continuing to fetch new comments after leaving the page
+    clearInterval(this.timer);
   },
 
   loadExercise: function(exercise) {

@@ -65,7 +65,7 @@ var nav = React.createClass({
                   <p style={{marginLeft: "100px !important"}}>OR</p>
                   <hr/>
                   <li style={{opacity:0.7, marginTop:10}}>
-                    <a className="btn btn-block btn-social btn-google" href="/api/twitter">
+                    <a className="btn btn-block btn-social btn-google" href="/api/google">
                       <i className="fa fa-google"></i>Sign in with Google
                     </a>
                     <a className="btn btn-block btn-social btn-facebook" href="/api/facebook">

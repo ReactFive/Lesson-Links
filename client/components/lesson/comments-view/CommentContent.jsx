@@ -10,7 +10,7 @@ var CommentContent = React.createClass({
   getInitialState: function(){
     return {
       liked: false,
-      starred: false
+      starred: false,
     }
   },
 
