@@ -9,10 +9,6 @@ var CreateLessonStore = Reflux.createStore({
 
   init: function() {},
 
-  getInitialState: function() {
-    return this.result;
-  },
-
   createLesson: function(lesson){
     var self = this;
 
@@ -20,7 +16,7 @@ var CreateLessonStore = Reflux.createStore({
     .then(function(res){
       console.log("successfully created lesson: ", res.data);
       self.result = {};
-      self.result.validURL = true; 
+      self.result.invalidURL = false; 
       self.result.createdLesson = true; 
       self.trigger(self.result);
       Actions.sendLesson(res.data);
@@ -29,7 +25,7 @@ var CreateLessonStore = Reflux.createStore({
     .catch(function(res){
       console.log("failed to create lesson");
       self.result = {};
-      self.result.validURL = false;
+      self.result.invalidURL = true;
       self.trigger(self.result);
     })
   },
