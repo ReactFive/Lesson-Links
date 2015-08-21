@@ -12,10 +12,10 @@ var TrueFalse = React.createClass({
 
     return {
       exercise: {
-        question: loadedExercise.question || "4 + 7 = 12",
-        correctOption: loadedExercise.correctOption || "false",
-        feedbackTrue: loadedExercise.feedbackTrue || "This was a fairly easy item, right?",
-        feedbackFalse: loadedExercise.feedbackFalse || "Oops, that should have been easy!?"
+        question: loadedExercise.question || "No question provided",
+        correctOption: loadedExercise.correctOption || "No correct answer chosen",
+        feedbackTrue: loadedExercise.feedbackTrue || "No feedback provided",
+        feedbackFalse: loadedExercise.feedbackFalse || "No feedback provided"
       },
       outcome: null
     };
