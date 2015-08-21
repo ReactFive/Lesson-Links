@@ -44,10 +44,16 @@ var LessonView = React.createClass({
     this.setState({exercise: exercise});
   },
 
+  onExerciseCompleted: function() {
+    this.setState({exercise: null});
+    var player = videojs('attachmentVideo');
+    player.play();
+  },
+
   mapExerciseType: function() {
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoice exercise={this.state.exercise || {}} />,
-      'truefalse' : <TrueFalse exercise={this.state.exercise.exercise || {}} />,
+      'multiplechoice' : <MultiChoice exercise={this.state.exercise || {}} onComplete={this.onExerciseCompleted}/>,
+      'truefalse' : <TrueFalse exercise={this.state.exercise.exercise || {}} onComplete={this.onExerciseCompleted}/>,
     }
 
     return exerciseTypeMap[this.state.exercise.text];

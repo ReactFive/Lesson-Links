@@ -9,6 +9,7 @@ var TrueFalse = React.createClass({
 
   getInitialState: function() {
     var loadedExercise = this.props.exercise;
+
     return {
       exercise: {
         question: loadedExercise.question || "4 + 7 = 12",
@@ -50,7 +51,7 @@ var TrueFalse = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -75,7 +76,7 @@ var TrueFalse = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
