@@ -20,17 +20,14 @@ var LessonView = React.createClass({
 
   componentWillMount: function(){
     
-    var self=this;
-    Actions.getUser()
-    .then(function(res){
-      return Actions.fetchLesson({sourceComponent: self, url: self.context.router.getCurrentParams().url});
-    })
-    .then(function(res){
-      return Actions.followLesson(self.context.router.getCurrentParams().url);
-    });
-    
   },
 
+  componentDidMount: function(){
+    var self=this;
+    Actions.getUser(function(){
+      Actions.fetchLesson({sourceComponent: self, url: self.context.router.getCurrentParams().url});
+    })
+  },
 
   render: function() {
 

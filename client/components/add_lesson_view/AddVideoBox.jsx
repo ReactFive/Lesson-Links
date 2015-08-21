@@ -8,17 +8,18 @@ var Navigation = Router.Navigation;
 var AddVideoBox = React.createClass({
   mixins: [Navigation, Reflux.connect(CreateLessonStore, "result")],
 
-  getInitialState: function(){
+  getInitialState: function(){    
     return {
       title: '',
       video_url: '',
       lesson_url: '',
       published: false,
       result: {
-        validURL: true,
+        invalidURL: false,
         createdLesson: false  
       }
     }
+
   },
 
   onInputChange: function(e){
@@ -45,10 +46,11 @@ var AddVideoBox = React.createClass({
     
   render: function() {
     //This error message appears underneath the video URL if it is already in the database
-    var errorMessage =  this.state.result.validURL ? null : 
+    console.log(this.state.result)
+    var errorMessage =  this.state.result.invalidURL ? 
       <div className="invalid-URL-error">
         <p>This URL is taken. Please try a different one.</p>
-      </div>
+      </div> : null
 
     var apo = "'";
 

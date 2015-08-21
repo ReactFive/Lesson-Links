@@ -38,7 +38,7 @@ module.exports = Reflux.createStore({
     }.bind(this));
   },
 
-  onGetUser: function(){
+  onGetUser: function(callback){
 
     return Api.getUser()
     .then(function (res) {
@@ -46,6 +46,7 @@ module.exports = Reflux.createStore({
         console.log('fetched user')
         this.auth.user = res.data.user;
         this.triggerChange();
+        callback()
       } else {
         this.auth.user = false;
         this.triggerChange();
