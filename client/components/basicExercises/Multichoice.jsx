@@ -8,13 +8,13 @@ var Route = Router.Route;
 var Multichoice = React.createClass({
 
   getInitialState: function(){
-    var loadedExercise = this.props.exercise;
+    var loadedExercise = this.props.exercise || {};
 
     return {
       question: loadedExercise.question || "No question provided",
       answers: loadedExercise.options || [],
       feedback: loadedExercise.feedback || [],
-      correctOption: loadedState.correctOption || 0,
+      correctOption: loadedExercise.correctOption || 0,
     };
   },
 
@@ -36,7 +36,7 @@ var Multichoice = React.createClass({
     var number = this.state.counter;
     var question = this.state.question;
     var outcome = this.state.outcome;
-    var opts = this.state.options.map(function (option, index) {
+    var opts = this.state.answers.map(function (option, index) {
       number++;
       var classString = "element-animation";
       classString += number;
