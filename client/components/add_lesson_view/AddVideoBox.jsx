@@ -46,7 +46,6 @@ var AddVideoBox = React.createClass({
     
   render: function() {
     //This error message appears underneath the video URL if it is already in the database
-    console.log(this.state.result)
     var errorMessage =  this.state.result.invalidURL ? 
       <div className="invalid-URL-error">
         <p>This URL is taken. Please try a different one.</p>
