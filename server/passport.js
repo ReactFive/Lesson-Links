@@ -221,7 +221,7 @@ module.exports = function(passport) {
           //User already exists and is logged in
           var user            = req.user;
 
-          // update the current users facebook credentials
+          // update the current users google credentials
           user.google.id    = profile.id;
           user.google.token = accessToken;
           user.google.name  = profile.displayName;
@@ -242,7 +242,7 @@ module.exports = function(passport) {
     callbackURL: config.twitterAuth.callbackURL,
     passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
   },
-    // User.findOne won't fire until we have all our data back from Google
+    // User.findOne won't fire until we have all our data back from Twitter
     function(req, token, tokenSecret, profile, done) {
       // try to find the user based on their google id
       process.nextTick(function() {
@@ -294,7 +294,7 @@ module.exports = function(passport) {
           //User already exists and is logged in
           var user            = req.user;
 
-          // update the current users facebook credentials
+          // update the current users Twitter credentials
           user.twitter.id    = profile.id;
           user.twitter.token = token;
           user.twitter.name  = profile.displayName;

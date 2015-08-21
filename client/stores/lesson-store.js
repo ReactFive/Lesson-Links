@@ -53,7 +53,6 @@ module.exports = Reflux.createStore({
       )
       if(!following) 
       {
-        console.log('adding lesson')
         Api.updateUser({
           lesson_url : url,
           addLesson : true
