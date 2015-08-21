@@ -41,8 +41,14 @@ var VideoPlayer = React.createClass({
     // initialize video.js
     var player = videojs('attachmentVideo');
     if(typeof player.markers === 'function') {
+      var exercises = this.state.lesson.exercises;
+      var exerciseMarkers = exercises.map(function(exercise) {
+        var markerObj = _.cloneDeep(exercise);
+        markerObj.text = markerObj.exercise.type;
+        return markerObj;
+      })
       player.markers({
-        markers: this.state.lesson.exercises
+        markers: exerciseMarkers
       });
     }
 
