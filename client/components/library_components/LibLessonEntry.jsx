@@ -22,6 +22,22 @@ var LibLessonEntry = React.createClass({
   deleteLesson: function(e) {
     e.preventDefault();
     e.stopPropagation();
+    {/*swal({
+      title: "Are you sure?",
+      text: "Clicking 'Delete' will remove this lesson from your Library!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false
+    },
+    function(isConfirm){   
+      if (isConfirm) {     
+        swal("Deleted!", "This lesson has been removed from your library!");   
+      } else {     
+        swal("Cancelled", "This lesson will remain in your library!", "error");   
+      } 
+    });*/}
     Actions.deleteLesson(this.props.lesson);
   },
 
