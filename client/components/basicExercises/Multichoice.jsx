@@ -36,6 +36,9 @@ var Multichoice = React.createClass({
     }
   },
   
+  retry: function() {
+    this.setState({outcome : null})
+  },
 
   render: function() {
     var view;
@@ -81,7 +84,7 @@ var Multichoice = React.createClass({
                   </div>
                   <div className="modal-footer">
                     <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
-                    {/* removed choice to Try Again */}
+                    <button className="btn btn-primary try-again-btn" onClick={this.retry}>Try Again</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
