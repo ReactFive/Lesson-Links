@@ -46,7 +46,13 @@ var CreateLessonStore = Reflux.createStore({
       self.result = {};
       self.result.invalidYoutubeURL = true;
       self.trigger(self.result);
-    }
+      Actions.sendLesson(res.data);
+      Actions.getUser();
+    }) 
+    .catch(function(res){
+      console.log("failed to create lesson");
+      swal("Oops!", "The URL '" + lesson.lesson_url + "' already exists! Try another combination of words.", "error");
+    })
   },
 });
 
