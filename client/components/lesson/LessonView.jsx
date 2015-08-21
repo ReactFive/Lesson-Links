@@ -29,7 +29,6 @@ var LessonView = React.createClass({
   },
 
   componentWillMount: function(){
-    
   },
 
   componentDidMount: function(){
@@ -61,9 +60,7 @@ var LessonView = React.createClass({
 
   render: function() {
 
-    if(this.state.auth){
-      console.log("this.state.auth", this.state.auth);
-      console.log("this.state.auth.user", this.state.auth.user);
+    if(this.state.lesson){
       var overlay = this.state.auth && this.state.auth.user ? null : <LoginOverlay/>
 
       return (
