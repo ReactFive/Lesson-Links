@@ -20,7 +20,7 @@ var LibLessonEntry = React.createClass({
   },
 
   deleteLesson: function(e) {
-    var that = this;
+    var self = this;
     e.preventDefault();
     e.stopPropagation();
     swal({
@@ -35,7 +35,7 @@ var LibLessonEntry = React.createClass({
     function(isConfirm){   
       if (isConfirm) {
         swal("Deleted!", "This lesson has been removed from your library!", "success");
-        Actions.deleteLesson(that.props.lesson);  
+        Actions.deleteLesson(self.props.lesson);  
       } 
     }); 
   },
