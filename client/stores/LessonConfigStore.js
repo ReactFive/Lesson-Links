@@ -44,11 +44,11 @@ var LessonConfigStore = Reflux.createStore({
        });
   },
 
-  onDeleteExercise: function(id){
+  onDeleteExercise: function(exercise_id){
 
-    this.updateExerciseOptimistically(exercise.id);
+    this.updateExerciseOptimistically(exercise_id);
 
-    Api.deleteExercise(exercise.id)
+    Api.deleteExercise(exercise_id)
        .then(function(err, res){
          this.triggerConfigStore();
        });
