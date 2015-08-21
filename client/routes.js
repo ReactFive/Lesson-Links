@@ -13,7 +13,7 @@ var SignupView = require('./components/signup/SignupView.jsx');
 var AddLessonView = require('./components/add_lesson_view/AddLessonView.jsx');
 var NotFound = require('./components/404/NotFound.jsx');
 var LessonConfiguration = require('./components/add_lesson_view/LessonConfiguration.jsx');
-var Exercise = require('./components/basicExercises/Multichoice.jsx');
+var ExerciseMultiChoice = require('./components/basicExercises/Multichoice.jsx');
 var ExerciseTrueFalse = require('./components/basicExercises/TrueFalse.jsx');
 var ExerciseShortAnswer = require('./components/basicExercises/ShortAnswer.jsx');
 var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
@@ -32,7 +32,7 @@ var routes = (
         <Route path='/configure' handler={LessonConfiguration}/>
         <Redirect from="/edit" to="/configure"/>
         {/*these two routes are for development purposes*/}
-        <Route path='/exercise' handler={Exercise} />
+        <Route path='/exerciseMC' handler={ExerciseMultiChoice} />
         <Route path='/exerciseTF' handler={ExerciseTrueFalse} />
         <Route path='/exerciseSA' handler={ExerciseShortAnswer} />
         <Route path='/multiplechoice' handler={MultiChoiceCreation} />

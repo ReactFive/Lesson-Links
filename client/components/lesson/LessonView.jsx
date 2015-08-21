@@ -60,7 +60,7 @@ var LessonView = React.createClass({
 
   mapExerciseType: function() {
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoice exercise={this.state.exercise || {}} onComplete={this.onExerciseCompleted}/>,
+      'multiplechoice' : <MultiChoice exercise={this.state.exercise.exercise || {}} onComplete={this.onExerciseCompleted}/>,
       'truefalse' : <TrueFalse exercise={this.state.exercise.exercise || {}} onComplete={this.onExerciseCompleted}/>,
     }
 
