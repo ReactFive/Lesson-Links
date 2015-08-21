@@ -9,19 +9,6 @@ var CreateLessonStore = Reflux.createStore({
 
   init: function() {},
 
-  getInitialState: function() {
-    return {
-      title: '',
-      video_url: '',
-      lesson_url: '',
-      published: false,
-      result: {
-        invalidURL: false,
-        createdLesson: false  
-      }
-    }
-  },
-
   createLesson: function(lesson){
     var self = this;
 

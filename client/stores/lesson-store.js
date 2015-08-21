@@ -18,7 +18,7 @@ module.exports = Reflux.createStore({
     .then(function(res) {
       self.lesson = res.data;
       self.trigger(self.lesson);
-      self.followLesson(url)
+      self.followLesson(payload)
     })
     .catch(function(res){
       payload.sourceComponent.transitionTo('/404');
@@ -40,21 +40,21 @@ module.exports = Reflux.createStore({
     this.trigger(this.lesson);
   },
 
-  followLesson : function(url){
+  followLesson : function(lesson){
     {/*Check if the user is already following this lesson*/}
     if (AuthStore.auth.user) {
       var following = _.reduce(AuthStore.auth.user.lessons, function(found, elem, key){
         if (found) {
           return true
         } else {
-          return (elem.lesson_url === url)
+          return (elem.lesson_url === lesson.url)
         }}, false
       )
       console.log(following)
       if(!following) 
       {
         console.log('adding lesson')
-        console.log(url)
+        console.log(lesson.url)
         Api.updateUser({
           lesson_url : url,
           addLesson : true
