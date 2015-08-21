@@ -8,12 +8,14 @@ var Route = Router.Route;
 var TrueFalse = React.createClass({
 
   getInitialState: function() {
+    var loadedExercise = this.props.exercise;
+
     return {
       exercise: {
-        prompt: "4 + 7 = 12",
-        correct: false,
-        posFeedback: "This was a fairly easy item, right?",
-        negFeedback: "Oops, that should have been easy!?"
+        question: loadedExercise.question || "No question provided",
+        correctOption: loadedExercise.correctOption || "No correct answer chosen",
+        feedbackTrue: loadedExercise.feedbackTrue || "No feedback provided",
+        feedbackFalse: loadedExercise.feedbackFalse || "No feedback provided"
       },
       outcome: null
     };
@@ -49,7 +51,7 @@ var TrueFalse = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -74,7 +76,7 @@ var TrueFalse = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -89,7 +91,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.prompt}</h4>
+                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.question}</h4>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">
@@ -105,18 +107,15 @@ var TrueFalse = React.createClass({
                         <div className="blockG" id="rotateG_08"></div>
                       </div>
                     </div>
+
                     <div className="quiz" id="quiz" data-toggle="buttons">
-
-                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
+                      <label onClick={this.handleClick.bind(null, "true")} className="element-animation1 btn btn-lg btn-primary btn-block">
                       <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-                      <input onClick={this.handleClick.bind(this, "true")} type="radio" name="q_answer" ref="true"
-                      value="true"/>TRUE</label>
+                      <input type="radio" name="q_answer" ref="true" value="true"/>TRUE</label>
 
-                      <label className="element-animation1 btn btn-lg btn-primary btn-block">
+                      <label onClick={this.handleClick.bind(null, "false")}className="element-animation1 btn btn-lg btn-primary btn-block">
                         <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-                        <input onClick={this.handleClick.bind(null, "false")} type="radio" name="q_answer" ref="false"
-                               value="false"/>FALSE</label>
-
+                        <input type="radio" name="q_answer" ref="false" value="false"/>FALSE</label>
                     </div>
                   </div>{/*end modal-body*/}
                   <div className="modal-footer text-muted">
