@@ -8,22 +8,19 @@ var Route = Router.Route;
 var Multichoice = React.createClass({
 
   getInitialState: function(){
+    var loadedExercise = this.props.exercise;
+
     return {
-     name: "Exercise 1",
-     question: "What is 4 + 7?",
-     options: ["11", "7", "32", "43", "22"],
-     posFeedback: "This was a fairly easy item, right?",
-     negFeedback: "Oops, that should have been easy!?",
-     time: 3,
-     correct: 1,
-     counter: 0,
-     outcome: null
+      question: loadedExercise.question || "No question provided",
+      answers: loadedExercise.options || [],
+      feedback: loadedExercise.feedback || [],
+      correctOption: loadedState.correctOption || 0,
     };
   },
 
   handleClick: function(clickedOpt){
     console.log(clickedOpt);
-      if(this.state.correct === clickedOpt) {
+      if(this.state.correctOption === clickedOpt) {
         console.log("correct");
         this.setState({outcome: true});
       } else{
@@ -38,7 +35,6 @@ var Multichoice = React.createClass({
     var i = this.state.item;
     var number = this.state.counter;
     var question = this.state.question;
-    var title = this.state.name;
     var outcome = this.state.outcome;
     var opts = this.state.options.map(function (option, index) {
       number++;
