@@ -9,24 +9,31 @@ var Multichoice = React.createClass({
 
   getInitialState: function(){
     var loadedExercise = this.props.exercise || {};
+    console.log(loadedExercise);
 
     return {
       question: loadedExercise.question || "No question provided",
-      answers: loadedExercise.options || [],
+      answers: loadedExercise.answers || [],
       feedback: loadedExercise.feedback || [],
-      correctOption: loadedExercise.correctOption || 0,
+      correctOption: +loadedExercise.correctOption || 0,
     };
   },
 
   handleClick: function(clickedOpt){
     console.log(clickedOpt);
-      if(this.state.correctOption === clickedOpt) {
-        console.log("correct");
-        this.setState({outcome: true});
-      } else{
-        console.log("false");
-        this.setState({outcome: false});
-     }
+    if(this.state.correctOption === clickedOpt) {
+      console.log("correct");
+      this.setState({
+        outcome: true,
+        currentFeedback: this.state.feedback[clickedOpt]
+      });
+    } else{
+      console.log("false");
+      this.setState({
+        outcome: false,
+        currentFeedback: this.state.feedback[clickedOpt]
+      });
+    }
   },
   
 
@@ -36,7 +43,7 @@ var Multichoice = React.createClass({
     var number = this.state.counter;
     var question = this.state.question;
     var outcome = this.state.outcome;
-    var opts = this.state.answers.map(function (option, index) {
+    var opts = this.state.answers.map(function (answer, index) {
       number++;
       var classString = "element-animation";
       classString += number;
@@ -45,10 +52,13 @@ var Multichoice = React.createClass({
       refString += index;
       var handle = this.handleClick;
       return (
-          <label className={classString}>
-            <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-            <input onClick={handle.bind(null,index)} type="radio" name="q_answer" ref={refString}
-                   value={index}/>{option}</label>
+          <label className={classString} onClick={handle.bind(null,index)}>
+            <span className="btn-label">
+              <i className="glyphicon glyphicon-chevron-right"></i>
+            </span>
+            <input type="radio" name="q_answer" ref={refString}
+                   value={index}/>{answer}
+          </label>
       )
     }.bind(this));
     console.log(outcome);
@@ -65,13 +75,13 @@ var Multichoice = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.negFeedback ? this.state.negFeedback : null }</p>
+                        <p>{ this.state.currentFeedback }</p>
                       </blockquote>
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
-                    <Link activeClassName="active" to="/exercise"><button className="btn btn-primary try-again-btn">Try Again</button></Link>
+                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
+                    {/* removed choice to Try Again */}
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -91,12 +101,12 @@ var Multichoice = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        { this.state.posFeedback ? this.state.posFeedback : null }
+                        { this.state.currentFeedback }
                       </blockquote>
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
