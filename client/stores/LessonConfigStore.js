@@ -9,7 +9,6 @@ var LessonConfigStore = Reflux.createStore({
 
   sendLesson: function(lesson){
     this.lesson = lesson;
-    console.log("LessonConfigStore has received the lesson: ", this.lesson)
   },
 
   triggerConfigStore: function() {
@@ -30,6 +29,31 @@ var LessonConfigStore = Reflux.createStore({
     .then(this.triggerConfigStore)
   },
 
+  onUpdateExercise: function(exercise) {
+    var updatedExercise = {
+      exercise: exercise,
+      time: exercise.time,
+      text: exercise.type
+    };
+
+    this.updateExerciseOptimistically(exercise.id, updatedExercise);
+
+    Api.updateExercise(updatedExercise, exercise.id)
+       .then(function(err, res){
+         this.triggerConfigStore();
+       });
+  },
+
+  onDeleteExercise: function(exercise_id){
+
+    this.updateExerciseOptimistically(exercise_id);
+
+    Api.deleteExercise(exercise_id)
+       .then(function(err, res){
+         this.triggerConfigStore();
+       });
+  },
+
   onPublish: function(lesson){
     return Api.updateLesson({
       lesson_url : lesson.lesson_url,
@@ -37,6 +61,22 @@ var LessonConfigStore = Reflux.createStore({
     })
   },
 
+  updateExerciseOptimistically(id, newExercise){
+
+    for (var i = 0; i < this.lesson.exercises.length; i++) {
+      if (this.lesson.exercises[i]._id === id) {
+        if (newExercise) {
+          this.lesson.exercises.splice(i, 1, newExercise);
+        } else {
+          this.lesson.exercises.splice(i, 1);
+        }
+      }
+
+    }
+    this.triggerConfigStore();
+  }
+
 });
 
 module.exports = LessonConfigStore;
+

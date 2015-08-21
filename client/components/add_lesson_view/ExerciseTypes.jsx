@@ -2,11 +2,12 @@ var _ = require('lodash');
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../../actions');
-
 var Select = require('react-select');
 
 
+
 var ExerciseTypes = React.createClass({
+
   getInitialState: function() {
     return {
       exerciseTypes: [

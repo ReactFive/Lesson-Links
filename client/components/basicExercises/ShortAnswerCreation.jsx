@@ -17,17 +17,19 @@ var ShortAnswerCreation = React.createClass({
     Navigation],
 
   getInitialState: function() {
-    console.log(this.props.exerciseState);
     var loadedState = this.props.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     return {
       exercise: {
         question: loadedState.question || "",
         bestAnswers: loadedState.bestAnswers || "",
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || ""
-      }
-    }
+        altFeedback: loadedState.altFeedback || "",
+        id: loadedState.id || undefined
+      },
+      updating: !!updating
+    };
   },
 
   setExerciseState: function(event){
@@ -37,16 +39,18 @@ var ShortAnswerCreation = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    console.log(nextProps.exerciseState);
     var loadedState = nextProps.exerciseState;
+    var updating = Object.keys(loadedState).length;
     this.setState({
       exercise: {
         question: loadedState.question || "",
         bestAnswers: loadedState.bestAnswers || "",
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || ""
-      }
+        altFeedback: loadedState.altFeedback || "",
+        id: loadedState.id || undefined
+      },
+      updating: !!updating
     });
   },
 
@@ -57,7 +61,7 @@ var ShortAnswerCreation = React.createClass({
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h3>Create a Short Answer Question</h3>
+            <h3>Create/Update a Short Answer Question</h3>
           </div>
             <div className="modal-body">
               <form name="shortAnswerForm">
@@ -107,7 +111,7 @@ var ShortAnswerCreation = React.createClass({
                     <button
                       type="submit"
                       onClick={this.handleSubmit}
-                      className="signup-cancel-btn btn btn-primary margin-right">Add to your lesson</button>
+                      className="signup-cancel-btn btn btn-primary margin-right">Save / Update</button>
                     <button
                       onClick={this.handleCancel}
                       className="btn btn-default">Cancel</button>
@@ -131,6 +135,7 @@ var ShortAnswerCreation = React.createClass({
     exercise.question = this.state.exercise.question;
     exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
     exercise.bestFeedback = this.state.exercise.bestFeedback;
+    exercise.id = this.state.exercise.id || undefined;
 
     if (this.state.exercise.altAnswers.length) {
       exercise.altAnswers = createRegex(this.state.exercise.altAnswers);
@@ -138,9 +143,16 @@ var ShortAnswerCreation = React.createClass({
     }
 
     if (this.state.exercise.question.length && this.state.exercise.bestAnswers.length) {
-      console.log(exercise);
-      Actions.createExercise(exercise);
-      this.props.onComplete();
+      if(!this.state.updating){
+        Actions.createExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been created');
+      } else {
+        console.log(exercise.id);
+        Actions.updateExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      }
     } else {
       toastr['warning']('Make sure you have a question and answer(s)');
     }

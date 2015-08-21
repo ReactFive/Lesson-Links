@@ -103,7 +103,7 @@ var MultiChoiceCreation = React.createClass({
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h3>Create a Multiple Choice Question</h3>
+                <h3>Create/Update a Multiple Choice Question</h3>
               </div>
               <div className="modal-body">
                 <Select
@@ -261,7 +261,7 @@ var MultiChoiceCreation = React.createClass({
                     </div>
                   <div className="row">
                     <div className="col-md-offset-6">
-                      <button type="submit" className="signup-cancel-btn btn btn-primary margin-right">Add to your lesson</button>
+                      <button type="submit" className="signup-cancel-btn btn btn-primary margin-right">Save / Update</button>
                       <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
                     </div>
                   </div>

@@ -26,5 +26,7 @@ module.exports = Reflux.createActions([
   'publish',
   'deleteLesson',
   'triggerConfigStore',
-  'triggerLessonStore'
+  'triggerLessonStore',
+  'updateExercise',
+  'deleteExercise'
 ]);

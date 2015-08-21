@@ -1,7 +1,9 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Actions = require('../../actions');
 
 var CurrentExercisesList = React.createClass({
+
   exerciseEntries: function() {
     var self = this;
 
@@ -17,7 +19,12 @@ var CurrentExercisesList = React.createClass({
       if(seconds.length < 2) seconds = '0' + seconds;
       var timeDisplay = minutes + ':' + seconds;
 
-      return <div key={exerciseInfo.key} onClick={reloadMe}> {timeDisplay} {exercise.type} <span className="glyphicon glyphicon-remove pull-right"></span></div>
+      return (
+          <div className="col-md-12">
+            <div className="col-md-9" key={exerciseInfo.key} onClick={reloadMe}> {timeDisplay} {exercise.type}</div>
+            <span onClick={self.deleteExercise.bind(null, exerciseInfo._id)} className="glyphicon glyphicon-remove col-md-3"></span>
+         </div>
+      )
     })
   },
 
@@ -37,7 +44,21 @@ var CurrentExercisesList = React.createClass({
           </div>
         </li>
     )
+  },
+
+  deleteExercise(exercise_id){
+
+    swal({   title: "Are you sure?",
+      text: "You will not be able to recover this exercise",
+      type: "warning",   showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false },
+      function(){
+        Actions.deleteExercise(exercise_id);
+        swal("Deleted!", "That exercise is deleted.", "success"); });
   }
-})
+
+});
 
 module.exports = CurrentExercisesList;
