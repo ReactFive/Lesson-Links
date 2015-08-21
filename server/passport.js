@@ -295,10 +295,10 @@ module.exports = function(passport) {
           var user            = req.user;
 
           // update the current users facebook credentials
-          user.google.id    = profile.id;
-          user.google.token = accessToken;
-          user.google.name  = profile.displayName;
-          user.google.email = profile.email
+          user.twitter.id    = profile.id;
+          user.twitter.token = token;
+          user.twitter.name  = profile.displayName;
+          user.twitter.email = profile.email
           // save the user
           user.save(function(err) {
             if (err)

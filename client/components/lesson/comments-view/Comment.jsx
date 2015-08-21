@@ -10,6 +10,7 @@ var Comment = React.createClass({
       showReplyForm: false
     }
   },
+
   onToggleReplyForm: function(e) {
     e.preventDefault();
     this.setState({ showReplyForm: !this.state.showReplyForm });
