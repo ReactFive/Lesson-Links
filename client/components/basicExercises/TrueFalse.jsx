@@ -8,12 +8,13 @@ var Route = Router.Route;
 var TrueFalse = React.createClass({
 
   getInitialState: function() {
+    var loadedExercise = this.props.exercise;
     return {
       exercise: {
-        prompt: "4 + 7 = 12",
-        correct: false,
-        posFeedback: "This was a fairly easy item, right?",
-        negFeedback: "Oops, that should have been easy!?"
+        question: loadedExercise.question || "4 + 7 = 12",
+        correctOption: loadedExercise.correctOption || "false",
+        feedbackTrue: loadedExercise.feedbackTrue || "This was a fairly easy item, right?",
+        feedbackFalse: loadedExercise.feedbackFalse || "Oops, that should have been easy!?"
       },
       outcome: null
     };
@@ -89,7 +90,7 @@ var TrueFalse = React.createClass({
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.prompt}</h4>
+                    <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{this.state.exercise.question}</h4>
                   </div>
                   {/*end header*/}
                   <div className="modal-body">

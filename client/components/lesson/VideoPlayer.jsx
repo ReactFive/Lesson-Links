@@ -12,13 +12,11 @@ var VideoPlayer = React.createClass({
       videoSetupCompleted: false
     }
   },
-  componentWillReceiveProps: function(nextProps){
-  },
-  componentWillMount: function(){
-  },
+
   componentDidMount: function(){
     Actions.triggerLessonStore();
   },
+
   componentWillUpdate: function(nextProps, nextState) {
     if(this.state.videoSetupCompleted) {
       var player = videojs('attachmentVideo');
@@ -27,6 +25,7 @@ var VideoPlayer = React.createClass({
       player.markers.add(newComments);
     }
   },
+
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted && this.state.lesson){
       var comments = this.state.lesson.comments,
@@ -48,9 +47,11 @@ var VideoPlayer = React.createClass({
   },
   
   videoSetup: function(comments){
+    var self = this;
+
     // initialize video.js
     var player = videojs('attachmentVideo');
-    // setup plugin
+    // setup markers
     player.markers({
       markers: comments,
       markerStyle: function(marker) {
@@ -81,7 +82,12 @@ var VideoPlayer = React.createClass({
           return marker.time;
         }
       },
-      onMarkerReached: function(marker) {}
+      onMarkerReached: function(marker) {
+        if(!marker.replies) {
+          player.pause();
+          self.props.onExerciseReached(marker);
+        }
+      }
     });
     return player;
   },
