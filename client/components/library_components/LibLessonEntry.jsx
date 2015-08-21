@@ -20,9 +20,10 @@ var LibLessonEntry = React.createClass({
   },
 
   deleteLesson: function(e) {
+    var that = this;
     e.preventDefault();
     e.stopPropagation();
-    {/*swal({
+    swal({
       title: "Are you sure?",
       text: "Clicking 'Delete' will remove this lesson from your Library!",
       type: "warning",
@@ -32,13 +33,11 @@ var LibLessonEntry = React.createClass({
       closeOnConfirm: false
     },
     function(isConfirm){   
-      if (isConfirm) {     
-        swal("Deleted!", "This lesson has been removed from your library!");   
-      } else {     
-        swal("Cancelled", "This lesson will remain in your library!", "error");   
+      if (isConfirm) {
+        swal("Deleted!", "This lesson has been removed from your library!", "success");
+        Actions.deleteLesson(that.props.lesson);  
       } 
-    });*/}
-    Actions.deleteLesson(this.props.lesson);
+    }); 
   },
 
   gotoConfigure: function () {
