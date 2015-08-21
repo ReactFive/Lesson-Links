@@ -42,9 +42,14 @@ module.exports.createExercise = function(exercise) {
 };
 
 module.exports.updateExercise = function(exercise, exercise_id) {
-  console.log("In apis", exercise, exercise_id);
   var url = rootUrl + '/api/exercise/' + exercise_id;
   return axios.put(url, exercise);
+};
+
+module.exports.deleteExercise = function(exercise_id) {
+  console.log("here is your id");
+  var url = rootUrl + '/api/exercise/' + exercise_id;
+  return axios.delete(url);
 };
 
 module.exports.updateUser = function(result) {

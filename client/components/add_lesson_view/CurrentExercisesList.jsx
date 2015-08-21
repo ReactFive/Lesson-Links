@@ -17,7 +17,7 @@ var CurrentExercisesList = React.createClass({
       if(seconds.length < 2) seconds = '0' + seconds;
       var timeDisplay = minutes + ':' + seconds;
 
-      return <div key={exerciseInfo.key} onClick={reloadMe}> {timeDisplay} {exercise.type} <span className="glyphicon glyphicon-remove pull-right"></span></div>
+      return <div key={exerciseInfo.key} onClick={reloadMe}> {timeDisplay} {exercise.type} <span onDeleteClick={this.deleteExercise} className="glyphicon glyphicon-remove pull-right"></span></div>
     })
   },
 
@@ -37,7 +37,12 @@ var CurrentExercisesList = React.createClass({
           </div>
         </li>
     )
+  },
+
+  deleteExercise(event){
+    console.log(event.target)
   }
-})
+
+});
 
 module.exports = CurrentExercisesList;

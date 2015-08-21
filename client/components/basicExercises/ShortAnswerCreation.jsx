@@ -61,7 +61,7 @@ var ShortAnswerCreation = React.createClass({
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h3>Create a Short Answer Question</h3>
+            <h3>Create/Update a Short Answer Question</h3>
           </div>
             <div className="modal-body">
               <form name="shortAnswerForm">
@@ -111,7 +111,7 @@ var ShortAnswerCreation = React.createClass({
                     <button
                       type="submit"
                       onClick={this.handleSubmit}
-                      className="signup-cancel-btn btn btn-primary margin-right">Add to your lesson</button>
+                      className="signup-cancel-btn btn btn-primary margin-right">Save / Update</button>
                     <button
                       onClick={this.handleCancel}
                       className="btn btn-default">Cancel</button>
