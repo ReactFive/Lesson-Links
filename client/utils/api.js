@@ -44,7 +44,7 @@ module.exports.createExercise = function(exercise) {
 module.exports.updateExercise = function(exercise, exercise_id) {
   console.log("In apis", exercise, exercise_id);
   var url = rootUrl + '/api/exercise/' + exercise_id;
-  return axios.put(url, exercise_id);
+  return axios.put(url, exercise);
 };
 
 module.exports.updateUser = function(result) {

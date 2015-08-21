@@ -135,6 +135,7 @@ var ShortAnswerCreation = React.createClass({
     exercise.question = this.state.exercise.question;
     exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
     exercise.bestFeedback = this.state.exercise.bestFeedback;
+    exercise.id = this.state.exercise.id || undefined;
 
     if (this.state.exercise.altAnswers.length) {
       exercise.altAnswers = createRegex(this.state.exercise.altAnswers);
@@ -147,6 +148,7 @@ var ShortAnswerCreation = React.createClass({
         this.props.onComplete();
         toastr['success']('Your new exercise has been created');
       } else {
+        console.log(exercise.id);
         Actions.updateExercise(exercise);
         this.props.onComplete();
         toastr['success']('Your exercise has been updated');
