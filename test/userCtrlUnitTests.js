@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
-var userCtrl = require('../server/controllers/userCtrl');
+//var userCtrl = require('../server/controllers/userCtrl');
 
 chai.should();
 

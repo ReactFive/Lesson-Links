@@ -1,6 +1,6 @@
 var request = require('supertest');
 var app = ('../server/index.js');
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 //var Lesson = require('mongoose').model('Lesson');
 var agent = request.agent(app);
 /*
