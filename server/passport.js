@@ -11,6 +11,7 @@ module.exports = function(passport) {
   // required for persistent login sessions
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
+    user.local = _.omit(user.local, 'password')
     done(null, user.id);
   });
 
@@ -19,6 +20,7 @@ module.exports = function(passport) {
     User.findById(id)
         .populate('lessons')
         .exec(function(err, user) {
+      user.local = _.omit(user.local, 'password')
       done(err, user);
     });
   });
