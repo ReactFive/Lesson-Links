@@ -30,6 +30,7 @@ var AddVideoBox = React.createClass({
   },
 
   handleSubmit: function(e){
+    var self = this;
     e.preventDefault();
     var lesson_url = this.state.lesson_url.replace(/\s+/g, '-');
     Actions.createLesson({
@@ -37,7 +38,11 @@ var AddVideoBox = React.createClass({
       video_url: this.state.video_url,
       lesson_url: lesson_url,
       published: this.state.published 
-    });
+    })
+    .triggerPromise()
+    .then(function(){
+      console.log("Geoffrey's Arguments: ", arguments)
+    })
   },
 
   gotoConfigure: function(e){
