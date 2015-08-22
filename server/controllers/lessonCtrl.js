@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Lesson = require('mongoose').model('Lesson');
 var User = require('mongoose').model('User');
+var _ = require('lodash')
 
 exports.getAllLessons = function(req, res) {
   Lesson.find({})
@@ -19,19 +20,38 @@ exports.getLessonByUrl = function(req, res, next) {
   Lesson.findOne({'lesson_url':lessonUrl})
   .populate('exercises')
   .exec(function(err, lesson) {
+    //Check if lesson exists
     if (!lesson) {
       err = new Error('That lesson does not exist');
       res.status(404);
       return res.send({reason:err.toString()});
     }
+    //Check if user has decided to publish lesson
+    if (!lesson.publish) {
+      res.status(401).send('Lesson not published')
+    }
     if(err) {
       res.status(500);
       return res.send(err);
+    //Lesson found and allowed to be published
     } else {
-      if (lesson.publish) {
-        res.status(200).send(lesson);
+      if (req.user._id === lesson.teacher.id) {
+        lesson.studentData.populate('started finished')
+        .exec(function(err, lesson){
+          res.status(200).send(lesson);
+        })
       } else {
-        res.status(401).send('Lesson not published')
+        //Check if it is the first time the student has fetched the lesson
+        if(lesson.studentData && lesson.studentData.started.indexOf(req.user._id) === -1){
+          console.log('test5')
+          Lesson.findOne({'lesson_url':lessonUrl})
+          .exec(function(err, lesson){
+            lesson.studentData.started.push(req.user._id)
+            lesson.save()
+          })
+        }
+        lesson = _.omit(lesson, 'studentData')
+        res.status(200).send(lesson);
       }
     }
   });
@@ -55,7 +75,8 @@ exports.updateLesson = function(req, res, next){
         {published_at : Date.now()},
         {upsert: true, 'new': true}, function(err, res){
           if (err) {console.log(err)}
-        })
+        }
+      )
     }
     if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
     Lesson.findOneAndUpdate({'lesson_url' : req.params.url}, {
