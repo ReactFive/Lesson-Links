@@ -17,10 +17,15 @@ exports.loginUser = function(req, res) {
   .populate('lessons')
   .exec(
     function(err, user){
+      if (!user){
+        res.status(401)
+        res.send({err: "Unauthorized"})
+      }
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
       console.log(user)
-      res.status(200).send({user:user})
+      res.status(200)
+      res.send({user:user})
     }
   )
 };
@@ -28,22 +33,20 @@ exports.loginUser = function(req, res) {
 exports.loginRedirect = {
 successRedirect : '/library',
 failureRedirect : '/'
-},
+};
 
 exports.addLesson = function(req, res){
   User.findByIdAndUpdate(req.user.id, {
     $addToSet: {
       lessons: req.body.lesson._id
-    }, null, function(err, obj) {
+    }}, {}, function(err, obj) {
       if (err) {
         console.log(500, err);
-      } else {
-        console.log(obj);
+        res.status(500).send();
       }
-    res.status(201);
-    }
-  })
-}
+    res.status(201).send(obj);
+    })
+};
 
 exports.getUser = function(req, res){
   console.log('Getting User')
@@ -60,7 +63,7 @@ exports.getUser = function(req, res){
   } else {
     res.sendStatus(401)
   }
-}
+};
 
 exports.updateUser = function(req, res){
   console.log('Updating User')
