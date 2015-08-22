@@ -25,7 +25,7 @@ module.exports = function(app, config){
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
-  app.use(express.static(path.join(__dirname, '/../client/')));
+  app.use(express.static(path.join(__dirname, '/../client/public')));
 
 // required for passport
   app.use(session({
