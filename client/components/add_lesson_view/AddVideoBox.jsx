@@ -20,7 +20,6 @@ var AddVideoBox = React.createClass({
         createdLesson: false  
       }
     }
-
   },
 
   onInputChange: function(e){
@@ -38,7 +37,37 @@ var AddVideoBox = React.createClass({
       video_url: this.state.video_url,
       lesson_url: lesson_url,
       published: this.state.published 
-    })
+    },
+
+    /*Callback to CreateLessonStore: invalidYouTube*/
+    /*This function runs if the User inputs an Invalid YouTube Link*/
+    function(){
+      swal("Invalid YouTube Link!", "That lesson is not a valid YouTube URL. Try Another.", "error")},
+
+    /*Callback to CreateLessonStore: lessonCreated*/
+    /*This function runs if the creation is sucessful -- clicking the button will redirect*/
+    function(){
+      swal({
+        title: "Success!", 
+        text: "Your lesson has been created! \n Title: '" + self.state.title + "' \n Lesson Link: www.lesson-links.com/" + self.state.lesson_url + "'", 
+        type: "success",
+        showCancelButton: false,
+        confirmButtonText: "Edit My Lesson!"
+      },
+      function(isConfirm){
+        if(isConfirm){
+          self.transitionTo('/configure')
+        }else{
+          console.log("If I'm running, something has gone wrong.")
+        }
+      })
+    },
+
+    /*Callback to CreateLessonStore: urlAlreadyExists*/
+    /*This function runs if the Lesson Link already exists in the database*/
+    function(){
+      swal("Invalid URL!", "That Lesson Link already exists! Try a new combination of words!", "error")}
+    );
   },
 
   gotoConfigure: function(e){
@@ -53,26 +82,7 @@ var AddVideoBox = React.createClass({
         <p>This URL is taken. Please try a different one.</p>
       </div> : null
 
-    var youtubeErrorMessage =  this.state.result.invalidYoutubeURL ? 
-      <div className="invalid-URL-error">
-        <p>This is not a valid Youtube URL. Please try a different one.</p>
-      </div> : null
-
     var apo = "'";
-
-    //This success message appears underneath the form when the lesson is successfully saved.
-    var successMessage = this.state.result.createdLesson ? 
-      <div className="alert alert-success">
-        <p><strong>Your lesson has been created!</strong></p>
-        <p>Title:  {this.state.title}</p>
-        <p>Video:  {this.state.video_url}</p>
-        <p>Your lesson{apo}s unique URL:<br/>
-        <strong>www.lesson-links.com/{this.state.lesson_url.replace(/\s+/g, '-')}</strong></p>
-        <br/>
-        <p>Click NEXT to configure your lesson exercises</p>
-      </div>
-      : null;
-
 
     //Once the user successfully creates a lesson, saves it successfully, and clicks 'save',
     //the button changes to 'next' so they can click it to continue to the configure page.
@@ -136,12 +146,9 @@ var AddVideoBox = React.createClass({
                   ref="lesson_url"
                   value={this.state.lesson_url}
                   onChange={this.onInputChange} />
-                {youtubeErrorMessage}
-                {errorMessage}
               </div>
             </div>
             <div className="col-md-offset-3 col-md-7">
-            {successMessage}
             </div>
             {button}
 
