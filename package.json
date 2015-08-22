@@ -4,9 +4,7 @@
   "description": "A teaching/learning tool allowing for rich interaction with video instruction",
   "main": "server/index.js",
   "scripts": {
-    "start": "babel-node server/index.js",
-    "watch": "nodemon --exec babel-node -- server/index.js",
-    "postinstall": "bower install && gulp build"
+    "start": "node --harmony server/index.js"
   },
   "repository": {
     "type": "git",
