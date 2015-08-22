@@ -5,10 +5,10 @@ var _ = require('lodash');
 
 exports.signupUser = function(req, res) {
     console.log('singup success');
-    req.logIn(req.user, function(err) {
+    req.logIn(req.user, function(err, user) {
       if(err) {return next(err);}
       user.local = _.omit(user.local, 'password')
-      return res.status(201).send(user:user});
+      return res.status(201).send({user:user});
   });
 };
 

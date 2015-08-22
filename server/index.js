@@ -4,7 +4,6 @@ var app = express();
 
 var config = require('./config')[env];
 
-require('../client/routes.js');
 require('./mongoose')(config);
 require('./express')(app, config);
 require('./routes')(app);
