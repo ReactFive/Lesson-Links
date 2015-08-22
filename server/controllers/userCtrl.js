@@ -7,7 +7,8 @@ exports.signupUser = function(req, res) {
     console.log('singup success');
     req.logIn(req.user, function(err) {
       if(err) {return next(err);}
-      return res.status(201).send({user:_.omit(req.user, 'local')});
+      user.local = _.omit(user.local, 'password')
+      return res.status(201).send(user:user});
   });
 };
 
@@ -23,7 +24,7 @@ exports.loginUser = function(req, res) {
       }
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
-      console.log(user)
+	  user.local = _.omit(user.local, 'password')
       res.status(200)
       res.send({user:user})
     }
@@ -58,6 +59,7 @@ exports.getUser = function(req, res){
     function(err, user){
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
+      user.local = _.omit(user.local, 'password')
       res.status(200).send({user:user})
     })
   } else {
@@ -67,7 +69,6 @@ exports.getUser = function(req, res){
 
 exports.updateUser = function(req, res){
   console.log('Updating User')
-  console.log(req.body)
   if(req.user && req.body.addLesson === true){
     Lesson
     .findOne({'lesson_url': req.body.lesson_url})
@@ -82,6 +83,7 @@ exports.updateUser = function(req, res){
         {safe:true, upsert: false, new: true},
         function(err, user){
           if (err) {console.log(err)}
+          user.local = _.omit(user.local, 'password')
           res.status(200).send(user)       
         })
       }
@@ -103,6 +105,7 @@ exports.updateUser = function(req, res){
             console.log('test2')
           })
         }
+        user.local = _.omit(user.local, 'password')
         res.status(200).send(user)       
       })
     })
