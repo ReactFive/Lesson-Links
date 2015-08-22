@@ -3,6 +3,7 @@ api.js
 *.log
 client/bower_components
 server/config.js
+server/configuration.js
 client/public/css/*
 .DS_store
 config.js
