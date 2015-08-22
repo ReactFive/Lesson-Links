@@ -23,30 +23,24 @@ var CreateLessonStore = Reflux.createStore({
     }
   },
 
-  createLesson: function(lesson){
+  createLesson: function(lesson, invalidYouTube, lessonCreated, urlAlreadyExists){
     var self = this;
     if(this.validateYoutube(lesson.video_url)) {
       Api.createLesson(lesson)
       .then(function(res){
         console.log("successfully created lesson: ", res.data);
-        self.result = {};
-        self.result.invalidURL = false; 
-        self.result.createdLesson = true; 
-        self.trigger(self.result);
+        lessonCreated();
         Actions.sendLesson(res.data);
         Actions.getUser();
-      }) 
+      })
       .catch(function(res){
         console.log("failed to create lesson");
-        self.result = {};
-        self.result.invalidURL = true;
-        self.trigger(self.result);
+        urlAlreadyExists();
       })
     } else {
-      self.result = {};
-      self.result.invalidYoutubeURL = true;
-      self.trigger(self.result);
-    }
+        console.log("Invalide YouTube Link")
+        invalidYouTube();
+    } 
   },
 });
 
