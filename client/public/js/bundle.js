@@ -4837,7 +4837,7 @@ module.exports = Reflux.createStore({
 
 var React = require('react');
 var axios = require('axios');
-var rootUrl = 'https://lesson-links.herokuapp.com/';
+var rootUrl = 'https://lesson-links.herokuapp.com';
 
 module.exports.login = function (email, password) {
   var url = rootUrl + '/api/login';
