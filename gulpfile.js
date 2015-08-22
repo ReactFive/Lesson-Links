@@ -149,9 +149,9 @@ gulp.task('sass', function () {
  */
 
 gulp.task('test', function(){
-  env({vars:{ENV: 'Test'}});
   gulp.src('test/*.js', {read: false})
       .pipe(mocha({reporter: 'nyan'}))
+      .on('error', gutil.log);
 });
 
 gulp.task('watch', function () {
