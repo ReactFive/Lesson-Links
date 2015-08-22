@@ -67,6 +67,8 @@ gulp.task('vendor', function() {
     'client/bower_components/jquery/dist/jquery.js',
     'client/bower_components/video.js/dist/video-js/video.js',
     'client/bower_components/videojs-youtube/dist/vjs.youtube.js',
+    'client/bower_components/moment/moment.min.js',
+    'client/bower_components/moment/min/moment.min.js',
     'client/bower_components/toastr/toastr.js',
     'client/bower_components/sweetalert/dist/sweetalert.min.js'
   ]).pipe(concat('vendor.js'))
@@ -148,9 +150,9 @@ gulp.task('sass', function () {
  */
 
 gulp.task('test', function(){
-  env({vars:{ENV: 'Test'}});
   gulp.src('test/*.js', {read: false})
       .pipe(mocha({reporter: 'nyan'}))
+      .on('error', gutil.log);
 });
 
 gulp.task('watch', function () {
