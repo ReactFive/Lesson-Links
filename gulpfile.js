@@ -13,6 +13,10 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var uglify = require('gulp-uglify');
 var notifier = require('node-notifier');
+var mocha = require('gulp-mocha');
+var env = require('gulp-env');
+var supertest = require('supertest');
+
 //var server = require('gulp-server-livereload');
 
 var production = process.env.NODE_ENV === 'production';
@@ -135,6 +139,18 @@ gulp.task('sass', function () {
       .pipe(sass().on('error', sass.logError))
       .pipe(concat('style.css'))
       .pipe(gulp.dest('client/public/css'));
+});
+
+/*
+ |--------------------------------------------------------------------------
+ | Run Mocha Unit Tests
+ |--------------------------------------------------------------------------
+ */
+
+gulp.task('test', function(){
+  env({vars:{ENV: 'Test'}});
+  gulp.src('test/*.js', {read: false})
+      .pipe(mocha({reporter: 'nyan'}))
 });
 
 gulp.task('watch', function () {

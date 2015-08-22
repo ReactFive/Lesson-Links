@@ -47,7 +47,7 @@ exports.updateLesson = function(req, res, next){
       req.body.video_url = lesson.video_url
     }
     if (!owner || !req.body.hasOwnProperty('publish') || lesson.publish) {
-      req.body.publish = lesson.publish
+      req.body.publish = lesson.publish;
     //Set publish date
     } else {
       Lesson.findOneAndUpdate(
@@ -124,4 +124,4 @@ exports.createLesson = function(req, res, next){
       res.status(201);
       res.json(lesson);
     });
-}
+};
