@@ -3,12 +3,10 @@
   "version": "0.0.1",
   "description": "A teaching/learning tool allowing for rich interaction with video instruction",
   "main": "server/index.js",
-  "engines": {
-    "node": "0.12.x",
-    "npm": "2.11.x"
-  },
   "scripts": {
-    "start": "node --harmony server/index.js"
+    "start": "babel-node server/index.js",
+    "watch": "nodemon --exec babel-node -- server/index.js",
+    "postinstall": "bower install && gulp build"
   },
   "repository": {
     "type": "git",
