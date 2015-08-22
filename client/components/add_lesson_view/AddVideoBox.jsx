@@ -16,6 +16,7 @@ var AddVideoBox = React.createClass({
       published: false,
       result: {
         invalidURL: false,
+        invalidYoutubeURL: false,
         createdLesson: false  
       }
     }
@@ -49,6 +50,11 @@ var AddVideoBox = React.createClass({
     var errorMessage =  this.state.result.invalidURL ? 
       <div className="invalid-URL-error">
         <p>This URL is taken. Please try a different one.</p>
+      </div> : null
+
+    var youtubeErrorMessage =  this.state.result.invalidYoutubeURL ? 
+      <div className="invalid-URL-error">
+        <p>This is not a valid Youtube URL. Please try a different one.</p>
       </div> : null
 
     var apo = "'";
@@ -129,6 +135,7 @@ var AddVideoBox = React.createClass({
                   ref="lesson_url"
                   value={this.state.lesson_url}
                   onChange={this.onInputChange} />
+                {youtubeErrorMessage}
                 {errorMessage}
               </div>
             </div>
