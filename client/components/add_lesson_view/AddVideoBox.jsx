@@ -39,10 +39,6 @@ var AddVideoBox = React.createClass({
       lesson_url: lesson_url,
       published: this.state.published 
     })
-    .triggerPromise()
-    .then(function(){
-      console.log("Geoffrey's Arguments: ", arguments)
-    })
   },
 
   gotoConfigure: function(e){
