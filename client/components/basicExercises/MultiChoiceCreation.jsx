@@ -82,6 +82,7 @@ var MultiChoiceCreation = React.createClass({
   },
 
   render: function(){
+    
     var classString = {};
     var radioClassString = {};
     for (var i = 0; i < 10; i++){
