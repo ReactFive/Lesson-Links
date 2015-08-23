@@ -1,8 +1,16 @@
 node_modules
+api.js
 *.log
 client/bower_components
+server/config.js
+server/configuration.js
+client/public/css/*
 .DS_store
+config.js
 
+bundle.js
+vendor.bundle.js
+vendor.js
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, WebStorm
@@ -47,6 +55,7 @@ build.properties
 junit*.properties
 
 ###Compiled Styles
+client/public/css/style.css
 
 ####Rebase Creations
 *.orig
