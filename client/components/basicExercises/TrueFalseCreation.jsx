@@ -16,18 +16,21 @@ var TrueFalseCreation = React.createClass({
 
   getInitialState: function() {
     var loadedState = this.props.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     return {
       exercise: {
         question: loadedState.question || "",
         correctOption: loadedState.correctOption || undefined,
         feedbackTrue: loadedState.feedbackTrue || "",
         feedbackFalse: loadedState.feedbackFalse || "",
-      }
+      },
+      updating: !!updating
     };
   },
 
   componentWillReceiveProps: function(nextProps) {
-    var loadedState = nextProps.exerciseState;
+    var loadedState = nextProps.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     console.log(loadedState);
     this.setState({
       exercise: {
@@ -35,7 +38,8 @@ var TrueFalseCreation = React.createClass({
         correctOption: loadedState.correctOption || undefined,
         feedbackTrue: loadedState.feedbackTrue || "",
         feedbackFalse: loadedState.feedbackFalse || "",
-      }
+      },
+      updating: !!updating
     });
   },
 
@@ -146,8 +150,15 @@ var TrueFalseCreation = React.createClass({
     exercise.correctOption = this.state.exercise.correctOption;
 
     if (exercise.question.length && exercise.correctOption !== undefined) {
-      Actions.createExercise(exercise);
-      this.props.onComplete();
+      if (!this.state.updating) {
+        Actions.createExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been created');
+      } else {
+        Actions.updateExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      }
     } else {
       toastr['warning']('Make sure you have a question');
     }

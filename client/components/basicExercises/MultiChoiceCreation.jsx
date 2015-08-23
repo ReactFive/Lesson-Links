@@ -17,7 +17,8 @@ var MultiChoiceCreation = React.createClass({
     Navigation],
 
   getInitialState: function(){
-    var loadedState = this.props.exerciseState;
+    var loadedState = this.props.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     return {
       exercise: {
         question: loadedState.question || "",
@@ -33,12 +34,14 @@ var MultiChoiceCreation = React.createClass({
           {value: '4', label: 'Option 4'},
           {value: '5', label: 'Option 5'}
         ]
-      }
+      },
+      updating: !!updating
     }
   },
 
   componentWillReceiveProps: function(nextProps) {
     var loadedState = nextProps.exerciseState;
+    var updating = Object.keys(loadedState).length;
     this.setState({
       exercise: {
         question: loadedState.question || "",
@@ -54,7 +57,8 @@ var MultiChoiceCreation = React.createClass({
           {value: '4', label: 'Option 4'},
           {value: '5', label: 'Option 5'}
         ]
-      }
+      },
+      updating: !!updating
     });
   },
 
@@ -197,10 +201,16 @@ var MultiChoiceCreation = React.createClass({
     exercise.answers = removeBlanks(exercise.answers);
     exercise.feedback = removeBlanks(exercise.feedback);
 
-    console.log(exercise);
     if (exercise.question.length && exercise.options.length) {
-      Actions.createExercise(exercise);
-      this.props.onComplete();
+      if (!this.state.updating) {
+        Actions.createExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been created');
+      } else {
+        Actions.updateExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      }
     } else {
       toastr['warning']('Make sure you have a question and options');
     }
@@ -227,3 +237,17 @@ var MultiChoiceCreation = React.createClass({
 
 module.exports = MultiChoiceCreation;
 
+if (this.state.exercise.question.length && this.state.exercise.bestAnswers.length) {
+  if(!this.state.updating){
+    Actions.createExercise(exercise);
+    this.props.onComplete();
+    toastr['success']('Your new exercise has been created');
+  } else {
+    console.log(exercise.id);
+    Actions.updateExercise(exercise);
+    this.props.onComplete();
+    toastr['success']('Your exercise has been updated');
+  }
+} else {
+  toastr['warning']('Make sure you have a question and answer(s)');
+}
