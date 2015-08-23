@@ -236,18 +236,3 @@ var MultiChoiceCreation = React.createClass({
 });
 
 module.exports = MultiChoiceCreation;
-
-if (this.state.exercise.question.length && this.state.exercise.bestAnswers.length) {
-  if(!this.state.updating){
-    Actions.createExercise(exercise);
-    this.props.onComplete();
-    toastr['success']('Your new exercise has been created');
-  } else {
-    console.log(exercise.id);
-    Actions.updateExercise(exercise);
-    this.props.onComplete();
-    toastr['success']('Your exercise has been updated');
-  }
-} else {
-  toastr['warning']('Make sure you have a question and answer(s)');
-}

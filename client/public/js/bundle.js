@@ -877,7 +877,8 @@ var MultiChoiceCreation = React.createClass({
   mixins: [Reflux.connect(AuthStore, "auth"), Reflux.connect(LessonConfigStore, "lesson"), Navigation],
 
   getInitialState: function getInitialState() {
-    var loadedState = this.props.exerciseState;
+    var loadedState = this.props.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     return {
       exercise: {
         question: loadedState.question || "",
@@ -887,12 +888,14 @@ var MultiChoiceCreation = React.createClass({
         answers: loadedState.answers || ["", "", "", "", ""],
         feedback: loadedState.feedback || ["", "", "", "", ""],
         options: [{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }, { value: '3', label: 'Option 3' }, { value: '4', label: 'Option 4' }, { value: '5', label: 'Option 5' }]
-      }
+      },
+      updating: !!updating
     };
   },
 
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
     var loadedState = nextProps.exerciseState;
+    var updating = Object.keys(loadedState).length;
     this.setState({
       exercise: {
         question: loadedState.question || "",
@@ -902,7 +905,8 @@ var MultiChoiceCreation = React.createClass({
         answers: loadedState.answers || ["", "", "", "", ""],
         feedback: loadedState.feedback || ["", "", "", "", ""],
         options: [{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }, { value: '3', label: 'Option 3' }, { value: '4', label: 'Option 4' }, { value: '5', label: 'Option 5' }]
-      }
+      },
+      updating: !!updating
     });
   },
 
@@ -1079,10 +1083,16 @@ var MultiChoiceCreation = React.createClass({
     exercise.answers = removeBlanks(exercise.answers);
     exercise.feedback = removeBlanks(exercise.feedback);
 
-    console.log(exercise);
     if (exercise.question.length && exercise.options.length) {
-      Actions.createExercise(exercise);
-      this.props.onComplete();
+      if (!this.state.updating) {
+        Actions.createExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been created');
+      } else {
+        Actions.updateExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      }
     } else {
       toastr['warning']('Make sure you have a question and options');
     }
@@ -2221,18 +2231,21 @@ var TrueFalseCreation = React.createClass({
 
   getInitialState: function getInitialState() {
     var loadedState = this.props.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     return {
       exercise: {
         question: loadedState.question || "",
         correctOption: loadedState.correctOption || undefined,
         feedbackTrue: loadedState.feedbackTrue || "",
         feedbackFalse: loadedState.feedbackFalse || ""
-      }
+      },
+      updating: !!updating
     };
   },
 
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    var loadedState = nextProps.exerciseState;
+    var loadedState = nextProps.exerciseState || {};
+    var updating = Object.keys(loadedState).length;
     console.log(loadedState);
     this.setState({
       exercise: {
@@ -2240,7 +2253,8 @@ var TrueFalseCreation = React.createClass({
         correctOption: loadedState.correctOption || undefined,
         feedbackTrue: loadedState.feedbackTrue || "",
         feedbackFalse: loadedState.feedbackFalse || ""
-      }
+      },
+      updating: !!updating
     });
   },
 
@@ -2403,8 +2417,15 @@ var TrueFalseCreation = React.createClass({
     exercise.correctOption = this.state.exercise.correctOption;
 
     if (exercise.question.length && exercise.correctOption !== undefined) {
-      Actions.createExercise(exercise);
-      this.props.onComplete();
+      if (!this.state.updating) {
+        Actions.createExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been created');
+      } else {
+        Actions.updateExercise(exercise);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      }
     } else {
       toastr['warning']('Make sure you have a question');
     }
