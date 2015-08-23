@@ -9,6 +9,7 @@ var Textarea = React.createClass({
     id: React.PropTypes.string,
     ref: React.PropTypes.string,
     value: React.PropTypes.string,
+    key: ReactPropTypes.number
   },
   render: function(){
     return (
@@ -17,6 +18,7 @@ var Textarea = React.createClass({
           <textarea id={this.props.id}
             className="form-control"
             name={this.props.name}
+            key={this.props.key}
             rows="2"
             ref={this.props.name}
             value={this.props.value}

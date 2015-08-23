@@ -11,6 +11,7 @@ var TextInput = React.createClass({
     ref: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     value: React.PropTypes.string,
+    key: ReactPropTypes.number
   },
   render: function(){
     return (
@@ -21,6 +22,7 @@ var TextInput = React.createClass({
            name={this.props.name}
            type='text'
            ref={this.props.name}
+           key={this.props.key}
            value={this.props.value}
            onChange={this.props.onChange}
            placeholder={this.props.placeholder}/>
