@@ -867,6 +867,8 @@ var AuthStore = require('../../stores/AuthStore');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
 var Select = require('react-select');
+var TextInput = require('./TextInput.jsx');
+var Textarea = require('./Textarea.jsx');
 var _ = require('lodash');
 
 var MultiChoiceCreation = React.createClass({
@@ -929,7 +931,43 @@ var MultiChoiceCreation = React.createClass({
     }
   },
 
+  createInputs: function createInputs() {
+    var self = this;
+
+    var inputs = [];
+    var i;
+    for (i = 0; i < self.state.exercise.optNums; i++) {
+      inputs.push(React.createElement(
+        'span',
+        null,
+        React.createElement(TextInput, {
+          wrapperClass: 'form-group',
+          htmlFor: 'option' + i,
+          id: 'option' + i,
+          ref: 'option' + i,
+          key: i * 10,
+          name: 'answers-' + i,
+          label: self.state.exercise.options[0].label,
+          value: self.state.exercise.answers[i] || "",
+          onChange: self.setExerciseState,
+          placeholder: 'Add an option here' }),
+        React.createElement(Textarea, {
+          htmlFor: 'feedback' + i,
+          id: 'feedback' + i,
+          ref: 'feedback' + i,
+          key: i * 20,
+          label: 'Feedback to these answers when entered by a learner:',
+          wrapperClass: 'form-group',
+          name: 'feedback-' + i,
+          value: self.state.exercise.feedback[i] || "",
+          onChange: self.setExerciseState })
+      ));
+    }
+    return inputs;
+  },
+
   render: function render() {
+
     var classString = {};
     var radioClassString = {};
     for (var i = 0; i < 10; i++) {
@@ -946,6 +984,7 @@ var MultiChoiceCreation = React.createClass({
         radioClassString[i] = "hidden";
       }
     }
+
     return React.createElement(
       'div',
       { className: 'container' },
@@ -991,191 +1030,7 @@ var MultiChoiceCreation = React.createClass({
                   onChange: this.setExerciseState,
                   placeholder: 'Question' })
               ),
-              React.createElement(
-                'div',
-                { className: classString[0] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'option1' },
-                  React.createElement(
-                    'strong',
-                    null,
-                    this.state.exercise.options[0].label
-                  )
-                ),
-                React.createElement('input', { id: 'option1',
-                  className: 'form-control',
-                  name: 'answers-0',
-                  type: 'text',
-                  ref: 'option1',
-                  value: this.state.exercise.answers[0] || "",
-                  onChange: this.setExerciseState,
-                  placeholder: 'Add an option here' })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[1] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'feedback1' },
-                  'Feedback to this option when selected by learner:'
-                ),
-                React.createElement('textarea', { id: 'feedback1',
-                  className: 'form-control',
-                  name: 'feedback-0',
-                  rows: '2',
-                  ref: 'feedback1',
-                  value: this.state.exercise.feedback[0] || "",
-                  onChange: this.setExerciseState })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[2] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'option2' },
-                  React.createElement(
-                    'strong',
-                    null,
-                    this.state.exercise.options[1].label
-                  )
-                ),
-                React.createElement('input', { id: 'option2',
-                  className: 'form-control',
-                  name: 'answers-1',
-                  type: 'text',
-                  ref: 'option2',
-                  value: this.state.exercise.answers[1] || "",
-                  onChange: this.setExerciseState,
-                  placeholder: 'Add an option here' })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[3] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'feedback2' },
-                  'Feedback to this option when selected by learner:'
-                ),
-                React.createElement('textarea', { id: 'feedback2',
-                  name: 'feedback-1',
-                  className: 'form-control',
-                  rows: '2',
-                  value: this.state.exercise.feedback[1] || "",
-                  onChange: this.setExerciseState,
-                  ref: 'feedback2' })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[4] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'option3' },
-                  React.createElement(
-                    'strong',
-                    null,
-                    this.state.exercise.options[2].label
-                  )
-                ),
-                React.createElement('input', { id: 'option3',
-                  className: 'form-control',
-                  name: 'answers-2',
-                  type: 'text',
-                  ref: 'option3',
-                  value: this.state.exercise.answers[2] || "",
-                  onChange: this.setExerciseState,
-                  placeholder: 'Add an option here' })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[5] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'feedback3' },
-                  'Feedback to this option when selected by learner:'
-                ),
-                React.createElement('textarea', { id: 'feedback3',
-                  ref: 'feedback3',
-                  name: 'feedback-2',
-                  className: 'form-control',
-                  rows: '2',
-                  onChange: this.setExerciseState,
-                  value: this.state.exercise.feedback[2] || "" })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[6] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'option4' },
-                  React.createElement(
-                    'strong',
-                    null,
-                    this.state.exercise.options[3].label
-                  )
-                ),
-                React.createElement('input', { id: 'option4',
-                  className: 'form-control',
-                  name: 'answers-3',
-                  ref: 'option4',
-                  type: 'text',
-                  onChange: this.setExerciseState,
-                  value: this.state.exercise.answers[3] || "",
-                  placeholder: 'Add an option here' })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[7] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'feedback4' },
-                  'Feedback to this option when selected by learner:'
-                ),
-                React.createElement('textarea', { id: 'feedback4',
-                  ref: 'feedback4',
-                  name: 'feedback-3',
-                  className: 'form-control',
-                  rows: '2',
-                  onChange: this.setExerciseState,
-                  value: this.state.exercise.feedback[3] || "" })
-              ),
-              React.createElement(
-                'div',
-                { className: classString[8] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'option5' },
-                  React.createElement(
-                    'strong',
-                    null,
-                    'value=',
-                    this.state.exercise.options[4].value
-                  )
-                ),
-                React.createElement('input', { id: 'option5',
-                  className: 'form-control',
-                  name: 'answers-4',
-                  ref: 'option5',
-                  type: 'text',
-                  value: this.state.exercise.answers[4] || "" }),
-                'placeholder="Add an option here"/>'
-              ),
-              React.createElement(
-                'div',
-                { className: classString[9] },
-                React.createElement(
-                  'label',
-                  { htmlFor: 'feedback5' },
-                  'Feedback to this option when selected by learner:'
-                ),
-                React.createElement('textarea', { id: 'feedback5',
-                  ref: 'feedback5',
-                  name: 'feedback-4',
-                  className: 'form-control',
-                  rows: '2',
-                  onChange: this.setExerciseState,
-                  value: this.state.exercise.feedback[4] || "" })
-              ),
+              this.createInputs(),
               React.createElement(
                 'div',
                 { onChange: this.checkHandle, className: 'correct-answer-label' },
@@ -1290,7 +1145,7 @@ var MultiChoiceCreation = React.createClass({
 
 module.exports = MultiChoiceCreation;
 
-},{"../../actions":1,"../../stores/AuthStore":46,"../../stores/LessonConfigStore":48,"lodash":"lodash","react":"react","react-router":"react-router","react-select":71,"reflux":"reflux"}],12:[function(require,module,exports){
+},{"../../actions":1,"../../stores/AuthStore":46,"../../stores/LessonConfigStore":48,"./TextInput.jsx":15,"./Textarea.jsx":16,"lodash":"lodash","react":"react","react-router":"react-router","react-select":71,"reflux":"reflux"}],12:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -2074,7 +1929,8 @@ var TextInput = React.createClass({
     id: React.PropTypes.string,
     ref: React.PropTypes.string,
     placeholder: React.PropTypes.string,
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    key: React.PropTypes.number
   },
   render: function render() {
     return React.createElement(
@@ -2094,6 +1950,7 @@ var TextInput = React.createClass({
         name: this.props.name,
         type: 'text',
         ref: this.props.name,
+        key: this.props.key,
         value: this.props.value,
         onChange: this.props.onChange,
         placeholder: this.props.placeholder })
@@ -2118,7 +1975,8 @@ var Textarea = React.createClass({
     onChange: React.PropTypes.func.isRequired,
     id: React.PropTypes.string,
     ref: React.PropTypes.string,
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    key: React.PropTypes.number
   },
   render: function render() {
     return React.createElement(
@@ -2132,6 +1990,7 @@ var Textarea = React.createClass({
       React.createElement("textarea", { id: this.props.id,
         className: "form-control",
         name: this.props.name,
+        key: this.props.key,
         rows: "2",
         ref: this.props.name,
         value: this.props.value,

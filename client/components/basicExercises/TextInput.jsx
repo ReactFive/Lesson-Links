@@ -11,7 +11,7 @@ var TextInput = React.createClass({
     ref: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     value: React.PropTypes.string,
-    key: ReactPropTypes.number
+    key: React.PropTypes.number
   },
   render: function(){
     return (

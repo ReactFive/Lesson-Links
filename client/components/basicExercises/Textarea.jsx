@@ -9,7 +9,7 @@ var Textarea = React.createClass({
     id: React.PropTypes.string,
     ref: React.PropTypes.string,
     value: React.PropTypes.string,
-    key: ReactPropTypes.number
+    key: React.PropTypes.number
   },
   render: function(){
     return (

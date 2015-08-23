@@ -25,13 +25,7 @@ var dependencies = [
   'reflux',
   'react',
   'react-router',
-  'video-js',
-  'vjs-youtube',
-  'lodash',
-  'jQuery',
-  'moment',
-  'toastr',
-  'sweetalert'
+  'lodash'
 ];
 
 /*
