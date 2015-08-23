@@ -1,6 +1,6 @@
 var React = require('react');
 var axios = require('axios');
-var rootUrl = 'https://lesson-links.herokuapp.com';
+var rootUrl = 'http://localhost:3000';
 
 module.exports.login = function(email, password) {
   var url = rootUrl + '/api/login';
