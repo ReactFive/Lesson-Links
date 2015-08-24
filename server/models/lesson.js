@@ -104,6 +104,10 @@ var lessonSchema = new mongoose.Schema ({
       default : null
     }
   },
+  studentData : {
+    started   : [{type : mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }],
+    finished  : [{type : mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }]
+  },
   exercises : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Exercise'}]
 });
 
