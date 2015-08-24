@@ -92,7 +92,8 @@ exports.getLessonByUrl = function(req, res, next) {
             User.findById(req.user._id, function(err, user){
               students.push({
                 id : req.user._id,
-                name : user.local.name
+                name : user.local.name,
+                timeWatched : 0
               })
               lesson.save()
             })
