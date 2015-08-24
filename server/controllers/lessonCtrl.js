@@ -19,7 +19,9 @@ exports.recordExerciseResult = function(req, res, next) {
   var lessonId = req.params.id;
   console.log("inside recordExerciseResult");
   console.log("req.user", req.user);
+  console.log("req.body", req.body);
   var studentId = req.user.id;
+  res.sendStatus(200);
   //Lesson.findByIdAndUpdate(lessonId, )
 }
 

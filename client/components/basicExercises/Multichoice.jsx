@@ -20,7 +20,7 @@ var Multichoice = React.createClass({
   },
 
   handleClick: function(clickedOpt){
-    console.log(clickedOpt);
+    this.setState({lastChoice: clickedOpt});
     if(this.state.correctOption === clickedOpt) {
       console.log("correct");
       this.setState({
@@ -38,6 +38,15 @@ var Multichoice = React.createClass({
   
   retry: function() {
     this.setState({outcome : null})
+  },
+
+  onComplete: function() {
+    var result = {
+      answer : this.state.lastChoice,
+      correct : this.state.lastChoice === this.state.correctOption
+    }
+
+    this.props.onComplete(result);
   },
 
   render: function() {
@@ -83,7 +92,7 @@ var Multichoice = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
+                    <button className="btn btn-success" onClick={this.onComplete}>Continue Video</button>
                     <button className="btn btn-primary try-again-btn" onClick={this.retry}>Try Again</button>
                   </div>
                 </div>
@@ -109,7 +118,7 @@ var Multichoice = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
+                    <button className="btn btn-success" onClick={this.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}

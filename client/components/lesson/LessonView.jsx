@@ -52,8 +52,15 @@ var LessonView = React.createClass({
     this.setState({exercise: exercise});
   },
 
-  onExerciseCompleted: function() {
+  onExerciseCompleted: function(result) {
+    
+    // send result to server
+    Actions.submitExerciseResult(this.state.exercise, result);
+
+    // clear exercise state in lesson
     this.setState({exercise: null});
+
+    // resume video player
     var player = videojs('attachmentVideo');
     player.play();
   },
