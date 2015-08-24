@@ -9,13 +9,14 @@ var Multichoice = React.createClass({
 
   getInitialState: function(){
     var loadedExercise = this.props.exercise || {};
+    var ex = loadedExercise.exercise || {};
     console.log(loadedExercise);
 
     return {
-      question: loadedExercise.question || "No question provided",
-      answers: loadedExercise.answers || [],
-      feedback: loadedExercise.feedback || [],
-      correctOption: +loadedExercise.correctOption || 0,
+      question: ex.question || "No question provided",
+      answers: ex.answers || [],
+      feedback: ex.feedback || [],
+      correctOption: +ex.correctOption || 0,
     };
   },
 

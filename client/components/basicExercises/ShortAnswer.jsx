@@ -6,14 +6,17 @@ var Link = Router.Link;
 var ShortAnswer = React.createClass({
 
   getInitialState: function(){
+    var loadedExercise = this.props.exercise || {};
+    var ex = loadedExercise.exercise || {};
+    console.log(loadedExercise);
     return {
       exercise: {
-        question: "What do the stars represent on the US flag?",
-        bestAnswers: "(states|50states|fiftystates)",
-        bestFeedback: "Well done",
-        altAnswers: "(nations|municipalities)",
-        altFeedback: "Uuuh, your close but the wrong scale",
-        wrongFeedback: "oh man, are you kidding?"
+        question: ex.question || "no question was provided" ,
+        bestAnswers: ex.bestAnswers || "",
+        bestFeedback: ex.bestFeedback || "",
+        altAnswers: ex.altAnswers || null,
+        altFeedback: ex.altFeedback || null,
+        wrongFeedback: ex.altFeedback || ""
       },
       answer: "",
       outcome: 0
@@ -45,7 +48,6 @@ var ShortAnswer = React.createClass({
 
   render: function() {
     var view;
-    var prompt = this.state.statement;
     var title = this.state.title;
 
     switch (this.state.outcome) {

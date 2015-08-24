@@ -47,9 +47,9 @@ var ShortAnswerCreation = React.createClass({
       exercise: {
         question: ex.question || "",
         bestAnswers: ex.bestAnswers || "",
-        bestFeedback: ex.bestFeedback || "",
+        bestFeedback: ex.bestFeedback || "No feedback provided",
         altAnswers: ex.altAnswers || "",
-        altFeedback: ex.altFeedback || ""
+        altFeedback: ex.altFeedback || "No feedback provided"
       },
       _id: loadedState._id || undefined,
       updating: !!updating

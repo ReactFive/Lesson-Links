@@ -31,7 +31,7 @@ var VideoPlayer = React.createClass({
       var comments = this.state.lesson.comments,
           exercises = this.state.lesson.exercises;
       exercises.forEach(function(exerciseInfo) {
-        exerciseInfo.text = exerciseInfo.exercise.type;
+        exerciseInfo.text = exerciseInfo.type;
       });
 
       var player = this.videoSetup(_.union(comments, exercises));

@@ -8,14 +8,16 @@ var Route = Router.Route;
 var TrueFalse = React.createClass({
 
   getInitialState: function() {
-    var loadedExercise = this.props.exercise;
+    var loadedExercise = this.props.exercise || {};
+    var ex = loadedExercise.exercise || {};
+    console.log(loadedExercise);
 
     return {
       exercise: {
-        question: loadedExercise.question || "No question provided",
-        correctOption: loadedExercise.correctOption || "No correct answer chosen",
-        feedbackTrue: loadedExercise.feedbackTrue || "No feedback provided",
-        feedbackFalse: loadedExercise.feedbackFalse || "No feedback provided"
+        question: ex.question || "No question provided",
+        correctOption: ex.correctOption || "No correct answer chosen",
+        feedbackTrue: ex.feedbackTrue || "No feedback provided",
+        feedbackFalse: ex.feedbackFalse || "No feedback provided"
       },
       outcome: null
     };
