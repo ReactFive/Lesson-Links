@@ -15,6 +15,14 @@ exports.getAllLessons = function(req, res) {
   });
 };
 
+exports.recordExerciseResult = function(req, res, next) {
+  var lessonId = req.params.id;
+  console.log("inside recordExerciseResult");
+  console.log("req.user", req.user);
+  var studentId = req.user.id;
+  //Lesson.findByIdAndUpdate(lessonId, )
+}
+
 exports.getLessonByUrl = function(req, res, next) {
   var lessonUrl = req.params.url;
   Lesson.findOne({'lesson_url':lessonUrl})
