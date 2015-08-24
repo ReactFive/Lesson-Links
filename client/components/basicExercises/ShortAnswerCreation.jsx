@@ -18,16 +18,17 @@ var ShortAnswerCreation = React.createClass({
 
   getInitialState: function() {
     var loadedState = this.props.exerciseState || {};
-    var updating = Object.keys(loadedState).length;
+    var ex = loadedState.exercise || {};
+    var updating = Object.keys(ex).length;
     return {
       exercise: {
-        question: loadedState.question || "",
-        bestAnswers: loadedState.bestAnswers || "",
-        bestFeedback: loadedState.bestFeedback || "",
-        altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || ""
+        question: ex.question || "",
+        bestAnswers: ex.bestAnswers || "",
+        bestFeedback: ex.bestFeedback || "",
+        altAnswers: ex.altAnswers || "",
+        altFeedback: ex.altFeedback || ""
       },
-      id: loadedState.id || undefined,
+      _id: loadedState._id || undefined,
       updating: !!updating
     };
   },
@@ -39,17 +40,18 @@ var ShortAnswerCreation = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    var loadedState = nextProps.exerciseState;
-    var updating = Object.keys(loadedState).length;
+    var loadedState = nextProps.exerciseState || {};
+    var ex = loadedState.exercise || {};
+    var updating = Object.keys(ex).length;
     this.setState({
       exercise: {
-        question: loadedState.question || "",
-        bestAnswers: loadedState.bestAnswers || "",
-        bestFeedback: loadedState.bestFeedback || "",
-        altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || ""
+        question: ex.question || "",
+        bestAnswers: ex.bestAnswers || "",
+        bestFeedback: ex.bestFeedback || "",
+        altAnswers: ex.altAnswers || "",
+        altFeedback: ex.altFeedback || ""
       },
-      id: loadedState.id || undefined,
+      _id: loadedState._id || undefined,
       updating: !!updating
     });
   },
@@ -134,6 +136,7 @@ var ShortAnswerCreation = React.createClass({
     exerciseObj.type = "shortanswer";
     exerciseObj.time = videojs("#attachmentVideo").currentTime();
     exerciseObj.exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
+    exerciseObj._id = this.state._id;
 
     if (this.state.exercise.altAnswers.length) {
       exerciseObj.exercise.altAnswers = createRegex(this.state.exercise.altAnswers);
@@ -166,7 +169,7 @@ var ShortAnswerCreation = React.createClass({
     event.preventDefault();
     console.log("cancel clicked");
     this.props.onComplete();
-  },
+  }
 
 });
 

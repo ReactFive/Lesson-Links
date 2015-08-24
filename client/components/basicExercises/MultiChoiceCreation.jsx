@@ -18,15 +18,16 @@ var MultiChoiceCreation = React.createClass({
 
   getInitialState: function(){
     var loadedState = this.props.exerciseState || {};
-    var updating = Object.keys(loadedState).length;
+    var ex = loadedState.exercise || {};
+    var updating = Object.keys(ex).length;
     return {
       exercise: {
-        question: loadedState.question || "",
-        numbs: loadedState.numbs || 6,
-        optNumbs: loadedState.optNumbs || 3,
-        correctOption: loadedState.correctOption || null,
-        answers: loadedState.answers ||["","","","",""],
-        feedback: loadedState.feedback || ["","","","",""],
+        question: ex.question || "",
+        numbs: ex.numbs || 6,
+        optNumbs: ex.optNumbs || 3,
+        correctOption: ex.correctOption || null,
+        answers: ex.answers ||["","","","",""],
+        feedback: ex.feedback || ["","","","",""],
         options: [
           {value: '1', label: 'Option 1'},
           {value: '2', label: 'Option 2'},
@@ -35,22 +36,23 @@ var MultiChoiceCreation = React.createClass({
           {value: '5', label: 'Option 5'}
         ]
       },
-      id: loadedState.id || undefined,
+      _id: loadedState._id || undefined,
       updating: !!updating
     }
   },
 
   componentWillReceiveProps: function(nextProps) {
     var loadedState = nextProps.exerciseState;
-    var updating = Object.keys(loadedState).length;
+    var ex = loadedState.exercise || {};
+    var updating = Object.keys(ex).length;
     this.setState({
       exercise: {
-        question: loadedState.question || "",
-        numbs: loadedState.numbs || 6,
-        optNumbs: loadedState.optNumbs || 3,
-        correctOption: loadedState.correctOption || null,
-        answers: loadedState.answers ||["","","","",""],
-        feedback: loadedState.feedback || ["","","","",""],
+        question: ex.question || "",
+        numbs: ex.numbs || 6,
+        optNumbs: ex.optNumbs || 3,
+        correctOption: ex.correctOption || null,
+        answers: ex.answers ||["","","","",""],
+        feedback: ex.feedback || ["","","","",""],
         options: [
           {value: '1', label: 'Option 1'},
           {value: '2', label: 'Option 2'},
@@ -59,7 +61,7 @@ var MultiChoiceCreation = React.createClass({
           {value: '5', label: 'Option 5'}
         ]
       },
-      id: loadedState.id || undefined,
+      _id: loadedState._id || undefined,
       updating: !!updating
     });
   },
@@ -200,7 +202,7 @@ var MultiChoiceCreation = React.createClass({
     exerciseObj.exercise = _.cloneDeep(this.state.exercise);
     exerciseObj.time = time;
     exerciseObj.type = "multiplechoice";
-    exerciseObj.id = this.state.id;
+    exerciseObj._id = this.state._id;
     exerciseObj.exercise.answers = removeBlanks(exerciseObj.exercise.answers);
     exerciseObj.exercise.feedback = removeBlanks(exerciseObj.exercise.feedback);
 

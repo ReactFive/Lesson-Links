@@ -16,11 +16,9 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
-      console.log('fetched lesson')
-      console.log('res ',res.data)
       self.lesson = res.data;
       self.trigger(self.lesson);
-      self.followLesson(payload)
+      self.followLesson(payload);
     })
     .catch(function(res){
       payload.sourceComponent.transitionTo('/404');
@@ -32,6 +30,7 @@ module.exports = Reflux.createStore({
   },
 
   triggerLessonStore: function(){
+    console.log(this.lesson);
     this.trigger(this.lesson);
   },
 

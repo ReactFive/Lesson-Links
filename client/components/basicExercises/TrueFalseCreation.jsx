@@ -16,38 +16,39 @@ var TrueFalseCreation = React.createClass({
 
   getInitialState: function() {
     var loadedState = this.props.exerciseState || {};
-    var updating = Object.keys(loadedState).length;
+    var ex = loadedState.exercise || {};
+    var updating = Object.keys(ex).length;
     return {
       exercise: {
-        question: loadedState.question || "",
-        correctOption: loadedState.correctOption || undefined,
-        feedbackTrue: loadedState.feedbackTrue || "",
-        feedbackFalse: loadedState.feedbackFalse || ""
+        question: ex.question || "",
+        correctOption: ex.correctOption || undefined,
+        feedbackTrue: ex.feedbackTrue || "",
+        feedbackFalse: ex.feedbackFalse || ""
       },
-      id: loadedState.id || undefined,
+      _id: loadedState._id || undefined,
       updating: !!updating
     };
   },
 
   componentWillReceiveProps: function(nextProps) {
     var loadedState = nextProps.exerciseState || {};
-    var updating = Object.keys(loadedState).length;
+    var ex = loadedState.exercise || {};
+    var updating = Object.keys(ex).length;
     console.log(loadedState);
     this.setState({
       exercise: {
-        question: loadedState.question || "",
-        correctOption: loadedState.correctOption || undefined,
-        feedbackTrue: loadedState.feedbackTrue || "",
-        feedbackFalse: loadedState.feedbackFalse || ""
+        question: ex.question || "",
+        correctOption: ex.correctOption || undefined,
+        feedbackTrue: ex.feedbackTrue || "",
+        feedbackFalse: ex.feedbackFalse || ""
       },
-      id: loadedState.id || undefined,
+      _id: loadedState._id || undefined,
       updating: !!updating
     });
   },
 
   setExerciseState: function(event){
     var field = event.target.name;
-    console.log(field, event.target.value)
     this.state.exercise[field] = event.target.value;
     return this.setState({exercise: this.state.exercise});
   },
@@ -147,7 +148,7 @@ var TrueFalseCreation = React.createClass({
     exerciseObj.exercise = _.cloneDeep(this.state.exercise);
     exerciseObj.type = "truefalse";
     exerciseObj.time = videojs("#attachmentVideo").currentTime();
-    exerciseObj.id = this.state.id;
+    exerciseObj._id = this.state._id;
 
     if (exerciseObj.exercise.question.length && exerciseObj.exercise.correctOption !== undefined) {
       if (!this.state.updating) {

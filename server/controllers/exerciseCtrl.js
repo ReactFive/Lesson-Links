@@ -3,7 +3,7 @@ var Exercise = require('mongoose').model('Exercise');
 var Lesson = require('mongoose').model('Lesson');
 
 exports.addExercise = function(req, res) {
-
+  console.log("in create exercise handler, here is body: ", req.body);
   var lessonId = req.body.lesson_id;
   console.log("lesson ID = ", lessonId, req.body);
   var newExercise = new Exercise({
@@ -39,24 +39,21 @@ exports.addExercise = function(req, res) {
 exports.updateExercise = function(req, res){
   var exerciseId = req.params.id;
   console.log("this is the body", req.body);
-  Exercise.findOne({'_id': exerciseId})
-    .exec(function(err, exerciseObj) {
-      if (!exerciseObj) {
-        err = new Error("That exercise does not exist");
-        res.status(404).send({reason: err.toString()});
-      }
-      else if (err) {
-        res.status(500);
-        return res.send(err);
+  Exercise.findByIdAndUpdate(exerciseId,
+      {$set:
+        {
+         type: req.body.type,
+         time: req.body.time,
+         exercise: req.body.exercise
+        }
+      },
+  {}, function(err, updatedExercise){
+      if (err) {
+        err = new Error("There was an error saving your exercise");
+        res.status(500).send({reason: err.toString()});
       } else {
-        exerciseObj.set({exercise : req.body.exercise});
-        exerciseObj.save(function(err, updatedExercise){
-          if(err) {
-            res.status(500);
-          } else {
-            res.status(200).json(updatedExercise);
-          }
-        });
+        console.log("updated exercise saved: ", updatedExercise);
+        res.status(201).json(updatedExercise);
       }
     });
 };

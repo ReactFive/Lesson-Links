@@ -46,11 +46,9 @@ var LessonConfiguration = React.createClass({
   },
 
   loadExercise: function(exerciseInfo) {
-    var exercise = exerciseInfo.exercise;
-    exercise.id = exerciseInfo._id;
     this.setState({
-      editing: exercise.type,
-      exerciseState : exercise
+      editing: exerciseInfo.type,
+      exerciseState : exerciseInfo
     })
   },
 
@@ -61,7 +59,7 @@ var LessonConfiguration = React.createClass({
           <li className="list-group-item col-md-8">
             <VideoPlayer />
           </li>
-          {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
+          {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exerciseObjects={this.state.lesson.exercises}/>}
 
           <li className="list-group-item col-md-12">
             {!this.state.editing &&
