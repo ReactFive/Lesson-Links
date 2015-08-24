@@ -47,13 +47,7 @@ exports.getLessonByUrl = function(req, res, next) {
       return res.send(err);
     //Lesson found and allowed to be published
     } else {
-      console.log('req :', req.user._id, 'teacher :', lesson.teacher.id)
-      console.log(req.user._id.toString() === lesson.teacher.id.toString())
       if (req.user._id.toString() === lesson.teacher.id.toString()) {
-        // Lesson.findOne({'lesson_url':lessonUrl})
-        // .populate('studentData.started')
-        // .deepPopulate('studentData.finished')
-        
         Lesson.populate(lesson, {
           path: 'studentData.started',
           select:'local.name',
