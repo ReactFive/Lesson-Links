@@ -15,30 +15,23 @@ var LessonConfigStore = Reflux.createStore({
     this.trigger(this.lesson);
   },
 
-  createExercise: function(exercise) {
-    var newExercise = {
-      exercise : exercise,
-      time : exercise.time,
-      text : exercise.type,
-      lesson_id : this.lesson._id
-    };
+  onCreateExercise: function(exerciseObj) {
+    exerciseObj.lesson_id = this.lesson.id;
     
-    this.lesson.exercises.push(newExercise);
-    console.log("sending exercise to database", newExercise);
-    Api.createExercise(newExercise)
-    .then(this.triggerConfigStore)
+    this.lesson.exercises.push(exerciseObj);
+    console.log("sending exercise to database", exerciseObj);
+    Api.createExercise(exerciseObj)
+    .then(this.triggerConfigStore);
   },
 
-  onUpdateExercise: function(exercise) {
-    var updatedExercise = {
-      exercise: exercise,
-      time: exercise.time,
-      text: exercise.type
-    };
+  onUpdateExercise: function(exerciseObj) {
+    exerciseObj.lesson_id = this.lesson._id;
 
-    this.updateExerciseOptimistically(exercise.id, updatedExercise);
+    console.log("here is the exercise we will update: ", exerciseObj);
 
-    Api.updateExercise(updatedExercise, exercise.id)
+    this.updateExerciseOptimistically(exerciseObj.id, exerciseObj);
+
+    Api.updateExercise(exerciseObj, exerciseObj.id)
        .then(function(err, res){
          this.triggerConfigStore();
        });

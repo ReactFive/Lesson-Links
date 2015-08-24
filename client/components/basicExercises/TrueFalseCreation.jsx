@@ -22,8 +22,9 @@ var TrueFalseCreation = React.createClass({
         question: loadedState.question || "",
         correctOption: loadedState.correctOption || undefined,
         feedbackTrue: loadedState.feedbackTrue || "",
-        feedbackFalse: loadedState.feedbackFalse || "",
+        feedbackFalse: loadedState.feedbackFalse || ""
       },
+      id: loadedState.id || undefined,
       updating: !!updating
     };
   },
@@ -37,8 +38,9 @@ var TrueFalseCreation = React.createClass({
         question: loadedState.question || "",
         correctOption: loadedState.correctOption || undefined,
         feedbackTrue: loadedState.feedbackTrue || "",
-        feedbackFalse: loadedState.feedbackFalse || "",
+        feedbackFalse: loadedState.feedbackFalse || ""
       },
+      id: loadedState.id || undefined,
       updating: !!updating
     });
   },
@@ -141,21 +143,19 @@ var TrueFalseCreation = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
 
-    var exercise = {};
-    exercise.type = "truefalse";
-    exercise.time = videojs("#attachmentVideo").currentTime();
-    exercise.question = this.state.exercise.question;
-    exercise.feedbackTrue = this.state.exercise.feedbackTrue;
-    exercise.feedbackFalse = this.state.exercise.feedbackFalse;
-    exercise.correctOption = this.state.exercise.correctOption;
+    var exerciseObj = {};
+    exerciseObj.exercise = _.cloneDeep(this.state.exercise);
+    exerciseObj.type = "truefalse";
+    exerciseObj.time = videojs("#attachmentVideo").currentTime();
+    exerciseObj.id = this.state.id;
 
-    if (exercise.question.length && exercise.correctOption !== undefined) {
+    if (exerciseObj.exercise.question.length && exerciseObj.exercise.correctOption !== undefined) {
       if (!this.state.updating) {
-        Actions.createExercise(exercise);
+        Actions.createExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your new exercise has been created');
       } else {
-        Actions.updateExercise(exercise);
+        Actions.updateExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your exercise has been updated');
       }

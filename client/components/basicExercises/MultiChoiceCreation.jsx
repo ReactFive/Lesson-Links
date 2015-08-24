@@ -35,6 +35,7 @@ var MultiChoiceCreation = React.createClass({
           {value: '5', label: 'Option 5'}
         ]
       },
+      id: loadedState.id || undefined,
       updating: !!updating
     }
   },
@@ -58,6 +59,7 @@ var MultiChoiceCreation = React.createClass({
           {value: '5', label: 'Option 5'}
         ]
       },
+      id: loadedState.id || undefined,
       updating: !!updating
     });
   },
@@ -129,7 +131,7 @@ var MultiChoiceCreation = React.createClass({
       radioOptions.push(
           <label htmlFor={'correct'+i+1} className="radio-inline">
             <input ref={'correct'+i+1} type="radio" name="correct" value={i}
-                   defaultChecked={self.state.exercise.correctOption === i} />
+                   defaultChecked={self.state.exercise.correctOption === i.toString()} />
             {i+1}
           </label>
       )
@@ -193,21 +195,22 @@ var MultiChoiceCreation = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
 
+    var exerciseObj = {};
     var time = videojs("#attachmentVideo").currentTime();
+    exerciseObj.exercise = _.cloneDeep(this.state.exercise);
+    exerciseObj.time = time;
+    exerciseObj.type = "multiplechoice";
+    exerciseObj.id = this.state.id;
+    exerciseObj.exercise.answers = removeBlanks(exerciseObj.exercise.answers);
+    exerciseObj.exercise.feedback = removeBlanks(exerciseObj.exercise.feedback);
 
-    var exercise = _.cloneDeep(this.state.exercise);
-    exercise.time = time;
-    exercise.type = "multiplechoice";
-    exercise.answers = removeBlanks(exercise.answers);
-    exercise.feedback = removeBlanks(exercise.feedback);
-
-    if (exercise.question.length && exercise.options.length) {
+    if (exerciseObj.exercise.question.length && exerciseObj.exercise.options.length) {
       if (!this.state.updating) {
-        Actions.createExercise(exercise);
+        Actions.createExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your new exercise has been created');
       } else {
-        Actions.updateExercise(exercise);
+        Actions.updateExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your exercise has been updated');
       }

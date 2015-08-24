@@ -25,9 +25,9 @@ var ShortAnswerCreation = React.createClass({
         bestAnswers: loadedState.bestAnswers || "",
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || "",
-        id: loadedState.id || undefined
+        altFeedback: loadedState.altFeedback || ""
       },
+      id: loadedState.id || undefined,
       updating: !!updating
     };
   },
@@ -47,9 +47,9 @@ var ShortAnswerCreation = React.createClass({
         bestAnswers: loadedState.bestAnswers || "",
         bestFeedback: loadedState.bestFeedback || "",
         altAnswers: loadedState.altAnswers || "",
-        altFeedback: loadedState.altFeedback || "",
-        id: loadedState.id || undefined
+        altFeedback: loadedState.altFeedback || ""
       },
+      id: loadedState.id || undefined,
       updating: !!updating
     });
   },
@@ -129,27 +129,25 @@ var ShortAnswerCreation = React.createClass({
 
     event.preventDefault();
 
-    var exercise = {};
-    exercise.type = "shortanswer";
-    exercise.time = videojs("#attachmentVideo").currentTime();
-    exercise.question = this.state.exercise.question;
-    exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
-    exercise.bestFeedback = this.state.exercise.bestFeedback;
-    exercise.id = this.state.exercise.id || undefined;
+    var exerciseObj = {};
+    exerciseObj.exercise = this.state.exercise;
+    exerciseObj.type = "shortanswer";
+    exerciseObj.time = videojs("#attachmentVideo").currentTime();
+    exerciseObj.exercise.bestAnswers = createRegex(this.state.exercise.bestAnswers);
 
     if (this.state.exercise.altAnswers.length) {
-      exercise.altAnswers = createRegex(this.state.exercise.altAnswers);
-      exercise.altFeedback = this.state.exercise.altFeedback;
+      exerciseObj.exercise.altAnswers = createRegex(this.state.exercise.altAnswers);
+      exerciseObj.exercise.altFeedback = this.state.exercise.altFeedback;
     }
 
     if (this.state.exercise.question.length && this.state.exercise.bestAnswers.length) {
       if(!this.state.updating){
-        Actions.createExercise(exercise);
+        Actions.createExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your new exercise has been created');
       } else {
-        console.log(exercise.id);
-        Actions.updateExercise(exercise);
+        console.log(exerciseObj.id);
+        Actions.updateExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your exercise has been updated');
       }
@@ -158,7 +156,7 @@ var ShortAnswerCreation = React.createClass({
     }
 
     function createRegex(value){
-      var strippedOfSpacesAndPunc = value.replace(/ |\,|\.|\;/g, '').toLowerCase();
+      var strippedOfSpacesAndPunc = value.replace(/ |\,|\.|\;|\)|\(/g, '').toLowerCase();
       return "(" + strippedOfSpacesAndPunc + ")";
     }
 
