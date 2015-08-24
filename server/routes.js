@@ -15,7 +15,6 @@ module.exports = function(app) {
   app.get('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.getLessonByUrl);
   app.post('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.createLesson);
   app.put('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.updateLesson);
-  app.put('/api/lesson/finished/:url', auth.requiresApiLogin, LessonCtrl.finishedLesson)
 
   /**
    * USER API

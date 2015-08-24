@@ -59,19 +59,18 @@ exports.getUser = function(req, res){
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
       user.local = _.omit(user.local, 'password')
+
+      for (var i = 0; i < user.lessons.length; i++) {
+        if (!(req.user._id.toString() === user.lessons[i].teacher.id.toString())) {
+          _.filter(user.lessons.students, function(student){
+            return (student.id.toString() === user.lessons[i].teacher.id.toString())
+          })
+        }
+      }
       res.status(200).send({user:user})
-
-      // for (var i = 0; i < user.lessons.length; i++) {
-        //Ensures the callback in populate points to the right lesson
-
-        // if (req.user._id.toString() === user.lessons[i].teacher.id.toString()) {
-          //If user is the teacher, populates the lesson with any data on students        }
-      // }
-
-  // } else {
-  //   res.sendStatus(401)
-  })}
-} ;
+    })
+  }
+};
 
 exports.updateUser = function(req, res){
   console.log('Updating User')
