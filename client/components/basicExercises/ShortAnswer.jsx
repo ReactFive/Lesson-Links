@@ -13,10 +13,10 @@ var ShortAnswer = React.createClass({
       exercise: {
         question: ex.question || "no question was provided" ,
         bestAnswers: ex.bestAnswers || "",
-        bestFeedback: ex.bestFeedback || "",
+        bestFeedback: ex.bestFeedback || "no feedback provided",
         altAnswers: ex.altAnswers || null,
         altFeedback: ex.altFeedback || null,
-        wrongFeedback: ex.altFeedback || ""
+        wrongFeedback: ex.altFeedback || "no feedback provided"
       },
       answer: "",
       outcome: 0
