@@ -15,18 +15,6 @@ exports.getAllLessons = function(req, res) {
   });
 };
 
-exports.finishedLesson = function(req, res, next) {
-  var lessonUrl = req.params.url;
-  Lesson.findOne({'lesson_url':lessonUrl})
-  .exec(function(err, lesson){
-    if(lesson.finished.indexOf(req.user._id) === -1){
-      lesson.finished.push(req.user._id)
-      lesson.save()
-    }
-  })
-  res.sendStatus(200)
-}
-
 exports.getLessonByUrl = function(req, res, next) {
   var lessonUrl = req.params.url;
   Lesson.findOne({'lesson_url':lessonUrl})
@@ -48,7 +36,6 @@ exports.getLessonByUrl = function(req, res, next) {
     //Lesson found and allowed to be published
     } else {
       if (req.user._id.toString() === lesson.teacher.id.toString()) {
-        lesson.deepPopulate('students')
         res.status(200).send(lesson);
       } else {
         //Check if it is the first time the student has fetched the lesson
@@ -56,7 +43,7 @@ exports.getLessonByUrl = function(req, res, next) {
           var students = lesson.students
           var index = -1
           for (var i = 0; i < students.length; i++) {
-            if (students[i].id === req.user._id) {
+            if (students[i].id.toString() === req.user._id.toString()) {
               return index = i;
             }
           }
@@ -70,7 +57,7 @@ exports.getLessonByUrl = function(req, res, next) {
             })
           }
         }
-        lesson = _.omit(lesson, 'studentData')
+        lesson = _.omit(lesson, 'students')
         res.status(200).send(lesson);
       }
     }
