@@ -15,6 +15,18 @@ exports.getAllLessons = function(req, res) {
   });
 };
 
+exports.finishedLesson = function(req, res, next) {
+  var lessonUrl = req.params.url;
+  Lesson.findOne({'lesson_url':lessonUrl})
+  .exec(function(err, lesson){
+    if(lesson.finished.indexOf(req.user._id) === -1){
+      lesson.finished.push(req.user._id)
+      lesson.save()
+    }
+  })
+  res.sendStatus(200)
+}
+
 exports.getLessonByUrl = function(req, res, next) {
   var lessonUrl = req.params.url;
   Lesson.findOne({'lesson_url':lessonUrl})
@@ -28,27 +40,41 @@ exports.getLessonByUrl = function(req, res, next) {
     }
     //Check if user has decided to publish lesson
     if (!lesson.publish) {
-      res.status(401).send('Lesson not published')
+      return res.status(401).send('Lesson not published')
     }
     if(err) {
       res.status(500);
       return res.send(err);
     //Lesson found and allowed to be published
     } else {
-      if (req.user._id === lesson.teacher.id) {
-        lesson.studentData.populate('started finished')
-        .exec(function(err, lesson){
-          res.status(200).send(lesson);
-        })
+      console.log('req :', req.user._id, 'teacher :', lesson.teacher.id)
+      console.log(req.user._id.toString() === lesson.teacher.id.toString())
+      if (req.user._id.toString() === lesson.teacher.id.toString()) {
+        // Lesson.findOne({'lesson_url':lessonUrl})
+        // .populate('studentData.started')
+        // .deepPopulate('studentData.finished')
+        
+        Lesson.populate(lesson, {
+          path: 'studentData.started',
+          select:'local.name',
+          model: User}, function(err, lesson){
+            Lesson.populate(lesson, {
+              path: 'studentData.finished',
+              select:'local.name',
+              model: User
+            }, function(err, lesson){
+              console.log(lesson)
+              res.status(200).send(lesson);
+            }
+            )
+          }
+        )
       } else {
         //Check if it is the first time the student has fetched the lesson
         if(lesson.studentData && lesson.studentData.started.indexOf(req.user._id) === -1){
           console.log('test5')
-          Lesson.findOne({'lesson_url':lessonUrl})
-          .exec(function(err, lesson){
-            lesson.studentData.started.push(req.user._id)
-            lesson.save()
-          })
+          lesson.studentData.started.push(req.user._id)
+          lesson.save()
         }
         lesson = _.omit(lesson, 'studentData')
         res.status(200).send(lesson);

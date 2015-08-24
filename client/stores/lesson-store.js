@@ -27,6 +27,10 @@ module.exports = Reflux.createStore({
     })
   },
 
+  finishedLesson : function(){
+    Api.finishedLesson(this.lesson)
+  },
+
   triggerLessonStore: function(){
     this.trigger(this.lesson);
   },

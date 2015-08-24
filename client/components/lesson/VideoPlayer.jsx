@@ -50,7 +50,13 @@ var VideoPlayer = React.createClass({
     var self = this;
 
     // initialize video.js
-    var player = videojs('attachmentVideo');
+    var player = videojs('attachmentVideo').ready(function(){
+      player.on('ended', function(){
+        alert ("I have triggered");
+      })
+    })
+    
+
     // setup markers
     player.markers({
       markers: comments,
