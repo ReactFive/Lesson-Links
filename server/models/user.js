@@ -53,7 +53,9 @@ userSchema.methods.validPassword = function(password, callback) {
   });
 };
 
-userSchema.plugin(deepPopulate);
+userSchema.plugin(deepPopulate, {
+  whiteList : ['local.password']
+});
 
 var User = mongoose.model('User', userSchema);
 
