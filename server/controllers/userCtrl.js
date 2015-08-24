@@ -55,12 +55,43 @@ exports.getUser = function(req, res){
     User
     .findById(req.user._id)
     .deepPopulate('lessons.exercises')
-    .exec(
-    function(err, user){
+    .exec(function(err, user){
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
       user.local = _.omit(user.local, 'password')
-      res.status(200).send({user:user})
+
+      for (var i = 0; i < user.lessons.length; i++) {
+        //Ensures the callback in populate points to the right lesson
+        let j=i;
+
+        if (req.user._id.toString() === user.lessons[i].teacher.id.toString()) {
+          //If user is the teacher, populates the lesson with any data on students
+          var lesson = user.lessons[i]
+          Lesson.populate(lesson, {
+            path: 'studentData.started',
+            select:'local.name',
+            model: User}, function(err, updatedLesson){
+              if(err){console.log(err)}
+              Lesson.populate(updatedLesson, {
+                path: 'studentData.finished',
+                select:'local.name',
+                model: User
+              }, function(err, updatedLesson){
+                if(err){console.log(err)}
+                user.lessons[j] = updatedLesson;
+                //Waits for the last lesson to be populated before returning the user object
+                if (j === user.lessons.length-1) {
+                  res.status(200).send({user:user})
+                }
+              })
+            }
+          )
+        //Waits for the last lesson to be populated before returning the user object
+        } else if (j === user.lessons.length-1) {
+          res.status(200).send({user:user})
+        }
+      }
+
     })
   } else {
     res.sendStatus(401)
