@@ -31,6 +31,11 @@ module.exports.updateLesson = function(lesson) {
   return axios.put(url, lesson);
 };
 
+module.exports.finishedLesson = function(lesson) {
+  var url  = rootUrl + '/api/lesson/finished' + lesson.lesson_url;
+  return axios.put(url, lesson);
+}
+
 module.exports.createLesson = function(lesson) {
   var url  = rootUrl + '/api/lesson/' + lesson.lesson_url;
   return axios.post(url, lesson);

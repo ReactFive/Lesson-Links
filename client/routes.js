@@ -18,7 +18,6 @@ var ExerciseTrueFalse = require('./components/basicExercises/TrueFalse.jsx');
 var ExerciseShortAnswer = require('./components/basicExercises/ShortAnswer.jsx');
 var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('./components/basicExercises/TrueFalseCreation.jsx');
-var EditView = require('./components/edit/EditView.jsx');
 var ShortAnswerCreation = require('./components/basicExercises/ShortAnswerCreation.jsx');
 
 

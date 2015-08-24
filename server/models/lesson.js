@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var check = require('./mongooseValidators');
 var Exercise = require('./exercise');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var lessonSchema = new mongoose.Schema ({
   title   :
@@ -104,6 +105,16 @@ var lessonSchema = new mongoose.Schema ({
       default : null
     }
   },
+  students : [{
+    id : {type : mongoose.Schema.Types.ObjectId, ref: 'User'},
+    name : String,
+    timeWatched : Number,
+    exerciseResults : [{
+      id : {type : mongoose.Schema.Types.ObjectId, ref: 'Exercise'},
+      answer : String,
+      correct : Boolean
+    }]
+  }],
   exercises : [{ type:mongoose.Schema.Types.ObjectId, ref: 'Exercise'}]
 });
 
@@ -116,6 +127,9 @@ lessonSchema.virtual('localDate').get(function(){
     return this.date.toLocaleString();
   }
 });
+
+lessonSchema.plugin(deepPopulate);
+
 
 lessonSchema.post('save', function(){
   console.log("lesson was saved!");

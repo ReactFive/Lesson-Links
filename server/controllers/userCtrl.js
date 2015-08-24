@@ -55,15 +55,20 @@ exports.getUser = function(req, res){
     User
     .findById(req.user._id)
     .deepPopulate('lessons.exercises')
-    .exec(
-    function(err, user){
+    .exec(function(err, user){
       if (err) {console.log(err)}
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
       user.local = _.omit(user.local, 'password')
+
+      for (var i = 0; i < user.lessons.length; i++) {
+        if (!(req.user._id.toString() === user.lessons[i].teacher.id.toString())) {
+          _.filter(user.lessons.students, function(student){
+            return (student.id.toString() === user.lessons[i].teacher.id.toString())
+          })
+        }
+      }
       res.status(200).send({user:user})
     })
-  } else {
-    res.sendStatus(401)
   }
 };
 
