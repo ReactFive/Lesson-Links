@@ -99,23 +99,36 @@
   color: $dark-pink;
 }
 
-#trashcan{
+#trashcan, #link, #chart{
   color: $darkest-blue;
   text-shadow: 1px 1px 1px #ccc;
-  font-size: 2em;
+  font-size: 1.75em;
   position: relative;
   float: right;
-  top: -60px;
-  right: 10px;
   cursor: pointer;
   cursor: hand;
 }
 
-#trashcan:hover{
+#trashcan:hover, #link:hover, #chart:hover{
   color: $dark-pink;
   position: relative;
   float: right;
+}
+
+#trashcan, #trashcan:hover{
   top: -60px;
+  right: -18px;
+}
+
+#link, #link:hover{
+  top: -90px;
   right: 10px;
 }
+
+#chart, #chart:hover{
+  top: -30px;
+  right: -48px;
+}
+
+
 
