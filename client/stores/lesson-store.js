@@ -240,11 +240,22 @@ module.exports = Reflux.createStore({
   },
 
   starReply: function(replyID, commentID){
+
+    //update the server
+    var self = this;
+    Api.toggleReplyStar(this.lesson, commentID, replyID)
+    .then(function(res){
+      console.log("red rocks");
+      self.lesson = res.data;
+    });
+
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
 
     this.lesson.comments[commentIndex].replies[replyIndex].star = !this.lesson.comments[commentIndex].replies[replyIndex].star;
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   findCommentIndex: function(commentID){

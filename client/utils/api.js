@@ -95,8 +95,9 @@ module.exports.deleteReplyLike = function(lesson, commentID, replyID, user){
   return axios.delete(url);
 }; 
 
-module.exports.toggleReplyStar = function(lesson){
-
+module.exports.toggleReplyStar = function(lesson, commentID, replyID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID + '/star';
+  return axios.put(url);
 }; 
 
 module.exports.createExercise = function(exercise) {

@@ -389,7 +389,7 @@ exports.deleteReplyLike = function(req, res, next){
 };
 
 exports.toggleReplyStar = function(req, res, next){
-
+  console.log("Made it to toggleReplyStar");
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
