@@ -41,6 +41,22 @@ var LibLessonEntry = React.createClass({
     }); 
   },
 
+  getLink: function(e){
+    var self = this;
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("I ran")
+    swal("Your Lesson Link is...", "www.lesson-links.com/" + this.props.lesson.lesson_url, "info")
+  },
+
+  gotoAnalytics: function(e){
+    var self = this;
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("I ran")
+    swal("Analytics Currently Unavailable!", "Analytics for '" + this.props.lesson.title + "' are currently unavailable. Please check back soon!", "error")
+  },
+
   gotoConfigure: function () {
     Actions.sendLesson(this.props.lesson);
     this.transitionTo('/configure');
@@ -96,9 +112,9 @@ var LibLessonEntry = React.createClass({
               {publishDisplay}
             </li>
           </ul>
-          <span className="fa fa-link pull-right" id="link"></span>
+          <span className="fa fa-link pull-right" id="link" onClick={this.getLink}></span>
           <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
-          <span className="fa fa-bar-chart pull-right" id="chart"></span>
+          <span className="fa fa-bar-chart pull-right" id="chart" onClick={this.gotoAnalytics}></span>
       </li>
     );
   }
