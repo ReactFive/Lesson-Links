@@ -8,23 +8,24 @@
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.css">
-    <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="/public/js/videojs.markers.css">
+    <link rel="stylesheet" type="text/css" href="/public/js/videojs.markers.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
     <link rel="stylesheet" href="bower_components/videojs/dist/video-js/video-js.min.css">
     <style>.video-js {padding-top: 56.25%} .vjs-fullscreen {padding-top: 0px}</style>
     <title>Lesson Links</title>
   </head>
   <body class="Site">
-  {% if !!bootstrappedUser %}
-  <script>
-    window.currentUser = {{ JSON.stringify(bootstrappedUser) }}
-  </script>
-  {% endif %}
-    <div id='root'>{{html|safe}}</div>
-      <script src="/public/js/vendor.js"></script>   
-      <script src="/public/js/vendor.bundle.js"></script>
-      <script src="/public/js/bundle.js"></script>
-      <script src="/public/js/videojs-markers.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      {% if !!bootstrappedUser %}
+    <script>
+      window.currentUser = {{ JSON.stringify(bootstrappedUser) }}
+    </script>
+    {% endif %}
+  <div id='root'>{{html|safe}}</div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/public/js/vendor.js"></script>
+    <script src="/public/js/vendor.bundle.js"></script>
+    <script src="/public/js/bundle.js"></script>
+    <script src="/public/js/videojs-markers.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
 </html>

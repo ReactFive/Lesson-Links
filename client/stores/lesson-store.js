@@ -10,8 +10,7 @@ module.exports = Reflux.createStore({
 
   init: function() {},
 
-
-  fetchLesson : function(payload){
+  fetchLesson : function(payload) {
     var url = payload.url// || 'sass-101'
     var self = this;
     Api.getLesson(url)
@@ -23,7 +22,7 @@ module.exports = Reflux.createStore({
     })
     .catch(function(res){
       payload.sourceComponent.transitionTo('/404');
-    })
+    });
   },
 
   finishedLesson : function(){
@@ -42,10 +41,10 @@ module.exports = Reflux.createStore({
   updateAndTrigger: function(){
     var self = this;
     Api.updateLesson(this.lesson)
-    .then(function(res){
-      self.lesson = res.data;
-      self.trigger(self.lesson);
-    });
+        .then(function(res){
+          self.lesson = res.data;
+          self.trigger(self.lesson);
+        });
     //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
     this.trigger(this.lesson);
   },
@@ -54,11 +53,11 @@ module.exports = Reflux.createStore({
     {/*Check if the user is already following this lesson*/}
     if (AuthStore.auth.user) {
       var following = _.reduce(AuthStore.auth.user.lessons, function(found, elem, key){
-        if (found) {
-          return true
-        } else {
-          return (elem.lesson_url === lesson.url)
-        }}, false
+            if (found) {
+              return true
+            } else {
+              return (elem.lesson_url === lesson.url)
+            }}, false
       )
       if(!following) {
         Api.updateUser({
@@ -167,8 +166,6 @@ module.exports = Reflux.createStore({
       }
     })
     return index;
-  },
+  }
 
-
-
-})
+});

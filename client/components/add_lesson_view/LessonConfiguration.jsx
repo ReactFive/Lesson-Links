@@ -45,34 +45,32 @@ var LessonConfiguration = React.createClass({
     return exerciseTypeMap[this.state.editing];
   },
 
-  loadExercise: function(exerciseInfo) {
-    var exercise = exerciseInfo.exercise;
-    exercise.id = exerciseInfo._id;
+  loadExercise: function(exerciseObj) {
     this.setState({
-      editing: exercise.type,
-      exerciseState : exercise
+      editing: exerciseObj.type,
+      exerciseState : exerciseObj
     })
   },
 
   render: function() {
     return (
-      <div className="container">
-        <ul className="list-group row config-container">
-          <li className="list-group-item col-md-8">
-            <VideoPlayer />
-          </li>
-          {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exercises={this.state.lesson.exercises}/>}
+        <div className="container">
+          <ul className="list-group row config-container">
+            <li className="list-group-item col-md-8">
+              <VideoPlayer />
+            </li>
+            {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exerciseObjects={this.state.lesson.exercises}/>}
 
-          <li className="list-group-item col-md-12">
-            {!this.state.editing &&
-            <ExerciseTypes chooseType={this.setEditing} />}
-          </li>
-        </ul>
+            <li className="list-group-item col-md-12">
+              {!this.state.editing &&
+              <ExerciseTypes chooseType={this.setEditing} />}
+            </li>
+          </ul>
           <div className="panel panel-default">
             {this.state.editing &&
             this.mapExerciseType()}
           </div>
-      </div>
+        </div>
     );
   },
 
@@ -80,10 +78,10 @@ var LessonConfiguration = React.createClass({
     var self = this;
 
     Actions.publish(this.state.lesson)
-    .then(function(res) {
-      console.log("published: ", res);
-      self.transitionTo('/library');
-    })
+        .then(function(res) {
+          console.log("published: ", res);
+          self.transitionTo('/library');
+        })
   },
 
   setEditing: function(exerciseType) {

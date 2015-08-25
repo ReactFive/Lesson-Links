@@ -11,20 +11,22 @@ var TextInput = React.createClass({
     ref: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     value: React.PropTypes.string,
+    key: React.PropTypes.number
   },
   render: function(){
     return (
-      <div className={this.props.wrapperClass}>
-        <label htmlFor={this.props.name}><strong>{this.props.label}</strong></label>
-        <input id={this.props.id}
-           className="form-control"
-           name={this.props.name}
-           type='text'
-           ref={this.props.name}
-           value={this.props.value}
-           onChange={this.props.onChange}
-           placeholder={this.props.placeholder}/>
-      </div>
+        <div className={this.props.wrapperClass}>
+          <label htmlFor={this.props.name}><strong>{this.props.label}</strong></label>
+          <input id={this.props.id}
+             className="form-control"
+             name={this.props.name}
+             type='text'
+             ref={this.props.name}
+             key={this.props.key}
+             value={this.props.value}
+             onChange={this.props.onChange}
+             placeholder={this.props.placeholder}/>
+        </div>
     )
   }
 });

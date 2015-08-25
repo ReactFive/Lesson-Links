@@ -29,12 +29,12 @@ var VideoPlayer = React.createClass({
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted && this.state.lesson){
       var comments = this.state.lesson.comments,
-          exercises = this.state.lesson.exercises;
-      exercises.forEach(function(exerciseInfo) {
-        exerciseInfo.text = exerciseInfo.exercise.type;
+          exerciseObjs = this.state.lesson.exercises;
+      exerciseObjs.forEach(function(exerciseInfo) {
+        exerciseInfo.text = exerciseInfo.type;
       });
 
-      var player = this.videoSetup(_.union(comments, exercises));
+      var player = this.videoSetup(_.union(comments, exerciseObjs));
       this.setState({
         videoSetupCompleted : true,
         currentComments : this.state.lesson.comments
@@ -45,7 +45,7 @@ var VideoPlayer = React.createClass({
   componentWillUnmount: function() {
     videojs('attachmentVideo').dispose();
   },
-  
+
   videoSetup: function(comments){
     var self = this;
 
@@ -55,7 +55,7 @@ var VideoPlayer = React.createClass({
         alert ("I have triggered");
       })
     })
-    
+
 
     // setup markers
     player.markers({
@@ -99,23 +99,24 @@ var VideoPlayer = React.createClass({
     return player;
   },
   render: function() {
+
     return (
-      this.state.lesson && this.state.lesson.video_url ?
-        <div className="row">
-          <div id="test">
-            <div className="col-md-10 video-wrapper">
-                <video id='attachmentVideo'
-                  className='video-js vjs-default-skin'
-                  width='auto' height='auto'
-                  controls preload='auto'
-                  data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
-                </video>
+        this.state.lesson && this.state.lesson.video_url ?
+            <div className="row">
+              <div id="test">
+                <div className="col-md-10 video-wrapper">
+                  <video id='attachmentVideo'
+                         className='video-js vjs-default-skin'
+                         width='auto' height='auto'
+                         controls preload='auto'
+                         data-setup={'{ "techOrder": ["youtube"], "src": "' + this.state.lesson.video_url + '" }'}>
+                  </video>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        : null
+            : null
     )
-  }  
+  }
 })
 
 module.exports = VideoPlayer;

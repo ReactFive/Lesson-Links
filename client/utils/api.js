@@ -1,6 +1,6 @@
 var React = require('react');
 var axios = require('axios');
-var rootUrl = 'http://localhost:3000'
+var rootUrl = 'http://localhost:3000';
 
 module.exports.login = function(email, password) {
   var url = rootUrl + '/api/login';
@@ -83,6 +83,6 @@ module.exports.getStatus = function(){
 };
 
 module.exports.getLesson = function(lessonUrl) {
-  var url  = rootUrl + '/api/lesson/'+lessonUrl; 
+  var url  = rootUrl + '/api/lesson/'+lessonUrl;
   return axios.get(url);
 };
