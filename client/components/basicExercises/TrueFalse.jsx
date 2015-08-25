@@ -119,8 +119,8 @@ var TrueFalse = React.createClass({
 
                     <div className="quiz" id="quiz" data-toggle="buttons">
                       <label onClick={this.handleClick.bind(null, "true")} className="element-animation1 btn btn-lg btn-primary btn-block">
-                      <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
-                      <input type="radio" name="q_answer" ref="true" value="true"/>TRUE</label>
+                        <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
+                        <input type="radio" name="q_answer" ref="true" value="true"/>TRUE</label>
 
                       <label onClick={this.handleClick.bind(null, "false")}className="element-animation1 btn btn-lg btn-primary btn-block">
                         <span className="btn-label"><i className="glyphicon glyphicon-chevron-right"></i></span>
