@@ -79,7 +79,9 @@ module.exports = Reflux.createStore({
       self.lesson = res.data;
       self.trigger(self.lesson);
     });
-    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     this.lesson.comments.push(comment);
     this.trigger(this.lesson);
 
@@ -95,7 +97,8 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     });
     
-    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments.splice(commentIndex, 1);
     this.trigger(this.lesson);
@@ -111,7 +114,8 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     });
 
-    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     if(this.lesson.comments[commentIndex].likes.indexOf(userID)  === -1){
       this.lesson.comments[commentIndex].likes.push(userID);
@@ -129,7 +133,8 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     });
     
-    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     if(this.lesson.comments[commentIndex].likes.indexOf(userID) >= 0){
       var index = this.lesson.comments[commentIndex].likes.indexOf(userID);
@@ -149,7 +154,8 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     });
     
-    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].star = !this.lesson.comments[commentIndex].star;
     this.trigger(this.lesson);
@@ -165,7 +171,8 @@ module.exports = Reflux.createStore({
       self.lesson = res.data;
     });
     
-    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].replies.push(reply);
     this.trigger(this.lesson);
@@ -181,7 +188,8 @@ module.exports = Reflux.createStore({
       self.lesson = res.data;
     });
     
-    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag.
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
     this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
@@ -189,12 +197,23 @@ module.exports = Reflux.createStore({
   },
 
   likeReply: function(replyID, commentID, userID) {
+
+    //update the server
+    var self = this;
+    Api.addReplyLike(this.lesson, commentID, replyID, {"userID": userID})
+    .then(function(res){
+      console.log("cocoa puffs");
+      self.lesson = res.data;
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
     if(this.lesson.comments[commentIndex].replies[replyIndex].likes.indexOf(userID)  === -1){
       this.lesson.comments[commentIndex].replies[replyIndex].likes.push(userID);
     }
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   unlikeReply: function(replyID, commentID, userID) {

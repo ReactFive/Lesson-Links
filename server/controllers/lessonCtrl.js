@@ -337,7 +337,7 @@ exports.deleteReply = function(req, res, next){
 };
 
 exports.addReplyLike = function(req, res, next){
-
+  console.log("Made it to addReplyLike");
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){

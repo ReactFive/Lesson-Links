@@ -85,8 +85,9 @@ module.exports.deleteReply = function(lesson, commentID, replyID){
   return axios.delete(url);
 }; 
 
-module.exports.addReplyLike = function(lesson){
-
+module.exports.addReplyLike = function(lesson, commentID, replyID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID + '/likes';
+  return axios.post(url, user);
 }; 
 
 module.exports.deleteReplyLike = function(lesson){
