@@ -169,6 +169,7 @@ module.exports = Reflux.createStore({
     Api.addReply(this.lesson, commentID, reply)
     .then(function(res){
       self.lesson = res.data;
+      self.trigger(self.lesson);
     });
     
     //this is an 'optimistic' refresh. We update and trigger locally 
