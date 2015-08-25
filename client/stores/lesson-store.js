@@ -162,14 +162,29 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.addReply(this.lesson, commentID, reply)
     .then(function(res){
-      console.log("yipee")
       self.lesson = res.data;
-      self.trigger(self.lesson);
     });
     
     //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].replies.push(reply);
+    this.trigger(this.lesson);
+  },
+
+  deleteReply: function(replyID, commentID) {
+
+    //update the server
+    var self = this;
+    Api.deleteReply(this.lesson, commentID, replyID)
+    .then(function(res){
+      console.log("yahoo")
+      self.lesson = res.data;
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag.
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+    this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
     this.trigger(this.lesson);
   },
 
@@ -199,14 +214,6 @@ module.exports = Reflux.createStore({
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
 
     this.lesson.comments[commentIndex].replies[replyIndex].star = !this.lesson.comments[commentIndex].replies[replyIndex].star;
-    this.updateAndTrigger();
-  },
-
-  deleteReply: function(replyID, commentID) {
-    var commentIndex = this.findCommentIndex(commentID);
-    var replyIndex = this.findReplyIndex(commentIndex, replyID);
-
-    this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
     this.updateAndTrigger();
   },
 
