@@ -1,3 +1,8 @@
+.exercise {
+  position: absolute;
+  background-color: yellow;
+  border: 1px solid #ccc;
+}
 .exercise-enter {
   left: -200px;
   transition: all 0.5s;
@@ -9,4 +14,9 @@
 
 .exercise-leave {
   top: 5px;
+}
+
+.exercise-leave-active {
+  left: 200px;
+  opacity: 0;
 }
