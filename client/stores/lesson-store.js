@@ -71,6 +71,8 @@ module.exports = Reflux.createStore({
   },
 
   submitComment: function(comment) {
+    
+    //update the server
     var self = this;
     Api.addComment(this.lesson, comment)
     .then(function(res){
@@ -78,18 +80,24 @@ module.exports = Reflux.createStore({
       self.trigger(self.lesson);
     });
     //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.lesson.comments.push(comment);
     this.trigger(this.lesson);
 
   },
 
   deleteComment: function(commentID){
+    
+    //update the server
     var self = this;
     Api.deleteComment(this.lesson, commentID)
     .then(function(res){
       self.lesson = res.data;
       self.trigger(self.lesson);
     });
+    
     //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    var commentIndex = this.findCommentIndex(commentID);
+    this.lesson.comments.splice(commentIndex, 1);
     this.trigger(this.lesson);
   },
 
