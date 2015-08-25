@@ -291,7 +291,7 @@ exports.toggleCommentStar = function(req, res, next){
 };
 
 exports.addReply = function(req, res, next){
-
+  console.log("Made it to addReply");
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){

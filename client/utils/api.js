@@ -75,8 +75,9 @@ module.exports.toggleCommentStar = function(lesson, commentID){
   return axios.put(url);
 }; 
 
-module.exports.addReply = function(lesson){
-
+module.exports.addReply = function(lesson, commentID, reply){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies';
+  return axios.post(url, reply);
 }; 
 
 module.exports.deleteReply = function(lesson){

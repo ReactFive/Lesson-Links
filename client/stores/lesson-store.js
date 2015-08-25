@@ -157,9 +157,20 @@ module.exports = Reflux.createStore({
 
 
   submitReply: function(reply, commentID) {
+
+    //update the server
+    var self = this;
+    Api.addReply(this.lesson, commentID, reply)
+    .then(function(res){
+      console.log("yipee")
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].replies.push(reply);
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   likeReply: function(replyID, commentID, userID) {
