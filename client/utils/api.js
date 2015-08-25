@@ -42,7 +42,7 @@ module.exports.submitExerciseResult = function(lessonId, exerciseObj, result) {
     exerciseObj : exerciseObj,
     result : result
   }
-  return axios.post(url, exerciseObj);
+  return axios.post(url, data);
 }
 
 module.exports.createLesson = function(lesson) {

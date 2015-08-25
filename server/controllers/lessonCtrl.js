@@ -18,11 +18,50 @@ exports.getAllLessons = function(req, res) {
 exports.recordExerciseResult = function(req, res, next) {
   var lessonId = req.params.id;
   console.log("inside recordExerciseResult");
-  console.log("req.user", req.user);
-  console.log("req.body", req.body);
+  //console.log("req.user", req.user);
+  //console.log("req.body", req.body);
   var studentId = req.user.id;
-  res.sendStatus(200);
-  //Lesson.findByIdAndUpdate(lessonId, )
+  var exerciseId = req.body.exerciseObj._id;
+  var result = req.body.result;
+  
+  Lesson.findById(lessonId, function(err, lesson) {
+    var studentEntry;
+    for(let i=0; i < lesson.students.length; i++) {
+      if(lesson.students[i].id.toString() === req.user.id) {
+        studentEntry = lesson.students[i];
+        console.log("found student", studentEntry);
+      }
+    }
+    if(studentEntry) {
+      // find the entry for the exercise, if there already is one
+      var exerciseEntry;
+      for(let i=0; i < studentEntry.exerciseResults.length; i++) {
+        if(studentEntry.exerciseResults[i].id.toString() === exerciseId) {
+          console.log("found exercise");
+          exerciseEntry = studentEntry.exerciseResults[i];
+          exerciseEntry.answer = result.answer;
+          exerciseEntry.correct = result.correct;
+        }
+      }
+
+      // create one if there was none
+      if(!exerciseEntry) {
+        exerciseEntry = {
+          id : exerciseId,
+          answer : result.answer,
+          correct : result.correct
+        }
+        studentEntry.exerciseResults.push(exerciseEntry);
+      }
+
+      console.log("exercise entry at end", exerciseEntry);
+      console.log("student entry at end", studentEntry);
+    }
+
+    lesson.save();
+    return res.sendStatus(200);
+  })
+
 }
 
 exports.getLessonByUrl = function(req, res, next) {
@@ -54,7 +93,7 @@ exports.getLessonByUrl = function(req, res, next) {
           var index = -1
           for (var i = 0; i < students.length; i++) {
             if (students[i].id.toString() === req.user._id.toString()) {
-              return index = i;
+              index = i;
             }
           }
           if (index === -1) {
@@ -67,7 +106,7 @@ exports.getLessonByUrl = function(req, res, next) {
             })
           }
         }
-        lesson = _.omit(lesson, 'students')
+        lesson = _.omit(lesson, 'students');
         res.status(200).send(lesson);
       }
     }
