@@ -1,5 +1,12 @@
 .exercise-enter {
-
+  left: -200px;
+  transition: all 0.5s;
 }
 
-.
+.exercise-enter-active{
+  top: 5px;
+}
+
+.exercise-leave {
+  top: 5px;
+}
