@@ -3,12 +3,11 @@ var Lesson = require('mongoose').model('Lesson');
 var passport = require('passport');
 var _ = require('lodash');
 
-exports.signupUser = function(req, res) {
+exports.signupUser = function(req, res, next) {
     console.log('singup success');
-    req.logIn(req.user, function(err, user) {
-      if(err) {return next(err);}
-      user.local = _.omit(user.local, 'password')
-      return res.status(201).send({user:user});
+    req.logIn(req.user, function(err) {
+      if(err) {console.log('error :', err);}
+      return res.sendStatus(201);
   });
 };
 
@@ -60,10 +59,12 @@ exports.getUser = function(req, res){
       user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
       user.local = _.omit(user.local, 'password')
 
+      //Iterates through each lesson
       for (var i = 0; i < user.lessons.length; i++) {
+        //If the user is not the teacher, remove all lesson data that doesn't belong to them
         if (!(req.user._id.toString() === user.lessons[i].teacher.id.toString())) {
-          _.filter(user.lessons.students, function(student){
-            return (student.id.toString() === user.lessons[i].teacher.id.toString())
+          user.lessons[i].students = _.filter(user.lessons[i].students, function(student){
+            return (student.id.toString() === req.user._id.toString())
           })
         }
       }
@@ -104,10 +105,8 @@ exports.updateUser = function(req, res){
       .findById(req.body._id, function(err, lesson){
         //If the owner removes a lesson, the lesson is also deleted.
         if (lesson.teacher.id.toString() === req.user._id.toString()) {
-          console.log('test')
           Lesson
           .findByIdAndRemove(req.body._id, function(err, lesson){
-            console.log('test2')
           })
         }
         user.local = _.omit(user.local, 'password')
