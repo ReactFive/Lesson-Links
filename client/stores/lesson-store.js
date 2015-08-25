@@ -149,7 +149,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.toggleCommentStar(this.lesson, commentID)
     .then(function(res){
-      console.log("yipee")
       self.lesson = res.data;
       self.trigger(self.lesson);
     });
@@ -185,7 +184,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.deleteReply(this.lesson, commentID, replyID)
     .then(function(res){
-      console.log("yahoo")
       self.lesson = res.data;
     });
     
@@ -203,7 +201,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.addReplyLike(this.lesson, commentID, replyID, {"userID": userID})
     .then(function(res){
-      console.log("cocoa puffs");
       self.lesson = res.data;
     });
     
@@ -223,7 +220,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.deleteReplyLike(this.lesson, commentID, replyID, {"userID": userID})
     .then(function(res){
-      console.log("fruit loops");
       self.lesson = res.data;
     });
 
@@ -246,7 +242,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.toggleReplyStar(this.lesson, commentID, replyID)
     .then(function(res){
-      console.log("red rocks");
       self.lesson = res.data;
     });
 

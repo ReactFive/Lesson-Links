@@ -198,9 +198,6 @@ exports.createLesson = function(req, res, next){
 
 
 exports.addComment = function(req, res, next){
-  console.log("Made it to addComment");
-  console.log('req.params.url,', req.params.url);
-  console.log('req.body,', req.body); 
 
   Lesson.findOneAndUpdate({'lesson_url':req.params.url}, 
     {$push: {comments: req.body}},
@@ -209,7 +206,6 @@ exports.addComment = function(req, res, next){
       if(err){
         console.log("err:", err);
       }else{
-        console.log('lesson after adding comment:', lesson);
         res.status(200).send(lesson);
       }
     }
@@ -217,7 +213,6 @@ exports.addComment = function(req, res, next){
 };
 
 exports.deleteComment = function(req, res, next){
-  console.log("Made it to deleteComment");
 
   Lesson.findOneAndUpdate({'lesson_url':req.params.url}, 
     {$pull: {comments: {_id: req.params.id}}},
@@ -233,7 +228,7 @@ exports.deleteComment = function(req, res, next){
 };
 
 exports.addCommentLike = function(req, res, next){
-  console.log("Made it to addCommentLike");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -252,7 +247,7 @@ exports.addCommentLike = function(req, res, next){
 };
 
 exports.deleteCommentLike = function(req, res, next){
-  console.log("Made it to deleteCommentLike");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -270,7 +265,7 @@ exports.deleteCommentLike = function(req, res, next){
 };
 
 exports.toggleCommentStar = function(req, res, next){
-  console.log("Made it to toggleCommentStar");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -291,7 +286,7 @@ exports.toggleCommentStar = function(req, res, next){
 };
 
 exports.addReply = function(req, res, next){
-  console.log("Made it to addReply");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -312,7 +307,7 @@ exports.addReply = function(req, res, next){
 };
 
 exports.deleteReply = function(req, res, next){
-  console.log("Made it to deleteReply");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -337,7 +332,7 @@ exports.deleteReply = function(req, res, next){
 };
 
 exports.addReplyLike = function(req, res, next){
-  console.log("Made it to addReplyLike");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -363,7 +358,7 @@ exports.addReplyLike = function(req, res, next){
 };
 
 exports.deleteReplyLike = function(req, res, next){
-  console.log("Made it to deleteReplyLike");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -389,7 +384,7 @@ exports.deleteReplyLike = function(req, res, next){
 };
 
 exports.toggleReplyStar = function(req, res, next){
-  console.log("Made it to toggleReplyStar");
+
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
