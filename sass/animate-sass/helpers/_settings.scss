@@ -48,10 +48,10 @@ $hinge-translate 				: 700px !default;
 //==================================================================================================//
 
 // Fade Enter
-$use-fadeIn 			:	false !default;
-$use-fadeInUp 			:	false !default;
+$use-fadeIn 			:	true  !default;
+$use-fadeInUp 			:	true  !default;
 $use-fadeInUpBig 		:	false !default;
-$use-fadeInDown 		:	false !default;
+$use-fadeInDown 		:	true  !default;
 $use-fadeInDownBig 		:	false !default;
 $use-fadeInLeft 		:	false !default;
 $use-fadeInLeftBig 		:	false !default;
@@ -60,7 +60,7 @@ $use-fadeInRightBig 	:	false !default;
 
 
 // Fade Exit
-$use-fadeOut			:   false !default;
+$use-fadeOut			:   true !default;
 $use-fadeOutUp			:	false !default;
 $use-fadeOutUpBig   	:	false !default;
 $use-fadeOutDown		:	false !default;
@@ -106,17 +106,17 @@ $use-rotateOutDownRight : 	false !default;
 
 // Slide Enter
 $use-slideIn			:   false !default;
-$use-slideInUp			:   false !default;
+$use-slideInUp			:   true !default;
 $use-slideInDown		:   false !default;
-$use-slideInLeft		:   false !default;
-$use-slideInRight		:   false !default;
+$use-slideInLeft		:   true !default;
+$use-slideInRight		:   true !default;
 
 // Slide Exit
-$use-slideOut			:   false !default;
+$use-slideOut			:   true !default;
 $use-slideOutUp			:   false !default;
 $use-slideOutDown		:   false !default;
-$use-slideOutLeft		:   false !default;
-$use-slideOutRight		:   false !default;
+$use-slideOutLeft		:   true !default;
+$use-slideOutRight		:   true !default;
 
 // Flippers
 $use-flip				:	false !default;

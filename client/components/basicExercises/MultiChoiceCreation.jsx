@@ -145,7 +145,7 @@ var MultiChoiceCreation = React.createClass({
   render: function(){
 
     return (
-        <div className="container">
+        <div className="container animated fadeInUp">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">

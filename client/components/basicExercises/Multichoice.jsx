@@ -131,7 +131,7 @@ var Multichoice = React.createClass({
       default:
         view = (
             <div className="container-fluid">
-              <div className="modal-dialog animated fadeIn">
+              <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
                     <h4><span className="label label-default" id="qid"><i className="fa fa-question-circle fa-lg"></i></span>{question}</h4>

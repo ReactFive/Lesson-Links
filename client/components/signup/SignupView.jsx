@@ -11,7 +11,7 @@ module.exports = React.createClass({
   mixins: [Navigation],
 
   render: function(){
-    return ( <div className="container signup-container" id='signup'>
+    return ( <div className="container signup-container animated fadeIn" id='signup'>
       <div className="col-md-6 col-md-offset-3 signup-panel">
 
         <h1>sign up</h1>
