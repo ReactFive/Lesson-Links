@@ -45,7 +45,7 @@ var CommentContent = React.createClass({
 
   starComment: function(e){
     e.preventDefault();
-    Actions.starComment(this.props.comment._id, this.state.user._id);
+    Actions.starComment(this.props.comment._id);
     this.toggleStarButton(e);
   },
 

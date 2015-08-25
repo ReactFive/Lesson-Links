@@ -71,56 +71,160 @@ module.exports = Reflux.createStore({
   },
 
   submitComment: function(comment) {
+    
+    //update the server
+    var self = this;
+    Api.addComment(this.lesson, comment)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     this.lesson.comments.push(comment);
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
+
   },
 
   deleteComment: function(commentID){
+    
+    //update the server
+    var self = this;
+    Api.deleteComment(this.lesson, commentID)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments.splice(commentIndex, 1);
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   likeComment: function(commentID, userID){
+
+    //update the server
+    var self = this;
+    Api.addCommentLike(this.lesson, commentID, { "userID": userID })
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     if(this.lesson.comments[commentIndex].likes.indexOf(userID)  === -1){
       this.lesson.comments[commentIndex].likes.push(userID);
     }
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   unlikeComment: function(commentID, userID){
+    
+    //update the server
+    var self = this;
+    Api.deleteCommentLike(this.lesson, commentID, { "userID": userID })
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     if(this.lesson.comments[commentIndex].likes.indexOf(userID) >= 0){
       var index = this.lesson.comments[commentIndex].likes.indexOf(userID);
       this.lesson.comments[commentIndex].likes.splice(index, 1);
     }
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
-  starComment: function(commentID, userID){
+  starComment: function(commentID){
+    
+    //update the server
+    var self = this;
+    Api.toggleCommentStar(this.lesson, commentID)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].star = !this.lesson.comments[commentIndex].star;
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
 
   submitReply: function(reply, commentID) {
+
+    //update the server
+    var self = this;
+    Api.addReply(this.lesson, commentID, reply)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].replies.push(reply);
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
+  },
+
+  deleteReply: function(replyID, commentID) {
+
+    //update the server
+    var self = this;
+    Api.deleteReply(this.lesson, commentID, replyID)
+    .then(function(res){
+      self.lesson = res.data;
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
+    var commentIndex = this.findCommentIndex(commentID);
+    var replyIndex = this.findReplyIndex(commentIndex, replyID);
+    this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
+    this.trigger(this.lesson);
   },
 
   likeReply: function(replyID, commentID, userID) {
+
+    //update the server
+    var self = this;
+    Api.addReplyLike(this.lesson, commentID, replyID, {"userID": userID})
+    .then(function(res){
+      self.lesson = res.data;
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
     if(this.lesson.comments[commentIndex].replies[replyIndex].likes.indexOf(userID)  === -1){
       this.lesson.comments[commentIndex].replies[replyIndex].likes.push(userID);
     }
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   unlikeReply: function(replyID, commentID, userID) {
+
+    //update the server
+    var self = this;
+    Api.deleteReplyLike(this.lesson, commentID, replyID, {"userID": userID})
+    .then(function(res){
+      self.lesson = res.data;
+    });
+
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
     var likes = this.lesson.comments[commentIndex].replies[replyIndex].likes;
@@ -129,23 +233,25 @@ module.exports = Reflux.createStore({
     if(index >= 0){
       likes.splice(index, 1);
     }
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   starReply: function(replyID, commentID){
+
+    //update the server
+    var self = this;
+    Api.toggleReplyStar(this.lesson, commentID, replyID)
+    .then(function(res){
+      self.lesson = res.data;
+    });
+
+    //this is an 'optimistic' refresh. We update and trigger locally 
+    //before we hear back from the server so the user doesn't see any lag.
     var commentIndex = this.findCommentIndex(commentID);
     var replyIndex = this.findReplyIndex(commentIndex, replyID);
 
     this.lesson.comments[commentIndex].replies[replyIndex].star = !this.lesson.comments[commentIndex].replies[replyIndex].star;
-    this.updateAndTrigger();
-  },
-
-  deleteReply: function(replyID, commentID) {
-    var commentIndex = this.findCommentIndex(commentID);
-    var replyIndex = this.findReplyIndex(commentIndex, replyID);
-
-    this.lesson.comments[commentIndex].replies.splice(replyIndex, 1);
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
   findCommentIndex: function(commentID){

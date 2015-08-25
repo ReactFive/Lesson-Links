@@ -195,3 +195,226 @@ exports.createLesson = function(req, res, next){
       res.json(lesson);
     });
 };
+
+
+exports.addComment = function(req, res, next){
+
+  Lesson.findOneAndUpdate({'lesson_url':req.params.url}, 
+    {$push: {comments: req.body}},
+    {new: true, upsert: true},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+};
+
+exports.deleteComment = function(req, res, next){
+
+  Lesson.findOneAndUpdate({'lesson_url':req.params.url}, 
+    {$pull: {comments: {_id: req.params.id}}},
+    {new: true, upsert: true},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+};
+
+exports.addCommentLike = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+        _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).likes.push(req.body.userID);
+
+        lesson.save();
+        res.status(200).send(lesson);
+
+      }
+    }
+  ); 
+};
+
+exports.deleteCommentLike = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+        _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).likes.remove(req.params.userID);
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+};
+
+exports.toggleCommentStar = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+        _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).star = !_.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).star;
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+
+};
+
+exports.addReply = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+
+        var oldReplies = _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).replies;
+
+        oldReplies.push(req.body);
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+};
+
+exports.deleteReply = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+
+        var oldReplies = _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).replies;
+
+        var selectedReply = _.find(oldReplies, function(reply){
+          return reply._id == req.params.replyid;
+        });
+
+        oldReplies.remove(selectedReply);
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+};
+
+exports.addReplyLike = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+
+        var oldReplies = _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).replies;
+
+        var selectedReply = _.find(oldReplies, function(reply){
+          return reply._id == req.params.replyid;
+        });
+
+        selectedReply.likes.push(req.body.userID);
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+
+};
+
+exports.deleteReplyLike = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+
+        var oldReplies = _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).replies;
+
+        var selectedReply = _.find(oldReplies, function(reply){
+          return reply._id == req.params.replyid;
+        });
+
+        selectedReply.likes.remove(req.params.userID);
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+
+};
+
+exports.toggleReplyStar = function(req, res, next){
+
+  Lesson.findOne({'lesson_url':req.params.url},
+    function(err, lesson) {
+      if(err){
+        console.log("err:", err);
+      }else{
+
+        var oldReplies = _.find(lesson.comments, function(com){
+          return com._id == req.params.id;
+        }).replies;
+
+        var selectedReply = _.find(oldReplies, function(reply){
+          return reply._id == req.params.replyid;
+        });
+        
+        selectedReply.star = !selectedReply.star;
+
+        lesson.save();
+        res.status(200).send(lesson);
+      }
+    }
+  ); 
+
+};
+
+
+
+
+
+
+
+
+
+

@@ -50,6 +50,56 @@ module.exports.createLesson = function(lesson) {
   return axios.post(url, lesson);
 };
 
+module.exports.addComment = function(lesson, comment){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments';
+  return axios.post(url, comment);
+}; 
+
+module.exports.deleteComment = function(lesson, commentID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID;
+  return axios.delete(url);
+}; 
+
+module.exports.addCommentLike = function(lesson, commentID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/likes';
+  return axios.post(url, user);
+}; 
+
+module.exports.deleteCommentLike = function(lesson, commentID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/likes/' + user.userID;
+  return axios.delete(url);
+}; 
+
+module.exports.toggleCommentStar = function(lesson, commentID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/star';
+  return axios.put(url);
+}; 
+
+module.exports.addReply = function(lesson, commentID, reply){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies';
+  return axios.post(url, reply);
+}; 
+
+module.exports.deleteReply = function(lesson, commentID, replyID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID;
+  return axios.delete(url);
+}; 
+
+module.exports.addReplyLike = function(lesson, commentID, replyID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID + '/likes';
+  return axios.post(url, user);
+}; 
+
+module.exports.deleteReplyLike = function(lesson, commentID, replyID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID + '/likes/' + user.userID;
+  return axios.delete(url);
+}; 
+
+module.exports.toggleReplyStar = function(lesson, commentID, replyID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID + '/star';
+  return axios.put(url);
+}; 
+
 module.exports.createExercise = function(exercise) {
   var url = rootUrl + '/api/exercise';
   return axios.post(url, exercise);
