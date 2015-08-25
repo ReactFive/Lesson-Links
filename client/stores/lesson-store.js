@@ -25,8 +25,8 @@ module.exports = Reflux.createStore({
     });
   },
 
-  finishedLesson : function(){
-    Api.finishedLesson(this.lesson)
+  lessonTimepoint : function(time) {
+    Api.submitLessonTimepoint(time, this.lesson.lesson_url)
   },
 
   submitExerciseResult : function(exerciseObj, result) {

@@ -56,6 +56,31 @@ exports.recordExerciseResult = function(req, res, next) {
 
 }
 
+exports.submitTimepoint = function(req, res, next){
+  var lesson_url = req.params.url;
+  var studentId = req.user.id;
+  var timepoint = req.body.time;
+
+  console.log('What is time? ', timepoint)
+
+  Lesson.findOne({'lesson_url':lesson_url})
+  .exec(function(err, lesson){
+    console.log('lesson is ', lesson)
+    for (var i = 0; i < lesson.students.length; i++ ){
+      console.log('student Id', studentId, 'lesson id ', lesson.students[i].id.toString())
+      if (studentId === lesson.students[i].id.toString()) {
+        if (timepoint > lesson.students[i].timeWatched) {
+          console.log('Updating time watched')
+          lesson.students[i].timeWatched = timepoint;
+          lesson.save()
+        }
+      }
+    }
+    res.sendStatus(200)
+  })
+
+}
+
 exports.getLessonByUrl = function(req, res, next) {
   var lessonUrl = req.params.url;
   Lesson.findOne({'lesson_url':lessonUrl})
