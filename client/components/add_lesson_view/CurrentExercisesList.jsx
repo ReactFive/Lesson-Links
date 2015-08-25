@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../../actions');
+var CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var CurrentExercisesList = React.createClass({
 
@@ -20,10 +21,12 @@ var CurrentExercisesList = React.createClass({
       var timeDisplay = minutes + ':' + seconds;
 
       return (
+        <CSSTransitionGroup>
           <div className="col-md-12">
             <div className="col-md-9" key={exerciseObj.key} onClick={reloadMe}> {timeDisplay} {exerciseObj.type}</div>
             <span onClick={self.deleteExercise.bind(null, exerciseObj._id)} className="glyphicon glyphicon-remove col-md-3"></span>
-          </div>
+         </div>
+        </CSSTransitionGroup>
       )
     })
   },
