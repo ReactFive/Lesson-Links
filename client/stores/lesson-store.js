@@ -138,10 +138,21 @@ module.exports = Reflux.createStore({
     this.trigger(this.lesson);
   },
 
-  starComment: function(commentID, userID){
+  starComment: function(commentID){
+    
+    //update the server
+    var self = this;
+    Api.toggleCommentStar(this.lesson, commentID)
+    .then(function(res){
+      console.log("yipee")
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    
+    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
     var commentIndex = this.findCommentIndex(commentID);
     this.lesson.comments[commentIndex].star = !this.lesson.comments[commentIndex].star;
-    this.updateAndTrigger();
+    this.trigger(this.lesson);
   },
 
 

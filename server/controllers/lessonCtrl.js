@@ -270,7 +270,7 @@ exports.deleteCommentLike = function(req, res, next){
 };
 
 exports.toggleCommentStar = function(req, res, next){
-
+  console.log("Made it to toggleCommentStar");
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){

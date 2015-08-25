@@ -68,11 +68,11 @@ module.exports.addCommentLike = function(lesson, commentID, user){
 module.exports.deleteCommentLike = function(lesson, commentID, user){
   var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/likes/' + user.userID;
   return axios.delete(url);
-
 }; 
 
-module.exports.toggleCommentStar = function(lesson){
-
+module.exports.toggleCommentStar = function(lesson, commentID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/star';
+  return axios.put(url);
 }; 
 
 module.exports.addReply = function(lesson){
