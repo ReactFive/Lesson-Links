@@ -78,7 +78,7 @@ var Multichoice = React.createClass({
     switch (outcome) {
       case false:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -105,7 +105,7 @@ var Multichoice = React.createClass({
         break;
       case true:
         view = (
-            <div className="container-fluid bg-info">
+            <div className="container-fluid bg-info animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -130,7 +130,7 @@ var Multichoice = React.createClass({
         break;
       default:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -160,12 +160,12 @@ var Multichoice = React.createClass({
                 </div>{/*end modal-content*/}
               </div>{/*end modal-dialog*/}
             </div>
-        );
+      );
 
     }
     return (
         <div>{view}</div>
-    );
+      );
   }
 });
 

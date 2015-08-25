@@ -56,7 +56,7 @@ var TrueFalseCreation = React.createClass({
   render: function(){
     console.log(this.state.exercise);
     return (
-        <div className="container">
+        <div className="container animated fadeInUp">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">

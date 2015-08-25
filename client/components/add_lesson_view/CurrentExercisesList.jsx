@@ -20,10 +20,10 @@ var CurrentExercisesList = React.createClass({
       var timeDisplay = minutes + ':' + seconds;
 
       return (
-          <div className="col-md-12">
+          <div className="col-md-12 animated fadeIn">
             <div className="col-md-9" key={exerciseObj.key} onClick={reloadMe}> {timeDisplay} {exerciseObj.type}</div>
             <span onClick={self.deleteExercise.bind(null, exerciseObj._id)} className="glyphicon glyphicon-remove col-md-3"></span>
-          </div>
+         </div>
       )
     })
   },

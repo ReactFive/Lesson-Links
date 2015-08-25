@@ -104,7 +104,7 @@ var VideoPlayer = React.createClass({
         this.state.lesson && this.state.lesson.video_url ?
             <div className="row">
               <div id="test">
-                <div className="col-md-10 video-wrapper">
+                <div className="col-md-10 video-wrapper animated fadeIn">
                   <video id='attachmentVideo'
                          className='video-js vjs-default-skin'
                          width='auto' height='auto'

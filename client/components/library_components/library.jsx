@@ -37,7 +37,7 @@ var Library = React.createClass({
       var lessonsB = _.filter(user.lessons, function (lesson) { return lesson.teacher.id !== user._id && lesson.publish });
 
       return (
-        <div className="container lib-lesson-container">
+        <div className="container lib-lesson-container animated fadeIn">
 
           {/* Lessons where user is the teacher */}
           <div id="library-filter-header">

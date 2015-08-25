@@ -55,7 +55,7 @@ var LessonConfiguration = React.createClass({
   render: function() {
     return (
         <div className="container">
-          <ul className="list-group row config-container">
+          <ul className="list-group row config-container animated fadeIn">
             <li className="list-group-item col-md-8">
               <VideoPlayer />
             </li>

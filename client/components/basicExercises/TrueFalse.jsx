@@ -45,7 +45,7 @@ var TrueFalse = React.createClass({
     switch (this.state.outcome) {
       case false:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -71,7 +71,7 @@ var TrueFalse = React.createClass({
         break;
       case true:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -96,7 +96,7 @@ var TrueFalse = React.createClass({
         break;
       default:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
