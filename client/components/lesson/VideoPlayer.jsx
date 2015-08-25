@@ -99,10 +99,7 @@ var VideoPlayer = React.createClass({
     return player;
   },
   render: function() {
-<<<<<<< HEAD
-=======
 
->>>>>>> changed exerciseObject, hooked up exercises, improved exercise queries
     return (
         this.state.lesson && this.state.lesson.video_url ?
             <div className="row">

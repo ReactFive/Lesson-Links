@@ -10,7 +10,7 @@ module.exports = Reflux.createStore({
 
   init: function() {},
 
-  fetchLesson : function(payload){
+  fetchLesson : function(payload) {
     var url = payload.url// || 'sass-101'
     var self = this;
     Api.getLesson(url)
@@ -22,8 +22,8 @@ module.exports = Reflux.createStore({
     })
     .catch(function(res){
       payload.sourceComponent.transitionTo('/404');
-    })
-
+    });
+  },
 
   finishedLesson : function(){
     Api.finishedLesson(this.lesson)
