@@ -41,11 +41,11 @@ var Home = module.exports = React.createClass({
         <div className="carousel-caption">
           <h1>Our Team</h1>
           <p>Images to be added - Richard Van Camp, Isto Barton, Colin Wiley, Abhi Gulati, Esteban Castaño</p>
-          <img id="react5" src="../../public/assets/TeamImage.png"/>
+          <img id="react5" className="pull-left" src="../../public/assets/TeamImage.png"/>
         </div>
         <div className="carousel-caption">
           <h1>Our Stack</h1>
-          <img id="ourStack" src="../../public/assets/ourstack.png"/>
+          <img id="ourStack" className="pull-right" src="../../public/assets/ourstack.png"/>
           <p>Images to be added: Node Express React Reflux MongoDB</p>
         </div>
       </div>
