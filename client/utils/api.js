@@ -90,8 +90,9 @@ module.exports.addReplyLike = function(lesson, commentID, replyID, user){
   return axios.post(url, user);
 }; 
 
-module.exports.deleteReplyLike = function(lesson){
-
+module.exports.deleteReplyLike = function(lesson, commentID, replyID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/replies/' + replyID + '/likes/' + user.userID;
+  return axios.delete(url);
 }; 
 
 module.exports.toggleReplyStar = function(lesson){
