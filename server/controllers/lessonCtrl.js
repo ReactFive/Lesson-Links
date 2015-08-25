@@ -17,9 +17,6 @@ exports.getAllLessons = function(req, res) {
 
 exports.recordExerciseResult = function(req, res, next) {
   var lessonId = req.params.id;
-  console.log("inside recordExerciseResult");
-  //console.log("req.user", req.user);
-  //console.log("req.body", req.body);
   var studentId = req.user.id;
   var exerciseId = req.body.exerciseObj._id;
   var result = req.body.result;
@@ -29,7 +26,6 @@ exports.recordExerciseResult = function(req, res, next) {
     for(let i=0; i < lesson.students.length; i++) {
       if(lesson.students[i].id.toString() === req.user.id) {
         studentEntry = lesson.students[i];
-        console.log("found student", studentEntry);
       }
     }
     if(studentEntry) {
@@ -37,7 +33,6 @@ exports.recordExerciseResult = function(req, res, next) {
       var exerciseEntry;
       for(let i=0; i < studentEntry.exerciseResults.length; i++) {
         if(studentEntry.exerciseResults[i].id.toString() === exerciseId) {
-          console.log("found exercise");
           exerciseEntry = studentEntry.exerciseResults[i];
           exerciseEntry.answer = result.answer;
           exerciseEntry.correct = result.correct;
@@ -53,9 +48,6 @@ exports.recordExerciseResult = function(req, res, next) {
         }
         studentEntry.exerciseResults.push(exerciseEntry);
       }
-
-      console.log("exercise entry at end", exerciseEntry);
-      console.log("student entry at end", studentEntry);
     }
 
     lesson.save();
