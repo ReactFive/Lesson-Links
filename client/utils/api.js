@@ -50,6 +50,47 @@ module.exports.createLesson = function(lesson) {
   return axios.post(url, lesson);
 };
 
+module.exports.addComment = function(lesson, comment){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments';
+  return axios.post(url, comment);
+}; 
+
+module.exports.deleteComment = function(lesson){
+
+}; 
+
+module.exports.addCommentLike = function(lesson){
+
+}; 
+
+module.exports.deleteCommentLike = function(lesson){
+
+}; 
+
+module.exports.toggleCommentStar = function(lesson){
+
+}; 
+
+module.exports.addReply = function(lesson){
+
+}; 
+
+module.exports.deleteReply = function(lesson){
+
+}; 
+
+module.exports.addReplyLike = function(lesson){
+
+}; 
+
+module.exports.deleteReplyLike = function(lesson){
+
+}; 
+
+module.exports.toggleReplyStar = function(lesson){
+
+}; 
+
 module.exports.createExercise = function(exercise) {
   var url = rootUrl + '/api/exercise';
   return axios.post(url, exercise);
