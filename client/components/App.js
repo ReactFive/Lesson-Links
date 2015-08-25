@@ -15,7 +15,6 @@ var App = React.createClass({
           <div id="main-content">
             <RouteHandler />
           </div>
-        <Footer />
       </div>
     );
   }
