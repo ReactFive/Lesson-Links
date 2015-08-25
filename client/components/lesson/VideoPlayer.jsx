@@ -29,12 +29,12 @@ var VideoPlayer = React.createClass({
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted && this.state.lesson){
       var comments = this.state.lesson.comments,
-          exercises = this.state.lesson.exercises;
-      exercises.forEach(function(exerciseInfo) {
+          exerciseObjs = this.state.lesson.exercises;
+      exerciseObjs.forEach(function(exerciseInfo) {
         exerciseInfo.text = exerciseInfo.type;
       });
 
-      var player = this.videoSetup(_.union(comments, exercises));
+      var player = this.videoSetup(_.union(comments, exerciseObjs));
       this.setState({
         videoSetupCompleted : true,
         currentComments : this.state.lesson.comments

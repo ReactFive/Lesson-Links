@@ -7,8 +7,8 @@ var CurrentExercisesList = React.createClass({
   exerciseEntries: function() {
     var self = this;
     console.log("in exercise entries ", self.props.exerciseObjects);
-    return this.props.exerciseObjects.map(function(exerciseInfo) {
-      var exerciseObj = exerciseInfo;
+    return this.props.exerciseObjects.map(function(exerciseObj) {
+      if (!exerciseObj._id) return null;
       var reloadMe = function() {
         this.props.reloadExercise(exerciseObj);
       }.bind(self);

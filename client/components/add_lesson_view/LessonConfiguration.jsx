@@ -45,10 +45,10 @@ var LessonConfiguration = React.createClass({
     return exerciseTypeMap[this.state.editing];
   },
 
-  loadExercise: function(exerciseInfo) {
+  loadExercise: function(exerciseObj) {
     this.setState({
-      editing: exerciseInfo.type,
-      exerciseState : exerciseInfo
+      editing: exerciseObj.type,
+      exerciseState : exerciseObj
     })
   },
 

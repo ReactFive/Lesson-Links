@@ -18,18 +18,17 @@ var LessonConfigStore = Reflux.createStore({
 
   onCreateExercise: function(exerciseObj) {
     exerciseObj.lesson_id = this.lesson._id;
+    var self = this;
 
-    this.lesson.exercises.push(exerciseObj);
-    console.log("sending exercise to database", exerciseObj);
     Api.createExercise(exerciseObj)
-        .then(this.triggerConfigStore);
+      .then(function(res){
+        self.lesson.exercises.push(res.data);
+        self.triggerConfigStore();
+      });
   },
 
   onUpdateExercise: function(exerciseObj) {
     exerciseObj.lesson_id = this.lesson._id;
-
-    console.log("here is the exercise we will update: ", exerciseObj);
-    console.log("here is the exerciseID: ", exerciseObj._id);
 
     this.updateExerciseOptimistically(exerciseObj._id, exerciseObj);
 

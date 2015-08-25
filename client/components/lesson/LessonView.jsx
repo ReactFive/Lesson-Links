@@ -47,9 +47,8 @@ var LessonView = React.createClass({
     clearInterval(this.timer);
   },
 
-  loadExercise: function(exercise) {
-    console.log(exercise);
-    this.setState({exercise: exercise});
+  loadExercise: function(exerciseObj) {
+    this.setState({exerciseObj: exerciseObj});
   },
 
   onExerciseCompleted: function(result) {
@@ -67,8 +66,8 @@ var LessonView = React.createClass({
 
   mapExerciseType: function() {
     var exerciseTypeMap = {
-      'multiplechoice' : <MultiChoice exercise={this.state.exercise.exercise || {}} onComplete={this.onExerciseCompleted}/>,
-      'truefalse' : <TrueFalse exercise={this.state.exercise.exercise || {}} onComplete={this.onExerciseCompleted}/>,
+      'multiplechoice' : <MultiChoice exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
+      'truefalse' : <TrueFalse exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
     }
 
     return exerciseTypeMap[this.state.exercise.text];
