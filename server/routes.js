@@ -16,6 +16,19 @@ module.exports = function(app) {
   app.post('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.createLesson);
   app.put('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.updateLesson);
 
+  app.post('/api/lesson/:url/comments', LessonCtrl.addComment);
+  app.delete('/api/lesson/:url/comments/:id', LessonCtrl.deleteComment);
+
+  app.post('/api/lesson/:url/comments/:id/likes', LessonCtrl.addCommentLike);
+  app.delete('/api/lesson/:url/comments/:id/likes/:userID', LessonCtrl.deleteCommentLike);
+  app.put('/api/lesson/:url/comments/:id/star', LessonCtrl.toggleCommentStar);
+
+  app.post('/api/lesson/:url/comments/:id/replies', LessonCtrl.addReply);
+  app.delete('/api/lesson/:url/comments/:id/replies/:replyid', LessonCtrl.deleteReply);
+  app.post('/api/lesson/:url/comments/:id/replies/:replyid/likes', LessonCtrl.addReplyLike);
+  app.delete('/api/lesson/:url/comments/:id/replies/:replyid/likes/:userID', LessonCtrl.deleteReplyLike);
+  app.put('/api/lesson/:url/comments/:id/replies/:replyid/star', LessonCtrl.toggleReplyStar);
+
   app.post('/api/lesson/:id/exercise_result', auth.requiresApiLogin, LessonCtrl.recordExerciseResult);
 
   /**
@@ -42,8 +55,6 @@ module.exports = function(app) {
   app.post('/api/exercise', auth.requiresApiLogin, ExerciseCtrl.addExercise);
   app.put('/api/exercise/:id', auth.requiresApiLogin, ExerciseCtrl.updateExercise);
   app.delete('/api/exercise/:id', auth.requiresApiLogin, ExerciseCtrl.deleteExercise);
-
-
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){
