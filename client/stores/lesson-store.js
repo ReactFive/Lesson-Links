@@ -112,13 +112,21 @@ module.exports = Reflux.createStore({
   },
 
   unlikeComment: function(commentID, userID){
+    
+    //update the server
     var self = this;
     Api.deleteCommentLike(this.lesson, commentID, { "userID": userID })
     .then(function(res){
       self.lesson = res.data;
       self.trigger(self.lesson);
     });
-    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    
+    //this is an 'optimistic' refresh. We update and trigger locally before we hear back from the server so the user doesn't see any lag. 
+    var commentIndex = this.findCommentIndex(commentID);
+    if(this.lesson.comments[commentIndex].likes.indexOf(userID) >= 0){
+      var index = this.lesson.comments[commentIndex].likes.indexOf(userID);
+      this.lesson.comments[commentIndex].likes.splice(index, 1);
+    }
     this.trigger(this.lesson);
   },
 
