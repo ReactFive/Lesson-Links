@@ -53,7 +53,7 @@ var ShortAnswer = React.createClass({
     switch (this.state.outcome) {
       case -1:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -80,7 +80,7 @@ var ShortAnswer = React.createClass({
         break;
       case 2:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -105,7 +105,7 @@ var ShortAnswer = React.createClass({
         break;
       case 1:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
@@ -131,7 +131,7 @@ var ShortAnswer = React.createClass({
         break;
       default:
         view = (
-            <div className="container-fluid">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
