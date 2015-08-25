@@ -40,16 +40,16 @@ var Home = module.exports = React.createClass({
       <div className="container">
         <div className="carousel-caption">
           <div className="row">
-            <div className="teamInfo col-xl-6">
+            <div className="teamInfo col-md-6 portfolio-item">
               <h1>Our Team</h1>
-              <img id="react5" className="pull-left" src="../../public/assets/TeamImage2.png"/>
+              <img id="react5" className="" src="../../public/assets/TeamImage2.png"/>
             </div>
-          </div>
           <div className="carousel-caption">
-            <div className="row">
-              <h1>Our Stack</h1>
-              <img id="ourStack" className="pull-right" src="../../public/assets/ourstack.png"/>
-            </div>
+              <div className="teamInfo col-md-6 portfolio-item">
+                <h1>Our Stack</h1>
+                <img id="ourStack" className="" src="../../public/assets/ourstack.png"/>
+              </div>
+          </div>
           </div>
         </div>
       </div>
