@@ -15,6 +15,47 @@ exports.getAllLessons = function(req, res) {
   });
 };
 
+exports.recordExerciseResult = function(req, res, next) {
+  var lessonId = req.params.id;
+  var studentId = req.user.id;
+  var exerciseId = req.body.exerciseObj._id;
+  var result = req.body.result;
+  
+  Lesson.findById(lessonId, function(err, lesson) {
+    var studentEntry;
+    for(let i=0; i < lesson.students.length; i++) {
+      if(lesson.students[i].id.toString() === req.user.id) {
+        studentEntry = lesson.students[i];
+      }
+    }
+    if(studentEntry) {
+      // find the entry for the exercise, if there already is one
+      var exerciseEntry;
+      for(let i=0; i < studentEntry.exerciseResults.length; i++) {
+        if(studentEntry.exerciseResults[i].id.toString() === exerciseId) {
+          exerciseEntry = studentEntry.exerciseResults[i];
+          exerciseEntry.answer = result.answer;
+          exerciseEntry.correct = result.correct;
+        }
+      }
+
+      // create one if there was none
+      if(!exerciseEntry) {
+        exerciseEntry = {
+          id : exerciseId,
+          answer : result.answer,
+          correct : result.correct
+        }
+        studentEntry.exerciseResults.push(exerciseEntry);
+      }
+    }
+
+    lesson.save();
+    return res.sendStatus(200);
+  })
+
+}
+
 exports.getLessonByUrl = function(req, res, next) {
   var lessonUrl = req.params.url;
   Lesson.findOne({'lesson_url':lessonUrl})
@@ -44,7 +85,7 @@ exports.getLessonByUrl = function(req, res, next) {
           var index = -1
           for (var i = 0; i < students.length; i++) {
             if (students[i].id.toString() === req.user._id.toString()) {
-              return index = i;
+              index = i;
             }
           }
           if (index === -1) {
@@ -57,7 +98,7 @@ exports.getLessonByUrl = function(req, res, next) {
             })
           }
         }
-        lesson = _.omit(lesson, 'students')
+        lesson = _.omit(lesson, 'students');
         res.status(200).send(lesson);
       }
     }

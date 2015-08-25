@@ -16,6 +16,8 @@ module.exports = function(app) {
   app.post('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.createLesson);
   app.put('/api/lesson/:url', auth.requiresApiLogin, LessonCtrl.updateLesson);
 
+  app.post('/api/lesson/:id/exercise_result', auth.requiresApiLogin, LessonCtrl.recordExerciseResult);
+
   /**
    * USER API
    */
@@ -40,6 +42,8 @@ module.exports = function(app) {
   app.post('/api/exercise', auth.requiresApiLogin, ExerciseCtrl.addExercise);
   app.put('/api/exercise/:id', auth.requiresApiLogin, ExerciseCtrl.updateExercise);
   app.delete('/api/exercise/:id', auth.requiresApiLogin, ExerciseCtrl.deleteExercise);
+
+
 
 // *** 404 FOR INCORRECT API URLS ***
   app.all('/api/*', function(req, res){

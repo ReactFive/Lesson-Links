@@ -30,6 +30,15 @@ var TrueFalse = React.createClass({
     }
   },
 
+  onComplete: function() {
+    var result = {
+      correct : this.state.outcome,
+      answer : this.state.outcome ? this.state.correctOption : !this.state.correctOption
+    }
+
+    this.props.onComplete(result);
+  },
+
   render: function() {
     var view;
 
@@ -51,7 +60,7 @@ var TrueFalse = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
+                    <button className="btn btn-success" onClick={this.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -76,7 +85,7 @@ var TrueFalse = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <button className="btn btn-success" onClick={this.props.onComplete}>Continue Video</button>
+                    <button className="btn btn-success" onClick={this.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}

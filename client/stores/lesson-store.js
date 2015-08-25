@@ -16,8 +16,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
-      console.log('fetched lesson')
-      console.log('res ',res.data)
       self.lesson = res.data;
       self.trigger(self.lesson);
       self.followLesson(payload)
@@ -29,6 +27,11 @@ module.exports = Reflux.createStore({
 
   finishedLesson : function(){
     Api.finishedLesson(this.lesson)
+  },
+
+  submitExerciseResult : function(exerciseObj, result) {
+    console.log(this.lesson);
+    Api.submitExerciseResult(this.lesson._id, exerciseObj, result);
   },
 
   triggerLessonStore: function(){
