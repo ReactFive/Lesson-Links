@@ -55,15 +55,19 @@ module.exports.addComment = function(lesson, comment){
   return axios.post(url, comment);
 }; 
 
-module.exports.deleteComment = function(lesson){
-
+module.exports.deleteComment = function(lesson, commentID){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID;
+  return axios.delete(url);
 }; 
 
-module.exports.addCommentLike = function(lesson){
-
+module.exports.addCommentLike = function(lesson, commentID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/likes';
+  return axios.post(url, user);
 }; 
 
-module.exports.deleteCommentLike = function(lesson){
+module.exports.deleteCommentLike = function(lesson, commentID, user){
+  var url = rootUrl + '/api/lesson/' + lesson.lesson_url + '/comments/' + commentID + '/likes/' + user.userID;
+  return axios.delete(url);
 
 }; 
 

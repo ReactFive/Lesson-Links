@@ -83,26 +83,36 @@ module.exports = Reflux.createStore({
   },
 
   deleteComment: function(commentID){
-    var commentIndex = this.findCommentIndex(commentID);
-    this.lesson.comments.splice(commentIndex, 1);
-    this.updateAndTrigger();
+    var self = this;
+    Api.deleteComment(this.lesson, commentID)
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.trigger(this.lesson);
   },
 
   likeComment: function(commentID, userID){
-    var commentIndex = this.findCommentIndex(commentID);
-    if(this.lesson.comments[commentIndex].likes.indexOf(userID)  === -1){
-      this.lesson.comments[commentIndex].likes.push(userID);
-    }
-    this.updateAndTrigger();
+    var self = this;
+    Api.addCommentLike(this.lesson, commentID, { "userID": userID })
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.trigger(this.lesson);
   },
 
   unlikeComment: function(commentID, userID){
-    var commentIndex = this.findCommentIndex(commentID);
-    if(this.lesson.comments[commentIndex].likes.indexOf(userID) >= 0){
-      var index = this.lesson.comments[commentIndex].likes.indexOf(userID);
-      this.lesson.comments[commentIndex].likes.splice(index, 1);
-    }
-    this.updateAndTrigger();
+    var self = this;
+    Api.deleteCommentLike(this.lesson, commentID, { "userID": userID })
+    .then(function(res){
+      self.lesson = res.data;
+      self.trigger(self.lesson);
+    });
+    //this is an 'optimistic' refresh. We call trigger before we hear back from the server so the user doesn't see any lag. 
+    this.trigger(this.lesson);
   },
 
   starComment: function(commentID, userID){

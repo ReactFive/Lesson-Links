@@ -217,6 +217,7 @@ exports.addComment = function(req, res, next){
 };
 
 exports.deleteComment = function(req, res, next){
+  console.log("Made it to deleteComment");
 
   Lesson.findOneAndUpdate({'lesson_url':req.params.url}, 
     {$pull: {comments: {_id: req.params.id}}},
@@ -232,6 +233,8 @@ exports.deleteComment = function(req, res, next){
 };
 
 exports.addCommentLike = function(req, res, next){
+  console.log("Made it to addCommentLike");
+  console.log(req.body);
 
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
