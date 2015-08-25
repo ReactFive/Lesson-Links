@@ -4,6 +4,7 @@ var Actions = require('../../actions');
 var Router = require('react-router')
 var Link = Router.Link;
 var Navigation = Router.Navigation;
+var truncate = require('truncate');
 
 var _ = require('lodash');
 var Moment = require('moment');
@@ -38,6 +39,22 @@ var LibLessonEntry = React.createClass({
         Actions.deleteLesson(self.props.lesson);  
       } 
     }); 
+  },
+
+  getLink: function(e){
+    var self = this;
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("I ran")
+    swal("Your Lesson Link is...", "www.lesson-links.com/" + this.props.lesson.lesson_url, "info")
+  },
+
+  gotoAnalytics: function(e){
+    var self = this;
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("I ran")
+    swal("Analytics Currently Unavailable!", "Analytics for '" + this.props.lesson.title + "' are currently unavailable. Please check back soon!", "error")
   },
 
   gotoConfigure: function () {
@@ -82,11 +99,11 @@ var LibLessonEntry = React.createClass({
           <ul className="lib-lesson-info list-unstyled">
             <li className="lib-less-title">
               <li className ="titleAnchor">
-                {lesson.title || 'title not found'}
+               {truncate(lesson.title, 20) || 'title not found'}
               </li>
             </li>
             <li className="lib-less-author">
-              Author: {lesson.teacher.name || 'anonymous'}
+              Author: {truncate(lesson.teacher.name, 20) || 'anonymous'}
             </li>
             <li className="lib-lesson-stats">
               Comments: {commentCount}    Exercises: {lesson.exercises.length}
@@ -95,8 +112,9 @@ var LibLessonEntry = React.createClass({
               {publishDisplay}
             </li>
           </ul>
+          <span className="fa fa-link pull-right" id="link" onClick={this.getLink}></span>
           <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
-          {/* UNCOMMENT FOR CHART GRAPHIC <span className="fa fa-bar-chart-o pull-right" id="chart"></span>*/}
+          <span className="fa fa-bar-chart pull-right" id="chart" onClick={this.gotoAnalytics}></span>
       </li>
     );
   }

@@ -25,7 +25,7 @@ module.exports = function(app, config){
   app.use(cookieParser()); // read cookies for auth
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(favicon(path.join(__dirname, '/../client/','public', 'assets', 'favicon.ico')));
+  app.use(favicon(path.join(__dirname, '/../client/','public', 'assets', 'favicon.gif')));
   app.use(express.static(path.join(__dirname, '/../client/')));
 
 // required for passport
