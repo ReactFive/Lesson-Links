@@ -234,8 +234,6 @@ exports.deleteComment = function(req, res, next){
 
 exports.addCommentLike = function(req, res, next){
   console.log("Made it to addCommentLike");
-  console.log(req.body);
-
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
@@ -254,7 +252,7 @@ exports.addCommentLike = function(req, res, next){
 };
 
 exports.deleteCommentLike = function(req, res, next){
-
+  console.log("Made it to deleteCommentLike");
   Lesson.findOne({'lesson_url':req.params.url},
     function(err, lesson) {
       if(err){
