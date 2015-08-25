@@ -86,12 +86,13 @@ module.exports = Reflux.createStore({
   onSignup: function(name, email, password){
     return Api.signup(name, email, password)
       .then(function(res){
-        this.auth.user = res.data.user;
+        // this.auth.user = res.data.user;
         this.auth.loggedIn = true;
         this.triggerChange();
-        toastr["success"]("Welcome to Lesson Links " + res.data.user.local.name);
+        toastr["success"]("Welcome to Lesson Links " + name);
       }.bind(this))
       .catch(function(res){
+        console.log('error :', res)
         toastr["error"]("Sorry, there was a problem registering you");
         this.triggerChange();
       }.bind(this));

@@ -7,6 +7,7 @@ server/configuration.js
 client/public/css/*
 .DS_store
 config.js
+configuration.js
 
 bundle.js
 vendor.bundle.js

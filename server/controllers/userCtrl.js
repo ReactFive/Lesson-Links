@@ -3,12 +3,11 @@ var Lesson = require('mongoose').model('Lesson');
 var passport = require('passport');
 var _ = require('lodash');
 
-exports.signupUser = function(req, res) {
+exports.signupUser = function(req, res, next) {
     console.log('singup success');
-    req.logIn(req.user, function(err, user) {
-      if(err) {return next(err);}
-      user.local = _.omit(user.local, 'password')
-      return res.status(201).send({user:user});
+    req.logIn(req.user, function(err) {
+      if(err) {console.log('error :', err);}
+      return res.sendStatus(201);
   });
 };
 
