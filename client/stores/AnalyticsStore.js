@@ -14,11 +14,11 @@ module.exports = Reflux.createStore({
   analyticsTransition : function(lesson){
     this.lesson = lesson;
     this.onFormatLesson(lesson)
+    console.log('lesson :', lesson)
   },
 
 //Calculating Number of Students Per Percentage of Video Watched
   onFormatLesson : function(lesson){
-    console.log(lesson)
     this.analytics.timeWatched = [
       {x:'20', y:0},
       {x:'40', y:0},
@@ -28,8 +28,24 @@ module.exports = Reflux.createStore({
     ];
 
     this.analytics.exercises = [];
-    for (var j = 0; j < lesson.exercises; j++){
-      this.analytics.exercises.push(lesson.exercises[i])
+    this.analytics.exerciseIndex = [];
+    for (var j = 0; j < lesson.exercises.length; j++){
+      var exercise = lesson.exercises[j]
+      this.analytics.exerciseIndex[j] = lesson.exercises[j]._id
+      if (exercise.type === 'truefalse') {
+        console.log('truefalse')
+        this.analytics.exercises.push([
+          {x:'False', y:0},
+          {x:'True', y:0}
+        ])
+      } else if (exercise.type === 'multiplechoice') {
+        console.log('multiplechoice')
+        var temp = []
+        for (var k = 0; k < exercise.exercise.answers.length; k++) {
+          temp.push({x:exercise.exercise.answers[k], y:0})
+        }
+        this.analytics.exercises.push(temp)
+      }
     }
  
     var length = 360;
@@ -41,8 +57,15 @@ module.exports = Reflux.createStore({
       else if (time/length > 3*length/5 && time/length < 4*length/5) {this.analytics.timeWatched[3]['y']++}   
       else if (time/length > 4*length/5) {this.analytics.timeWatched[4]['y']++}   
 
-      for (var j = 0; j < lesson.students[i].exerciseResults; j++){
-
+      for (var j = 0; j < lesson.students[i].exerciseResults.length; j++) {
+        var answer = lesson.students[i].exerciseResults[j].answer
+        console.log(answer)
+        if (answer === 'true') {answer = 1}
+        if (answer === 'false') {answer = 0}
+        if(answer !== undefined) {
+          var index = this.analytics.exerciseIndex.indexOf(lesson.students[i].exerciseResults[j].id)
+          console.log('answer is ', typeof answer, answer)
+          this.analytics.exercises[index][parseInt(answer)]['y']++}
       }
     }
 

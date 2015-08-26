@@ -24,7 +24,7 @@ var AnalyticsView = React.createClass({
   },
   
   filter: function() {
-    this.setState({data: filtered});
+    this.setState({data: this.state.analytics.exercises[0]});
   },
 
   render: function() {
