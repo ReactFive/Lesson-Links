@@ -78,7 +78,7 @@ var VideoPlayer = React.createClass({
       return (
           <div className="panel panel-default">
             <div className="panel-body">
-            <video ref="test" id='attachmentVideo'
+            <video id='attachmentVideo'
               className='video-js vjs-default-skin embed-responsive-item'
               width='500' height='300'
               controls preload='auto'
