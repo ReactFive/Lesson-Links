@@ -20,10 +20,10 @@ var CurrentExercisesList = React.createClass({
       var timeDisplay = minutes + ':' + seconds;
 
       return (
-          <div className="col-md-12">
+          <div className="col-md-12 animated fadeIn">
             <div className="col-md-9" key={exerciseObj.key} onClick={reloadMe}> {timeDisplay} {exerciseObj.type}</div>
             <span onClick={self.deleteExercise.bind(null, exerciseObj._id)} className="glyphicon glyphicon-remove col-md-3"></span>
-          </div>
+         </div>
       )
     })
   },
@@ -31,15 +31,15 @@ var CurrentExercisesList = React.createClass({
   render: function() {
     return (
         <li className="list-group-item col-md-4">
+          <div className="panel-footer">
+            <button onClick={this.props.onPublish} className="btn-block btn-success">Publish your lesson</button>
+          </div>
           <div id="current-exercises" className="panel panel-default">
             <div className="panel-heading">
               <h3 className="panel-title">Current exercises</h3>
             </div>
             <div className="panel-body exercise-list-body exercise-list-body-wide">
               {this.exerciseEntries()}
-            </div>
-            <div className="panel-footer">
-              <button onClick={this.props.onPublish} className="btn-block btn-default">Publish your lesson</button>
             </div>
           </div>
         </li>

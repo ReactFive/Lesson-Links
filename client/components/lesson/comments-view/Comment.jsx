@@ -18,7 +18,7 @@ var Comment = React.createClass({
   render: function() {
 
     return (
-      <li className="comment-box">
+      <li className="comment-box animated fadeInUp">
         <CommentContent comment={this.props.comment} toggleReplyForm={this.onToggleReplyForm}/>
         <ReplyList replies={this.props.comment.replies}/>
         <ReplySubmissionBox id="reply-submission-box"

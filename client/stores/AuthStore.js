@@ -67,8 +67,8 @@ module.exports = Reflux.createStore({
     .catch(function(res){
       if (res.headers.status === 401 || res.data === "Unauthorized") {
         toastr["error"]("The username and password did not match");
-      } else {
-        toastr["error"]("There was a problem logging you in");
+      } else if (res.err) {
+        toastr["error"]("There was an error while logging you in: ", res.err);
       }
       this.triggerChange();
     }.bind(this));
