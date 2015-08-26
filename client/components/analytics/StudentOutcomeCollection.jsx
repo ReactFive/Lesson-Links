@@ -16,6 +16,7 @@ var StudentOutcomeCollection = React.createClass({
   mixins: [Reflux.connect(AuthStore, 'auth')],
 
   render:function(){
+    return <div>test</div>
     /*var owner = this.props.owner;
 
     var lessons = this.props.lessons.map(function(lesson, index){

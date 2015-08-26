@@ -16,6 +16,7 @@ module.exports = Reflux.createStore({
     this.onFormatLesson(lesson)
   },
 
+//Calculating Number of Students Per Percentage of Video Watched
   onFormatLesson : function(lesson){
     console.log(lesson)
     this.analytics.timeWatched = [

@@ -41,12 +41,9 @@ var AnalyticsView = React.createClass({
           </div>
           <hr/>
       <div id="analytics-view">
-	      <div>
-	      	NAVBAR
-	      </div>
       	<div className="container">
       		<div className="row">
-      				<div id="analytics-view">
+      				<div className="col-lg-6 col-md-12" id="analytics-view">
          				<Chart data={data} />
      	 			</div>
 			      <div className="col-lg-6 col-md-12">
