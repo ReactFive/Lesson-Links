@@ -22,6 +22,11 @@ var lessonSchema = new mongoose.Schema ({
     type      : String,
     validate  : check.urlValidator
   },
+  video_duration : 
+  {
+    type    : Number,
+    default : 1
+  },
   created_at  :
   {
     type      : Date,

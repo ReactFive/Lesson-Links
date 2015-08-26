@@ -25,6 +25,7 @@ module.exports = Reflux.createActions([
   'followLesson',
   'togglePublish',
   'publish',
+  'setVideoDuration',
   'deleteLesson',
   'triggerConfigStore',
   'triggerLessonStore',
