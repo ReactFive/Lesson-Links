@@ -4,6 +4,7 @@ var AnalyticsStore = require('../../stores/AnalyticsStore');
 var Actions = require('../../actions');
 var d3 = require('d3');
 
+
 var SetIntervalMixin = {
   componentWillMount: function() {
     this.intervals = [];
@@ -123,7 +124,7 @@ var Chart = React.createClass({
                  height={this.props.height} >
               {this.props.children}
             </svg>
-        );
+        )
     }
 });
 
@@ -133,16 +134,6 @@ var Axis = React.createClass({
   }
 });
 
-var all = [
-  {x: 'a', y: 20}, 
-  {x: 'b', y: 14}, 
-  {x: 'c', y: 12}, 
-  {x: 'd', y: 19}, 
-  {x: 'e', y: 18}, 
-  {x: 'f', y: 15}, 
-  {x: 'g', y: 10}, 
-  {x: 'h', y: 14}
-];
 
 var filtered = [
   {x: 'a', y: 9}, 
@@ -157,46 +148,57 @@ var filtered = [
     
     
 var App = React.createClass({
-    getDefaultProps: function() {
-        return {
-          width: 500,
-          height: 500
-        }
-    },
-    
-    getInitialState: function() {
-        return {
-          data: all
-        }
-    },
-    
-    showAll: function() {
-      this.setState({data : all})
-    },
-    
-    filter: function() {
-      this.setState({data: filtered});
-    },
-    
-    render: function() {
-        return (
-          <div>
-            <div className="selection">
-              <ul>
-                <li onClick={this.showAll}>All</li>
-                <li onClick={this.filter}>Filter</li>
-              </ul>
-            </div>
-            <hr/>
-            <Chart width={this.props.width} 
-                   height={this.props.height}>
-              <Bar data={this.state.data} 
-                          width={this.props.width} 
-                          height={this.props.height} />
-            </Chart>
-          </div>
-        );
+  mixins: [Reflux.connect(AnalyticsStore, 'analytics')],
+  getDefaultProps: function() {
+      return {
+        width: 500,
+        height: 500
+      }
+  },
+  
+  getInitialState: function() {
+    return {
+      data: [
+        {x:'20', y:1},
+        {x:'40', y:2},
+        {x:'60', y:3},
+        {x:'80', y:4},
+        {x:'100', y:5}
+      ]
     }
+  },
+  
+  componentDidMount: function(){
+    this.showAll()
+  },
+  
+  showAll: function() {
+    this.setState({data : this.state.analytics.timeWatched})
+  },
+  
+  filter: function() {
+    this.setState({data: filtered});
+  },
+
+  render: function() {
+      return (
+        <div>
+          <div className="selection">
+            <ul>
+              <li onClick={this.showAll}>All</li>
+              <li onClick={this.filter}>Filter</li>
+            </ul>
+          </div>
+          <hr/>
+          <Chart width={this.props.width} 
+                 height={this.props.height}>
+            <Bar data={this.state.data} 
+                        width={this.props.width} 
+                        height={this.props.height} />
+          </Chart>
+        </div>
+      );
+  }
 });
             
 module.exports = App;

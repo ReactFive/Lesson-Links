@@ -49,13 +49,13 @@ var LibLessonEntry = React.createClass({
     swal("Your Lesson Link is...", "www.lesson-links.com/" + this.props.lesson.lesson_url, "info")
   },
 
-  gotoAnalytics: function(e){
+ gotoAnalytics: function(e){
     var self = this;
     e.preventDefault();
     e.stopPropagation();
-    console.log("I ran")
-    swal("Analytics Currently Unavailable!", "Analytics for '" + this.props.lesson.title + "' are currently unavailable. Please check back soon!", "error")
-  },
+    this.transitionTo('/analytics')
+    Actions.analyticsTransition(self.props.lesson)
+  }, 
 
   gotoConfigure: function () {
     Actions.sendLesson(this.props.lesson);
@@ -122,5 +122,3 @@ var LibLessonEntry = React.createClass({
 })
 
 module.exports = LibLessonEntry;
-
-

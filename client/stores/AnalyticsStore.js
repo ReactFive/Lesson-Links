@@ -4,56 +4,21 @@ var Actions = require('../actions');
 var _ = require('lodash');
 var AuthStore = require('./AuthStore')
 
-    // return lesson = {
-    //   "_id": {
-    //       "$oid": "55dca3420d31ba931849e5a9"
-    //   },
-    //   "title": "Metal Gear?",
-    //   "lesson_url": "mgs",
-    //   "video_url": "https://www.youtube.com/watch?v=alxN1i1GagM",
-    //   "exercises": [
-    //       {
-    //           "$oid": "55dca36d0d31ba931849e5aa"
-    //       },
-    //       {
-    //           "$oid": "55dca3a10d31ba931849e5ab"
-    //       }
-    //   ],
-    //   "students": [
-    //       {
-    //           "id": {
-    //               "$oid": "55db33073998424d089ae119"
-    //           },
-    //           "name": "test5",
-    //           "timeWatched": 64.030179,
-    //           "_id": {
-    //               "$oid": "55dca3c30d31ba931849e5ac"
-    //           },
-    //           "exerciseResults": []
-    //       }
-    //   ],
-    //   "teacher": {
-    //       "name": "Colin Wiley",
-    //       "id": {
-    //           "$oid": "55d52416d18d7259a58b405a"
-    //       }
-    //   },
-    //   "comments": [],
-    //   "published_at": {
-    //       "$date": "2015-08-25T17:19:32.673Z"
-    //   },
-    //   "publish": true,
-    //   "created_at": {
-    //       "$date": "2015-08-25T17:17:54.685Z"
-    //   },
-    //   "__v": 1
-    // }
-
 module.exports = Reflux.createStore({
   listenables: [Actions],
 
+  init: function(){
+    return this.analytics = {};
+  },
+
+  onAnalyticsTransition : function(lesson){
+    this.lesson = lesson;
+    this.onFormatLesson(lesson)
+  },
+
   onFormatLesson : function(lesson){
-    var result = [
+    console.log(lesson)
+    this.analytics.timeWatched = [
       {x:'20', y:0},
       {x:'40', y:0},
       {x:'60', y:0},
@@ -62,12 +27,17 @@ module.exports = Reflux.createStore({
     ];
     var length = 360;
     for (var i = 0; i < lesson.students.length; i++ ){
-      time = lesson.students[i].timeWatched;
-      if (time/length < length/5) {result[0][y]++}
-      else if (time/length > 1*length/5 && time/length < 2*length/5) {result[1][y]++}   
-      else if (time/length > 2*length/5 && time/length < 3*length/5) {result[2][y]++}   
-      else if (time/length > 3*length/5 && time/length < 4*length/5) {result[3][y]++}   
-      else if (time/length > 4*length/5) {result[4][y]++}   
+      var time = lesson.students[i].timeWatched;
+      if (time/length < length/5) {this.analytics.timeWatched[0]['y']++}
+      else if (time/length > 1*length/5 && time/length < 2*length/5) {this.analytics.timeWatched[1]['y']++}   
+      else if (time/length > 2*length/5 && time/length < 3*length/5) {this.analytics.timeWatched[2]['y']++}   
+      else if (time/length > 3*length/5 && time/length < 4*length/5) {this.analytics.timeWatched[3]['y']++}   
+      else if (time/length > 4*length/5) {this.analytics.timeWatched[4]['y']++}   
     }
+    this.triggerChange();
+  },
+
+  triggerChange: function(){
+    this.trigger(this.analytics);
   }
 })

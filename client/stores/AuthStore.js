@@ -86,7 +86,6 @@ module.exports = Reflux.createStore({
   onSignup: function(name, email, password){
     return Api.signup(name, email, password)
       .then(function(res){
-        // this.auth.user = res.data.user;
         this.auth.loggedIn = true;
         this.triggerChange();
         toastr["success"]("Welcome to Lesson Links " + name);
