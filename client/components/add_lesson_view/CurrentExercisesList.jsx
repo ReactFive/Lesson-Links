@@ -32,7 +32,7 @@ var CurrentExercisesList = React.createClass({
     return (
         <li className="list-group-item col-md-4">
           <div className="panel-footer">
-            <button onClick={this.props.onPublish} className="btn-block btn-default">Publish your lesson</button>
+            <button onClick={this.props.onPublish} className="btn-block btn-success">Publish your lesson</button>
           </div>
           <div id="current-exercises" className="panel panel-default">
             <div className="panel-heading">

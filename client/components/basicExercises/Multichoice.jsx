@@ -105,7 +105,7 @@ var Multichoice = React.createClass({
         break;
       case true:
         view = (
-            <div className="container-fluid bg-info animated fadeIn">
+            <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
