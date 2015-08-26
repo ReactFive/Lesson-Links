@@ -20,7 +20,6 @@ var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreati
 var TrueFalseCreation = require('./components/basicExercises/TrueFalseCreation.jsx');
 var ShortAnswerCreation = require('./components/basicExercises/ShortAnswerCreation.jsx');
 
-
 var routes = (
       <Route path="/" handler={App}>
         <DefaultRoute handler={LandingPage}/>
@@ -30,15 +29,8 @@ var routes = (
         <Redirect from="/lesson" to="/add-lesson"/>
         <Route path='/configure' handler={LessonConfiguration}/>
         <Redirect from="/edit" to="/configure"/>
-        {/*these two routes are for development purposes*/}
-        <Route path='/exerciseMC' handler={ExerciseMultiChoice} />
-        <Route path='/exerciseTF' handler={ExerciseTrueFalse} />
-        <Route path='/exerciseSA' handler={ExerciseShortAnswer} />
-        <Route path='/multiplechoice' handler={MultiChoiceCreation} />
-        <Route path='/truefalse' handler={TrueFalseCreation} />
-        <Route path='/shortanswer' handler={ShortAnswerCreation} />
         <Route path='/404' handler={NotFound}/>
-        <Route path='/:url' handler={LessonView} />
+        <Route path='/:url' handler={LessonView}/>
         <NotFoundRoute handler={NotFound}/>
       </Route>
 );
