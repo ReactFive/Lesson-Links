@@ -54,10 +54,10 @@ var LessonView = React.createClass({
   onExerciseCompleted: function(result) {
     
     // send result to server
-    Actions.submitExerciseResult(this.state.exercise, result);
+    Actions.submitExerciseResult(this.state.exerciseObj, result);
 
     // clear exercise state in lesson
-    this.setState({exercise: null});
+    this.setState({exerciseObj: null});
 
     // resume video player
     var player = videojs('attachmentVideo');
@@ -70,7 +70,7 @@ var LessonView = React.createClass({
       'truefalse' : <TrueFalse exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
     }
 
-    return exerciseTypeMap[this.state.exercise.text];
+    return exerciseTypeMap[this.state.exerciseObj.type];
   },
 
   render: function() {
@@ -85,7 +85,7 @@ var LessonView = React.createClass({
             <div id="video-box" className="col-lg-12">
               <VideoPlayer onExerciseReached={this.loadExercise} />
             </div>
-            {this.state.exercise ? this.mapExerciseType() : <Content />}
+            {this.state.exerciseObj ? this.mapExerciseType() : <Content />}
           </div>
         </div>
       );

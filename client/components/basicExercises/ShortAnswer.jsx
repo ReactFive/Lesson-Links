@@ -6,9 +6,8 @@ var Link = Router.Link;
 var ShortAnswer = React.createClass({
 
   getInitialState: function(){
-    var loadedExercise = this.props.exercise || {};
-    var ex = loadedExercise.exercise || {};
-    console.log(loadedExercise);
+    var ex = this.props.exercise || {};
+
     return {
       exercise: {
         question: ex.question || "no question was provided" ,
