@@ -32,11 +32,10 @@ var VideoPlayer = React.createClass({
       this.setState({
         videoSetupCompleted : true,
       });
-      player.play();
+      player.load();
       setTimeout(function() {
         var duration = player.duration();
         Actions.setVideoDuration(this.state.lesson, duration);
-        player.pause();
       }.bind(this), 3000);
     } else {
 
