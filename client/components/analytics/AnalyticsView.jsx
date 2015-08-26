@@ -3,7 +3,14 @@ var Reflux = require('Reflux')
 var AnalyticsStore = require('../../stores/AnalyticsStore');
 var Actions = require('../../actions');
 
+//This is the parent component for the library view. The file Structure is as follows:
+  //AnalyticsView
+    //Graph
+    //StudentOutcomes
+    	//StudentOutcomeEntry
+
 var Chart = require('./Chart.jsx');
+var StudentOutcomeCollection = require('./StudentOutcomeCollection.jsx');
 
 var AnalyticsView = React.createClass({
   mixins: [Reflux.connect(AnalyticsStore, 'analytics')],
@@ -34,7 +41,19 @@ var AnalyticsView = React.createClass({
           </div>
           <hr/>
       <div id="analytics-view">
-         <Chart data={data} />
+	      <div>
+	      	NAVBAR
+	      </div>
+      	<div className="container">
+      		<div className="row">
+      				<div id="analytics-view">
+         				<Chart data={data} />
+     	 			</div>
+			      <div className="col-lg-6 col-md-12">
+			      	<StudentOutcomeCollection />
+			      </div>
+			    </div>	
+		    </div>
       </div>
     </div>
     );
