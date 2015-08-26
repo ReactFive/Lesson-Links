@@ -7,6 +7,8 @@ var Nav = require('./header-footer/nav.jsx');
 var Home = module.exports = React.createClass({
 
   render: function () {
+
+
     return (
 <div id="myCarousel" className="carousel slide">
   <ol className="carousel-indicators">
@@ -19,7 +21,7 @@ var Home = module.exports = React.createClass({
       <div className="container">
         <div className="carousel-caption">
           <h1 className="logo">Lesson Links</h1>
-          <h3 className="sublogo">Annotated  Educational  Videos.</h3>
+          <h3 className="sublogo">Annotated Educational Videos</h3>
           <p>To be colored, styled, and replaced with a gif soon! </p>
           <p>
             <p>
