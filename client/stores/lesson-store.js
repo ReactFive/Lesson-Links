@@ -82,8 +82,8 @@ module.exports = Reflux.createStore({
     
     //this is an 'optimistic' refresh. We update and trigger locally 
     //before we hear back from the server so the user doesn't see any lag. 
-    this.lesson.comments.push(comment);
-    this.trigger(this.lesson);
+    // this.lesson.comments.push(comment);
+    // this.trigger(this.lesson);
 
   },
 
