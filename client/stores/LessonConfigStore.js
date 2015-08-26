@@ -71,7 +71,6 @@ var LessonConfigStore = Reflux.createStore({
   },
 
   onSetVideoDuration: function(lesson, duration){
-    console.log("in onsetvideoduration: ", duration)
     return Api.updateLesson({
       lesson_url : lesson.lesson_url,
       video_duration : duration
