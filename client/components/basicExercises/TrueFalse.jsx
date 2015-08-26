@@ -8,8 +8,7 @@ var Route = Router.Route;
 var TrueFalse = React.createClass({
 
   getInitialState: function() {
-    var loadedExercise = this.props.exercise;
-
+    var loadedExercise = this.props.exercise || {};
     return {
       exercise: {
         question: loadedExercise.question || "No question provided",
@@ -55,7 +54,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.exercise.negFeedback ? this.state.exercise.negFeedback : null }</p>
+                        <p>{ this.state.exercise.feedbackFalse ? this.state.exercise.feedbackTrue : null }</p>
                       </blockquote>
                     </div>
                   </div>
@@ -80,7 +79,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        { this.state.exercise.posFeedback ? this.state.exercise.posFeedback : null }
+                        <p>{ this.state.exercise.feedbackTrue ? this.state.exercise.feedbackFalse : null }</p>
                       </blockquote>
                     </div>
                   </div>
