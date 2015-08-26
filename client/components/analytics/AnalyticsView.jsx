@@ -8,6 +8,7 @@ var ElapsedTime = require('./ElapsedTime.jsx');
 var AnalyticsView = React.createClass({
 
   render: function() {
+    console.log('test')
     return (
       <div id="analytics-view">
          <ElapsedTime />

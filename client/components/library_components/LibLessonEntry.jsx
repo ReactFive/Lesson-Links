@@ -53,8 +53,8 @@ var LibLessonEntry = React.createClass({
     var self = this;
     e.preventDefault();
     e.stopPropagation();
-    this.transitionTo('/analytics')
     Actions.analyticsTransition(self.props.lesson)
+    this.transitionTo('/analytics')
   }, 
 
   gotoConfigure: function () {

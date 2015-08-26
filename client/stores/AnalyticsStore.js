@@ -11,7 +11,7 @@ module.exports = Reflux.createStore({
     return this.analytics = {};
   },
 
-  onAnalyticsTransition : function(lesson){
+  analyticsTransition : function(lesson){
     this.lesson = lesson;
     this.onFormatLesson(lesson)
   },
