@@ -29,7 +29,7 @@ var nav = React.createClass({
             <span className="icon-bar"></span>
           </button>
           <Link to="/" className="navbar-brand">
-            LESSON LINKS
+            <img id="logo-gif" src="../../public/assets/landingGif.gif"/>
           </Link>
         </div>
         <div id="navbar" className="collapse navbar-collapse">

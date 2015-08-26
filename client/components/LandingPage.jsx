@@ -31,22 +31,42 @@ var Home = module.exports = React.createClass({
     <div className="item item2">
       <div className="container">
         <div className="carousel-caption">
-          <h1>How it all Works</h1>
-          <p>Information and graphics coming soon...</p>
+          <div className="row">
+              <h1>How to make a Lesson Link...</h1>
+            <div className="steps col-lg-4">
+              <h3>Step 1:<br/>Drop in a YouTube URL.</h3>
+              <img id="step1" src="../../public/assets/step1.png" />
+              <p>You can use any YouTube URL to create a Lesson on Lesson Links!</p>
+            </div>
+            <div className="steps col-lg-4">
+              <h3>Step 2:<br/>Set-up Exercises.</h3>
+              <img id="step2" src="../../public/assets/step2.png" />
+              <p>Choose between True/False, Short Answer, Multiple Choice, or Drag-and-Drop questions to your Lesson!</p>
+            </div>
+            <div className="steps col-lg-4">
+              <h3>Step 3:<br/>Share your Link!</h3>
+              <img id="step3" src="../../public/assets/step3.png" />
+              <p>Share your published link with students to start a classroom conversation online!</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div className="item item3">
       <div className="container">
         <div className="carousel-caption">
-          <h1>Our Team</h1>
-          <p>Images to be added - Richard Van Camp, Isto Barton, Colin Wiley, Abhi Gulati, Esteban Castaño</p>
-          <img id="react5" className="pull-left" src="../../public/assets/TeamImage.png"/>
-        </div>
-        <div className="carousel-caption">
-          <h1>Our Stack</h1>
-          <img id="ourStack" className="pull-right" src="../../public/assets/ourstack.png"/>
-          <p>Images to be added: Node Express React Reflux MongoDB</p>
+          <div className="row">
+            <div className="teamInfo col-md-6 portfolio-item">
+              <h1>Our Team: React5</h1>
+              <img id="react5" className="" src="../../public/assets/TeamImage2.png"/>
+            </div>
+          <div className="carousel-caption">
+              <div className="teamInfo col-md-6 portfolio-item">
+                <h1>Our Tech</h1>
+                <img id="ourStack" className="" src="../../public/assets/ourstack.png"/>
+              </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
