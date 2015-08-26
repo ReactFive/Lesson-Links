@@ -115,6 +115,12 @@ exports.updateLesson = function(req, res, next){
     if (!owner || !req.body.hasOwnProperty('video_url')) {
       req.body.video_url = lesson.video_url
     }
+    if (!owner || !req.body.hasOwnProperty('video_duration')) {
+      req.body.video_duration = lesson.video_duration;
+    }
+    if (!req.body.hasOwnProperty('comments')) {
+      req.body.comments = lesson.comments
+    }
     if (!owner || !req.body.hasOwnProperty('publish') || lesson.publish) {
       req.body.publish = lesson.publish;
     //Set publish date
@@ -127,14 +133,13 @@ exports.updateLesson = function(req, res, next){
         }
       )
     }
-    if (!req.body.hasOwnProperty('comments')) {req.body.comments = lesson.comments}
     Lesson.findOneAndUpdate({'lesson_url' : req.params.url}, {
       $set : 
         {
-          title : req.body.title,
           video_url : req.body.video_url,
           publish : req.body.publish,
-          comments : req.body.comments
+          comments : req.body.comments,
+          video_duration : req.body.video_duration
         }
       },{'new': true}, function(err, updatedLesson){
         if (err) {

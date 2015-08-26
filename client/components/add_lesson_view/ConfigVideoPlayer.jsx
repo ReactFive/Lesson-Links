@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Actions = require('./../../actions');
 
 var _ = require('lodash');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
@@ -26,10 +27,18 @@ var VideoPlayer = React.createClass({
 
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted){
+      console.log("inside componentDidUpdate");
       var player = this.videoSetup();
       this.setState({
         videoSetupCompleted : true,
       });
+      player.load();
+      setTimeout(function() {
+        var duration = player.duration();
+        Actions.setVideoDuration(this.state.lesson, duration);
+      }.bind(this), 3000);
+    } else {
+
     }
   },
 
