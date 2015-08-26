@@ -25,6 +25,12 @@ module.exports = Reflux.createStore({
       {x:'80', y:0},
       {x:'100', y:0},
     ];
+
+    this.analytics.exercises = [];
+    for (var j = 0; j < lesson.exercises; j++){
+      this.analytics.exercises.push(lesson.exercises[i])
+    }
+ 
     var length = 360;
     for (var i = 0; i < lesson.students.length; i++ ){
       var time = lesson.students[i].timeWatched;
@@ -33,7 +39,12 @@ module.exports = Reflux.createStore({
       else if (time/length > 2*length/5 && time/length < 3*length/5) {this.analytics.timeWatched[2]['y']++}   
       else if (time/length > 3*length/5 && time/length < 4*length/5) {this.analytics.timeWatched[3]['y']++}   
       else if (time/length > 4*length/5) {this.analytics.timeWatched[4]['y']++}   
+
+      for (var j = 0; j < lesson.students[i].exerciseResults; j++){
+
+      }
     }
+
     this.triggerChange();
   },
 

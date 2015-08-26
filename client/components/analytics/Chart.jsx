@@ -134,17 +134,6 @@ var Axis = React.createClass({
   }
 });
 
-
-var filtered = [
-  {x: 'a', y: 9}, 
-  {x: 'b', y: 5}, 
-  {x: 'c', y: 6}, 
-  {x: 'd', y: 12}, 
-  {x: 'e', y: 10}, 
-  {x: 'f', y: 7}, 
-  {x: 'g', y: 4}, 
-  {x: 'h', y: 9}
-];
     
     
 var App = React.createClass({
@@ -168,31 +157,12 @@ var App = React.createClass({
     }
   },
   
-  componentDidMount: function(){
-    this.showAll()
-  },
-  
-  showAll: function() {
-    this.setState({data : this.state.analytics.timeWatched})
-  },
-  
-  filter: function() {
-    this.setState({data: filtered});
-  },
-
   render: function() {
       return (
         <div>
-          <div className="selection">
-            <ul>
-              <li onClick={this.showAll}>All</li>
-              <li onClick={this.filter}>Filter</li>
-            </ul>
-          </div>
-          <hr/>
           <Chart width={this.props.width} 
                  height={this.props.height}>
-            <Bar data={this.state.data} 
+            <Bar data={this.props.data} 
                         width={this.props.width} 
                         height={this.props.height} />
           </Chart>
