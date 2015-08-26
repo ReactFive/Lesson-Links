@@ -11,14 +11,24 @@ var ReplySubmissionBox = React.createClass({
       text: ''
     }
   },
-  componentDidUpdate: function(){
+
+  componentDidMount: function(){
     if(this.props.showReplyForm){
       React.findDOMNode(this.refs.test).focus();
     }
   },
+
   onChange: function(e) {
     this.setState({text: e.target.value});
   },
+
+  onBlur: function(){
+    console.log('blurred');
+    if(this.state.text === ''){
+      this.props.toggleReplyForm();
+    }
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
 
@@ -39,17 +49,22 @@ var ReplySubmissionBox = React.createClass({
       text: ''
     });
 
+    React.findDOMNode(this.refs.test).focus();
+
   },
   render: function() {
     return (
       <div id="reply-creation-box">
-        { this.props.showReplyForm ? 
           <form onSubmit={this.handleSubmit} className="reply-form-box">
-            <Textarea className="form-control reply-form" onChange={this.onChange} value={this.state.text} ref="test"></Textarea>
+            <Textarea 
+              className="form-control reply-form" 
+              value={this.state.text} 
+              ref="test"
+              onChange={this.onChange}
+              onBlur={this.onBlur}></Textarea>
             <button type="submit" className="btn btn-primary btn-xs pull-right reply-button" onClick={this.handleSubmit} >Submit</button>
             <button type="submit" className="btn btn-default btn-xs pull-right reply-button" onClick={this.props.toggleReplyForm} >Cancel</button>
           </form>
-        : null }
       </div>
     );
   }

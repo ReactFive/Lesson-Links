@@ -11,20 +11,28 @@ var Comment = React.createClass({
     }
   },
 
-  onToggleReplyForm: function(e) {
+  onClick: function(e) {
     e.preventDefault();
     this.setState({ showReplyForm: !this.state.showReplyForm });
   },
+
+  onToggleReplyForm: function() {
+    this.setState({ showReplyForm: !this.state.showReplyForm });
+  },
+
+
   render: function() {
 
     return (
       <li className="comment-box animated fadeInUp">
-        <CommentContent comment={this.props.comment} toggleReplyForm={this.onToggleReplyForm}/>
+        <CommentContent comment={this.props.comment} toggleReplyForm={this.onClick}/>
         <ReplyList replies={this.props.comment.replies}/>
+        {this.state.showReplyForm ? 
         <ReplySubmissionBox id="reply-submission-box"
           comment={this.props.comment}
           showReplyForm={this.state.showReplyForm}
-          toggleReplyForm={this.onToggleReplyForm} /> 
+          toggleReplyForm={this.onToggleReplyForm} />
+          : null }
       </li>
     );
   }
