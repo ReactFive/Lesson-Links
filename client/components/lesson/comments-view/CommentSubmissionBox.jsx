@@ -19,9 +19,11 @@ var CommentSubmissionBox = React.createClass({
   onInputChange: function(e) {
     this.setState({text: e.target.value});
   },
+
   onToggleCommentForm: function(){
     this.setState({ showCommentForm: !this.state.showCommentForm });
   },
+
   onFormFocus: function(){
     if(this.state.text === ''){
       var player = videojs('attachmentVideo');
@@ -29,6 +31,7 @@ var CommentSubmissionBox = React.createClass({
       this.onToggleCommentForm();
     }
   },
+
   onFormBlur: function(){
     if(this.state.text === ''){
       this.onToggleCommentForm();
