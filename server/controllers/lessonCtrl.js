@@ -23,7 +23,7 @@ exports.recordExerciseResult = function(req, res, next) {
   
   Lesson.findById(lessonId, function(err, lesson) {
     var studentEntry;
-    for(let i=0; i < lesson.students.length; i++) {
+    for(var i=0; i < lesson.students.length; i++) {
       if(lesson.students[i].id.toString() === req.user.id) {
         studentEntry = lesson.students[i];
       }
@@ -31,7 +31,7 @@ exports.recordExerciseResult = function(req, res, next) {
     if(studentEntry) {
       // find the entry for the exercise, if there already is one
       var exerciseEntry;
-      for(let i=0; i < studentEntry.exerciseResults.length; i++) {
+      for(var i=0; i < studentEntry.exerciseResults.length; i++) {
         if(studentEntry.exerciseResults[i].id.toString() === exerciseId) {
           exerciseEntry = studentEntry.exerciseResults[i];
           exerciseEntry.answer = result.answer;
