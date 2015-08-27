@@ -51,7 +51,7 @@ module.exports.submitExerciseResult = function(lessonId, exerciseObj, result) {
 
 module.exports.submitLessonTimepoint = function(time, lesson_url) {
   console.log('submitting timepoint ', time)
-  var url = rootUrl + '/api/lesson/' + lesson_url + '/timepoint';
+  var url = '/api/lesson/' + lesson_url + '/timepoint';
   return axios.post(url, {'time':time});
 }
 
