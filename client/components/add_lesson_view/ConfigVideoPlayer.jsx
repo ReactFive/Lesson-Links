@@ -1,12 +1,14 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('./../../actions');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
 
 var _ = require('lodash');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 
 var VideoPlayer = React.createClass({
-  mixins: [Reflux.connect(LessonConfigStore, "lesson")],
+  mixins: [Navigation, Reflux.connect(LessonConfigStore, "lesson")],
 
   getInitialState: function() {
     return {
@@ -26,8 +28,14 @@ var VideoPlayer = React.createClass({
   },
 
   componentDidUpdate: function() {
+
     if(!this.state.videoSetupCompleted){
-      console.log("inside componentDidUpdate");
+
+      var self=this;
+      if(!this.state.lesson){
+        self.transitionTo('/library');
+        return;
+      }
       var player = this.videoSetup();
       this.setState({
         videoSetupCompleted : true,
@@ -43,7 +51,9 @@ var VideoPlayer = React.createClass({
   },
 
   componentWillUnmount: function() {
-    videojs('attachmentVideo').dispose();
+    if(this.state.lesson){
+      videojs('attachmentVideo').dispose();
+    }
   },
 
   videoSetup: function(){
@@ -64,8 +74,6 @@ var VideoPlayer = React.createClass({
     return player;
   },
   render: function() {
-    console.log("# exercises", this.state.lesson &&
-      this.state.lesson.exercises);
     if(this.state.lesson && this.state.lesson.video_url) {
       return (
           <div className="panel panel-default">
