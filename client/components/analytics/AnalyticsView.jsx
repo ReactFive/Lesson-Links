@@ -16,47 +16,62 @@ var AnalyticsView = React.createClass({
   mixins: [Reflux.connect(AnalyticsStore, 'analytics')],
 
   getInitialState: function() {
-    return {data: []}  
+    return {
+      data: [], 
+      yAxis: '', 
+      xAxis: '', 
+      analytics : {
+        exercises: []
+      }
+    }  
   },
 
-  showAll: function() {
-    this.setState({data : this.state.analytics.timeWatched})
+  timeWatched: function() {
+    this.setState({
+      data : this.state.analytics.timeWatched,
+      xAxis : 'Percentage of Video Completed'
+    })
   },
   
-  filter: function() {
-    this.setState({data: this.state.analytics.exercises[0]});
+  setExercise: function(exercise) {
+    this.setState({
+      data: exercise,
+      xAxis: 'Answers'
+    });
   },
 
   render: function() {
+    var self = this;
     var data = this.state.data;
+    var exercises = [];
 
-    if (data) {
+    var exercises = this.state.analytics.exercises.map(function(exercise, index){
+      return <li onClick={function(){self.setExercise(exercise)}} exercise={exercise}>Exercise #{index+1}</li>
+    })
+
     return (
     <div>
       <div className="selection">
-            <ul>
-              <li onClick={this.showAll}>All</li>
-              <li onClick={this.filter}>Filter</li>
-            </ul>
-          </div>
-          <hr/>
+        <ul>
+          <li onClick={this.timeWatched}>Time Watched</li>
+            {exercises.length ? {exercises} : ''}
+          </ul>
+      </div>
+      <hr/>
       <div id="analytics-view">
       	<div className="container">
       		<div className="row">
       				<div className="col-lg-6 col-md-12" id="analytics-view">
-         				<Chart data={data} />
-     	 			</div>
-			      <div className="col-lg-6 col-md-12">
-			      	<StudentOutcomeCollection />
-			      </div>
-			    </div>	
-		    </div>
-      </div>
+      					<Chart data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
+       	 			</div>
+		      <div className="col-lg-6 col-md-12">
+		      	<StudentOutcomeCollection />
+		      </div>
+		    </div>	
+	    </div>
     </div>
-    );
-  } else {
-    return null
-  }
+    </div>
+    )
   }
 });
 

@@ -20,11 +20,11 @@ module.exports = Reflux.createStore({
 //Calculating Number of Students Per Percentage of Video Watched
   onFormatLesson : function(lesson){
     this.analytics.timeWatched = [
-      {x:'20', y:0},
-      {x:'40', y:0},
-      {x:'60', y:0},
-      {x:'80', y:0},
-      {x:'100', y:0},
+      {x:'20%', y:0},
+      {x:'40%', y:0},
+      {x:'60%', y:0},
+      {x:'80%', y:0},
+      {x:'100%', y:0},
     ];
 
     this.analytics.exercises = [];
@@ -48,14 +48,14 @@ module.exports = Reflux.createStore({
       }
     }
  
-    var length = 360;
+    var length = 123;
     for (var i = 0; i < lesson.students.length; i++ ){
       var time = lesson.students[i].timeWatched;
-      if (time/length < length/5) {this.analytics.timeWatched[0]['y']++}
-      else if (time/length > 1*length/5 && time/length < 2*length/5) {this.analytics.timeWatched[1]['y']++}   
-      else if (time/length > 2*length/5 && time/length < 3*length/5) {this.analytics.timeWatched[2]['y']++}   
-      else if (time/length > 3*length/5 && time/length < 4*length/5) {this.analytics.timeWatched[3]['y']++}   
-      else if (time/length > 4*length/5) {this.analytics.timeWatched[4]['y']++}   
+      if (Math.floor(5*time/length) === 0) {this.analytics.timeWatched[0]['y']++}
+      else if (Math.floor(5*time/length) === 1) {this.analytics.timeWatched[1]['y']++}   
+      else if (Math.floor(5*time/length) === 2) {this.analytics.timeWatched[2]['y']++}   
+      else if (Math.floor(5*time/length) === 3) {this.analytics.timeWatched[3]['y']++}   
+      else if (Math.floor(5*time/length) >= 4) {this.analytics.timeWatched[4]['y']++}   
 
       for (var j = 0; j < lesson.students[i].exerciseResults.length; j++) {
         var answer = lesson.students[i].exerciseResults[j].answer
@@ -68,6 +68,7 @@ module.exports = Reflux.createStore({
           this.analytics.exercises[index][parseInt(answer)]['y']++}
       }
     }
+    console.log(this.analytics.exercises)
 
     this.triggerChange();
   },
