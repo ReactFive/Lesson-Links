@@ -29,7 +29,6 @@ var ShortAnswer = React.createClass({
 
   submitAnswer: function(event){
     event.preventDefault();
-    this.setState({answer: event.target.value.trim()});
 
     var bestCheck = new RegExp(this.state.exercise.bestAnswers);
     var altCheck = new RegExp(this.state.exercise.altAnswers);
@@ -105,7 +104,7 @@ var ShortAnswer = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/"><button className="btn btn-success">Continue Video</button></Link>
+                    <button className="btn btn-success try-again-btn" onClick={this.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}
@@ -130,8 +129,8 @@ var ShortAnswer = React.createClass({
                     </div>
                   </div>
                   <div className="modal-footer">
-                    <Link activeClassName="active" to="/exerciseSA"><button className="btn btn-primary">Try Again</button></Link>
-                    <Link activeClassName="active" to="/"><button className="btn btn-success try-again-btn">Continue Video</button></Link>
+                    <button className="btn btn-primary" onClick={this.retry}>Try Again</button>
+                    <button className="btn btn-success try-again-btn" onClick={this.onComplete}>Continue Video</button>
                   </div>
                 </div>
                 {/*end modal-content*/}

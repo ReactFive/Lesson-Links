@@ -30,7 +30,6 @@ module.exports = Reflux.createStore({
   },
 
   submitExerciseResult : function(exerciseObj, result) {
-    console.log(this.lesson);
     Api.submitExerciseResult(this.lesson._id, exerciseObj, result);
   },
 
