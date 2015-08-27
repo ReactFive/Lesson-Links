@@ -3,11 +3,15 @@ var Reflux = require('reflux');
 var Comment = require('./Comment.jsx');
 var LessonStore = require('../../../stores/lesson-store');
 var _ = require('lodash');
-
+var Actions = require('../../../actions');
 
 var CommentList = React.createClass({
 
   mixins: [Reflux.connect(LessonStore, "lesson")],
+
+  componentWillMount: function() {
+    Actions.triggerLessonStore();
+  },
   
   render: function() {
     if (this.state.lesson && this.state.lesson.comments.length) {
