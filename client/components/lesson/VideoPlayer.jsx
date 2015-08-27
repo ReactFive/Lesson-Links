@@ -44,6 +44,7 @@ var VideoPlayer = React.createClass({
   },
 
   componentWillUnmount: function() {
+    Actions.lessonTimepoint(videojs('attachmentVideo').currentTime())
     videojs('attachmentVideo').dispose();
   },
 

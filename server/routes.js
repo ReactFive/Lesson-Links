@@ -30,6 +30,7 @@ module.exports = function(app) {
   app.put('/api/lesson/:url/comments/:id/replies/:replyid/star', LessonCtrl.toggleReplyStar);
 
   app.post('/api/lesson/:id/exercise_result', auth.requiresApiLogin, LessonCtrl.recordExerciseResult);
+  app.post('/api/lesson/:url/timepoint', auth.requiresApiLogin, LessonCtrl.submitTimepoint);
 
   /**
    * USER API

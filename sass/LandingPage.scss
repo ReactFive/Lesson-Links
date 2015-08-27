@@ -8,14 +8,6 @@
   color: $darkest-blue;
 } 
 
-.sublogo{
-  padding-bottom: 150px;
-  text-align: center;
-  font-family: $header-font;
-  letter-spacing: .16em;
-  color: $light-purple;
-  font-weight: bold;
-}
 
 .testWash{
   background-color: $darkest-blue;
@@ -48,25 +40,51 @@
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 100%;
-  background-color:$darkest-blue;
+  background-image: url('../assets/ll-background.png');
 }
 
 .carousel .item2 {
-  background-color:$dark-purple;
-}
-
-.carousel h1{
-  margin: 0;
+  background-color: $dark-purple;
+  background-image: none;
 }
 
 .carousel .item3 {
-  background-color:$dark-teal;
+  background-color: white;
+  background-image: none;
+}
+
+.carousel{
+  h1, h3, p{
+    margin-top: 20px;
+    color: $lightest-blue;
+    font-family: $header-font;
+  }
+}
+
+
+.carousel{ 
+  .sublogo { 
+      color: $star;
+  }
+}
+
+.carousel{ 
+  .whiteHeader { 
+      color: $darkest-blue;
+  }
 }
 
 #react5{
   width: 450px;
   height: 450px;
+  cursor: pointer; 
+  cursor: hand;
+  transition: all .2s ease-in-out;
 }
+
+#react5:hover{
+  transform: scale(1.025);
+  }
 
 #ourStack{
   width: 450px;
@@ -76,14 +94,15 @@
 .carContent{
   width: 150px;
 }
-/*
-If we decide we want an image background -- this is what we'll use. Be sure to change the other images with the .carContent class
-.carousel img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 100%;
+
+/*.carousel {
+  backgroundimg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 100%;
+  }
 }*/
 
 .carousel-control.left, .carousel-control.right {
@@ -137,4 +156,25 @@ width: 100%; // Add this
 
 #step3{
   height: 45%;
+}
+
+.carousel-indicators li {
+  background-color: $mid-blue;
+  border: none;
+}
+
+.carousel-indicators .active {
+  background-color: $mid-blue;
+}
+
+
+
+.sublogo{
+  padding-bottom: 150px;
+  text-align: center;
+  font-family: $header-font;
+  letter-spacing: .25em;
+  color: $light-purple;
+  font-weight: bold;
+  word-spacing: 5px;
 }

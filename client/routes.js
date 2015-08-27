@@ -9,6 +9,7 @@ var App = require('./components/App');
 var LandingPage = require('./components/LandingPage.jsx');
 var LessonView = require('./components/lesson/LessonView.jsx');
 var LibraryView = require('./components/library_components/LibraryView.jsx');
+var AnalyticsView = require('./components/analytics/AnalyticsView.jsx');
 var SignupView = require('./components/signup/SignupView.jsx');
 var AddLessonView = require('./components/add_lesson_view/AddLessonView.jsx');
 var NotFound = require('./components/404/NotFound.jsx');
@@ -25,6 +26,7 @@ var routes = (
         <DefaultRoute handler={LandingPage}/>
         <Route path='/register' handler={SignupView} />
         <Route path='/library' handler={LibraryView} />
+        <Route path='/analytics' handler={AnalyticsView} />
         <Route path='/add-lesson' handler={AddLessonView}/>
         <Redirect from="/lesson" to="/add-lesson"/>
         <Route path='/configure' handler={LessonConfiguration}/>

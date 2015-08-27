@@ -1,26 +1,34 @@
 var React = require("react");
 var Router = require('react-router');
-var LINK = Router.Link;
+var Link = Router.Link;
 
 var NotFound = React.createClass({
   render: function() {
     return (
-        <div className="container error-container" id="404err">
+        <div className="fourOhFour container error-container" id="404err">
           <div className="row">
-            <div classname="col-md-12">
-              <div className="error-template">
-                <h1>Oops!</h1>
+            <div className="col-md-12">
+              <div className="error-template yellow">
+                <span>
+                  <h1 className="oops ohno" >Oops!</h1>
+                </span>
 
-                <h2>404 Not Found</h2>
+                <span >
+                  <h2 className="notFound">404 Not Found</h2>
 
-                <div className="error-details">
-                  Sorry, requested page not found!
-                </div>
-                <div className="error-actions">
-                  <LINK to="/" className="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
-                    Take Me Home </LINK>
-                  <LINK to="/" className="btn btn-default btn-lg"><span
-                    class="glyphicon glyphicon-envelope"></span> Contact Support </LINK>
+                  <p className="oops ohnopara">
+                    The page you requested could not be found!
+                  </p>
+              
+
+                  <Link to="/404explanation" className="oops ohnopara ohnoparalink">What does '404 Not Found' mean? Click here to find out!</Link>
+
+                </span>
+                <div className="error-actions pull-right">
+                  <Link to="/" className="oopsybtn btn btn-primary btn-lg">Take Me Home</Link>
+                  <a href="https://github.com/ReactFive/Lesson-Links/issues" target="_blank" className="oopsybtn btn btn-default btn-lg">
+                    Submit an Issue 
+                  </a>
                 </div>
               </div>
             </div>
