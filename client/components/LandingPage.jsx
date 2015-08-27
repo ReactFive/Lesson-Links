@@ -22,7 +22,6 @@ var Home = module.exports = React.createClass({
         <div className="carousel-caption">
           <h1 className="logo">Lesson Links</h1>
           <h3 className="sublogo">Annotated Educational Videos</h3>
-          <p>To be colored, styled, and replaced with a gif soon! </p>
           <p>
             <p>
             </p>
@@ -36,19 +35,19 @@ var Home = module.exports = React.createClass({
           <div className="row">
               <h1>How to make a Lesson Link...</h1>
             <div className="steps col-lg-4">
-              <h3>Step 1:<br/>Drop in a YouTube URL.</h3>
+              <h1>Step 1:</h1>
               <img id="step1" src="../../public/assets/step1.png" />
-              <p>You can use any YouTube URL to create a Lesson on Lesson Links!</p>
+              <h3>Drop in a YouTube URL.</h3>            
             </div>
             <div className="steps col-lg-4">
-              <h3>Step 2:<br/>Set-up Exercises.</h3>
+              <h1>Step 2:</h1>
               <img id="step2" src="../../public/assets/step2.png" />
-              <p>Choose between True/False, Short Answer, Multiple Choice, or Drag-and-Drop questions to your Lesson!</p>
+              <h3>Set-up Exercises.</h3>
             </div>
             <div className="steps col-lg-4">
-              <h3>Step 3:<br/>Share your Link!</h3>
+              <h1>Step 3:</h1>
               <img id="step3" src="../../public/assets/step3.png" />
-              <p>Share your published link with students to start a classroom conversation online!</p>
+              <h3>Share your Link!</h3>
             </div>
           </div>
         </div>
@@ -59,12 +58,14 @@ var Home = module.exports = React.createClass({
         <div className="carousel-caption">
           <div className="row">
             <div className="teamInfo col-md-6 portfolio-item">
-              <h1>Our Team: React5</h1>
-              <img id="react5" className="" src="../../public/assets/TeamImage2.png"/>
+              <h1 className="whiteHeader">Our Team: React5</h1>
+              <a href="https://github.com/ReactFive/Lesson-Links" title="View our GitHub!" target="_blank">
+                <img id="react5" className="" src="../../public/assets/TeamImage2.png"/>
+              </a>
             </div>
           <div className="carousel-caption">
               <div className="teamInfo col-md-6 portfolio-item">
-                <h1>Our Tech</h1>
+                <h1 className="whiteHeader">Our Tech</h1>
                 <img id="ourStack" className="" src="../../public/assets/ourstack.png"/>
               </div>
           </div>
