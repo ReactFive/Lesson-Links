@@ -69,32 +69,3 @@ var Library = React.createClass({
 });
 
 module.exports = Library;
-
-   // return <div className="container lib-lesson-container">
-   //        <h1>TEST</h1>
-   //        {/* Lessons where user is the teacher */}
-   //        <div id="library-filter-header">
-   //          <h1 className="filterColor">
-   //            {name}{apo}s Library
-   //          </h1>
-   //          <hr/>
-   //        </div>
-   //        <LibLessonCollection lessons = {
-   //            _.filter(user.lessons, function (lesson) {
-   //              return lesson.teacher.id === user._id
-   //            })
-   //          } owner = {true}/>
-
-   //        {/* Lessons where user is not the teacher */}
-   //        <div className="library-filter-header">
-   //          <h1 className="filterColor">{name}{apo}s Studies</h1>
-   //          <hr/>
-   //        </div>
-
-   //        <LibLessonCollection lessons = {
-   //          _.filter(user.lessons, function (lesson) {
-   //            return lesson.teacher.id !== user._id && lesson.publish
-   //          })
-   //        } owner = {false}/>
-
-   //      </div>;
