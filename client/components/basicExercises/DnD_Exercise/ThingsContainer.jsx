@@ -10,13 +10,14 @@ var categoryTarget = {
     var droppedItem = monitor.getItem().itemId;
     var currThings = component.state.things;  
 
-    if(currThings.indexOf(droppedItem)) {
+    if(currThings.indexOf(droppedItem) === -1) {
+      console.log(currThings, droppedItem)
       component.setState({things:currThings.concat([droppedItem])});
     }
 
     return {
       endCategory: component.props.name
-    }
+    }  
   }
 };
 
@@ -27,7 +28,7 @@ function collect(connect, monitor) {
   };
 }
 
-var Category = React.createClass({
+var ThingsContainer = React.createClass({
   getInitialState: function() {
     return {
       things : this.props.things
@@ -47,9 +48,11 @@ var Category = React.createClass({
 
     var things = this.state.things.map(function(thingName) {
       return (
-          <Thing name={thingName}
+        <div key={thingName} className="col-xs-2">
+          <Thing name={thingName} 
             currentCategory={this.props.name}
             onDraggedElsewhere={this.removeThing}/>
+        </div>
       )
     }.bind(this))
 
@@ -57,18 +60,21 @@ var Category = React.createClass({
       <div
         key={this.props.name}
         style={{
-          minHeight:'150px',
-          backgroundColor:'white',
+          minHeight:'80px',
+          backgroundColor:'red',
         }}>
-        <div style={{textAlign:'center'}}>
-          {this.props.name}
+        <div style={{
+          textAlign:'center',
+          color: 'black',
+          fontSize: '18px'
+        }}>
+          {"Drag each of the items into a category"}
         </div>
-        <div>
-          {things}
-        </div>
+        {things}
       </div>
     )
   }
 })
 
-module.exports = DropTarget('thing', categoryTarget, collect)(Category);
+module.exports = DropTarget('thing', categoryTarget, collect)(ThingsContainer);
+
