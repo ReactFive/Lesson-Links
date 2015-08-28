@@ -1,7 +1,47 @@
 @import "Theme.scss";
 
-#current-exercises {
-  margin-top: 40px;
+.panel{
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+#lesson-config-view{
+  width: 1003px;
+  margin: 0 auto;
+  position: relative;
+  top: 10px;
+}
+
+.left-column{
+  width: 640px;
+}
+
+.right-column{
+  width: 416px;
+}
+
+.config-video-box{
+  background-color: red !important;
+}
+
+#config-video-container{
+  width: 640px;
+  height: 360px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.config-video-wrapper{
+  position: relative;
+  top: 0px;
+  width: 640px;
+  height: 360px;
+  padding: 0px;
+}
+
+#attachmentVideo {
+  width: 100%;
+  height: 100%;
 }
 
 .config-container {

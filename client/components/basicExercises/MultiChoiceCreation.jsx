@@ -145,13 +145,13 @@ var MultiChoiceCreation = React.createClass({
   render: function(){
 
     return (
-        <div className="container animated fadeInUp">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
+        <div className="animated fadeInUp">
+          <div className="">
+            <div className="">
+              <div className="">
                 <h3>Create/Update a Multiple Choice Question</h3>
               </div>
-              <div className="modal-body">
+              <div className="">
                 <Select
                     name="Number of items"
                     value="Select the number of alternative answers"

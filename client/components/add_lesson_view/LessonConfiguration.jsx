@@ -54,22 +54,45 @@ var LessonConfiguration = React.createClass({
 
   render: function() {
     return (
-        <div className="container">
-          <ul className="list-group row config-container animated fadeIn">
-            <li className="list-group-item col-md-8">
-              <VideoPlayer />
-            </li>
-            {this.state.lesson && <CurrentExercisesList onPublish={this.publishLesson} reloadExercise={this.loadExercise} exerciseObjects={this.state.lesson.exercises}/>}
+        <div id="lesson-config-view">
 
-            <li className="list-group-item col-md-12">
-              {!this.state.editing &&
-              <ExerciseTypes chooseType={this.setEditing} />}
-            </li>
-          </ul>
-          <div className="panel panel-default">
-            {this.state.editing &&
-            this.mapExerciseType()}
+          <div className="col-lg-8">
+              <div className="panel config-video-box">
+                <VideoPlayer />
+              </div>
+              
+              <div className="panel panel-default">
+                <div className="panel-body">
+                  <h5>Configure your lesson</h5>
+                  <ol>
+                    <li>Click on the video timeline where you want an exercise to appear to the student.</li>
+                    <li>Select the type of exercise you'd like to add</li>
+                    <li>Fill out the exercise form</li>
+                    <li>Repeat!</li>
+                    <li>When you've added all of your exercises, click Publish to make your lesson link publicly available</li>
+                  </ol>
+                </div>
+                <div className="panel-footer">
+                  <button onClick={this.publishLesson} className="btn-block btn-success">Publish your lesson</button>
+                </div>
+              </div>
+
+              <div className="panel panel-default">
+                <div className="panel-header">
+                  {!this.state.editing && <ExerciseTypes chooseType={this.setEditing} />}
+                </div>
+                <div className="panel-body">
+                  {this.state.editing && this.mapExerciseType()}
+                </div>
+              </div>
+
           </div>
+       
+          <div className="col-lg-4">
+            {this.state.lesson && 
+              <CurrentExercisesList reloadExercise={this.loadExercise} exerciseObjects={this.state.lesson.exercises}/>}
+          </div>
+  
         </div>
     );
   },
