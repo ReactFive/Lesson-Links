@@ -29,7 +29,7 @@ var AnalyticsView = React.createClass({
   timeWatched: function() {
     this.setState({
       data : this.state.analytics.timeWatched,
-      xAxis : 'Percentage of Video Completed'
+      xAxis : '% Completed'
     })
   },
   
@@ -44,7 +44,6 @@ var AnalyticsView = React.createClass({
     var self = this;
     var data = this.state.data;
     var exercises = [];
-
     var exercises = this.state.analytics.exercises.map(function(exercise, index){
       return <li onClick={function(){self.setExercise(exercise)}} exercise={exercise}>Exercise #{index+1}</li>
     })
