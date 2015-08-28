@@ -22,6 +22,5 @@
     "moment": "~2.10.6",
     "bootstrap-social": "~4.9.1",
     "sweetalert": "~1.1.0",
-    "d3": "~3.5.6"
   }
 }
