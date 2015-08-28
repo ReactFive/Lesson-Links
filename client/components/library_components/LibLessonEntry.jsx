@@ -66,33 +66,42 @@ var LibLessonEntry = React.createClass({
     this.transitionTo('/' + this.props.lesson.lesson_url);
   },
 
+  renderAnalyticsBtn: function(owner, lesson) {
+    if (owner && lesson.publish) {
+      return <span className="fa fa-bar-chart pull-right" id="chart" onClick={this.gotoAnalytics}></span>
+    }
+    return null;
+  },
+
   render: function() {
     var lesson = this.props.lesson;
+    var owner = this.props.owner;
 
     var commentCount = _.reduce(
-      lesson.comments, function(total, comment){
-        return total + comment.replies.length + 1
-      }, 0);
+        lesson.comments, function (total, comment) {
+          return total + comment.replies.length + 1;
+        }, 0);
 
     var createdDate;
-    if(lesson.published_at) {
-      createdDate = Moment(lesson.created_at).format('MMMM Do YYYY, h:mm a')
+    if (lesson.published_at) {
+      createdDate = Moment(lesson.created_at).format('MMMM Do YYYY, h:mm a');
     } else {
-      createdDate = 'Not published'
+      createdDate = 'Not published';
     }
 
     var video_id = lesson.video_url.split('v=')[1];
     var ampersandPosition = video_id.indexOf('&');
-    if(ampersandPosition != -1) {
+    if (ampersandPosition != -1) {
       video_id = video_id.substring(0, ampersandPosition);
     }
-    
+
     var publishDisplay = lesson.publish ?
         <li> Published on: {createdDate} </li>
-      : <li>Not Published</li>;
+        : <li>Not Published</li>;
 
-    var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
+    var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg';
 
+    console.log("here the lesson to be rendered ", this.props.lesson);
     return (
       <li className="list-group-item col-md-6 col-xs-12 lib-lesson-entry animated fadeIn" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
           <img className="hidden-xs media pull-left videoSnippet" src={imgUrl} />
@@ -114,11 +123,11 @@ var LibLessonEntry = React.createClass({
           </ul>
           <span className="fa fa-link pull-right" id="link" onClick={this.getLink}></span>
           <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
-          <span className="fa fa-bar-chart pull-right" id="chart" onClick={this.gotoAnalytics}></span>
+        { this.renderAnalyticsBtn(owner, lesson) }
       </li>
     );
   }
 
-})
+});
 
 module.exports = LibLessonEntry;
