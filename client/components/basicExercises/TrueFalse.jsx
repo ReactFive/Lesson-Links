@@ -22,7 +22,7 @@ var TrueFalse = React.createClass({
 
   handleClick: function(clickedOpt){
     console.log(clickedOpt);
-    if(clickedOpt === "true") {
+    if(clickedOpt === this.state.exercise.correctOption) {
       this.setState({outcome: true});
     } else{
       this.setState({outcome: false});
@@ -32,7 +32,7 @@ var TrueFalse = React.createClass({
   onComplete: function() {
     var result = {
       correct : this.state.outcome,
-      answer : this.state.outcome ? this.state.correctOption : !this.state.correctOption
+      answer : this.state.outcome ? this.state.exercise.correctOption : !this.state.exercise.correctOption
     }
 
     this.props.onComplete(result);
