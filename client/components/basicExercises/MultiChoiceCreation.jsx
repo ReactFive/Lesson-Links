@@ -225,8 +225,8 @@ var MultiChoiceCreation = React.createClass({
           "closeButton": true,
           "showMethod": "slideDown",
           "hideMethod": "slideUp",
-          "positionClass": "toast-top-left",
-          "showDuration": "150"
+          "positionClass": "toast-top-right",
+          "showDuration": "100"
         };
         toastr['success']('Your exercise has been updated');
       }
