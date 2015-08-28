@@ -2,7 +2,7 @@
 
 [www.lesson-links.com](https://www.lesson-links.com)
 
-Lesson Links is a React.js, Reflux, MongoDB, Express app thatallows teachers to create video-based lessons that are 
+Lesson Links is a React.js, Reflux, MongoDB, Express app that allows teachers to create video-based lessons that are 
 easily accessible, facilitate student/teacher conversations, and enable the assessment of student understanding.
 
 ## File structure
