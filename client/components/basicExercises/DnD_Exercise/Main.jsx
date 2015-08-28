@@ -1,7 +1,11 @@
 var React = require('react');
 var Reflux = require('reflux');
 
+var DragDropContext = require('react-dnd').DragDropContext;
+var HTML5Backend = require('react-dnd/modules/backends/HTML5');
+
 var Category = require('./Category.jsx');
+var Thing = require('./Thing.jsx');
 
 var DnD_Exercise = React.createClass({
 
@@ -14,12 +18,21 @@ var DnD_Exercise = React.createClass({
       )
     })
 
+    var things = this.things.map(function(thingName) {
+      return (
+        <div className="col-xs-2">
+          <Thing name={thingName} />
+        </div>
+      )
+    })
+
     return (
       <div className="container">
+        <div className="row" style={{margin:'20px 0px'}}>
+          {categories}     
+        </div>
         <div className="row">
-          
-            {categories}
-          
+          {things}
         </div>
       </div>)
   },
@@ -27,7 +40,12 @@ var DnD_Exercise = React.createClass({
   categories: [
     'fruits',
     'vegetables'
+  ],
+
+  things: [
+    'apple',
+    'tomato'
   ]
 })
 
-module.exports = DnD_Exercise;
+module.exports = DragDropContext(HTML5Backend)(DnD_Exercise);
