@@ -60,25 +60,9 @@ var LessonConfiguration = React.createClass({
               <div className="panel config-video-box">
                 <VideoPlayer />
               </div>
-              
-              <div className="panel panel-default">
-                <div className="panel-body">
-                  <h5>Configure your lesson</h5>
-                  <ol>
-                    <li>Click on the video timeline where you want an exercise to appear to the student.</li>
-                    <li>Select the type of exercise you'd like to add</li>
-                    <li>Fill out the exercise form</li>
-                    <li>Repeat!</li>
-                    <li>When you've added all of your exercises, click Publish to make your lesson link publicly available</li>
-                  </ol>
-                </div>
-                <div className="panel-footer">
-                  <button onClick={this.publishLesson} className="btn-block btn-success">Publish your lesson</button>
-                </div>
-              </div>
 
               <div className="panel panel-default">
-                <div className="panel-body">
+                <div className="panel-header">
                   {!this.state.editing && <ExerciseTypes chooseType={this.setEditing} />}
                 </div>
                 <div className="panel-body">
@@ -89,8 +73,28 @@ var LessonConfiguration = React.createClass({
           </div>
        
           <div className="col-lg-4">
-            {this.state.lesson && 
-              <CurrentExercisesList reloadExercise={this.loadExercise} exerciseObjects={this.state.lesson.exercises}/>}
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <div className="panel panel-default">
+                  <div className="panel-body">
+                    <h5>Configure your lesson</h5>
+                    <ol>
+                      <li>Click on the video timeline where you want an exercise to appear to the student.</li>
+                      <li>Select the type of exercise you'd like to add</li>
+                      <li>Fill out the exercise form</li>
+                      <li>Repeat!</li>
+                      <li>When you've added all of your exercises, click Publish to make your lesson link publicly available</li>
+                    </ol>
+                  </div>
+                  <div className="panel-footer">
+                    <button onClick={this.publishLesson} className="btn-block btn-success">Publish your lesson</button>
+                  </div>
+                </div>
+              
+                {this.state.lesson && 
+                  <CurrentExercisesList reloadExercise={this.loadExercise} exerciseObjects={this.state.lesson.exercises}/>}
+              </div>
+            </div>
           </div>
   
         </div>

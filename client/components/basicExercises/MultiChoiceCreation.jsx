@@ -164,19 +164,14 @@ var MultiChoiceCreation = React.createClass({
               <form className="multichoiceForm" name="multichoiceForm" onSubmit={this.handleSubmit}>
 
                 <div>
-                  
                     <h5>Question</h5>
-                  
-                    <Textarea
+                    <TextInput
                       ref="question"
                       className="form-control exercise-text-form"
                       rows={1}
                       value={this.state.exercise.question}
                       onChange={this.setExerciseState}/>
-              
                 </div>
-
-              
 
                 <h5>Answer Choices</h5>
 
