@@ -94,6 +94,7 @@ var LibLessonEntry = React.createClass({
 
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg'
 
+    console.log("here the ownership check ", this.props.owner);
     return (
       <li className="list-group-item col-md-6 col-xs-12 lib-lesson-entry animated fadeIn" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
           <img className="hidden-xs media pull-left videoSnippet" src={imgUrl} />
@@ -115,7 +116,7 @@ var LibLessonEntry = React.createClass({
           </ul>
           <span className="fa fa-link pull-right" id="link" onClick={this.getLink}></span>
           <span className="fa fa-trash-o pull-right" id="trashcan" onClick={this.deleteLesson}></span>
-          <span className="fa fa-bar-chart pull-right" id="chart" onClick={this.gotoAnalytics}></span>
+        {this.props.owner ? <span className="fa fa-bar-chart pull-right" id="chart" onClick={this.gotoAnalytics}></span>: null}
       </li>
     );
   }
