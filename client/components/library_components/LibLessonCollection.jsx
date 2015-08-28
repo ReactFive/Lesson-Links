@@ -29,8 +29,7 @@ var LibLessonCollection = React.createClass({
       </ul>
     );
   }
-})
-
+});
 
 {/* FOR FUTURE ANIMATION STYLING           <img src='../../public/assets/lock.png' />*/}
 
