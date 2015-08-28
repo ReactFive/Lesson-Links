@@ -69,6 +69,7 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.3",
     "react": "^0.13.3",
+    "react-d3-components": "^0.4.8",
     "react-router": "^0.13.3",
     "react-select": "^0.6.1",
     "react-textarea-autosize": "^2.5.0",

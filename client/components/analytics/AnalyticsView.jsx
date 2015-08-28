@@ -16,47 +16,66 @@ var AnalyticsView = React.createClass({
   mixins: [Reflux.connect(AnalyticsStore, 'analytics')],
 
   getInitialState: function() {
-    return {data: []}  
+    return {
+      data: [], 
+      yAxis: '', 
+      xAxis: '', 
+      analytics : {
+        exercises: {
+          answerCount: [],
+          studentsAnswer: []
+        }
+      },
+      studentAnswers: []
+    }  
   },
 
-  showAll: function() {
-    this.setState({data : this.state.analytics.timeWatched})
+  timeWatched: function() {
+    this.setState({
+      data : this.state.analytics.timeWatched,
+      xAxis : '% Completed'
+    })
   },
   
-  filter: function() {
-    this.setState({data: filtered});
+  setExercise: function(exercise, studentAnswers) {
+    this.setState({
+      data: exercise,
+      studentAnswers: studentAnswers,
+      xAxis: 'Answers'
+    });
   },
 
   render: function() {
+    var self = this;
     var data = this.state.data;
+    var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
+      return <li onClick={function(){self.setExercise(exercise, 
+      self.state.analytics.exercises.studentsAnswer[index])}}>Exercise #{index+1}</li>
+    })
 
-    if (data) {
     return (
     <div>
       <div className="selection">
-            <ul>
-              <li onClick={this.showAll}>All</li>
-              <li onClick={this.filter}>Filter</li>
-            </ul>
-          </div>
-          <hr/>
+        <ul>
+          <li onClick={this.timeWatched}>Time Watched</li>
+            {exercises.length ? {exercises} : ''}
+          </ul>
+      </div>
+      <hr/>
       <div id="analytics-view">
       	<div className="container">
       		<div className="row">
       				<div className="col-lg-6 col-md-12" id="analytics-view">
-         				<Chart data={data} />
-     	 			</div>
-			      <div className="col-lg-6 col-md-12">
-			      	<StudentOutcomeCollection />
-			      </div>
-			    </div>	
-		    </div>
-      </div>
+      					<Chart data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
+       	 			</div>
+		      <div className="col-lg-6 col-md-12">
+		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} />
+		      </div>
+		    </div>	
+	    </div>
     </div>
-    );
-  } else {
-    return null
-  }
+    </div>
+    )
   }
 });
 

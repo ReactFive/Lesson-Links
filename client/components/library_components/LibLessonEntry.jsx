@@ -53,9 +53,8 @@ var LibLessonEntry = React.createClass({
     var self = this;
     e.preventDefault();
     e.stopPropagation();
-    swal("Oops!", "There are currently no analytics available for this lesson! Check back later!", "error");
-    /*Actions.analyticsTransition(self.props.lesson)
-    this.transitionTo('/analytics')*/
+    Actions.analyticsTransition(self.props.lesson)
+    this.transitionTo('/analytics')
   }, 
 
   gotoConfigure: function () {
