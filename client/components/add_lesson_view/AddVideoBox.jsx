@@ -45,7 +45,7 @@ var AddVideoBox = React.createClass({
       swal("Invalid YouTube Link!", "That lesson is not a valid YouTube URL. Try Another.", "error")},
 
     /*Callback to CreateLessonStore: lessonCreated*/
-    /*This function runs if the creation is sucessful -- clicking the button will redirect*/
+    /*This function runs if the creation is successful -- clicking the button will redirect*/
     function(){
       swal({
         title: "Success!", 
