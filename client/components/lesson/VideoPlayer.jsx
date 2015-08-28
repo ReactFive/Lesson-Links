@@ -29,6 +29,7 @@ var VideoPlayer = React.createClass({
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted && this.state.lesson){
       console.log(this.state.lesson);
+      Actions.lessonTimepoint(videojs('attachmentVideo').currentTime())
       var comments = this.state.lesson.comments,
           exerciseObjs = this.state.lesson.exercises;
       exerciseObjs.forEach(function(exerciseInfo) {
@@ -54,7 +55,7 @@ var VideoPlayer = React.createClass({
     // initialize video.js
     var player = videojs('attachmentVideo').ready(function(){
       player.on('ended', function(){
-        alert ("I have triggered");
+        Actions.lessonTimepoint(videojs('attachmentVideo').currentTime())
       })
     })
 

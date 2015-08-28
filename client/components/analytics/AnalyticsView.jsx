@@ -21,8 +21,12 @@ var AnalyticsView = React.createClass({
       yAxis: '', 
       xAxis: '', 
       analytics : {
-        exercises: []
-      }
+        exercises: {
+          answerCount: [],
+          studentsAnswer: []
+        }
+      },
+      studentAnswers: []
     }  
   },
 
@@ -33,9 +37,10 @@ var AnalyticsView = React.createClass({
     })
   },
   
-  setExercise: function(exercise) {
+  setExercise: function(exercise, studentAnswers) {
     this.setState({
       data: exercise,
+      studentAnswers: studentAnswers,
       xAxis: 'Answers'
     });
   },
@@ -43,9 +48,9 @@ var AnalyticsView = React.createClass({
   render: function() {
     var self = this;
     var data = this.state.data;
-    var exercises = [];
-    var exercises = this.state.analytics.exercises.map(function(exercise, index){
-      return <li onClick={function(){self.setExercise(exercise)}} exercise={exercise}>Exercise #{index+1}</li>
+    var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
+      return <li onClick={function(){self.setExercise(exercise, 
+      self.state.analytics.exercises.studentsAnswer[index])}}>Exercise #{index+1}</li>
     })
 
     return (
@@ -64,7 +69,7 @@ var AnalyticsView = React.createClass({
       					<Chart data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
        	 			</div>
 		      <div className="col-lg-6 col-md-12">
-		      	<StudentOutcomeCollection />
+		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} />
 		      </div>
 		    </div>	
 	    </div>
