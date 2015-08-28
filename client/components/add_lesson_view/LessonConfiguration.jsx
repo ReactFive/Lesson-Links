@@ -78,7 +78,7 @@ var LessonConfiguration = React.createClass({
               </div>
 
               <div className="panel panel-default">
-                <div className="panel-header">
+                <div className="panel-body">
                   {!this.state.editing && <ExerciseTypes chooseType={this.setEditing} />}
                 </div>
                 <div className="panel-body">
