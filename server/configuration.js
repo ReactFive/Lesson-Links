@@ -29,6 +29,5 @@ module.exports = {
     'clientSecret'  : '7rmDtlJTTsuvaUEqn0c9VAy5',
     'callbackURL'   : '/api/google/callback'
   }
+
 };
-
-
