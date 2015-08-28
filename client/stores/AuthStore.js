@@ -7,7 +7,7 @@ var ReactRouter = require('react-router');
 var Navigation = ReactRouter.Navigation;
 var _ = require('lodash');
 
-module.exports = Reflux.createStore({
+var authStore = Reflux.createStore({
   mixins: [Navigation],
   listenables: [Actions],
 
@@ -43,7 +43,6 @@ module.exports = Reflux.createStore({
     return Api.getUser()
     .then(function (res) {
       if (res.data.user) {
-        console.log('fetched user')
         this.auth.user = res.data.user;
         this.triggerChange();
         callback()
@@ -91,7 +90,6 @@ module.exports = Reflux.createStore({
         toastr["success"]("Welcome to Lesson Links " + name);
       }.bind(this))
       .catch(function(res){
-        console.log('error :', res)
         toastr["error"]("Sorry, there was a problem registering you");
         this.triggerChange();
       }.bind(this));
@@ -101,3 +99,5 @@ module.exports = Reflux.createStore({
     this.trigger(this.auth);
   }
 });
+
+module.exports = authStore;

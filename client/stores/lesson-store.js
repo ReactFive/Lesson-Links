@@ -2,23 +2,29 @@ var Reflux = require('reflux');
 var Api = require('../utils/api');
 var Actions = require('../actions');
 var _ = require('lodash');
-var AuthStore = require('./AuthStore')
+var AuthStore = require('./AuthStore');
 
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
 
-  init: function() {},
+  init: function() {
+    this.listenTo(AuthStore, this.onAuthStore);
+  },
+
+  onAuthStore: function(auth){
+    this.user = auth.user;
+  },
 
   fetchLesson : function(payload) {
     var url = payload.url// || 'sass-101'
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
-      console.log('fetched lesson')
+      console.log('fetched lesson');
       self.lesson = res.data;
       self.trigger(self.lesson);
-      self.followLesson(payload)
+      self.followLesson(payload);
     })
     .catch(function(res){
       payload.sourceComponent.transitionTo('/404');
@@ -26,7 +32,7 @@ module.exports = Reflux.createStore({
   },
 
   lessonTimepoint : function(time) {
-    Api.submitLessonTimepoint(time, this.lesson.lesson_url)
+    Api.submitLessonTimepoint(time, this.lesson.lesson_url);
   },
 
   submitExerciseResult : function(exerciseObj, result) {
@@ -49,23 +55,23 @@ module.exports = Reflux.createStore({
   },
 
   followLesson : function(lesson){
-    {/*Check if the user is already following this lesson*/}
-    if (AuthStore.auth.user) {
-      var following = _.reduce(AuthStore.auth.user.lessons, function(found, elem, key){
+    /*Check if the user is already following this lesson*/
+    if (this.user) {
+      var following = _.reduce(this.user.lessons, function(found, elem, key){
             if (found) {
-              return true
+              return true;
             } else {
-              return (elem.lesson_url === lesson.url)
+              return (elem.lesson_url === lesson.url);
             }}, false
-      )
+      );
       if(!following) {
         Api.updateUser({
           lesson_url : lesson.url,
           addLesson : true
-        })
+        });
       }
     } else {
-      console.log('User not found, can\'t follow lesson')
+      console.log('User not found, can\'t follow lesson');
     }
   },
 

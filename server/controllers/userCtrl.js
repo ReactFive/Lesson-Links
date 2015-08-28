@@ -19,13 +19,13 @@ exports.loginUser = function(req, res) {
     function(err, user){
       if (!user){
         res.status(401)
-        res.send({err: "Unauthorized"})
+        res.send({err: "Unauthorized"});
       }
       if (err) {console.log(err)}
-      user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')})
-	  user.local = _.omit(user.local, 'password')
+      user.lessons = _.filter(user.lessons, function(lesson){return (typeof lesson !== 'string')});
+	    user.local = _.omit(user.local, 'password');
       res.status(200)
-      res.send({user:user})
+      res.send({user:user});
     }
   )
 };
@@ -45,7 +45,7 @@ exports.addLesson = function(req, res){
         res.status(500).send();
       }
     res.status(201).send(obj);
-    })
+    });
 };
 
 exports.getUser = function(req, res){
@@ -64,11 +64,11 @@ exports.getUser = function(req, res){
         //If the user is not the teacher, remove all lesson data that doesn't belong to them
         if (!(req.user._id.toString() === user.lessons[i].teacher.id.toString())) {
           user.lessons[i].students = _.filter(user.lessons[i].students, function(student){
-            return (student.id.toString() === req.user._id.toString())
-          })
+            return (student.id.toString() === req.user._id.toString());
+          });
         }
       }
-      res.status(200).send({user:user})
+      res.status(200).send({user:user});
     })
   }
 };
@@ -81,19 +81,19 @@ exports.updateUser = function(req, res){
     .exec(
       function(err, lesson){
       if (lesson === null) {
-        res.status(500).send('That lesson does not exist')
+        res.status(500).send('That lesson does not exist');
       } else {
         User
         .findByIdAndUpdate(req.user._id,
-        {$push:{'lessons': lesson._id}},
+        {$addToSet :{'lessons': lesson._id}},
         {safe:true, upsert: false, new: true},
         function(err, user){
           if (err) {console.log(err)}
-          user.local = _.omit(user.local, 'password')
-          res.status(200).send(user)       
-        })
+          user.local = _.omit(user.local, 'password');
+          res.status(200).send(user);
+        });
       }
-    })
+    });
   } else if (req.user && req.body.unfollowLesson === true) {
     //Removes lesson from user's lesson array
     User
@@ -107,17 +107,16 @@ exports.updateUser = function(req, res){
         if (lesson.teacher.id.toString() === req.user._id.toString()) {
           Lesson
           .findByIdAndRemove(req.body._id, function(err, lesson){
-          })
+          });
         }
-        user.local = _.omit(user.local, 'password')
-        res.status(200).send(user)       
-      })
-    })
+        user.local = _.omit(user.local, 'password');
+        res.status(200).send(user) ;
+      });
+    });
   }
-}
+};
 
 exports.logout = function(req, res){
-  console.log('logging out')
   req.logout();
   req.session.destroy(function (err) {
     if (err) { return next(err); }

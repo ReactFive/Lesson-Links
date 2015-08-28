@@ -135,16 +135,16 @@ exports.updateLesson = function(req, res, next){
   Lesson.findOne({'lesson_url':req.params.url})
   .exec(function(err, lesson){
     //Ensure only the teacher can update certain parts of a lesson
-    var owner = lesson.teacher.id.toString() === req.user._id.toString()   
+    var owner = lesson.teacher.id.toString() === req.user._id.toString();
     //Only update parts of the lesson supplied in req.body
     if (!owner || !req.body.hasOwnProperty('video_url')) {
-      req.body.video_url = lesson.video_url
+      req.body.video_url = lesson.video_url;
     }
     if (!owner || !req.body.hasOwnProperty('video_duration')) {
       req.body.video_duration = lesson.video_duration;
     }
     if (!req.body.hasOwnProperty('comments')) {
-      req.body.comments = lesson.comments
+      req.body.comments = lesson.comments;
     }
     if (!owner || !req.body.hasOwnProperty('publish') || lesson.publish) {
       req.body.publish = lesson.publish;
