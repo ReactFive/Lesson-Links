@@ -70,8 +70,7 @@ gulp.task('vendor', function() {
     'client/bower_components/moment/moment.min.js',
     'client/bower_components/moment/min/moment.min.js',
     'client/bower_components/toastr/toastr.js',
-    'client/bower_components/sweetalert/dist/sweetalert.min.js',
-    ''
+    'client/bower_components/sweetalert/dist/sweetalert.min.js'
   ]).pipe(concat('vendor.js'))
       .pipe(gulpif(production, uglify({ mangle: false })))
       .pipe(gulp.dest('client/public/js'));

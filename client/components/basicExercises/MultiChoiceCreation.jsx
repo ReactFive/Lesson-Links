@@ -210,13 +210,34 @@ var MultiChoiceCreation = React.createClass({
       if (!this.state.updating) {
         Actions.createExercise(exerciseObj);
         this.props.onComplete();
+        toastr.options = {
+          "closeButton": true,
+          "showMethod": "slideDown",
+          "hideMethod": "slideUp",
+          "positionClass": "toast-top-left",
+          "showDuration": "150"
+        };
         toastr['success']('Your new exercise has been created');
       } else {
         Actions.updateExercise(exerciseObj);
         this.props.onComplete();
+        toastr.options = {
+          "closeButton": true,
+          "showMethod": "slideDown",
+          "hideMethod": "slideUp",
+          "positionClass": "toast-top-right",
+          "showDuration": "100"
+        };
         toastr['success']('Your exercise has been updated');
       }
     } else {
+      toastr.options = {
+        "closeButton": true,
+        "showMethod": "slideDown",
+        "hideMethod": "slideUp",
+        "positionClass": "toast-top-left",
+        "showDuration": "150"
+      };
       toastr['warning']('Make sure you have a question and options');
     }
 
