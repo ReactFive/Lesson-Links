@@ -49,7 +49,7 @@ var nav = React.createClass({
               <div className="dropdown-menu">
                 <ul style={{padding:0, listStyleType: "none"}}>
                   <li>
-                    <form className="form" id="formLogin"> 
+                    <form name="login" className="form" id="formLogin" onSubmit={this.handleSubmit}>
                       <div className="form-group form-group-md">
                         <input ref="email" type="text" className="form-control" placeholder="Email"/>
                       </div>
@@ -58,7 +58,7 @@ var nav = React.createClass({
                         <input ref="password" type="password" className="form-control" placeholder="Password"/>
                       </div>
                       <br/>
-                      <button type="button" id="btnLogin" className="btn btn-default" style={{width: "100%"}} onClick={this.handleSubmit}>Login</button>
+                      <button type="submit" id="btnLogin" className="btn btn-default" style={{width: "100%"}}>Login</button>
                       <Link to="/register" className="signup-link" data-toggle="dropdown">Create new account</Link>
                     </form>
                   </li>
