@@ -59,25 +59,50 @@ var AnalyticsView = React.createClass({
 
     return (
     <div>
+
       <div className="analyticsEntryCollection selection">
         <ul>
           <li className="analyticsNavEntry" onClick={this.timeWatched}>Time Watched</li>
             {exercises.length ? {exercises} : ''}
-          </ul>
+        </ul>
       </div>
+
       <hr/>
+
       <div id="analytics-view">
-      	<div className="container">
-      		<div className="row">
-      				<div className="col-lg-8 col-md-8" id="analytics-view">
-      					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
-       	 			</div>
-		      <div className="col-lg-4 col-md-4">
-		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} studentParam={this.state.studentParam} />
-		      </div>
-		    </div>	
+        <div className="container">
+          <div className="analyticsHolder col-lg-10 col-lg-offset-1">
+
+          	<div className="panel panel-default">
+              <div className="panel-body">
+
+              <div className="row" id="analytics-view">
+
+                <div className="col-lg-6">
+                  <div className="panel panel-default">
+                    <div className="panel-body">
+              					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-lg-6">
+          	      <div className="panel panel-default">
+                    <div className="panel-body">
+          	      	  <StudentOutcomeCollection studentAnswers={this.state.studentAnswers} studentParam={this.state.studentParam} />
+                    </div>
+          	      </div>
+                </div>
+
+              </div>
+              
+              </div>
+            </div>
+
+  		    </div>	
+        </div>
 	    </div>
-    </div>
+
     </div>
     )
   }
