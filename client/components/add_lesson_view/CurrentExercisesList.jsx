@@ -9,7 +9,8 @@ var CurrentExercisesList = React.createClass({
   
     return this.props.exerciseObjects.map(function(exerciseObj) {
       if (!exerciseObj._id) return null;
-      var reloadMe = function() {
+      var reloadMe = function(e) {
+        e.stopPropagation();
         this.props.reloadExercise(exerciseObj);
       }.bind(self);
 
@@ -18,11 +19,14 @@ var CurrentExercisesList = React.createClass({
       var seconds = (Math.floor(exerciseObj.time) % 60).toString();
       if(seconds.length < 2) seconds = '0' + seconds;
       var timeDisplay = minutes + ':' + seconds;
-
+      console.log("Exercise obj", exerciseObj);
       return (
-          <div className="col-md-12 animated fadeIn">
-            <div className="col-md-9" key={exerciseObj.key} onClick={reloadMe}> {timeDisplay} {exerciseObj.type}</div>
-            <span onClick={self.deleteExercise.bind(null, exerciseObj._id)} className="glyphicon glyphicon-remove col-md-3"></span>
+          <div className="exercise-entry col-md-12 animated fadeIn" onClick={reloadMe}>
+            <span onClick={self.deleteExercise.bind(null, exerciseObj._id)} className="glyphicon glyphicon-remove pull-right"></span>
+            <span key={exerciseObj.key}> 
+              {timeDisplay} {exerciseObj.type} <br/>
+              {exerciseObj.exercise.question}
+            </span>
          </div>
       )
     })
@@ -30,23 +34,21 @@ var CurrentExercisesList = React.createClass({
 
   render: function() {
     return (
-        <li className="list-group-item col-md-4">
-          <div className="panel-footer">
-            <button onClick={this.props.onPublish} className="btn-block btn-success">Publish your lesson</button>
-          </div>
-          <div id="current-exercises" className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">Current exercises</h3>
-            </div>
-            <div className="panel-body exercise-list-body exercise-list-body-wide">
-              {this.exerciseEntries()}
-            </div>
-          </div>
-        </li>
+      <div id="current-exercises" className="panel panel-default">
+        <div className="panel-heading">
+          <h3 className="panel-title">Current exercises</h3>
+        </div>
+        <div className="panel-body exercise-list-body exercise-list-body-wide">
+          {this.exerciseEntries()}
+        </div>
+      </div>
+
     )
   },
 
-  deleteExercise(exercise_id){
+  deleteExercise(exercise_id, e){
+    console.log(e);
+    e.stopPropagation();
 
     swal({   title: "Are you sure?",
           text: "You will not be able to recover this exercise",

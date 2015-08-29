@@ -107,13 +107,13 @@ var AddVideoBox = React.createClass({
           <form className="form-horizontal">
             
             <div className="form-group">
-              <label htmlFor="lesson" className="col-sm-3 control-label"><strong>Lesson Title:</strong></label>
-              <div className="col-sm-9">
+              <label htmlFor="lesson" className="col-sm-4 control-label"><strong>Lesson Title:</strong></label>
+              <div className="col-sm-8">
               <input
                 id="lesson"
                 className="form-control"
                 type="text" 
-                placeholder="What is the name of your new Lesson?"
+                placeholder=""
                 ref="title" 
                 value={this.state.title}
                 onChange={this.onInputChange} />
@@ -121,13 +121,13 @@ var AddVideoBox = React.createClass({
             </div>
             
             <div className="form-group">
-              <label htmlFor="video_url" className="col-sm-3 control-label"><strong>Video URL:</strong></label>
-              <div className="col-sm-9">
+              <label htmlFor="video_url" className="col-sm-4 control-label"><strong>YouTube URL:</strong></label>
+              <div className="col-sm-8">
                 <input
                 id="video_url"
                   className="form-control"
                   type="url"
-                  placeholder="Input your video URL here. We currently only support YouTube videos."
+                  placeholder=""
                   name="newVideoUrl" ref="video_url"
                   value={this.state.video_url}
                   onChange={this.onInputChange} />
@@ -135,13 +135,14 @@ var AddVideoBox = React.createClass({
            </div>
             
             <div className="form-group">
-              <label htmlFor="lesson_url" className="col-sm-3 control-label"><strong>Key words for URL</strong></label>
-              <div className="col-sm-9">
+              <label htmlFor="lesson_url" className="col-sm-4 control-label"><strong>Customize your lesson link:</strong></label>
+              <div className="col-sm-8">
+                <p className="custom-link">www.lesson-links.com/</p>
                 <input
                   id="lesson_url"
-                  className="form-control"
+                  className="custom-link-form form-control"
                   type="text"
-                  placeholder="/shakespeare-in-the-movies-lesson2"
+                  placeholder="your-lesson-title"
                   name="newVideoUrl"
                   ref="lesson_url"
                   value={this.state.lesson_url}

@@ -59,70 +59,73 @@ var ShortAnswerCreation = React.createClass({
   render: function(){
 
     return (
-        <div className="container animated fadeInUp">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h3>Create/Update a Short Answer Question</h3>
-              </div>
-              <div className="modal-body">
-                <form name="shortAnswerForm">
-                  <h5>Write a prompt requiring a short answer</h5>
-                  <div className="form-group">
-                    <input
-                        ref="question"
-                        className="form-control"
-                        name="question"
-                        type='text'
-                        value={this.state.exercise.question}
-                        onChange={this.setExerciseState}
-                        placeholder="Question"/>
-                  </div>
+        <div className="exercise-form animated fadeInUp">
+          <div className="">
+            <h4><strong>Short Answer</strong></h4>
+          </div>
+          <hr/>
 
-                  <TextInput
-                      wrapperClass="form-group"
-                      name="bestAnswers"
-                      label="Best answer(s)"
-                      value={this.state.exercise.bestAnswers}
-                      onChange={this.setExerciseState}
-                      placeholder="Separate answers with a pipe: red | white | blue" />
+          <form className="shortAnswerForm" name="shortAnswerForm" onSubmit={this.handleSubmit}>
+            <div>
+              <h5>Question</h5>
+              <div className="form-group">
+                <input ref="question"
+                  className="form-control"
+                  name="question"
+                  type='text'
+                  value={this.state.exercise.question}
+                  onChange={this.setExerciseState}/>
+              </div>
+            </div>
+
+            <h5>Answer Choices</h5>
+
+            <div className="answer-choice">
+              <div className="col-sm-1 answer-choice-number">
+              </div>
+              <div className="col-sm-11 answer-choice-content">
+                <Textarea
+                    wrapperClass="form-group"
+                    className="form-control exercise-text-form"
+                    name="bestAnswers"
+                    label="Best answer(s)"
+                    value={this.state.exercise.bestAnswers}
+                    onChange={this.setExerciseState}
+                    placeholder="Separate answers with a pipe: red | white | blue" />
 
                 <Textarea
-                    label="Feedback to these answers when entered by a learner:"
+                    placeholder="Feedback shown to student"
+                    className="form-control exercise-text-form"
                     wrapperClass="form-group"
                     name="bestFeedback"
                     value={this.state.exercise.bestFeedback}
                     onChange={this.setExerciseState}/>
 
-                  <TextInput
-                      wrapperClass="form-group"
-                      name="altAnswers"
-                      label="Alternative answer(s)"
-                      value={this.state.exercise.altAnswers}
-                      onChange={this.setExerciseState}
-                      placeholder="Separate answers with a pipe: red | white | blue" />
+                <Textarea
+                    wrapperClass="form-group"
+                    name="altAnswers"
+                    label="Good answer(s)"
+                    className="form-control exercise-text-form"
+                    value={this.state.exercise.altAnswers}
+                    onChange={this.setExerciseState}
+                    placeholder="Separate answers with a pipe: red | white | blue" />
 
                 <Textarea
-                    label="Feedback to these answers when entered by a learner:"
+                    placeholder="Feedback shown to student"
                     wrapperClass="form-group"
+                    className="form-control exercise-text-form"
                     name="altFeedback"
                     value={this.state.exercise.altFeedback}
                     onChange={this.setExerciseState}/>
-                  <div className="row">
-                    <div className="col-md-offset-6">
-                      <button
-                          type="submit"
-                          onClick={this.handleSubmit}
-                          className="signup-cancel-btn btn btn-primary margin-right">Save / Update</button>
-                      <button
-                          onClick={this.handleCancel}
-                          className="btn btn-default">Cancel</button>
-                    </div>
-                  </div>
-                </form>
               </div>
             </div>
-          </div>
+
+            <div className="col-md-offset-8">
+              <button type="submit" onClick={this.handleSubmit} className="signup-cancel-btn btn btn-primary margin-right">Save</button>
+              <button onClick={this.handleCancel} className="btn btn-default">Cancel</button>
+            </div>
+
+          </form>
         </div>
     )
   },

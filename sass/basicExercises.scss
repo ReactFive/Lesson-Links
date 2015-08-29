@@ -1,3 +1,29 @@
+
+
+#ExerciseTypeSelection{
+    padding-top: 20px;
+}
+.answer-choice{
+    display: flex;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 13px !important ;
+    line-height: 1.846 !important;
+    color: #666666 !important;
+    margin-bottom: 30px;
+
+    .form-control{
+        height: auto;
+    }
+
+    .answer-choice-number{
+        font-size: 16px;
+    }
+
+    .answer-choice-content{
+        border-left: 2px solid rgba(20, 20, 20, 0.05);
+    }
+}
+
 .quiz .btn-primary {
 
   }

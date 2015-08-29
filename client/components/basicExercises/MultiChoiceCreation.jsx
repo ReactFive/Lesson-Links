@@ -98,27 +98,35 @@ var MultiChoiceCreation = React.createClass({
     let i;
     for (i = 0; i < this.state.exercise.optNumbs; i++) {
       inputs.push(
-          <span>
-        <TextInput
-            wrapperClass="form-group"
-            htmlFor={'option' + i}
-            id={'option' + i}
-            ref={'option' + i}
-            name={'answers-' + i}
-            label={self.state.exercise.options[i].label}
-            value={self.state.exercise.answers[i]}
-            onChange={self.setExerciseState}
-            placeholder="Add an option here" />
-        <Textarea
-            htmlFor={'feedback' + i}
-            id={'feedback' + i}
-            ref={'feedback' + i}
-            label="Feedback to these answers when entered by a learner:"
-            wrapperClass="form-group"
-            name={'feedback-' + i}
-            value={self.state.exercise.feedback[i]}
-            onChange={self.setExerciseState}/>
-      </span>
+        <div className="answer-choice">
+          <div className="col-sm-1 answer-choice-number">
+            {i+1}
+          </div>
+          <div className="col-sm-11 answer-choice-content">
+            <Textarea
+                wrapperClass="form-group"
+                className="form-control exercise-text-form"
+                htmlFor={'optiona' + i}
+                id={'optionb' + i}
+                ref={'optionc' + i}
+                rows={1}
+                name={'answers-' + i}
+                value={self.state.exercise.answers[i]}
+                onChange={self.setExerciseState}
+                placeholder="answer choice" />
+            <Textarea
+                className="form-control exercise-text-form"
+                placeholder="feedback shown if selected by student"
+                htmlFor={'feedback' + i}
+                id={'feedback' + i}
+                ref={'feedback' + i}
+                rows={1}
+                wrapperClass="form-group"
+                name={'feedback-' + i}
+                value={self.state.exercise.feedback[i]}
+                onChange={self.setExerciseState}/>
+          </div>
+        </div>
       )
     }
     return inputs;
@@ -145,51 +153,52 @@ var MultiChoiceCreation = React.createClass({
   render: function(){
 
     return (
-        <div className="container animated fadeInUp">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h3>Create/Update a Multiple Choice Question</h3>
+        <div className="exercise-form animated fadeInUp">
+              <div className="">
+                <h4><strong>Multiple Choice</strong></h4>
               </div>
-              <div className="modal-body">
-                <Select
-                    name="Number of items"
-                    value="Select the number of alternative answers"
-                    options={this.state.exercise.options}
-                    onChange={this.formSetup} />
-
-                <form name="multichoiceForm" onSubmit={this.handleSubmit}>
-                  <h5>Write your question/prompt/problem</h5>
-                  <div className="form-group">
-                    <input ref="question"
-                           className="form-control"
-                           name="question"
-                           type='text'
-                           value={this.state.exercise.question}
-                           onChange={this.setExerciseState}
-                           placeholder="Question"/>
-                  </div>
-
-                  {this.createInputs()}
-
-                  <div onChange={this.checkHandle} className="correct-answer-label">
-                     <span className="correct-answer-label">
-                       <strong>Indicate the best option: </strong>
-                     </span>
-
-                    {this.createRadioOptions()}
-
-                  </div>
-                  <div className="row">
-                    <div className="col-md-offset-6">
-                      <button type="submit" className="signup-cancel-btn btn btn-primary margin-right">Save / Update</button>
-                      <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
+              <hr/>
+              <form className="multichoiceForm" name="multichoiceForm" onSubmit={this.handleSubmit}>
+                <div>
+                    <h5>Question</h5>
+                    <div className="form-group">
+                      <input ref="question"
+                        className="form-control"
+                        name="question"
+                        type='text'
+                        value={this.state.exercise.question}
+                        onChange={this.setExerciseState}/>
                     </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+                </div>
+
+                <h5>Answer Choices</h5>
+                <div>
+                  <span className="correct-answer-label">
+                     <strong>How many answer choices? </strong>
+                   </span>
+                   <Select
+                       name="Number of items"
+                       className="answer-choices-select"
+                       value=""
+                       options={this.state.exercise.options}
+                       onChange={this.formSetup} />
+                </div>
+
+                <div onChange={this.checkHandle} className="correct-answer-label">
+                   <span className="correct-answer-label">
+                     <strong>Correct answer choice: </strong>
+                   </span>
+                  {this.createRadioOptions()}
+                </div>
+
+                {this.createInputs()}
+                
+                <div className="col-md-offset-8">
+                  <button type="submit" className="signup-cancel-btn btn btn-primary margin-right">Save</button>
+                  <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
+                </div>
+              </form>
+        
         </div>
     )
   },
