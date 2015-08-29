@@ -66,7 +66,7 @@ var AnalyticsView = React.createClass({
       	<div className="container">
       		<div className="row">
       				<div className="col-lg-6 col-md-12" id="analytics-view">
-      					<Chart data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
+      					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
        	 			</div>
 		      <div className="col-lg-6 col-md-12">
 		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} />

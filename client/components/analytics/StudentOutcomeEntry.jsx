@@ -8,7 +8,7 @@ var StudentOutcomeEntry = React.createClass({
 
   render: function() {
 
-      return <div>Name : {this.props.studentAnswer.name} Answer :{this.props.studentAnswer.answer} </div>
+      return <div clasName="studentCollection">Name : {this.props.studentAnswer.name} Answer :{this.props.studentAnswer.answer} </div>
   }
 
 })
