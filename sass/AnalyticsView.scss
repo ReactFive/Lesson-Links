@@ -1,11 +1,30 @@
 .bar {
-  fill: #006B24
+  fill: $darkest-blue;
 }
 
 .selection ul {
   margin: 0;
   padding: 0;
 }
+
+.x axis{
+	font-size: 50px;
+}
+
+.chart{
+	margin: 20px;
+}
+
+.studentCollection{
+		background-color: $lightest-blue;
+    padding: 5px;
+    font-size: 20px;
+    font-family: $header-font;
+    font-weight: bold;
+    color: $darkest-blue;
+    border: 5px solid $darkest-blue;
+    padding: 5px;
+ }
 
 .selection ul li {
   display: inline;

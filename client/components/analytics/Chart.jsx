@@ -45,7 +45,7 @@ var App = React.createClass({
         colorScale={colorScale}
         margin={{top: 10, bottom: 50, left: 50, right: 10}}
         xAxis={{innerTickSize: 10, label: this.props.xAxis}}
-        yAxis={{tickFormat: formatyAxis, tickValues: d3.range(0,yMax+1, tickSize), innerTickSize: 10, label: this.props.yAxis}}/>
+        yAxis={{tickFormat: formatyAxis, tickValues: d3.range(0,yMax+1, tickSize), innerTickSize: 10, label: this.props.yAxis}} clasName="chart"/>
     } else {
       return null
     }
