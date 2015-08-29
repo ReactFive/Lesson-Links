@@ -25,22 +25,35 @@ var LessonView = React.createClass({
 
   getInitialState: function() {
     return {
-      exercise: null
+      exercise: null,
+      loggedInUser: true
     }
+  },
+
+  componentWillMount: function(){
+    Actions.authenticate();
   },
 
   componentDidMount: function(){
     var self=this;
     Actions.getUser(function(){
       Actions.fetchLesson({sourceComponent: self, url: self.context.router.getCurrentParams().url});
-    })
-
+    });
     //Set up a timer to fetch the lesson again every 10 seconds to get any new comments
     this.timer = setInterval(function(){
       Actions.fetchLesson({
         sourceComponent: self, url: self.context.router.getCurrentParams().url
-      })
+      });
     }, 30000);
+  },
+
+  shouldComponentUpdate: function(nextProps, nextState){
+    console.log("called from shouldUpdate", nextState);
+    if(nextState.auth.loggedIn === false && this.state.loggedInUser === true) {
+      this.setState({loggedInUser: false});
+      return true;
+    }
+    return true;
   },
 
   componentWillUnmount: function(){
@@ -76,7 +89,6 @@ var LessonView = React.createClass({
   },
 
   render: function() {
-
     if(this.state.lesson){
 
       return (
@@ -90,7 +102,7 @@ var LessonView = React.createClass({
         </div>
       );
     }else{
-      return this.state.auth && this.state.auth.user ? null : <LoginOverlay/>
+      return this.state.loggedInUser ? null : <LoginOverlay/>
     }
   }, 
 });

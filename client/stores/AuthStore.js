@@ -45,7 +45,7 @@ var authStore = Reflux.createStore({
       if (res.data.user) {
         this.auth.user = res.data.user;
         this.triggerChange();
-        callback()
+        callback();
       } else {
         this.auth.user = false;
         this.triggerChange();
