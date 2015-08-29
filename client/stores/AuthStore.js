@@ -54,7 +54,6 @@ var authStore = Reflux.createStore({
   },
 
   onLogin: function (payload) {
-    console.log(payload)
     return Api.login(payload.email, payload.password)
     .then(function(res){
       this.auth.user = res.data.user;

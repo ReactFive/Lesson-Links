@@ -12,14 +12,12 @@ module.exports = Reflux.createStore({
     return this.analytics = {};
   },
 
-  //Passes lesson from library to the analytics store
   analyticsTransition : function(lesson){
     this.lesson = lesson;
     this.onFormatLesson(lesson);
     this.onFormatStudent(lesson);
   },
 
-  //Format time watched 
   onFormatStudent : function(lesson){
     this.analytics.studentTime = [];
     for (var i = 0; i < lesson.students.length; i++) {
@@ -48,7 +46,6 @@ module.exports = Reflux.createStore({
     };
     this.analytics.exerciseIndex = [];
 
-    //Create empty exercise objects to be populated with student answers
     for (var j = 0; j < lesson.exercises.length; j++){
       var exercise = lesson.exercises[j];
       this.analytics.exerciseIndex[j] = lesson.exercises[j]._id;
@@ -74,10 +71,7 @@ module.exports = Reflux.createStore({
       }
     }
  
-    //Length of the lesson video
     var length = this.lesson.video_duration;
-
-    //Convert time watched 
     for (var i = 0; i < lesson.students.length; i++ ){
       var time = lesson.students[i].timeWatched;
       if (Math.floor(5*time/length) === 0) {this.analytics.timeWatched[0]['y']++}
@@ -121,6 +115,7 @@ module.exports = Reflux.createStore({
           }
         }
       }
+
     this.triggerChange();
   },
 
