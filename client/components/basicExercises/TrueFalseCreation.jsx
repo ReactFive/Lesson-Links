@@ -7,6 +7,7 @@ var AuthStore = require('../../stores/AuthStore');
 var LessonConfigStore = require('../../stores/LessonConfigStore');
 var Actions = require('../../actions');
 var Select = require('react-select');
+var Textarea = require('./Textarea.jsx');
 var _ = require('lodash');
 
 var TrueFalseCreation = React.createClass({
@@ -56,76 +57,76 @@ var TrueFalseCreation = React.createClass({
   render: function(){
     console.log(this.state.exercise);
     return (
-        <div className="container animated fadeInUp">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h3>Create/Update a True-False Question</h3>
-              </div>
-              <div className="modal-body">
-                <form name="trueFalseForm" onSubmit={this.handleSubmit}>
-                  <h5>Write a statement which is true or false</h5>
-                  <div className="form-group">
-                    <input
-                        ref="question"
-                        className="form-control"
-                        name="question"
-                        type='text'
-                        value={this.state.exercise.question}
-                        onChange={this.setExerciseState}
-                        placeholder="Question" />
-                  </div>
+        <div className="exercise-form animated fadeInUp">
+          <div className="">
+            <h3>True or False</h3>
+          </div>
 
+          <hr/>
 
-                  <div className="form-group">
-                    <label htmlFor="feedbackTrue">Feedback if the user selects "true":</label>
-                  <textarea
-                      id="feedbackTrue"
-                      className="form-control"
-                      rows="2"
-                      name="feedbackTrue"
-                      value={this.state.exercise.feedbackTrue}
-                      onChange={this.setExerciseState}
-                      ref="feedbackTrue"/>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="feedbackFalse">Feedback if the user selects "false":</label>
-                  <textarea
-                      id="feedbackFalse"
-                      className="form-control"
-                      rows="2"
-                      name="feedbackFalse"
-                      value={this.state.exercise.feedbackFalse}
-                      onChange={this.setExerciseState}
-                      ref="feedbackFalse"/>
-                  </div>
-
-                  <div onChange={this.checkHandle} className="correct-answer-label">
-                <span className="correct-answer-label">
-                  <strong>Indicate the correct answer: </strong>
-                </span>
-                    <label htmlFor="correct1" className="radio-inline">
-                      <input ref="correct1" type="radio" name="correct" value={"true"}
-                             defaultChecked={this.state.exercise.correctOption === "true"}/>
-                      True
-                    </label>
-                    <label htmlFor="correct2" className="radio-inline">
-                      <input ref="correct2" type="radio" name="correct" value={"false"}
-                             defaultChecked={this.state.exercise.correctOption === "false"}/>
-                      False
-                    </label>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-offset-6">
-                      <button type="submit" onClick={ this.handleSubmit } className="signup-cancel-btn btn btn-primary margin-right">Save / Update</button>
-                      <button onClick={ this.handleCancel } className=" btn btn-default">Cancel</button>
-                    </div>
-                  </div>
-                </form>
+          <form className="trueFalseForm" name="trueFalseFrom" onSubmit={this.handleSubmit}>
+            <div>
+              <h5>Question</h5>
+              <div className="form-group">
+                <input ref="question"
+                  className="form-control"
+                  name="question"
+                  type='text'
+                  value={this.state.exercise.question}
+                  onChange={this.setExerciseState}/>
               </div>
             </div>
-          </div>
+
+            <h5>Answer Choices</h5>
+
+            <div className="form-group">
+              <label htmlFor="feedbackTrue">Feedback if the user selects "true":</label>
+              <Textarea
+                  id="feedbackTrue"
+                  className="form-control exercise-text-form"
+                  rows={1}
+                  name="feedbackTrue"
+                  value={this.state.exercise.feedbackTrue}
+                  onChange={this.setExerciseState}
+                  ref="feedbackTrue"/>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="feedbackFalse">Feedback if the user selects "false":</label>
+              <Textarea
+                  id="feedbackFalse"
+                  className="form-control exercise-text-form"
+                  rows={1}
+                  name="feedbackFalse"
+                  value={this.state.exercise.feedbackFalse}
+                  onChange={this.setExerciseState}
+                  ref="feedbackFalse"/>
+            </div>
+
+            <div onChange={this.checkHandle} className="correct-answer-label">
+              <span className="correct-answer-label">
+                <strong>Indicate the correct answer: </strong>
+              </span>
+              <label htmlFor="correct1" className="radio-inline">
+                <input ref="correct1" type="radio" name="correct" value={"true"}
+                  defaultChecked={this.state.exercise.correctOption === "true"}/>
+                True
+              </label>
+              <label htmlFor="correct2" className="radio-inline">
+                <input ref="correct2" type="radio" name="correct" value={"false"}
+                  defaultChecked={this.state.exercise.correctOption === "false"}/>
+                False
+              </label>
+            </div>
+
+
+            <div className="col-md-offset-8">
+              <button type="submit" onClick={ this.handleSubmit } className="signup-cancel-btn btn btn-primary margin-right">Save</button>
+              <button onClick={ this.handleCancel } className=" btn btn-default">Cancel</button>
+            </div>
+
+
+          </form>
         </div>
     )
   },
