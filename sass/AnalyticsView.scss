@@ -15,6 +15,14 @@
 	margin: 20px;
 }
 
+#analytics-view{
+  
+}
+
+.student{
+  font-weight: bold;
+}
+
 .studentCollection{
 		background-color: $lightest-blue;
     padding: 5px;
@@ -26,6 +34,7 @@
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 2px;
+    cursor: pointer;
  }
 
 .selection ul li {
@@ -47,6 +56,16 @@
 	  font-family: $subheader-font;
     padding: 5px;
     font-weight: bold;
+    width: 100%;   
+    scrollbar-base-color:#ffeaff;
+    overflow: auto;
+    overflow-y: hidden;
+    -ms-overflow-y: hidden;
+    white-space: nowrap;
+}
+
+::-webkit-scrollbar-thumb :horizontal{
+  color: $darkest-blue;
 }
 
 .analyticsNavEntry:hover{
