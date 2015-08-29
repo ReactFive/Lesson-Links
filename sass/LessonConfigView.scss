@@ -99,6 +99,24 @@
   color: #fc8a8a;
 }
 
+#current-exercises{
+
+  max-height: 500px;
+  overflow: auto;
+  overflow-y: scroll;
+
+  .panel-body{
+    padding-top: 0px;
+  }
+
+  .exercise-entry{
+    border-bottom: 1px solid rgba(20, 20, 20, 0.1);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+  }
+}
+
 @media (min-width: 950px) {
   .exercise-list-body {
     min-height: 230px;

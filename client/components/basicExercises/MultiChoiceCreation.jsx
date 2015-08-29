@@ -165,12 +165,15 @@ var MultiChoiceCreation = React.createClass({
 
                 <div>
                     <h5>Question</h5>
-                    <TextInput
-                      ref="question"
-                      className="form-control exercise-text-form"
-                      rows={1}
-                      value={this.state.exercise.question}
-                      onChange={this.setExerciseState}/>
+
+                    <div className="form-group">
+                      <input ref="question"
+                             className="form-control"
+                             name="question"
+                             type='text'
+                             value={this.state.exercise.question}
+                             onChange={this.setExerciseState}/>
+                    </div>
                 </div>
 
                 <h5>Answer Choices</h5>
