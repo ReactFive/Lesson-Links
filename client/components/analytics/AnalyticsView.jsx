@@ -26,6 +26,7 @@ var AnalyticsView = React.createClass({
           studentsAnswer: []
         }
       },
+      studentParam: '',
       studentAnswers: []
     }  
   },
@@ -33,6 +34,8 @@ var AnalyticsView = React.createClass({
   timeWatched: function() {
     this.setState({
       data : this.state.analytics.timeWatched,
+      studentAnswers: this.state.analytics.studentTime,
+      studentParam : 'Time Watched',
       xAxis : '% Completed'
     })
   },
@@ -41,6 +44,7 @@ var AnalyticsView = React.createClass({
     this.setState({
       data: exercise,
       studentAnswers: studentAnswers,
+      studentParam: 'Answer',
       xAxis: 'Answers'
     });
   },
@@ -69,7 +73,7 @@ var AnalyticsView = React.createClass({
       					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
        	 			</div>
 		      <div className="col-lg-6 col-md-12">
-		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} />
+		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} studentParam={this.state.studentParam} />
 		      </div>
 		    </div>	
 	    </div>
