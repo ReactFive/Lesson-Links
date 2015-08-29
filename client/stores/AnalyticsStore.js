@@ -46,7 +46,6 @@ module.exports = Reflux.createStore({
     };
     this.analytics.exerciseIndex = [];
 
-
     for (var j = 0; j < lesson.exercises.length; j++){
       var exercise = lesson.exercises[j]
       this.analytics.exerciseIndex[j] = lesson.exercises[j]._id
@@ -65,7 +64,14 @@ module.exports = Reflux.createStore({
         }
         this.analytics.exercises.answerCount.push(temp)
         this.analytics.exercises.studentsAnswer.push([])
-      } 
+      } else if (exercise.type === 'shortanswer') {
+        console.log('shortanswer')
+        this.analytics.exercises.answerCount.push([
+          {x:'Incorrect', y:0},
+          {x:'Correct', y:0}
+        ])
+        this.analytics.exercises.studentsAnswer.push([])
+      }
     }
  
     var length = this.lesson.video_duration;
@@ -85,25 +91,32 @@ module.exports = Reflux.createStore({
         if (answer === 'false') {answer = 0}
         if(answer !== undefined) {
           var index = this.analytics.exerciseIndex.indexOf(lesson.students[i].exerciseResults[j].id)
-          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++
           //Format each individual student's answer
           //If true/false question
+          if (lesson.exercises[index].type === 'shortanswer') {
+            if (lesson.students[i].exerciseResults[j].correct) {
+              answer = 1
+            } else {
+              answer = 0
+            }
+          }
+          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++
           if (answerText === 'true') {
             answerText = 'True'
           } else if(answerText === 'false') {
             answerText = 'False'
           //If multiple choice question
-          } else {
+          } else if (parseInt(answerText) >= 0) {
             answerText = lesson.exercises[index].exercise.answers[parseInt(answer)]
           }
-          //Record individual student answers
-          this.analytics.exercises.studentsAnswer[index].push({
-            name: lesson.students[i].name,
-            answer : answerText
-          })
+            //Record individual student answers
+            this.analytics.exercises.studentsAnswer[index].push({
+              name: lesson.students[i].name,
+              answer : answerText
+            })
+          }
         }
       }
-    }
     console.log(this.analytics.exercises)
 
     this.triggerChange();
