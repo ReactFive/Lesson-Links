@@ -96,9 +96,10 @@ var nav = React.createClass({
 
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
+    var url = this.context.router.getCurrentParams().url;
 
     var self=this;
-    Actions.login({sourceComponent: this, email: email, password: password})
+    Actions.login({sourceComponent: this, email: email, password: password, url: url})
     .then(function(res){
       console.log("User logged in: ", res)
       self.refs.email.getDOMNode().value = "";
