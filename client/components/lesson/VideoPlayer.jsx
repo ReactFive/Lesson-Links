@@ -95,6 +95,7 @@ var VideoPlayer = React.createClass({
         // check if the marker corresponds to an exercise
         if(marker && !marker.replies && !marker.done) {
           player.pause();
+          setTimeout(()=>player.pause(),300);
           self.props.onExerciseReached(marker);
         }
       }
