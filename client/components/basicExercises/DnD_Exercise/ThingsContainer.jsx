@@ -7,13 +7,13 @@ var Thing = require('./Thing.jsx');
 
 var categoryTarget = {
   drop: function (props, monitor, component) {
-    var droppedItem = monitor.getItem().itemId;
-    var currThings = component.state.things;  
+    // var droppedItem = monitor.getItem().itemId;
+    // var currThings = component.state.things;  
 
-    if(currThings.indexOf(droppedItem) === -1) {
-      console.log(currThings, droppedItem)
-      component.setState({things:currThings.concat([droppedItem])});
-    }
+    // if(currThings.indexOf(droppedItem) === -1) {
+    //   console.log(currThings, droppedItem)
+    //   component.setState({things:currThings.concat([droppedItem])});
+    // }
 
     return {
       endCategory: component.props.name
@@ -35,13 +35,6 @@ var ThingsContainer = React.createClass({
     }
   },
 
-  removeThing: function(thingObj) {
-    if(thingObj.startCategory === this.props.name) {
-      //console.log(thingObj.startCategory, this.props.name)
-      this.setState({things : _.without(this.state.things, thingObj.itemId)});
-    }
-  },
-
   render: function() {
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
@@ -50,8 +43,7 @@ var ThingsContainer = React.createClass({
       return (
         <div key={thingName} className="col-xs-2">
           <Thing name={thingName} 
-            currentCategory={this.props.name}
-            onDraggedElsewhere={this.removeThing}/>
+            currentCategory={this.props.name}/>
         </div>
       )
     }.bind(this))

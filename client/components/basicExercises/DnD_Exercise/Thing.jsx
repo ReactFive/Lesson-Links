@@ -21,9 +21,7 @@ var itemSource = {
     var endCategory = monitor.getDropResult().endCategory;
     console.log("start and end", startCategory, endCategory);
     if(startCategory !== endCategory) {
-      console.log("inside if statement");
-      DnDActions.moveThingBetweenCategories(monitor.getItem(), startCategory, endCategory)
-      component.props.onDraggedElsewhere(monitor.getItem());
+      DnDActions.moveThingBetweenCategories(monitor.getItem().itemId, startCategory, endCategory)
     }
   }
 };

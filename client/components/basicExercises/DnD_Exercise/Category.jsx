@@ -9,12 +9,12 @@ var Thing = require('./Thing.jsx');
 
 var categoryTarget = {
   drop: function (props, monitor, component) {
-    var droppedItem = monitor.getItem().itemId;
-    var currThings = component.state.things;  
+    // var droppedItem = monitor.getItem().itemId;
+    // var currThings = component.state.things;  
 
-    if(currThings.indexOf(droppedItem)) {
-      component.setState({things:currThings.concat([droppedItem])});
-    }
+    // if(currThings.indexOf(droppedItem) === -1) {
+    //   component.setState({things:currThings.concat([droppedItem])});
+    // }
 
     return {
       endCategory: component.props.name
@@ -49,7 +49,7 @@ var Category = React.createClass({
 
     var things = this.state.things.map(function(thingName) {
       return (
-          <Thing name={thingName}
+          <Thing name={thingName} key={thingName}
             currentCategory={this.props.name}
             onDraggedElsewhere={this.removeThing}/>
       )
