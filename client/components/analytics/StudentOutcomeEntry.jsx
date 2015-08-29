@@ -7,7 +7,7 @@ var _ = require('lodash');
 var StudentOutcomeEntry = React.createClass({
 
   render: function() {
-
+      console.log(this.props.studentAnswer.answer)
       return <div>Name : {this.props.studentAnswer.name} Answer :{this.props.studentAnswer.answer} </div>
   }
 
