@@ -15,5 +15,4 @@ var LoginOverlay
 
 });
 
-module.exports = LoginOverlay
-;
+module.exports = LoginOverlay;
