@@ -53,7 +53,7 @@ var LessonView = React.createClass({
   },
 
   onExerciseCompleted: function(result) {
-    
+    this.state.exerciseObj.done = true;
     // send result to server
     Actions.submitExerciseResult(this.state.exerciseObj, result);
 
