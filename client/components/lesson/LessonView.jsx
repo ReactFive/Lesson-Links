@@ -78,12 +78,10 @@ var LessonView = React.createClass({
   render: function() {
 
     if(this.state.lesson){
-      var overlay = this.state.auth && this.state.auth.user ? null : <LoginOverlay/>
 
       return (
         <div>
           <div id='lesson-view'>
-            {overlay}
             <div id="video-box" className="col-lg-12">
               <VideoPlayer onExerciseReached={this.loadExercise} />
             </div>
@@ -92,7 +90,7 @@ var LessonView = React.createClass({
         </div>
       );
     }else{
-      return null;
+      return this.state.auth && this.state.auth.user ? null : <LoginOverlay/>
     }
   }, 
 });
