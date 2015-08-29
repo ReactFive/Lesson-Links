@@ -11,8 +11,10 @@ var _ = require('lodash');
 var StudentOutcomeCollection = React.createClass({
 
   render:function(){
+    var self = this;
     var studentAnswers = this.props.studentAnswers.map(function(studentAnswer, index){
-      return <StudentOutcomeEntry key={index} studentAnswer={studentAnswer}/>
+      console.log('student answer is ', studentAnswer)
+      return <StudentOutcomeEntry key={index} studentAnswer={studentAnswer} studentParam={self.props.studentParam} />
     });
     
     return (

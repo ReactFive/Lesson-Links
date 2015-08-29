@@ -4,7 +4,7 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('mongoose').model('User');
 var _               = require('lodash');
-var config             = require('./configuration.js');
+var config             = require('./configfile.js');
 
 module.exports = function(passport) {
 

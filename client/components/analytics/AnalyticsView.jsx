@@ -26,6 +26,7 @@ var AnalyticsView = React.createClass({
           studentsAnswer: []
         }
       },
+      studentParam: '',
       studentAnswers: []
     }  
   },
@@ -33,6 +34,8 @@ var AnalyticsView = React.createClass({
   timeWatched: function() {
     this.setState({
       data : this.state.analytics.timeWatched,
+      studentAnswers: this.state.analytics.studentTime,
+      studentParam : 'Time Watched',
       xAxis : '% Completed'
     })
   },
@@ -41,6 +44,7 @@ var AnalyticsView = React.createClass({
     this.setState({
       data: exercise,
       studentAnswers: studentAnswers,
+      studentParam: 'Answer',
       xAxis: 'Answers'
     });
   },
@@ -49,15 +53,15 @@ var AnalyticsView = React.createClass({
     var self = this;
     var data = this.state.data;
     var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
-      return <li onClick={function(){self.setExercise(exercise, 
+      return <li className="analyticsNavEntry" onClick={function(){self.setExercise(exercise, 
       self.state.analytics.exercises.studentsAnswer[index])}}>Exercise #{index+1}</li>
     })
 
     return (
     <div>
-      <div className="selection">
+      <div className="analyticsEntryCollection selection">
         <ul>
-          <li onClick={this.timeWatched}>Time Watched</li>
+          <li className="analyticsNavEntry" onClick={this.timeWatched}>Time Watched</li>
             {exercises.length ? {exercises} : ''}
           </ul>
       </div>
@@ -66,10 +70,10 @@ var AnalyticsView = React.createClass({
       	<div className="container">
       		<div className="row">
       				<div className="col-lg-6 col-md-12" id="analytics-view">
-      					<Chart data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
+      					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
        	 			</div>
 		      <div className="col-lg-6 col-md-12">
-		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} />
+		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} studentParam={this.state.studentParam} />
 		      </div>
 		    </div>	
 	    </div>
