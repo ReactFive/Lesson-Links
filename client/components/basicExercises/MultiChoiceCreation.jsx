@@ -163,11 +163,11 @@ var MultiChoiceCreation = React.createClass({
                     <h5>Question</h5>
                     <div className="form-group">
                       <input ref="question"
-                             className="form-control"
-                             name="question"
-                             type='text'
-                             value={this.state.exercise.question}
-                             onChange={this.setExerciseState}/>
+                        className="form-control"
+                        name="question"
+                        type='text'
+                        value={this.state.exercise.question}
+                        onChange={this.setExerciseState}/>
                     </div>
                 </div>
 
@@ -188,11 +188,11 @@ var MultiChoiceCreation = React.createClass({
                    <span className="correct-answer-label">
                      <strong>Correct answer choice: </strong>
                    </span>
-
                   {this.createRadioOptions()}
-
                 </div>
+
                 {this.createInputs()}
+                
                 <div className="col-md-offset-8">
                   <button type="submit" className="signup-cancel-btn btn btn-primary margin-right">Save</button>
                   <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
