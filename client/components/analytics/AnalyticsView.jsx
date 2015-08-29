@@ -49,15 +49,15 @@ var AnalyticsView = React.createClass({
     var self = this;
     var data = this.state.data;
     var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
-      return <li onClick={function(){self.setExercise(exercise, 
+      return <li className="analyticsNavEntry" onClick={function(){self.setExercise(exercise, 
       self.state.analytics.exercises.studentsAnswer[index])}}>Exercise #{index+1}</li>
     })
 
     return (
     <div>
-      <div className="selection">
+      <div className="analyticsEntryCollection selection">
         <ul>
-          <li onClick={this.timeWatched}>Time Watched</li>
+          <li className="analyticsNavEntry" onClick={this.timeWatched}>Time Watched</li>
             {exercises.length ? {exercises} : ''}
           </ul>
       </div>

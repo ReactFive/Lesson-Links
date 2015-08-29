@@ -65,7 +65,7 @@ module.exports = Reflux.createStore({
         }
         this.analytics.exercises.answerCount.push(temp)
         this.analytics.exercises.studentsAnswer.push([])
-      }
+      } 
     }
  
     var length = this.lesson.video_duration;

@@ -13,3 +13,21 @@
   margin-left: 10px;
   cursor: pointer;
 }
+
+.analyticsNavEntry{
+	font-size: 16px;
+	color: $darkest-blue;
+	font-family: $subheader-font;
+}
+
+.analyticsEntryCollection{
+		background-color: $lightest-blue;
+	  font-size: 20px;
+	  font-family: $subheader-font;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.analyticsNavEntry:hover{
+	color: $dark-pink;
+}
