@@ -113,7 +113,7 @@ module.exports = Reflux.createStore({
             
           //If multiple choice question
           } else if (parseInt(answerText) >= 0) {
-            answerText = lesson.exercises[index].exercise.answers[parseInt(answer)];
+            answerText = lesson.exercises[index].exercise.answers[parseInt(answer)]
           }
             //Record individual student answers
             this.analytics.exercises.studentsAnswer[index].push({
