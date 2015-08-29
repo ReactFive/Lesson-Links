@@ -64,6 +64,7 @@ var authStore = Reflux.createStore({
       } else {
         console.log("/" + payload.url);
         payload.sourceComponent.transitionTo('/' + payload.url);
+        Actions.fetchLesson({url: payload.url, sourceComponent: payload.sourceComponent});
       }
       toastr.options.fadeOut = 1000;
       toastr["success"]("Welcome back to Lesson Links " + res.data.user.local.name);
