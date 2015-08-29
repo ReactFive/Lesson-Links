@@ -70,6 +70,8 @@ exports.getUser = function(req, res){
       }
       res.status(200).send({user:user});
     })
+  } else {
+    res.status(403).send({reason:"user not found"});
   }
 };
 
