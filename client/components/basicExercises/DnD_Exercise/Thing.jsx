@@ -1,6 +1,8 @@
 var React = require('react');
 
 var DragSource = require('react-dnd').DragSource;
+var DnDActions = require('./DnD-actions');
+
 
 var itemSource = {
   beginDrag: function (props) {
@@ -17,7 +19,10 @@ var itemSource = {
 
     var startCategory = monitor.getItem().startCategory;
     var endCategory = monitor.getDropResult().endCategory;
+    console.log("start and end", startCategory, endCategory);
     if(startCategory !== endCategory) {
+      console.log("inside if statement");
+      DnDActions.moveThingBetweenCategories(monitor.getItem(), startCategory, endCategory)
       component.props.onDraggedElsewhere(monitor.getItem());
     }
   }

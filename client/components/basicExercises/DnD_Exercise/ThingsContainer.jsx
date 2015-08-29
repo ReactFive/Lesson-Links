@@ -37,7 +37,7 @@ var ThingsContainer = React.createClass({
 
   removeThing: function(thingObj) {
     if(thingObj.startCategory === this.props.name) {
-      console.log(thingObj.startCategory, this.props.name)
+      //console.log(thingObj.startCategory, this.props.name)
       this.setState({things : _.without(this.state.things, thingObj.itemId)});
     }
   },

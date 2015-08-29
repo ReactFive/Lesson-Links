@@ -9,7 +9,10 @@ var Thing = require('./Thing.jsx');
 var ThingsContainer = require('./ThingsContainer.jsx');
 var Category = require('./Category.jsx');
 
+var DnDStore = require('./DnD-Store.jsx');
+
 var DnD_Exercise = React.createClass({
+  mixins: [Reflux.connect(DnDStore, "data")],
 
   getInitialState: function() {
     return {

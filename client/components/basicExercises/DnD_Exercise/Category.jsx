@@ -1,5 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
+var DnDActions = require('./DnD-actions');
+
 
 var DropTarget = require('react-dnd').DropTarget;
 
@@ -36,7 +38,7 @@ var Category = React.createClass({
 
   removeThing: function(thingObj) {
     if(thingObj.startCategory === this.props.name) {
-      console.log(thingObj.startCategory, this.props.name)
+      //console.log(thingObj.startCategory, this.props.name)
       this.setState({things : _.without(this.state.things, thingObj.itemId)});
     }
   },
