@@ -157,15 +157,10 @@ var MultiChoiceCreation = React.createClass({
               <div className="">
                 <h4><strong>Multiple Choice</strong></h4>
               </div>
-
               <hr/>
-
-
               <form className="multichoiceForm" name="multichoiceForm" onSubmit={this.handleSubmit}>
-
                 <div>
                     <h5>Question</h5>
-
                     <div className="form-group">
                       <input ref="question"
                              className="form-control"
@@ -177,7 +172,6 @@ var MultiChoiceCreation = React.createClass({
                 </div>
 
                 <h5>Answer Choices</h5>
-
                 <div>
                   <span className="correct-answer-label">
                      <strong>How many answer choices? </strong>
@@ -198,18 +192,11 @@ var MultiChoiceCreation = React.createClass({
                   {this.createRadioOptions()}
 
                 </div>
-
-            
-
                 {this.createInputs()}
-
-    
                 <div className="col-md-offset-8">
                   <button type="submit" className="signup-cancel-btn btn btn-primary margin-right">Save</button>
                   <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
                 </div>
-
-
               </form>
         
         </div>
