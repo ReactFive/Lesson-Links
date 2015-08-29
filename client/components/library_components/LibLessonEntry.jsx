@@ -16,7 +16,6 @@ var LibLessonEntry = React.createClass({
   publish: function(e) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("publish clicked!");
     Actions.togglePublish(this.props.lesson);
   },
 
@@ -45,7 +44,6 @@ var LibLessonEntry = React.createClass({
     var self = this;
     e.preventDefault();
     e.stopPropagation();
-    console.log("I ran")
     swal("Your Lesson Link is...", "www.lesson-links.com/" + this.props.lesson.lesson_url, "info")
   },
 
@@ -101,7 +99,6 @@ var LibLessonEntry = React.createClass({
 
     var imgUrl = 'http://img.youtube.com/vi/' + video_id + '/mqdefault.jpg';
 
-    console.log("here the lesson to be rendered ", this.props.lesson);
     return (
       <li className="list-group-item col-md-6 col-xs-12 lib-lesson-entry animated fadeIn" onClick={lesson.publish ? this.gotoLesson : this.gotoConfigure}>
           <img className="hidden-xs media pull-left videoSnippet" src={imgUrl} />

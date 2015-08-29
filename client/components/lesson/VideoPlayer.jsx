@@ -28,7 +28,6 @@ var VideoPlayer = React.createClass({
 
   componentDidUpdate: function() {
     if(!this.state.videoSetupCompleted && this.state.lesson){
-      console.log(this.state.lesson);
       Actions.lessonTimepoint(videojs('attachmentVideo').currentTime())
       var comments = this.state.lesson.comments,
           exerciseObjs = this.state.lesson.exercises;

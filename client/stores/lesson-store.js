@@ -21,7 +21,6 @@ module.exports = Reflux.createStore({
     var self = this;
     Api.getLesson(url)
     .then(function(res) {
-      console.log('fetched lesson');
       self.lesson = res.data;
       self.trigger(self.lesson);
       self.followLesson(payload);
@@ -70,8 +69,6 @@ module.exports = Reflux.createStore({
           addLesson : true
         });
       }
-    } else {
-      console.log('User not found, can\'t follow lesson');
     }
   },
 

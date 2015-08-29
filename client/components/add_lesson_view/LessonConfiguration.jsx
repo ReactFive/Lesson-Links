@@ -107,7 +107,6 @@ var LessonConfiguration = React.createClass({
 
     Actions.publish(this.state.lesson)
         .then(function(res) {
-          console.log("published: ", res);
           self.transitionTo('/library');
         })
   },

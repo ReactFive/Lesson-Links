@@ -57,8 +57,6 @@ var AddVideoBox = React.createClass({
       function(isConfirm){
         if(isConfirm){
           self.transitionTo('/configure')
-        }else{
-          console.log("If I'm running, something has gone wrong.")
         }
       })
     },

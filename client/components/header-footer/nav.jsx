@@ -101,7 +101,6 @@ var nav = React.createClass({
     var self=this;
     Actions.login({sourceComponent: this, email: email, password: password, url: url})
     .then(function(res){
-      console.log("User logged in: ", res)
       self.refs.email.getDOMNode().value = "";
       self.refs.password.getDOMNode().value = "";
     })

@@ -23,7 +23,6 @@ var ReplySubmissionBox = React.createClass({
   },
 
   onBlur: function(){
-    console.log('blurred');
     if(this.state.text === ''){
       this.props.toggleReplyForm();
     }

@@ -61,13 +61,10 @@ exports.submitTimepoint = function(req, res, next){
   var studentId = req.user.id;
   var timepoint = req.body.time;
 
-  console.log('What is time? ', timepoint)
 
   Lesson.findOne({'lesson_url':lesson_url})
   .exec(function(err, lesson){
-    console.log('lesson is ', lesson)
     for (var i = 0; i < lesson.students.length; i++ ){
-      console.log('student Id', studentId, 'lesson id ', lesson.students[i].id.toString())
       if (studentId === lesson.students[i].id.toString()) {
         if (timepoint > lesson.students[i].timeWatched) {
           console.log('Updating time watched')
@@ -172,7 +169,6 @@ exports.updateLesson = function(req, res, next){
           res.sendStatus(500)
         } else {
         //Sends lesson back if update was successful
-        console.log(updatedLesson)
         res.status(200).send(updatedLesson)
         }
       }
@@ -216,7 +212,8 @@ exports.createLesson = function(req, res, next){
         }
       }, {}, function(err, obj) {
         if (err) {
-          console.log(500, err);
+          res.sendStatus(500)
+          console.log(err);
         } else {
           console.log(obj);
         }

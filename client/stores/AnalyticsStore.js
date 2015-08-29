@@ -32,7 +32,6 @@ module.exports = Reflux.createStore({
 
 //Calculating Number of Students Per Percentage of Video Watched
   onFormatLesson : function(lesson){
-    console.log('lesson :',lesson)
     this.analytics.timeWatched = [
       {x:'20%', y:0},
       {x:'40%', y:0},
@@ -64,7 +63,6 @@ module.exports = Reflux.createStore({
         this.analytics.exercises.answerCount.push(temp);
         this.analytics.exercises.studentsAnswer.push([]);
       } else if (exercise.type === 'shortanswer') {
-        console.log('shortanswer')
         this.analytics.exercises.answerCount.push([
           {x:'Incorrect', y:0},
           {x:'Correct', y:0}

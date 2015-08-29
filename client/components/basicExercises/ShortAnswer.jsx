@@ -23,7 +23,6 @@ var ShortAnswer = React.createClass({
   },
 
   setAnswerState: function(event){
-    console.log(event.target.value);
     this.setState({answer: event.target.value});
   },
 
