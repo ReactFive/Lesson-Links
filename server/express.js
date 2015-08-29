@@ -12,6 +12,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var colors = require('colors');
 var favicon = require('serve-favicon');
+var config = require('./configfile.js')
 
 module.exports = function(app, config){
   require('./passport')(passport);
@@ -29,8 +30,9 @@ module.exports = function(app, config){
   app.use(express.static(path.join(__dirname, '/../client/')));
 
 // required for passport
+  console.log(config)
   app.use(session({
-    secret: 'superdupersecretdonttellanyone',
+    secret: config.express,
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({
