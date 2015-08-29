@@ -22,9 +22,11 @@ module.exports = Reflux.createStore({
   onFormatStudent : function(lesson){
     this.analytics.studentTime = [];
     for (var i = 0; i < lesson.students.length; i++) {
+      var seconds = lesson.students[i].timeWatched
       this.analytics.studentTime.push({
         name : lesson.students[i].name,
-        time : moment(lesson.students[i].timeWatched, 'mm-ss')
+        answer : seconds > 60 ? Math.floor(seconds/60)+ ' minutes, ' + Math.floor(seconds%60) + ' seconds' 
+        : Math.floor(seconds%60) + ' seconds'
       })
     }
   },
