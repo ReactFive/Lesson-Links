@@ -2,6 +2,7 @@ var React = require('react');
 
 var _ = require('lodash');
 var Actions = require('../../../actions');
+var Select = require('react-select');
 
 var CategoriesCreation = React.createClass({
 
@@ -14,6 +15,7 @@ var CategoriesCreation = React.createClass({
       null,
       {name:"", things:[]},
       {name:"", things:[]},
+      {name:"", things:[]},
       {name:"", things:[]}
     ];
 
@@ -23,7 +25,12 @@ var CategoriesCreation = React.createClass({
         categories: ex.categories || emptyCategories
       },
       _id: loadedState._id || undefined,
-      updating: !!updating
+      updating: !!updating,
+      options: [
+        {value: '2', label: 'Two categories'},
+        {value: '3', label: 'Three categories'},
+        {value: '4', label: 'Four categories'},
+      ]
     }
   },
 
@@ -42,8 +49,10 @@ var CategoriesCreation = React.createClass({
     }
   },
 
-  componentDidUpdate: function() {
-    console.log(this.state.exercise.categories[1].things);
+  numCategoriesSetup: function(event) {
+    this.state.exercise.numCategories = +event;
+    this.setState({exercise: this.state.exercise});
+    console.log(typeof event);
   },
 
   render: function() {
@@ -94,6 +103,17 @@ var CategoriesCreation = React.createClass({
           minHeight:"400px",
         }}>
         <h3>Create/Update a Categories Exercise</h3>
+        <div>
+          <span className="correct-answer-label">
+            <strong>How many categories? </strong>
+          </span>
+          <Select
+            name="Number of Categories"
+            className="answer-choices-select"
+            value=""
+            options={this.state.options}
+            onChange={this.numCategoriesSetup} />
+        </div>
         <div className="row">
           {categories}
         </div>
