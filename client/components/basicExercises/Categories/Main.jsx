@@ -20,10 +20,6 @@ var DnD_Exercise = React.createClass({
     DnDActions.loadDnDStore(this.props.exercise.categories);
   },
 
-  getInitialState: function() {
-    return this.props.exercise || {};
-  },
-
   render: function() {
     if(!this.state.data) return null;
 
@@ -38,13 +34,14 @@ var DnD_Exercise = React.createClass({
 
     var unassignedThings = this.state.data.categories.unassigned
     return (
-      <div className="container">
+      <div className="container" style={{'height':'400px'}}>
         <div className="row" style={{margin:'20px 0px'}}>
           {renderedCategories}     
         </div>
         <div className="row">
           <ThingsContainer things={unassignedThings} name={"unassigned"} />
         </div>
+        <button onClick={this.submitAnswer} className="btn btn-primary">Submit</button>
       </div>
     )
   },

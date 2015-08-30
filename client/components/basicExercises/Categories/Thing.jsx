@@ -42,11 +42,7 @@ var Thing = React.createClass({
 
     return connectDragSource(
       <div
-        style={{
-          height:'20px',
-          backgroundColor:'green',
-          textAlign: 'center'
-        }}>
+        className="Categories-Thing">
         {this.props.name}
       </div>
     )

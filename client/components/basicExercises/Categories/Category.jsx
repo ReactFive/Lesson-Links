@@ -48,12 +48,7 @@ var Category = React.createClass({
     }.bind(this))
 
     return connectDropTarget(
-      <div
-        key={this.props.name}
-        style={{
-          minHeight:'150px',
-          backgroundColor:'white',
-        }}>
+      <div className="Categories-Category" key={this.props.name}>
         <div style={{textAlign:'center'}}>
           {this.props.name}
         </div>
