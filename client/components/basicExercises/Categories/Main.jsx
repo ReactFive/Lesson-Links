@@ -16,7 +16,8 @@ var DnD_Exercise = React.createClass({
   mixins: [Reflux.connect(DnDStore, "data")],
 
   componentWillMount: function() {
-    DnDActions.triggerDnDStore();
+    console.log("props to Main", this.props);
+    DnDActions.loadDnDStore(this.props.exercise.categories);
   },
 
   getInitialState: function() {

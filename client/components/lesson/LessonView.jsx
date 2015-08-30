@@ -15,6 +15,7 @@ var LoginOverlay = require('./LoginOverlay.jsx');
 var MultiChoice = require('../basicExercises/Multichoice.jsx');
 var TrueFalse = require('../basicExercises/TrueFalse.jsx');
 var ShortAnswer = require('../basicExercises/ShortAnswer.jsx');
+var Categories = require('../basicExercises/Categories/Main.jsx');
 
 var LessonView = React.createClass({
   mixins: [Router.Navigation, Reflux.connect(LessonStore, "lesson"), Reflux.connect(AuthStore, 'auth')],
@@ -83,6 +84,7 @@ var LessonView = React.createClass({
       'multiplechoice' : <MultiChoice exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
       'truefalse' : <TrueFalse exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
       'shortanswer': <ShortAnswer exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
+      'categories': <Categories exercise={this.state.exerciseObj.exercise || {}} onComplete={this.onExerciseCompleted}/>,
     }
 
     return exerciseTypeMap[this.state.exerciseObj.type];
