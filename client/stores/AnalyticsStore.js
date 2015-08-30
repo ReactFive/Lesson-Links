@@ -14,9 +14,8 @@ module.exports = Reflux.createStore({
 
   analyticsTransition : function(lesson){
     this.lesson = lesson;
-    this.onFormatLesson(lesson)
-    this.onFormatStudent(lesson)
-    console.log('lesson :', lesson)
+    this.onFormatLesson(lesson);
+    this.onFormatStudent(lesson);
   },
 
   onFormatStudent : function(lesson){
@@ -48,23 +47,21 @@ module.exports = Reflux.createStore({
 
 
     for (var j = 0; j < lesson.exercises.length; j++){
-      var exercise = lesson.exercises[j]
-      this.analytics.exerciseIndex[j] = lesson.exercises[j]._id
+      var exercise = lesson.exercises[j];
+      this.analytics.exerciseIndex[j] = lesson.exercises[j]._id;
       if (exercise.type === 'truefalse') {
-        console.log('truefalse')
         this.analytics.exercises.answerCount.push([
           {x:'False', y:0},
           {x:'True', y:0}
         ])
-        this.analytics.exercises.studentsAnswer.push([])
+        this.analytics.exercises.studentsAnswer.push([]);
       } else if (exercise.type === 'multiplechoice') {
-        console.log('multiplechoice')
-        var temp = []
+        var temp = [];
         for (var k = 0; k < exercise.exercise.answers.length; k++) {
-          temp.push({x:exercise.exercise.answers[k], y:0})
+          temp.push({x:exercise.exercise.answers[k], y:0});
         }
-        this.analytics.exercises.answerCount.push(temp)
-        this.analytics.exercises.studentsAnswer.push([])
+        this.analytics.exercises.answerCount.push(temp);
+        this.analytics.exercises.studentsAnswer.push([]);
       }
     }
  
@@ -79,13 +76,13 @@ module.exports = Reflux.createStore({
 
       for (var j = 0; j < lesson.students[i].exerciseResults.length; j++) {
         //Counting the number of answers for each choice
-        var answer = lesson.students[i].exerciseResults[j].answer
-        var answerText = lesson.students[i].exerciseResults[j].answer        
+        var answer = lesson.students[i].exerciseResults[j].answer;
+        var answerText = lesson.students[i].exerciseResults[j].answer;
         if (answer === 'true') {answer = 1}
         if (answer === 'false') {answer = 0}
         if(answer !== undefined) {
-          var index = this.analytics.exerciseIndex.indexOf(lesson.students[i].exerciseResults[j].id)
-          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++
+          var index = this.analytics.exerciseIndex.indexOf(lesson.students[i].exerciseResults[j].id);
+          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++;
           //Format each individual student's answer
           //If true/false question
           if (answerText === 'true') {
@@ -94,7 +91,7 @@ module.exports = Reflux.createStore({
             answerText = 'False'
           //If multiple choice question
           } else {
-            answerText = lesson.exercises[index].exercise.answers[parseInt(answer)]
+            answerText = lesson.exercises[index].exercise.answers[parseInt(answer)];
           }
           //Record individual student answers
           this.analytics.exercises.studentsAnswer[index].push({
@@ -104,7 +101,6 @@ module.exports = Reflux.createStore({
         }
       }
     }
-    console.log(this.analytics.exercises)
 
     this.triggerChange();
   },

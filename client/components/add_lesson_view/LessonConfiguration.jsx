@@ -56,24 +56,24 @@ var LessonConfiguration = React.createClass({
     return (
         <div id="lesson-config-view">
 
-          <div className="col-lg-8">
+          <div className="col-lg-8 col-md-8 col-sm-8">
               <div className="panel config-video-box">
                 <VideoPlayer />
               </div>
 
-              <div className="panel panel-default">
+              <div className="panel choose-exercise panel-default">
                 <div className="panel-header">
                   {!this.state.editing && <ExerciseTypes chooseType={this.setEditing} />}
                 </div>
-                <div className="panel-body">
+                <div className="panel-body choose-exercise-body">
                   {this.state.editing && this.mapExerciseType()}
                 </div>
               </div>
 
           </div>
        
-          <div className="col-lg-4">
-            <div className="panel panel-default">
+          <div className="col-lg-4 col-md-4 col-sm-4">
+            <div className="panel panel-default choose-exercise">
               <div className="panel-body">
                 <div className="panel panel-default">
                   <div className="panel-body">
