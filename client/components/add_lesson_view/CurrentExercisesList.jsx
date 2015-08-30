@@ -19,7 +19,7 @@ var CurrentExercisesList = React.createClass({
       var seconds = (Math.floor(exerciseObj.time) % 60).toString();
       if(seconds.length < 2) seconds = '0' + seconds;
       var timeDisplay = minutes + ':' + seconds;
-      console.log("Exercise obj", exerciseObj);
+
       return (
           <div className="exercise-entry col-md-12 animated fadeIn" onClick={reloadMe}>
             <span onClick={self.deleteExercise.bind(null, exerciseObj._id)} className="glyphicon glyphicon-remove pull-right"></span>

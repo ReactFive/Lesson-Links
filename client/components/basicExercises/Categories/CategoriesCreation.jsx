@@ -1,5 +1,7 @@
 var React = require('react');
 
+var _ = require('lodash');
+var Actions = require('../../../actions');
 
 var CategoriesCreation = React.createClass({
 
@@ -35,9 +37,13 @@ var CategoriesCreation = React.createClass({
       //in this case, the input was for an item in a category
       //the category index if before the -, the thing index is after
       var splitted = nameOfInput.split('-');
-      this.state.exercise.categories[splitted[0]][splitted[1]] = event.target.value;
+      this.state.exercise.categories[splitted[0]].things[splitted[1]] = event.target.value;
       this.setState({exercise : this.state.exercise});
     }
+  },
+
+  componentDidUpdate: function() {
+    console.log(this.state.exercise.categories[1].things);
   },
 
   render: function() {
@@ -45,7 +51,7 @@ var CategoriesCreation = React.createClass({
       var result = [];
       for(var j=0; j<5; j++) {
         result.push(
-          <input name={i + '-' + 0}
+          <input name={i + '-' + j}
             type='text'
             ref={'Category' + i + 'Thing' + j}
             key={'Category' + i + 'Thing' + j}
@@ -91,9 +97,38 @@ var CategoriesCreation = React.createClass({
         <div className="row">
           {categories}
         </div>
+        <button onClick={this.handleSubmit} className="signup-cancel-btn btn btn-primary margin-right">Save</button>
+        <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
       </div>
     )
-  }
+  },
+
+  handleSubmit: function(event) {
+    event.preventDefault();
+
+    var exerciseObj = {};
+    var time = videojs("#attachmentVideo").currentTime();
+    exerciseObj.exercise = _.cloneDeep(this.state.exercise);
+    exerciseObj.time = time;
+    exerciseObj.type = "categories";
+    exerciseObj._id = this.state._id;
+
+    if (!this.state.updating) {
+      Actions.createExercise(exerciseObj);
+      this.props.onComplete();
+      toastr['success']('Your new exercise has been created');
+    } else {
+      Actions.updateExercise(exerciseObj);
+      console.log("updated exercise that was sent to store", exerciseObj);
+      this.props.onComplete();
+      toastr['success']('Your exercise has been updated');
+    }
+  },
+
+  handleCancel: function(event) {
+    event.preventDefault();
+    this.props.onComplete();
+  },
 
 })
 
