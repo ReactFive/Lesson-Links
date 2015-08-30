@@ -22,6 +22,7 @@ var TrueFalseCreation = require('./components/basicExercises/TrueFalseCreation.j
 var ShortAnswerCreation = require('./components/basicExercises/ShortAnswerCreation.jsx');
 
 var ExerciseDnD = require('./components/basicExercises/DnD_Exercise/Main.jsx');
+var CategoriesCreation = require('./components/basicExercises/DnD_Exercise/CategoriesCreation.jsx')
 
 var routes = (
       <Route path="/" handler={App}>
@@ -34,6 +35,7 @@ var routes = (
         <Route path='/configure' handler={LessonConfiguration}/>
         <Redirect from="/edit" to="/configure"/>
         <Route path='/DnD' handler={ExerciseDnD}/>
+        <Route path='/Cat' handler={CategoriesCreation}/>
         <Route path='/404' handler={NotFound}/>
         <Route path='/:url' handler={LessonView}/>
         <NotFoundRoute handler={NotFound}/>

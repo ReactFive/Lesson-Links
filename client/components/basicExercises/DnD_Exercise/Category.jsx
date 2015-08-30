@@ -9,13 +9,6 @@ var Thing = require('./Thing.jsx');
 
 var categoryTarget = {
   drop: function (props, monitor, component) {
-    // var droppedItem = monitor.getItem().itemId;
-    // var currThings = component.state.things;  
-
-    // if(currThings.indexOf(droppedItem) === -1) {
-    //   component.setState({things:currThings.concat([droppedItem])});
-    // }
-
     return {
       endCategory: component.props.name
     }
@@ -38,7 +31,6 @@ var Category = React.createClass({
 
   removeThing: function(thingObj) {
     if(thingObj.startCategory === this.props.name) {
-      //console.log(thingObj.startCategory, this.props.name)
       this.setState({things : _.without(this.state.things, thingObj.itemId)});
     }
   },
