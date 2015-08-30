@@ -16,7 +16,6 @@ module.exports = Reflux.createStore({
   },
 
   loadDnDStore: function(categories) {
-    console.log(categories);
     var unassigned = this.state.categories.unassigned;
     for(var i=1, category; i<categories.length; i++) {
       category = categories[i];
@@ -32,7 +31,6 @@ module.exports = Reflux.createStore({
   },
 
   moveThingBetweenCategories: function(thingId, fromCategory, toCategory) {
-    console.log(thingId, fromCategory, toCategory);
     if(fromCategory === toCategory) return;
 
     _.remove(this.state.categories[fromCategory], (other) => other === thingId);

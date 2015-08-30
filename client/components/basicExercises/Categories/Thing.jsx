@@ -19,7 +19,6 @@ var itemSource = {
 
     var startCategory = monitor.getItem().startCategory;
     var endCategory = monitor.getDropResult().endCategory;
-    console.log("start and end", startCategory, endCategory);
     if(startCategory !== endCategory) {
       DnDActions.moveThingBetweenCategories(monitor.getItem().itemId, startCategory, endCategory)
     }
