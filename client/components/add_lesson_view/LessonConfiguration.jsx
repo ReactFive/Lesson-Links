@@ -62,7 +62,7 @@ var LessonConfiguration = React.createClass({
                 <VideoPlayer />
               </div>
 
-              <div className="panel choose-exercise panel-default">
+              <div className="panel panel-default">
                 <div className="panel-header">
                   {!this.state.editing && <ExerciseTypes chooseType={this.setEditing} />}
                 </div>

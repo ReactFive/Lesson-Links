@@ -12,6 +12,7 @@ module.exports = {
     database: 'mongodb://vancamp:test1@ds043971.mongolab.com:43971/testapp',
     port: process.env.PORT || 80
   },
+
   'facebookAuth' : {
     'clientID'      : '399450483593443', // your App ID
     'clientSecret'  : 'db3d8e352738f359f83d283b2ee99e52', // your App Secret
