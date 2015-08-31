@@ -134,6 +134,10 @@ var CategoriesCreation = React.createClass({
     )
   },
 
+  exerciseIsValid: function() {
+    debugger;
+  },
+
   handleSubmit: function(event) {
     event.preventDefault();
 
@@ -144,15 +148,19 @@ var CategoriesCreation = React.createClass({
     exerciseObj.type = "categories";
     exerciseObj._id = this.state._id;
 
-    if (!this.state.updating) {
-      Actions.createExercise(exerciseObj);
-      this.props.onComplete();
-      toastr['success']('Your new exercise has been created');
+    if(this.exerciseIsValid()) {
+      if (!this.state.updating) {
+        Actions.createExercise(exerciseObj);
+        this.props.onComplete();
+        toastr['success']('Your new exercise has been created');
+      } else {
+        Actions.updateExercise(exerciseObj);
+        console.log("updated exercise that was sent to store", exerciseObj);
+        this.props.onComplete();
+        toastr['success']('Your exercise has been updated');
+      }
     } else {
-      Actions.updateExercise(exerciseObj);
-      console.log("updated exercise that was sent to store", exerciseObj);
-      this.props.onComplete();
-      toastr['success']('Your exercise has been updated');
+      toastr['warning']('Make sure you have a question and options');
     }
   },
 
