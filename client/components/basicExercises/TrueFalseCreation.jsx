@@ -159,7 +159,7 @@ var TrueFalseCreation = React.createClass({
         toastr['success']('Your exercise has been updated');
       }
     } else {
-      toastr['warning']('Make sure you have a question');
+      toastr['warning']('Make sure you have a question and have indicated the correct answer.');
     }
 
   },

@@ -19,6 +19,22 @@ var LessonConfigStore = Reflux.createStore({
     exerciseObj.lesson_id = this.lesson._id;
     var self = this;
 
+    //Search through the existing exercises to make sure that the
+    //exercise's time is available
+    var finalTime = exerciseObj.time;
+    var search = function(){
+      _.forEach(self.lesson.exercises, function(exercise){
+        //if the exercise's time is already taken, increment it by 2. 
+        if(Math.floor(exercise.time) === Math.floor(finalTime)){
+          finalTime = Math.floor(finalTime + 2); 
+          search();
+        }
+      });
+    }
+    search();
+
+    exerciseObj.time = Math.floor(finalTime);
+
     Api.createExercise(exerciseObj)
       .then(function(res){
         self.lesson.exercises.push(res.data);
