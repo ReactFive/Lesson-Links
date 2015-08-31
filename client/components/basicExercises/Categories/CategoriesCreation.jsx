@@ -19,6 +19,13 @@ var CategoriesCreation = React.createClass({
       {name:"", things:[]}
     ];
 
+    //append empty categories if ex is being loaded and has fewer than 4
+    if(ex.categories) {
+      for(var i=ex.categories.length; i<5; i++) {
+        ex.categories.push({name:"", things:[]});
+      }
+    }
+
     return {
       exercise: {
         numCategories: ex.numCategories || 3,
@@ -52,7 +59,6 @@ var CategoriesCreation = React.createClass({
   numCategoriesSetup: function(event) {
     this.state.exercise.numCategories = +event;
     this.setState({exercise: this.state.exercise});
-    console.log(typeof event);
   },
 
   render: function() {
@@ -134,12 +140,47 @@ var CategoriesCreation = React.createClass({
     )
   },
 
-  exerciseIsValid: function() {
-    debugger;
+  exerciseValidity: function() {
+    var exercise = this.state.exercise;
+
+    // check that every category has a name
+    for(var i=1; i <= exercise.numCategories; i++) {
+      if(!exercise.categories[i].name) {
+        return {
+          isValid: false,
+          reason: "Make sure every category has a name"
+        }
+      }
+    }
+
+    // check that no item is repeated
+    var itemsObj = {};
+    for(var i=1; i <= exercise.numCategories; i++) {
+      var thingsList = exercise.categories[i].things;
+      _.remove(thingsList, (str) => !str);
+      console.log(exercise.categories[i].name, thingsList);
+      for(var j=0; j < thingsList.length; j++) {
+        if(itemsObj[thingsList[j]]) {
+          return {
+            isValid: false,
+            reason: "Make sure no item is repeated"
+          }
+        } else {
+          itemsObj[thingsList[j]] = true;
+        }
+      }
+    }
+
+    return {
+      isValid: true
+    }
   },
 
   handleSubmit: function(event) {
     event.preventDefault();
+
+    // run the validity check, which also removes any blank items
+    var validity = this.exerciseValidity();
 
     var exerciseObj = {};
     var time = videojs("#attachmentVideo").currentTime();
@@ -148,19 +189,23 @@ var CategoriesCreation = React.createClass({
     exerciseObj.type = "categories";
     exerciseObj._id = this.state._id;
 
-    if(this.exerciseIsValid()) {
+    // remove any categories beyond numCategories, only in the copied version
+    var numCategories = exerciseObj.exercise.numCategories
+    exerciseObj.exercise.categories = exerciseObj.exercise.categories.slice(0, numCategories+1);
+
+
+    if(validity.isValid) {
       if (!this.state.updating) {
         Actions.createExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your new exercise has been created');
       } else {
         Actions.updateExercise(exerciseObj);
-        console.log("updated exercise that was sent to store", exerciseObj);
         this.props.onComplete();
         toastr['success']('Your exercise has been updated');
       }
     } else {
-      toastr['warning']('Make sure you have a question and options');
+      toastr['warning'](validity.reason);
     }
   },
 
