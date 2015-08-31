@@ -60,13 +60,13 @@ var CategoriesCreation = React.createClass({
       var result = [];
       for(var j=0; j<5; j++) {
         result.push(
-          <input name={i + '-' + j}
-            type='text'
-            ref={'Category' + i + 'Thing' + j}
-            key={'Category' + i + 'Thing' + j}
-            value={this.state.exercise.categories[i].things[j]}
-            placeholder="item name"
-            onChange={this.setExerciseState} />
+            <input className="form-control" name={i + '-' + j}
+              type='text'
+              ref={'Category' + i + 'Thing' + j}
+              key={'Category' + i + 'Thing' + j}
+              value={this.state.exercise.categories[i].things[j]}
+              placeholder="item name"
+              onChange={this.setExerciseState} />
         );
       }
 
@@ -74,51 +74,62 @@ var CategoriesCreation = React.createClass({
     }.bind(this);
 
     var categories = [];
+    var labelStyle = {
+      paddingTop: '10px'
+    };
+
     for(var i=1; i<=this.state.exercise.numCategories; i++) {
       categories.push(
-        <div className="col-xs-3" key={'Category' + i}>
-          <label htmlFor={'Category' + i + 'Name'}>
-            <strong>{'Category ' + i}</strong>
-          </label>
-          <input name={i}
-            type='text'
-            ref={'Category' + i + 'Name'}
-            key={'Category' + i + 'Name'}
-            value={this.state.exercise.categories[i].name}
-            placeholder="Name of category"
-            onChange={this.setExerciseState} />
-          <label htmlFor={'Category' + i + 'Name'}>
-            {"Things in this category"}
-          </label>
-          {inputs(i)}
+        <div className="panel panel-default col-xs-3" key={'Category' + i}>
+          <div className="panel-heading">
+            <label htmlFor={'Category' + i + 'Name'}>
+              <strong>{'Category ' + i}</strong>
+            </label>
+          </div>
+          <div className="panel-body">
+            <input className="form-control" name={i}
+              type='text'
+              ref={'Category' + i + 'Name'}
+              key={'Category' + i + 'Name'}
+              value={this.state.exercise.categories[i].name}
+              placeholder="Name of category"
+              onChange={this.setExerciseState} />
+            <label style={labelStyle} htmlFor={'Category' + i + 'Name'}>
+              <span class="label label-info">Things in this category</span>
+            </label>
+            {inputs(i)}
         </div>
+      </div>
       )
     }
 
     return (
-      <div className="container" 
+      <div className="panel panel-default"
         style={{
           backgroundColor:"white", 
-          textAlign:"center",
-          minHeight:"400px",
+          textAlign:"center"
         }}>
-        <h3>Create/Update a Categories Exercise</h3>
-        <div>
-          <span className="correct-answer-label">
-            <strong>How many categories? </strong>
-          </span>
-          <Select
-            name="Number of Categories"
-            className="answer-choices-select"
-            value=""
-            options={this.state.options}
-            onChange={this.numCategoriesSetup} />
+          <div className="well col-md-12">
+          <h3>Categories Exercise</h3>
+            <label className="correct-answer-label col-md-6 col-md-offset-3">
+              <strong>How many categories? </strong>
+            </label>
+            <Select
+              name="Number of Categories"
+              className="answer-choices-select col-md-6 col-md-offset-3"
+              value=""
+              options={this.state.options}
+              onChange={this.numCategoriesSetup} />
+          </div>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            {categories}
+          </div>
         </div>
-        <div className="row">
-          {categories}
+        <div className="col-md-12">
+          <button onClick={this.handleSubmit} className="signup-cancel-btn btn btn-primary margin-right pull-right">Save</button>
+          <button onClick={this.handleCancel} className=" btn btn-default pull-right">Cancel</button>
         </div>
-        <button onClick={this.handleSubmit} className="signup-cancel-btn btn btn-primary margin-right">Save</button>
-        <button onClick={this.handleCancel} className=" btn btn-default">Cancel</button>
       </div>
     )
   },
