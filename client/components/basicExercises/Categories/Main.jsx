@@ -38,7 +38,7 @@ var DnD_Exercise = React.createClass({
 
     if(this.state.data.outcome) {
       return (
-        <div className="container Categories-Container">
+        <div className="well container Categories-Container">
           <p>{this.state.data.outcome}</p>
           <button onClick={DnDActions.resumeExercise} className="btn btn-primary">Resume Exercise</button>
           <button onClick={this.onComplete} className="btn btn-primary">Continue Video</button>
@@ -56,15 +56,23 @@ var DnD_Exercise = React.createClass({
 
       var unassignedThings = this.state.data.categories.unassigned
       return (
-        <div className="container Categories-Container">
-          <div className="row" style={{margin:'20px 0px'}}>
-            {renderedCategories}     
+    <div className="container-fluid animated fadeIn">
+      <div className="modal-dialog-lg">
+        <div className="modal-content">
+          <div className="well container Categories-Container">
+            <div className="row" style={{margin:'20px 0px'}}>
+              {renderedCategories}
+            </div>
+            <div className="row">
+              <ThingsContainer things={unassignedThings} name={"unassigned"} />
+            </div>
+            <div className="col-md-4 col-md-offset-4">
+              <button onClick={this.submitAnswer} className="btn btn-block btn-default">Submit</button>
+            </div>
           </div>
-          <div className="row">
-            <ThingsContainer things={unassignedThings} name={"unassigned"} />
-          </div>
-          <button onClick={this.submitAnswer} className="btn btn-primary">Submit</button>
         </div>
+      </div>
+    </div>
       )
     }
   },
