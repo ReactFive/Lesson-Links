@@ -26,7 +26,7 @@ var DnD_Exercise = React.createClass({
 
   onComplete: function() {
     var result = {
-      answer : this.state.data.categories,
+      answer : JSON.stringify(this.state.data.categories),
       correct : this.state.data.correct
     }
 
