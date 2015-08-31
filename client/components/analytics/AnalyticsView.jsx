@@ -53,8 +53,15 @@ var AnalyticsView = React.createClass({
     var self = this;
     var data = this.state.data;
     var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
-      return <li className="analyticsNavEntry" onClick={function(){self.setExercise(exercise, 
-      self.state.analytics.exercises.studentsAnswer[index])}}> Exercise - {index+1} </li>
+      return 
+      <li className="analyticsNavEntry"
+        onClick={ 
+          function(){
+            self.setExercise(exercise, self.state.analytics.exercises.studentsAnswer[index])
+          }
+        }> 
+        Exercise - {index+1} 
+      </li>
     })
 
     return (
@@ -63,7 +70,7 @@ var AnalyticsView = React.createClass({
       <div className="analyticsEntryCollection selection">
         <ul>
           <li className="analyticsNavEntry" onClick={this.timeWatched}>Time Watched</li>
-            {exercises.length ? {exercises} : ''}
+            {exercises.length ? {exercises} : <li>' No exercises found for this lesson! '</li>}
         </ul>
       </div>
 
@@ -75,6 +82,16 @@ var AnalyticsView = React.createClass({
 
           	<div className="panel panel-default">
               <div className="panel-body">
+
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="panel panel-default">
+                    <div className="panel-body">
+                      <p>Exercise Options</p>
+                    </div>
+                  </div>  
+                </div>
+              </div>
 
               <div className="row" id="analytics-view">
 

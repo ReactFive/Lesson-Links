@@ -18,7 +18,7 @@ var StudentOutcomeCollection = React.createClass({
     
     return (
       <ul className="list-group row" id="ulCollection">
-        {studentAnswers.length ? {studentAnswers} : ''}
+        {studentAnswers.length ? {studentAnswers} : 'There is currently no Student Answer data.'}
       </ul>
     );
   }
