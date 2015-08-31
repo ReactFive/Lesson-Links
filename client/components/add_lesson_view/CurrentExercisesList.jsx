@@ -29,9 +29,6 @@ var CurrentExercisesList = React.createClass({
         case "truefalse":
           exerciseType = "True False";
           break;
-        case "truefalse":
-          exerciseType = "True False";
-          break;
         case "shortanswer":
           exerciseType = "Short Answer";
           break;
