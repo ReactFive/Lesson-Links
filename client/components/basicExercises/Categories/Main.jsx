@@ -20,30 +20,44 @@ var DnD_Exercise = React.createClass({
     DnDActions.loadDnDStore(this.props.exercise.categories);
   },
 
+  submitAnswer: function() {
+    DnDActions.evaluateResponse();
+  },
+
   render: function() {
     if(!this.state.data) return null;
 
-    var categories = _.omit(this.state.data.categories, "unassigned");
-    var renderedCategories = _.map(categories, function(things, categoryName) {
+    if(this.state.data.outcome) {
       return (
-        <div key={categoryName} className="col-xs-3">
-          <Category name={categoryName} things={things}/>
+        <div className="container Categories-Container">
+          <p>{this.state.data.outcome}</p>
+          <button onClick={DnDActions.resumeExercise} className="btn btn-primary">Resume Exercise</button>
+          <button onClick={this.onComplete} className="btn btn-primary">Continue Video</button>
         </div>
       )
-    })
+    } else {
+      var categories = _.omit(this.state.data.categories, "unassigned");
+      var renderedCategories = _.map(categories, function(things, categoryName) {
+        return (
+          <div key={categoryName} className="col-xs-3">
+            <Category name={categoryName} things={things}/>
+          </div>
+        )
+      })
 
-    var unassignedThings = this.state.data.categories.unassigned
-    return (
-      <div className="container" style={{'height':'400px'}}>
-        <div className="row" style={{margin:'20px 0px'}}>
-          {renderedCategories}     
+      var unassignedThings = this.state.data.categories.unassigned
+      return (
+        <div className="container Categories-Container">
+          <div className="row" style={{margin:'20px 0px'}}>
+            {renderedCategories}     
+          </div>
+          <div className="row">
+            <ThingsContainer things={unassignedThings} name={"unassigned"} />
+          </div>
+          <button onClick={this.submitAnswer} className="btn btn-primary">Submit</button>
         </div>
-        <div className="row">
-          <ThingsContainer things={unassignedThings} name={"unassigned"} />
-        </div>
-        <button onClick={this.submitAnswer} className="btn btn-primary">Submit</button>
-      </div>
-    )
+      )
+    }
   },
 })
 

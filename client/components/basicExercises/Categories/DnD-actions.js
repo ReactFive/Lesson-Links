@@ -3,5 +3,7 @@ var Reflux = require('reflux');
 module.exports = Reflux.createActions([
   'moveThingBetweenCategories',
   'triggerDnDStore',
-  'loadDnDStore'
+  'loadDnDStore',
+  'evaluateResponse',
+  'resumeExercise'
 ]);
