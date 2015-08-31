@@ -31,6 +31,15 @@
   }
 }
 
+.vjs-default-skin .vjs-fullscreen-control{
+  display: none;
+}
+
+.vjs-default-skin .vjs-volume-control{
+  margin-right: 10px !important;
+}
+
+
 #attachmentVideo {
   width: 100%;
   height: 100%;
