@@ -21,6 +21,9 @@ var MultiChoiceCreation = require('./components/basicExercises/MultiChoiceCreati
 var TrueFalseCreation = require('./components/basicExercises/TrueFalseCreation.jsx');
 var ShortAnswerCreation = require('./components/basicExercises/ShortAnswerCreation.jsx');
 
+var ExerciseDnD = require('./components/basicExercises/Categories/Main.jsx');
+var CategoriesCreation = require('./components/basicExercises/Categories/CategoriesCreation.jsx')
+
 var routes = (
       <Route path="/" handler={App}>
         <DefaultRoute handler={LandingPage}/>

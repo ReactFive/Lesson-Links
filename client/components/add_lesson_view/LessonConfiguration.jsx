@@ -13,7 +13,7 @@ var CurrentExercisesList = require('./CurrentExercisesList.jsx');
 var MultiChoiceCreation = require('../basicExercises/MultiChoiceCreation.jsx');
 var TrueFalseCreation = require('../basicExercises/TrueFalseCreation.jsx');
 var ShortAnswerCreation = require('../basicExercises/ShortAnswerCreation.jsx');
-
+var CategoriesCreation = require('../basicExercises/Categories/CategoriesCreation.jsx')
 
 var LessonConfiguration = React.createClass({
   mixins: [Reflux.connect(LessonConfigStore, "lesson"), Navigation],
@@ -40,6 +40,7 @@ var LessonConfiguration = React.createClass({
       'multiplechoice' : <MultiChoiceCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
       'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
       'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
+      'categories' : <CategoriesCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
     }
 
     return exerciseTypeMap[this.state.editing];
