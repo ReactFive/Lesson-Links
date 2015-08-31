@@ -19,9 +19,15 @@ var AnalyticsView = React.createClass({
     return {
       data: [], 
       yAxis: '', 
-      xAxis: '', 
+      xAxis: '',
+      title: '',
+      options: [],
+      correctAnswer: '',
       analytics : {
         exercises: {
+          question: [],
+          options: [],
+          correctAnswer: [],
           answerCount: [],
           studentsAnswer: []
         }
@@ -40,9 +46,13 @@ var AnalyticsView = React.createClass({
     })
   },
   
-  setExercise: function(exercise, studentAnswers) {
+  setExercise: function(exercise, studentAnswers, title, options, correctAnswer) {
+    console.log("options:", options)
     this.setState({
       data: exercise,
+      title: title,
+      options: options,
+      correctAnswer: correctAnswer, 
       studentAnswers: studentAnswers,
       studentParam: 'Answer',
       xAxis: 'Answers'
@@ -53,15 +63,22 @@ var AnalyticsView = React.createClass({
     var self = this;
     var data = this.state.data;
     var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
-      return 
+      console.log("Colin is the greatest!")
+      return (
       <li className="analyticsNavEntry"
         onClick={ 
           function(){
-            self.setExercise(exercise, self.state.analytics.exercises.studentsAnswer[index])
+            self.setExercise(
+              exercise, 
+              self.state.analytics.exercises.studentsAnswer[index],
+              self.state.analytics.exercises.question[index],
+              self.state.analytics.exercises.options[index],
+              self.state.analytics.exercises.correctAnswer[index]
+              )
           }
         }> 
         Exercise - {index+1} 
-      </li>
+      </li>)
     })
 
     return (
@@ -87,7 +104,9 @@ var AnalyticsView = React.createClass({
                 <div className="col-lg-12">
                   <div className="panel panel-default">
                     <div className="panel-body">
-                      <p>Exercise Options</p>
+                      <p> {this.state.title} </p>
+                      <p> {this.state.options} </p>
+                      <p> {this.state.correctAnswer} </p>
                     </div>
                   </div>  
                 </div>

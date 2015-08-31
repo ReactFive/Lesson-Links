@@ -57,14 +57,16 @@ module.exports = Reflux.createStore({
 
       //capturing data for exercise display
       //Question
-      this.analytics.exercises.question[j] = lesson.exercises[j]["exercise"]["question"]
-
-      //Answer Options
-      this.analytics.exercises.options[j] = lesson.exercises[j]["exercise"]["options"]
+      this.analytics.exercises.question[j] = (j+1+"") + ". " + lesson.exercises[j]["exercise"]["question"]
 
       //Correct Answer
-      this.analytics.exercises.correctAnswer[j] = lesson.exercises[j]["exercise"]["correctOption"] 
+      var letters = ["A", "B", "C", "D", "E"]
 
+      if(lesson.exercises[j]["type"] === "multiplechoice"){
+        this.analytics.exercises.correctAnswer[j] = letters[parseInt(lesson.exercises[j]["exercise"]["correctOption"])];
+      }else{
+        this.analytics.exercises.correctAnswer[j] = lesson.exercises[j]["exercise"]["correctOption"]
+      }
 
       var exercise = lesson.exercises[j]
 
@@ -72,6 +74,10 @@ module.exports = Reflux.createStore({
 
       if (exercise.type === 'truefalse') 
         {
+          //Answer Options
+          this.analytics.exercises.options[j] = " True, False"
+
+          console.log('truefalse')
           this.analytics.exercises.answerCount.push([
             {x:'False', y:0},
             {x:'True', y:0}
@@ -82,6 +88,15 @@ module.exports = Reflux.createStore({
       else if (exercise.type === 'multiplechoice') {
 
         var temp = []
+        var multiChoiceAnswers = [];
+        var multiChoiceLetters = ["A.  ", "B.  ", "C.  ", "D.  ", "E.  "]
+
+        //Answer Options
+        for(var x = 0; x<lesson.exercises[j]["exercise"]["answers"].length; x++){
+          multiChoiceAnswers.push(multiChoiceLetters[x] + lesson.exercises[j]["exercise"]["answers"][x] + "      ")
+        }
+
+        this.analytics.exercises.options[j] = multiChoiceAnswers
 
         for (var k = 0; k < exercise.exercise.answers.length; k++) {
           temp.push({x:exercise.exercise.answers[k], y:0});
@@ -91,6 +106,13 @@ module.exports = Reflux.createStore({
         this.analytics.exercises.studentsAnswer.push([])
 
       } else if (exercise.type === 'shortanswer') {
+
+        console.log('shortanswer')
+
+        //Answer Options
+        var bestAnswers = lesson.exercises[j]["exercise"]["altAnswers"].replace('(', '').replace(')', '').replace(/\|/g, ', ') + ", "
+        var altAnswers = lesson.exercises[j]["exercise"]["bestAnswers"].replace('(', '').replace(')', '').replace(/\|/g, ', ')
+        this.analytics.exercises.options[j] = bestAnswers + altAnswers;
 
         this.analytics.exercises.answerCount.push([
           {x:'Incorrect', y:0},
