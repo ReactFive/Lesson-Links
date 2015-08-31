@@ -1,5 +1,5 @@
 .bar {
-  fill: #006B24
+  fill: $darkest-blue;
 }
 
 .selection ul {
@@ -7,9 +7,46 @@
   padding: 0;
 }
 
+.x axis{
+	font-size: 50px;
+}
+
+.chart{
+	margin: 20px;
+}
+
+.studentCollection{
+		background-color: $lightest-blue;
+    padding: 5px;
+    font-size: 20px;
+    font-family: $header-font;
+    font-weight: bold;
+    color: $darkest-blue;
+    border: 5px solid $darkest-blue;
+    padding: 5px;
+ }
+
 .selection ul li {
   display: inline;
   text-decoration: none;
   margin-left: 10px;
   cursor: pointer;
+}
+
+.analyticsNavEntry{
+	font-size: 16px;
+	color: $darkest-blue;
+	font-family: $subheader-font;
+}
+
+.analyticsEntryCollection{
+		background-color: $lightest-blue;
+	  font-size: 20px;
+	  font-family: $subheader-font;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.analyticsNavEntry:hover{
+	color: $dark-pink;
 }

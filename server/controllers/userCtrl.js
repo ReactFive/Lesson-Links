@@ -4,7 +4,6 @@ var passport = require('passport');
 var _ = require('lodash');
 
 exports.signupUser = function(req, res, next) {
-    console.log('singup success');
     req.logIn(req.user, function(err) {
       if(err) {console.log('error :', err);}
       return res.sendStatus(201);
@@ -49,7 +48,6 @@ exports.addLesson = function(req, res){
 };
 
 exports.getUser = function(req, res){
-  console.log('Getting User')
   if(req.user) {
     User
     .findById(req.user._id)
@@ -76,7 +74,6 @@ exports.getUser = function(req, res){
 };
 
 exports.updateUser = function(req, res){
-  console.log('Updating User')
   if(req.user && req.body.addLesson === true){
     Lesson
     .findOne({'lesson_url': req.body.lesson_url})

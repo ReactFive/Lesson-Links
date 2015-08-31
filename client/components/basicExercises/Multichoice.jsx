@@ -21,13 +21,11 @@ var Multichoice = React.createClass({
   handleClick: function(clickedOpt){
     this.setState({lastChoice: clickedOpt});
     if(this.state.correctOption === clickedOpt) {
-      console.log("correct");
       this.setState({
         outcome: true,
         currentFeedback: this.state.feedback[clickedOpt]
       });
     } else{
-      console.log("false");
       this.setState({
         outcome: false,
         currentFeedback: this.state.feedback[clickedOpt]
@@ -72,7 +70,6 @@ var Multichoice = React.createClass({
           </label>
       )
     }.bind(this));
-    console.log(outcome);
     switch (outcome) {
       case false:
         view = (

@@ -12,7 +12,6 @@ var LessonConfigStore = Reflux.createStore({
   },
 
   triggerConfigStore: function() {
-    console.log("store triggered: ", this.lesson);
     this.trigger(this.lesson);
   },
 

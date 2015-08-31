@@ -21,7 +21,6 @@ var TrueFalse = React.createClass({
   },
 
   handleClick: function(clickedOpt){
-    console.log(clickedOpt);
     if(clickedOpt === this.state.exercise.correctOption) {
       this.setState({outcome: true});
     } else{

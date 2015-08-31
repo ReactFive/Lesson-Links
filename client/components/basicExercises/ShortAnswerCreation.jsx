@@ -152,7 +152,6 @@ var ShortAnswerCreation = React.createClass({
         this.props.onComplete();
         toastr['success']('Your new exercise has been created');
       } else {
-        console.log(exerciseObj.id);
         Actions.updateExercise(exerciseObj);
         this.props.onComplete();
         toastr['success']('Your exercise has been updated');
@@ -170,7 +169,6 @@ var ShortAnswerCreation = React.createClass({
 
   handleCancel: function(event) {
     event.preventDefault();
-    console.log("cancel clicked");
     this.props.onComplete();
   }
 

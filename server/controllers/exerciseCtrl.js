@@ -18,13 +18,11 @@ exports.addExercise = function(req, res) {
       return;
     }
 
-    console.log("now in here");
     Lesson.findOneAndUpdate({_id: lessonId}, {
       $addToSet: {
         exercises: exer._id
       }
     }, {}, function(err, obj) {
-      console.log("in here");
       if (err) {
         console.log(500, err);
       } else {
@@ -38,7 +36,6 @@ exports.addExercise = function(req, res) {
 
 exports.updateExercise = function(req, res){
   var exerciseId = req.params.id;
-  console.log("this is the body", req.body);
   Exercise.findByIdAndUpdate(exerciseId,
       {$set:
       {
@@ -73,7 +70,6 @@ exports.deleteExercise = function(req, res){
               {$pull: {'exercises': exerciseId}}, { multi: true},
               function(err, lesson){
                 if (err) console.log(err);
-                if (lesson) console.log(lesson);
               });
         }
         exercise.remove();

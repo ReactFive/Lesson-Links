@@ -35,7 +35,6 @@ var TrueFalseCreation = React.createClass({
     var loadedState = nextProps.exerciseState || {};
     var ex = loadedState.exercise || {};
     var updating = Object.keys(ex).length;
-    console.log(loadedState);
     this.setState({
       exercise: {
         question: ex.question || "",
@@ -55,7 +54,6 @@ var TrueFalseCreation = React.createClass({
   },
 
   render: function(){
-    console.log(this.state.exercise);
     return (
         <div className="exercise-form animated fadeInUp">
           <div className="">
@@ -138,7 +136,6 @@ var TrueFalseCreation = React.createClass({
 
   handleCancel: function(event) {
     event.preventDefault();
-    console.log("cancel clicked");
     this.props.onComplete();
   },
 
