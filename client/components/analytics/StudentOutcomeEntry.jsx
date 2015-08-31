@@ -13,7 +13,7 @@ var StudentOutcomeEntry = React.createClass({
       	</div>
       	<div className="col-lg-8 answer"> 
       		<span className="boldStudent">{this.props.studentParam} : </span>
-      		<span>{this.props.studentAnswer.answer} : {this.props.studentAnswer.correct}</span>
+      		<span>{this.props.studentAnswer.answer} </span> {/*USE THIS TO INDICATE CORRECTNESS SOON {this.props.studentAnswer.correct}*/}
       	</div>
       	<hr/>
       </div>

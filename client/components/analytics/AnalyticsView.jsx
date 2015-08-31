@@ -103,10 +103,10 @@ var AnalyticsView = React.createClass({
               <div className="row">
                 <div className="col-lg-12">
                   <div className="panel panel-default">
-                    <div className="panel-body">
-                      <p> {this.state.title} </p>
-                      <p> {this.state.options} </p>
-                      <p> {this.state.correctAnswer} </p>
+                    <div className="exerciseInfoAnalytics panel-body">
+                      <p className="exerciseTitleAnalytics"> Exercise {this.state.title} </p>
+                      <p className="answerOptionsAnalytics"> Answer Options: {this.state.options} </p>
+                      <p className="correctAnswerAnalytics"> Correct Answer: {this.state.correctAnswer} </p>
                     </div>
                   </div>  
                 </div>
