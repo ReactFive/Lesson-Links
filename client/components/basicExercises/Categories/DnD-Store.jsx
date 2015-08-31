@@ -43,6 +43,7 @@ module.exports = Reflux.createStore({
     }
 
     this.state.outcome = "You have " + correctCount + " items placed correctly and " + wrongCount + " items placed incorrectly";
+    this.state.correct = (wrongCount === 0);
     this.trigger(this.state);
   },
 

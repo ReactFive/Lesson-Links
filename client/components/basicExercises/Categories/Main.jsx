@@ -24,6 +24,15 @@ var DnD_Exercise = React.createClass({
     DnDActions.evaluateResponse();
   },
 
+  onComplete: function() {
+    var result = {
+      answer : this.state.data.categories,
+      correct : this.state.data.correct
+    }
+
+    this.props.onComplete(result);
+  },
+
   render: function() {
     if(!this.state.data) return null;
 
