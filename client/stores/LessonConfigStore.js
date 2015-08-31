@@ -25,15 +25,15 @@ var LessonConfigStore = Reflux.createStore({
     var search = function(){
       _.forEach(self.lesson.exercises, function(exercise){
         //if the exercise's time is already taken, increment it by 2. 
-        if(exercise.time === finalTime){
-          finalTime = finalTime + 2; 
+        if(Math.floor(exercise.time) === Math.floor(finalTime)){
+          finalTime = Math.floor(finalTime + 2); 
           search();
         }
       });
     }
     search();
 
-    exerciseObj.time = finalTime;
+    exerciseObj.time = Math.floor(finalTime);
 
     Api.createExercise(exerciseObj)
       .then(function(res){
