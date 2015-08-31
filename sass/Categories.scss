@@ -1,5 +1,5 @@
 .Categories-Container {
-  height: 700px;
+  height: 500px;
 }
 
 .Categories-Thing {
@@ -22,4 +22,8 @@
   border: 3px dashed #999;
   background: #eee;
   padding: 10px;
+}
+
+#dragdrop-feedback-btns {
+  padding-top: 20px;
 }

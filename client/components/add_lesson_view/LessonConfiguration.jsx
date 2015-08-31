@@ -41,7 +41,7 @@ var LessonConfiguration = React.createClass({
       'truefalse' : <TrueFalseCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
       'shortanswer' : <ShortAnswerCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
       'categories' : <CategoriesCreation exerciseState={this.state.exerciseState || {}} onComplete={onDoneEditing}/>,
-    }
+    };
 
     return exerciseTypeMap[this.state.editing];
   },
