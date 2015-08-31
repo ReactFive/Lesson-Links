@@ -9,15 +9,17 @@ module.exports = Reflux.createStore({
   listenables: [Actions],
 
   init: function(){
-    return this.analytics = {};
+    this.analytics = {}
   },
 
+  //Passes lesson from library to the analytics store
   analyticsTransition : function(lesson){
     this.lesson = lesson;
     this.onFormatLesson(lesson);
     this.onFormatStudent(lesson);
   },
 
+  //Format time watched 
   onFormatStudent : function(lesson){
     this.analytics.studentTime = [];
     for (var i = 0; i < lesson.students.length; i++) {
@@ -46,6 +48,7 @@ module.exports = Reflux.createStore({
     };
     this.analytics.exerciseIndex = [];
 
+    //Create empty exercise objects to be populated with student answers
     for (var j = 0; j < lesson.exercises.length; j++){
       var exercise = lesson.exercises[j];
       this.analytics.exerciseIndex[j] = lesson.exercises[j]._id;
@@ -71,7 +74,10 @@ module.exports = Reflux.createStore({
       }
     }
  
+    //Length of the lesson video
     var length = this.lesson.video_duration;
+
+    //Convert time watched 
     for (var i = 0; i < lesson.students.length; i++ ){
       var time = lesson.students[i].timeWatched;
       if (Math.floor(5*time/length) === 0) {this.analytics.timeWatched[0]['y']++}
@@ -90,7 +96,7 @@ module.exports = Reflux.createStore({
           var index = this.analytics.exerciseIndex.indexOf(lesson.students[i].exerciseResults[j].id);
           this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++;
           //Format each individual student's answer
-          //If true/false question
+
           if (lesson.exercises[index].type === 'shortanswer') {
             if (lesson.students[i].exerciseResults[j].correct) {
               answer = 1
@@ -98,11 +104,13 @@ module.exports = Reflux.createStore({
               answer = 0
             }
           }
+
           this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++
           if (answerText === 'true') {
             answerText = 'True'
           } else if(answerText === 'false') {
             answerText = 'False'
+            
           //If multiple choice question
           } else if (parseInt(answerText) >= 0) {
             answerText = lesson.exercises[index].exercise.answers[parseInt(answer)];
@@ -115,7 +123,6 @@ module.exports = Reflux.createStore({
           }
         }
       }
-
     this.triggerChange();
   },
 
