@@ -32,7 +32,7 @@ module.exports = Reflux.createStore({
     var correctCount =0;
     var wrongCount =0;
     for(var i=1, currThings; i<this.answer.length; i++) {
-      currThings = this.answer[i].things
+      currThings = this.answer[i].things;
       for(var j=0; j<currThings.length; j++) {
         if(categories[this.answer[i].name].indexOf(currThings[j]) >= 0) {
           correctCount++;
@@ -42,7 +42,9 @@ module.exports = Reflux.createStore({
       }
     }
 
-    this.state.outcome = "You have " + correctCount + " items placed correctly and " + wrongCount + " items placed incorrectly";
+    this.state.outcome = "You have " + correctCount + " items placed correctly and " + wrongCount + " items" +
+        " placed" +
+        " incorrectly";
     this.state.correct = (wrongCount === 0);
     this.trigger(this.state);
   },

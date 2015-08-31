@@ -49,20 +49,14 @@ var ThingsContainer = React.createClass({
     }.bind(this))
 
     return connectDropTarget(
-      <div
-        key={this.props.name}
-        style={{
-          minHeight:'80px',
-          backgroundColor:'red',
-        }}>
-        <div style={{
-          textAlign:'center',
-          color: 'black',
-          fontSize: '18px'
-        }}>
-          {"Drag each of the items into a category"}
+      <div className="panel panel-primary panel-default"
+        key={this.props.name}>
+        <div className="panel-heading text-center">
+          <div className="panel-title">{"Drag each of the items into a category"}</div>
         </div>
-        {things}
+        <div className="panel-body">
+         {things}
+        </div>
       </div>
     )
   }
