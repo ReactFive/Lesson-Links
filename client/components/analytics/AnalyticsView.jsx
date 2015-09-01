@@ -33,7 +33,8 @@ var AnalyticsView = React.createClass({
         }
       },
       studentParam: '',
-      studentAnswers: []
+      studentAnswers: [],
+      updated: false
     }  
   },
 
@@ -56,6 +57,15 @@ var AnalyticsView = React.createClass({
       studentParam: 'Answer',
       xAxis: 'Answers'
     });
+  },
+
+  componentDidUpdate : function(Props, State){
+    if (this.state.analytics.timeWatched.length > 0 && !this.state.updated){
+      this.setState({
+        updated: true
+      })
+      setTimeout(this.timeWatched, 100);
+    }
   },
 
   render: function() {
