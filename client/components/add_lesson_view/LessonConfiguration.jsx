@@ -105,9 +105,25 @@ var LessonConfiguration = React.createClass({
   publishLesson: function() {
     var self = this;
 
-    Actions.publish(this.state.lesson)
-        .then(function(res) {
-          self.transitionTo('/library');
+    swal({
+          title: "Are you sure?",
+          text: "You will not be able to edit this lesson after publishing",
+          type: "warning", showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, publish it!",
+          closeOnConfirm: false
+        },
+        function () {
+          Actions.publish(self.state.lesson);
+          swal({
+                title: "Published!",
+                text: "This lesson is published.",
+                type: "success",
+                showCancelButton: false
+              },
+              function () {
+                self.transitionTo('/library')
+              });
         })
   },
 
