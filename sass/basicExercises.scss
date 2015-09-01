@@ -217,8 +217,13 @@ label .glyphicon {
 }
 
 .modal-body {
-    min-height: 205px
+    min-height: 205px;
 }
+
+#special-modal.modal-body {
+    min-height: 40px;
+}
+
 #loadbar {
     position: absolute;
     width: 62px;
