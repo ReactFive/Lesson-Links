@@ -77,7 +77,6 @@ module.exports = Reflux.createStore({
           //Answer Options
           this.analytics.exercises.options[j] = " True, False"
 
-          console.log('truefalse')
           this.analytics.exercises.answerCount.push([
             {x:'False', y:0},
             {x:'True', y:0}
@@ -106,8 +105,6 @@ module.exports = Reflux.createStore({
         this.analytics.exercises.studentsAnswer.push([])
 
       } else if (exercise.type === 'shortanswer') {
-
-        console.log('shortanswer')
 
         //Answer Options
         var bestAnswers = lesson.exercises[j]["exercise"]["altAnswers"].replace('(', '').replace(')', '').replace(/\|/g, ', ') + ", "
@@ -146,7 +143,7 @@ module.exports = Reflux.createStore({
         if (answer === 'false') {answer = 0}
         if(answer !== undefined) {
           var index = this.analytics.exerciseIndex.indexOf(lesson.students[i].exerciseResults[j].id);
-          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++;
+
           //Format each individual student's answer
           if (lesson.exercises[index].type === 'shortanswer') {
             if (lesson.students[i].exerciseResults[j].correct) {
@@ -156,8 +153,9 @@ module.exports = Reflux.createStore({
             }
           }
           
+          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++;
+
           //If true/false question
-          this.analytics.exercises.answerCount[index][parseInt(answer)]['y']++
           if (answerText === 'true') {
             answerText = 'True'
           } else if(answerText === 'false') {

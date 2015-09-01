@@ -47,7 +47,6 @@ var AnalyticsView = React.createClass({
   },
   
   setExercise: function(exercise, studentAnswers, title, options, correctAnswer) {
-    console.log("options:", options)
     this.setState({
       data: exercise,
       title: title,
@@ -63,7 +62,6 @@ var AnalyticsView = React.createClass({
     var self = this;
     var data = this.state.data;
     var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
-      console.log("Colin is the greatest!")
       return (
       <li className="analyticsNavEntry"
         onClick={ 
