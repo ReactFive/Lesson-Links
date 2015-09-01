@@ -19,15 +19,22 @@ var AnalyticsView = React.createClass({
     return {
       data: [], 
       yAxis: '', 
-      xAxis: '', 
+      xAxis: '',
+      title: '',
+      options: [],
+      correctAnswer: '',
       analytics : {
         exercises: {
+          question: [],
+          options: [],
+          correctAnswer: [],
           answerCount: [],
           studentsAnswer: []
         }
       },
       studentParam: '',
-      studentAnswers: []
+      studentAnswers: [],
+      updated: false
     }  
   },
 
@@ -40,44 +47,106 @@ var AnalyticsView = React.createClass({
     })
   },
   
-  setExercise: function(exercise, studentAnswers) {
+  setExercise: function(exercise, studentAnswers, title, options, correctAnswer) {
     this.setState({
       data: exercise,
+      title: title,
+      options: options,
+      correctAnswer: correctAnswer, 
       studentAnswers: studentAnswers,
       studentParam: 'Answer',
       xAxis: 'Answers'
     });
   },
 
+  componentDidUpdate : function(Props, State){
+    if (this.state.analytics.timeWatched.length > 0 && !this.state.updated){
+      this.setState({
+        updated: true
+      })
+      setTimeout(this.timeWatched, 100);
+    }
+  },
+
   render: function() {
     var self = this;
     var data = this.state.data;
     var exercises = this.state.analytics.exercises.answerCount.map(function(exercise, index){
-      return <li className="analyticsNavEntry" onClick={function(){self.setExercise(exercise, 
-      self.state.analytics.exercises.studentsAnswer[index])}}>Exercise #{index+1}</li>
+      return (
+      <li className="analyticsNavEntry"
+        onClick={ 
+          function(){
+            self.setExercise(
+              exercise, 
+              self.state.analytics.exercises.studentsAnswer[index],
+              self.state.analytics.exercises.question[index],
+              self.state.analytics.exercises.options[index],
+              self.state.analytics.exercises.correctAnswer[index]
+              )
+          }
+        }> 
+        Exercise - {index+1} 
+      </li>)
     })
 
     return (
     <div>
+
       <div className="analyticsEntryCollection selection">
         <ul>
           <li className="analyticsNavEntry" onClick={this.timeWatched}>Time Watched</li>
-            {exercises.length ? {exercises} : ''}
-          </ul>
+            {exercises.length ? {exercises} : <li>' No exercises found for this lesson! '</li>}
+        </ul>
       </div>
+
       <hr/>
+
       <div id="analytics-view">
-      	<div className="container">
-      		<div className="row">
-      				<div className="col-lg-6 col-md-12" id="analytics-view">
-      					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
-       	 			</div>
-		      <div className="col-lg-6 col-md-12">
-		      	<StudentOutcomeCollection studentAnswers={this.state.studentAnswers} studentParam={this.state.studentParam} />
-		      </div>
-		    </div>	
+        <div className="container">
+          <div className="analyticsHolder col-lg-10 col-lg-offset-1">
+
+          	<div className="panel panel-default">
+              <div className="panel-body">
+
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="panel panel-default">
+                    <div className="exerciseInfoAnalytics panel-body">
+                      <p className="exerciseTitleAnalytics"> Exercise {this.state.title} </p>
+                      <p className="answerOptionsAnalytics"> Answer Options: {this.state.options} </p>
+                      <p className="correctAnswerAnalytics"> Correct Answer: {this.state.correctAnswer} </p>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+
+              <div className="row" id="analytics-view">
+
+                <div className="col-lg-6">
+                  <div className="panel panel-default">
+                    <div className="panel-body">
+              					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-lg-6">
+          	      <div className="panel panel-default">
+                    <div className="panel-body">
+          	      	  <StudentOutcomeCollection studentAnswers={this.state.studentAnswers} studentParam={this.state.studentParam} />
+                    </div>
+          	      </div>
+                </div>
+
+              </div>
+              
+              </div>
+            </div>
+
+  		    </div>	
+        </div>
 	    </div>
-    </div>
+
     </div>
     )
   }
