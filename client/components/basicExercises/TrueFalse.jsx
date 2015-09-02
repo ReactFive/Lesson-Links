@@ -16,15 +16,36 @@ var TrueFalse = React.createClass({
         feedbackTrue: loadedExercise.feedbackTrue || "No feedback provided",
         feedbackFalse: loadedExercise.feedbackFalse || "No feedback provided"
       },
-      outcome: null
+      outcome: null,
+      outcomeView : NaN
     };
   },
 
   handleClick: function(clickedOpt){
+    console.log("option clicked:", clickedOpt);
     if(clickedOpt === this.state.exercise.correctOption) {
-      this.setState({outcome: true});
-    } else{
-      this.setState({outcome: false});
+      this.state.outcome = true;
+      this.setViewState(true, clickedOpt);
+      return;
+    }
+      this.state.outcome = false;
+      this.setViewState(false, clickedOpt);
+  },
+
+  setViewState: function(bool, clickedOpt){
+    console.log("here is the option in the next function", clickedOpt);
+    console.log("here is the outcome state", this.state.outcome);
+    if (bool === false && clickedOpt === "false"){
+      this.setState({outcomeView: 0});
+    }
+    if (bool === false && clickedOpt === "true"){
+      this.setState({outcomeView: 1});
+    }
+    if (bool === true && clickedOpt === "false"){
+      this.setState({outcomeView: 2});
+    }
+    if (bool === true && clickedOpt === "true"){
+      this.setState({outcomeView: 3});
     }
   },
 
@@ -39,9 +60,9 @@ var TrueFalse = React.createClass({
 
   render: function() {
     var view;
-
-    switch (this.state.outcome) {
-      case false:
+    console.log("here is the view state number: ", this.state.outcomeView);
+    switch (this.state.outcomeView) {
+      case 0:
         view = (
             <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
@@ -53,7 +74,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.exercise.feedbackFalse ? this.state.exercise.feedbackTrue : null }</p>
+                        <p>{ this.state.exercise.feedbackFalse }</p>
                       </blockquote>
                     </div>
                   </div>
@@ -67,7 +88,33 @@ var TrueFalse = React.createClass({
             </div>
         );
         break;
-      case true:
+      case 1:
+        view = (
+            <div className="container-fluid animated fadeIn">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h3><span className="label label-warning text-center" id="qid"><i className="fa fa-thumbs-down fa-lg"></i></span>Incorrect</h3>
+                  </div>
+                  {/*end header*/}
+                  <div className="modal-body">
+                    <div className="col-xs-10 col-xs-offset-2">
+                      <blockquote>
+                        <p>{ this.state.exercise.feedbackTrue }</p>
+                      </blockquote>
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <button className="btn btn-success" onClick={this.onComplete}>Continue Video</button>
+                  </div>
+                </div>
+                {/*end modal-content*/}
+              </div>
+              {/*end modal-dialog*/}
+            </div>
+        );
+        break;
+      case 2:
         view = (
             <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
@@ -78,7 +125,32 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.exercise.feedbackTrue ? this.state.exercise.feedbackFalse : null }</p>
+                        <p>{ this.state.exercise.feedbackFalse }</p>
+                      </blockquote>
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <button className="btn btn-success" onClick={this.onComplete}>Continue Video</button>
+                  </div>
+                </div>
+                {/*end modal-content*/}
+              </div>
+              {/*end modal-dialog*/}
+            </div>
+        );
+        break;
+      case 3:
+        view = (
+            <div className="container-fluid animated fadeIn">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h3><span className="label label-success text-center" id="qid"><i className="fa fa-thumbs-up fa-lg"></i></span>Correct!</h3>
+                  </div>
+                  <div className="modal-body">
+                    <div className="col-xs-10 col-xs-offset-2">
+                      <blockquote>
+                        <p>{ this.state.exercise.feedbackTrue }</p>
                       </blockquote>
                     </div>
                   </div>
