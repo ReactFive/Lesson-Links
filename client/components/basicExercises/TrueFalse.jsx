@@ -16,7 +16,8 @@ var TrueFalse = React.createClass({
         feedbackTrue: loadedExercise.feedbackTrue || "No feedback provided",
         feedbackFalse: loadedExercise.feedbackFalse || "No feedback provided"
       },
-      outcome: null
+      outcome: null,
+      clickedOpt: undefined
     };
   },
 
@@ -26,6 +27,7 @@ var TrueFalse = React.createClass({
     } else{
       this.setState({outcome: false});
     }
+    this.setState({clickedOpt: clickedOpt});
   },
 
   onComplete: function() {
@@ -40,8 +42,8 @@ var TrueFalse = React.createClass({
   render: function() {
     var view;
 
-    switch (this.state.outcome) {
-      case false:
+    switch (this.state.clickedOpt) {
+      case "false":
         view = (
             <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
@@ -53,7 +55,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.exercise.feedbackFalse ? this.state.exercise.feedbackTrue : null }</p>
+                        <p>{ this.state.exercise.feedbackFalse }</p>
                       </blockquote>
                     </div>
                   </div>
@@ -67,7 +69,7 @@ var TrueFalse = React.createClass({
             </div>
         );
         break;
-      case true:
+      case "true":
         view = (
             <div className="container-fluid animated fadeIn">
               <div className="modal-dialog">
@@ -78,7 +80,7 @@ var TrueFalse = React.createClass({
                   <div className="modal-body">
                     <div className="col-xs-10 col-xs-offset-2">
                       <blockquote>
-                        <p>{ this.state.exercise.feedbackTrue ? this.state.exercise.feedbackFalse : null }</p>
+                        <p>{ this.state.exercise.feedbackTrue }</p>
                       </blockquote>
                     </div>
                   </div>
