@@ -35,19 +35,19 @@ var Home = module.exports = React.createClass({
           <div className="row">
               <h1>How to make a Lesson Link...</h1>
             <div className="steps col-lg-4">
-              <h1>Step 1:</h1>
-              <img id="step1" src="../../public/assets/step1.png" />
-              <h3>Drop in a YouTube URL.</h3>            
+              <h1 className="stepsHead">Step 1:</h1>
+              <img className="imgSteps hidden-xs hidden-sm hidden-md" id="step1" src="../../public/assets/step1.png" />
+              <h3 className="stepsInst">Drop in a YouTube URL.</h3>            
             </div>
             <div className="steps col-lg-4">
-              <h1>Step 2:</h1>
-              <img id="step2" src="../../public/assets/step2.png" />
-              <h3>Set-up Exercises.</h3>
+              <h1 className="stepsHead">Step 2:</h1>
+              <img className="imgSteps hidden-xs hidden-sm hidden-md" id="step2" src="../../public/assets/step2.png" />
+              <h3 className="stepsInst">Set-up Exercises.</h3>
             </div>
             <div className="steps col-lg-4">
-              <h1>Step 3:</h1>
-              <img id="step3" src="../../public/assets/step3.png" />
-              <h3>Share your Link!</h3>
+              <h1 className="stepsHead">Step 3:</h1>
+              <img id="step3" className="imgSteps hidden-xs hidden-sm hidden-md" src="../../public/assets/step3.png" />
+              <h3 className="stepsInst">Share your Link!</h3>
             </div>
           </div>
         </div>

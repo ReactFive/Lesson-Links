@@ -3,11 +3,10 @@
 .logo {
   font-size: 120px;
   text-align: center;
-  padding-top: 125px;
+  padding-top: 120px;
   font-family: $header-font;
   color: $darkest-blue;
 } 
-
 
 .testWash{
   background-color: $darkest-blue;
@@ -182,4 +181,28 @@ width: 100%; // Add this
 /*Increase size of arrows on carousel*/
 .carousel-control .icon-next{
   font-size: 100px;
+}
+
+/*For Smart Phone*/
+@media only screen and (max-width : 480px)   {
+.logo {
+  padding-top: 25px;
+} 
+
+.carousel{
+  .stepsHead{
+    color: $light-purple;
+    font-family: $header-font;
+    margin-top: 30px;
+    font-size: 40px;
+  }
+}
+
+.carousel{
+  .stepsInst{
+    font-size: 25px;
+    margin-top: 20px;
+  }
+}
+
 }
