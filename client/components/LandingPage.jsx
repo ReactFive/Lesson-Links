@@ -12,9 +12,9 @@ var Home = module.exports = React.createClass({
     return (
 <div id="myCarousel" className="carousel slide">
   <ol className="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="0" className="hidden-xs active"></li>
+    <li data-target="#myCarousel" data-slide-to="1" className="hidden-xs "></li>
+    <li data-target="#myCarousel" data-slide-to="2" className="hidden-xs "></li>
   </ol>
   <div className="carousel-inner">
     <div className="item active">
@@ -22,10 +22,6 @@ var Home = module.exports = React.createClass({
         <div className="carousel-caption">
           <h1 className="logo">Lesson Links</h1>
           <h3 className="sublogo">Annotated Educational Videos</h3>
-          <p>
-            <p>
-            </p>
-          </p>
         </div>
       </div>
     </div>
@@ -66,7 +62,8 @@ var Home = module.exports = React.createClass({
           <div className="carousel-caption">
               <div className="teamInfo col-md-6 portfolio-item">
                 <h1 className="whiteHeader">Our Tech</h1>
-                <img id="ourStack" className="" src="../../public/assets/ourstack.png"/>
+                <img id="ourStack" className="hidden-xs hidden-sm" src="../../public/assets/ourstack.png"/>
+                <h3 className="writtenStack hidden-lg hidden-md">MongoDB, node.js, express, React, Reflux, & Video JS</h3>
               </div>
           </div>
           </div>
