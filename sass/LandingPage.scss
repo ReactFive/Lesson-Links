@@ -198,7 +198,11 @@ width: 100%; // Add this
   font-size: 100px;
 }
 
-/*To keep team image*/
+.carousel-control .icon-prev{
+  font-size: 100px;
+}
+
+/*To keep team image resizing for mobile*/
 @media (max-width: 1000px) {
   #react5 {
     width: 250px;
