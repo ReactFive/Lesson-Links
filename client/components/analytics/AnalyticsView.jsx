@@ -128,7 +128,7 @@ var AnalyticsView = React.createClass({
 
               <div className="row" id="analytics-view">
 
-                <div className="col-lg-6">
+                <div className="hidden-xs col-lg-6">
                   <div className="panel panel-default">
                     <div className="panel-body">
               					<Chart className="chart" data={data} yAxis='Number of Students' xAxis={this.state.xAxis}/>
