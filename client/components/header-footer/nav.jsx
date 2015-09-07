@@ -85,7 +85,7 @@ var nav = React.createClass({
     </nav> )
   },
 
-  handleLogout: function() {
+  handleLogout: function(event) {
     event.preventDefault();
     Actions.logout();
     this.transitionTo('/');
