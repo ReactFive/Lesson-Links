@@ -41,9 +41,9 @@ easily accessible, facilitate student/teacher conversations, and enable the asse
  │── models
  |   └── mongoose schemas exercise/lesson/user.js
  |
- ├── express.js - main html file
+ ├── express.js
  ├── routes.js 
- ├── mongoose.js - main html file
+ ├── mongoose.js
  ├── passport.js
  ├── auth.js 
  ├── configuration.js (gitignored!)
